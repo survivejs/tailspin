@@ -44,6 +44,7 @@
     "lint-staged": "^10.0.7",
     "mini-css-extract-plugin": "^0.9.0",
     "mini-html-webpack-plugin": "^2.2.1",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss-loader": "^3.0.0",
     "prettier": "^1.19.1",
     "purgecss-webpack-plugin": "^2.0.6",

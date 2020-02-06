@@ -1,5 +1,6 @@
 import * as elements from "typed-html";
 import Page from "../layouts/page";
+import Button from "../components/button";
 
 export default ({ htmlAttributes, cssTags, jsTags }) => (
   <Page
@@ -19,7 +20,7 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
 
         <p>TODO</p>
 
-        <div class="btn btn-blue">Demo button</div>
+        <Button label="Demo button" />
       </main>
     }
   />

@@ -4,6 +4,9 @@ import WebpackWatchedGlobEntries from "webpack-watched-glob-entries-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import MiniHtmlWebpackPlugin from "mini-html-webpack-plugin";
 import CopyPlugin from "copy-webpack-plugin";
+import PurgeCSSPlugin from "purgecss-webpack-plugin";
+import TerserJSPlugin from "terser-webpack-plugin";
+import OptimizeCSSAssetsPlugin from "optimize-css-assets-webpack-plugin";
 import merge from "webpack-merge";
 import glob from "glob";
 
@@ -11,11 +14,14 @@ const PORT = 8080;
 const ROOT = __dirname;
 const PATHS = {
   ASSETS: path.resolve(ROOT, "assets"),
+  COMPONENTS: path.resolve(ROOT, "components"),
   JS: path.resolve(ROOT, "js"),
   LAYOUTS: path.resolve(ROOT, "layouts"),
   PAGES: path.resolve(ROOT, "pages"),
   OUTPUT: path.resolve(ROOT, "public"),
 };
+const ALL_COMPONENTS = glob.sync(path.join(PATHS.COMPONENTS, "*.tsx"));
+const ALL_LAYOUTS = glob.sync(path.join(PATHS.LAYOUTS, "*.tsx"));
 const ALL_PAGES = glob.sync(path.join(PATHS.PAGES, "*.tsx"));
 
 interface AddDependencyPluginOptions {
@@ -152,7 +158,31 @@ const developmentConfig: webpack.Configuration = {
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
 };
-const productionConfig: webpack.Configuration = {};
+const productionConfig: webpack.Configuration = {
+  optimization: {
+    minimizer: [
+      new TerserJSPlugin({}),
+      new OptimizeCSSAssetsPlugin({
+        cssProcessorPluginOptions: {
+          preset: ["default", { discardComments: { removeAll: true } }],
+        },
+      }),
+    ],
+  },
+  plugins: [
+    new PurgeCSSPlugin({
+      whitelistPatterns: [], // Example: /^svg-/
+      paths: ALL_COMPONENTS.concat(ALL_PAGES).concat(ALL_LAYOUTS),
+      extractors: [
+        {
+          extractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || [],
+          extensions: ["html"],
+        },
+      ],
+      // paths: glob.sync(`${htmlDir}/**/*.html`),
+    }),
+  ],
+};
 
 export default mode => {
   switch (mode) {
