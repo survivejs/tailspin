@@ -11,25 +11,37 @@ const PORT = 8080;
 const ROOT = __dirname;
 const PATHS = {
   ASSETS: path.resolve(ROOT, "assets"),
-  SRC: path.resolve(ROOT, "src"),
+  JS: path.resolve(ROOT, "js"),
+  LAYOUTS: path.resolve(ROOT, "layouts"),
+  PAGES: path.resolve(ROOT, "pages"),
   OUTPUT: path.resolve(ROOT, "public"),
 };
 
 const commonConfig: webpack.Configuration = merge(
   {
     entry: WebpackWatchedGlobEntries.getEntries([
-      path.resolve(PATHS.SRC, "**/*.js"),
+      path.resolve(PATHS.JS, "**/*.js"),
     ]),
     output: {
       path: PATHS.OUTPUT,
+    },
+    resolve: {
+      extensions: [".ts", ".tsx", ".js"],
     },
     module: {
       rules: [
         {
           test: /\.js$/,
-          include: PATHS.SRC,
+          include: PATHS.PAGES,
           use: {
             loader: "babel-loader",
+          },
+        },
+        {
+          test: /\.ts(x)$/,
+          include: [PATHS.LAYOUTS, PATHS.PAGES],
+          use: {
+            loader: "ts-loader",
           },
         },
         {
@@ -46,7 +58,7 @@ const commonConfig: webpack.Configuration = merge(
       new CopyPlugin([{ from: PATHS.ASSETS, to: "assets" }]),
     ],
   },
-  generatePages(glob.sync(path.join(PATHS.SRC, "*.tsx")))
+  generatePages(glob.sync(path.join(PATHS.PAGES, "*.tsx")))
 );
 
 function generatePages(paths) {
@@ -56,7 +68,7 @@ function generatePages(paths) {
 }
 
 function generatePage(pagePath): webpack.Plugin {
-  const name = path.relative(PATHS.SRC, pagePath).split(".")[0];
+  const name = path.relative(PATHS.PAGES, pagePath).split(".")[0];
 
   return new MiniHtmlWebpackPlugin({
     name: name === "index" ? "index.html" : `${name}/index.html`,
@@ -75,10 +87,8 @@ function generatePage(pagePath): webpack.Plugin {
       css,
       js,
       publicPath,
-    }) => {
-      // TODO: import now instead
-      return "<html><head></head><body>demo</body></html>";
-    },
+      // TODO: Inject above to the template
+    }) => require(pagePath).default,
   });
 }
 
@@ -86,6 +96,7 @@ const developmentConfig: webpack.Configuration = {
   devServer: {
     port: PORT,
   },
+  plugins: [new webpack.HotModuleReplacementPlugin()],
 };
 const productionConfig: webpack.Configuration = {};
 

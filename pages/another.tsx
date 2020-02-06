@@ -1,5 +1,5 @@
 import * as elements from "typed-html";
-import Page from "./layouts/page";
+import Page from "../layouts/page";
 
 export default (
   <Page
@@ -14,7 +14,7 @@ export default (
       <main>
         <h1>tailwind-webpack-starter</h1>
 
-        <p>TODO</p>
+        <p>Another page</p>
       </main>
     }
   />
