@@ -14,36 +14,45 @@ const PATHS = {
   OUTPUT: path.resolve(ROOT, "public"),
 };
 
-const commonConfig: webpack.Configuration = {
-  entry: WebpackWatchedGlobEntries.getEntries([
-    path.resolve(PATHS.SRC, "**/*.js"),
-  ]),
-  output: {
-    path: PATHS.OUTPUT,
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        include: PATHS.SRC,
-        use: {
-          loader: "babel-loader",
+const commonConfig: webpack.Configuration = merge(
+  {
+    entry: WebpackWatchedGlobEntries.getEntries([
+      path.resolve(PATHS.SRC, "**/*.js"),
+    ]),
+    output: {
+      path: PATHS.OUTPUT,
+    },
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          include: PATHS.SRC,
+          use: {
+            loader: "babel-loader",
+          },
         },
-      },
-      {
-        test: /\.(css|pcss)$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
-      },
+        {
+          test: /\.(css|pcss)$/,
+          use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
+        },
+      ],
+    },
+    plugins: [
+      new WebpackWatchedGlobEntries(),
+      new MiniCssExtractPlugin({
+        filename: "[name].css",
+      }),
+      new CopyPlugin([{ from: PATHS.ASSETS, to: "assets" }]),
     ],
   },
-  plugins: [
-    new WebpackWatchedGlobEntries(),
-    new MiniCssExtractPlugin({
-      filename: "[name].css",
-    }),
-    new CopyPlugin([{ from: PATHS.ASSETS, to: "assets" }]),
-  ],
-};
+  generatePages()
+);
+
+function generatePages() {
+  // TODO: This could through src html files and generate plugin per each
+  // TODO: Set up AddDependencyPlugin per page as well (important for dev)
+  return {};
+}
 
 const developmentConfig: webpack.Configuration = {
   entry: ["webpack-plugin-serve/client"],
