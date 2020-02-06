@@ -71,7 +71,7 @@ function generatePage(pagePath): webpack.Plugin {
   const name = path.relative(PATHS.PAGES, pagePath).split(".")[0];
 
   return new MiniHtmlWebpackPlugin({
-    name: name === "index" ? "index.html" : `${name}/index.html`,
+    filename: name === "index" ? "index.html" : `${name}/index.html`,
     publicPath: "/",
     chunks: ["common", name],
     context: {
