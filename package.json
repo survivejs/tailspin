@@ -2,7 +2,7 @@
   "name": "tailwind-webpack-starter",
   "version": "0.0.0",
   "private": true,
-  "description": "",
+  "description": "Opinionated starter for Tailwind/webpack projects",
   "main": "index.js",
   "scripts": {
     "build": "rimraf public && webpack --env production",
