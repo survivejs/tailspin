@@ -112,7 +112,7 @@ function generatePage(pagePath): webpack.Plugin {
     chunks: ["common", name],
     context: {
       htmlAttributes: { lang: "en" },
-      cssAttributes: { rel: "preload", as: "style" },
+      cssAttributes: {},
       jsAttributes: { defer: "defer" },
     },
     template: ({
