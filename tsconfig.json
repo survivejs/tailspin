@@ -2,10 +2,9 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "lib": [
-      "es2019",
-      "dom"
-    ],
+    "lib": ["es2019", "dom"],
+    "jsx": "react",
+    "jsxFactory": "elements.createElement",
     "strict": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,

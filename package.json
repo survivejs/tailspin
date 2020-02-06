@@ -49,6 +49,7 @@
     "tap-spot": "^1.1.1",
     "terser-webpack-plugin": "^2.3.4",
     "ts-node": "^8.6.2",
+    "typed-html": "^2.0.0",
     "typescript": "^3.7.5",
     "webpack": "^4.41.5",
     "webpack-bundle-analyzer": "^3.6.0",
