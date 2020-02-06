@@ -3,8 +3,10 @@ import webpack from "webpack";
 import WebpackWatchedGlobEntries from "webpack-watched-glob-entries-plugin";
 import { WebpackPluginServe } from "webpack-plugin-serve";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import MiniHtmlWebpackPlugin from "mini-html-webpack-plugin";
 import CopyPlugin from "copy-webpack-plugin";
 import merge from "webpack-merge";
+import glob from "glob";
 
 const PORT = 8080;
 const ROOT = __dirname;
@@ -45,13 +47,40 @@ const commonConfig: webpack.Configuration = merge(
       new CopyPlugin([{ from: PATHS.ASSETS, to: "assets" }]),
     ],
   },
-  generatePages()
+  generatePages(glob.sync(path.join(PATHS.SRC, "*.tsx")))
 );
 
-function generatePages() {
-  // TODO: This could through src html files and generate plugin per each
-  // TODO: Set up AddDependencyPlugin per page as well (important for dev)
-  return {};
+function generatePages(paths) {
+  return {
+    plugins: paths.map(generatePage),
+  };
+}
+
+function generatePage(pagePath): webpack.Plugin {
+  const name = path.relative(PATHS.SRC, pagePath).split(".")[0];
+
+  return new MiniHtmlWebpackPlugin({
+    name: name === "index" ? "index.html" : `${name}/index.html`,
+    publicPath: "/",
+    chunks: ["common", name],
+    context: {
+      title: "tailwind-webpack-starter",
+      htmlAttributes: { lang: "en" },
+      cssAttributes: { rel: "preload" },
+      jsAttributes: { defer: "defer" },
+    },
+    template: ({
+      cssAttributes,
+      jsAttributes,
+      htmlAttributes,
+      css,
+      js,
+      publicPath,
+    }) => {
+      // TODO: import now instead
+      return "<html><head></head><body>demo</body></html>";
+    },
+  });
 }
 
 const developmentConfig: webpack.Configuration = {
