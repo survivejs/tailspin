@@ -1,8 +1,12 @@
 import * as elements from "typed-html";
 
-export default ({ head, body }) => (
-  <html lang="en">
-    <head>{head}</head>
+export default ({ head, body, cssTags, jsTags, htmlAttributes }) => (
+  <html {...htmlAttributes}>
+    <head>
+      {head}
+      {cssTags}
+    </head>
     <body>{body}</body>
+    {jsTags}
   </html>
 );

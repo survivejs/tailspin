@@ -16,6 +16,34 @@ const PATHS = {
   PAGES: path.resolve(ROOT, "pages"),
   OUTPUT: path.resolve(ROOT, "public"),
 };
+const ALL_PAGES = glob.sync(path.join(PATHS.PAGES, "*.tsx"));
+
+interface AddDependencyPluginOptions {
+  path: string;
+}
+
+class AddDependencyPlugin implements webpack.Plugin {
+  private readonly options: AddDependencyPluginOptions;
+
+  constructor(options: AddDependencyPluginOptions) {
+    this.options = options;
+  }
+
+  plugin = (
+    compilation: webpack.compilation.Compilation,
+    callback: () => void
+  ) => {
+    const { path } = this.options;
+
+    compilation.fileDependencies.add(path);
+
+    callback();
+  };
+
+  apply(compiler: webpack.Compiler) {
+    compiler.hooks.emit.tapAsync("AddDependencyPlugin", this.plugin);
+  }
+}
 
 const commonConfig: webpack.Configuration = merge(
   {
@@ -58,7 +86,8 @@ const commonConfig: webpack.Configuration = merge(
       new CopyPlugin([{ from: PATHS.ASSETS, to: "assets" }]),
     ],
   },
-  generatePages(glob.sync(path.join(PATHS.PAGES, "*.tsx")))
+  generatePages(ALL_PAGES),
+  generateDependencies(ALL_PAGES)
 );
 
 function generatePages(paths) {
@@ -66,6 +95,12 @@ function generatePages(paths) {
     plugins: paths.map(generatePage),
   };
 }
+
+const {
+  generateAttributes,
+  generateCSSReferences,
+  generateJSReferences,
+} = MiniHtmlWebpackPlugin;
 
 function generatePage(pagePath): webpack.Plugin {
   const name = path.relative(PATHS.PAGES, pagePath).split(".")[0];
@@ -75,7 +110,6 @@ function generatePage(pagePath): webpack.Plugin {
     publicPath: "/",
     chunks: ["common", name],
     context: {
-      title: "tailwind-webpack-starter",
       htmlAttributes: { lang: "en" },
       cssAttributes: { rel: "preload" },
       jsAttributes: { defer: "defer" },
@@ -87,9 +121,34 @@ function generatePage(pagePath): webpack.Plugin {
       css,
       js,
       publicPath,
-      // TODO: Inject above to the template
-    }) => require(pagePath).default,
+    }) =>
+      requireUncached(pagePath).default({
+        htmlAttributes,
+        cssTags: generateCSSReferences({
+          files: css,
+          attributes: cssAttributes,
+          publicPath,
+        }),
+        jsTags: generateJSReferences({
+          files: js,
+          attributes: jsAttributes,
+          publicPath,
+        }),
+      }),
   });
+}
+
+function generateDependencies(paths) {
+  return {
+    plugins: paths.map(path => new AddDependencyPlugin({ path })),
+  };
+}
+
+// https://stackoverflow.com/a/16060619/228885
+function requireUncached(module) {
+  delete require.cache[require.resolve(module)];
+
+  return require(module);
 }
 
 const developmentConfig: webpack.Configuration = {
