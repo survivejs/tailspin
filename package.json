@@ -8,5 +8,13 @@
   },
   "keywords": [],
   "author": "Juho Vepsäläinen",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "mini-css-extract-plugin": "^0.9.0",
+    "mini-html-webpack-plugin": "^2.2.1",
+    "prettier": "^1.19.1",
+    "purgecss-webpack-plugin": "^2.0.6",
+    "webpack": "^4.41.5",
+    "webpack-merge": "^4.2.2"
+  }
 }
