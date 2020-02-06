@@ -1,7 +1,6 @@
 import path from "path";
 import webpack from "webpack";
 import WebpackWatchedGlobEntries from "webpack-watched-glob-entries-plugin";
-import { WebpackPluginServe } from "webpack-plugin-serve";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import MiniHtmlWebpackPlugin from "mini-html-webpack-plugin";
 import CopyPlugin from "copy-webpack-plugin";
@@ -84,9 +83,9 @@ function generatePage(pagePath): webpack.Plugin {
 }
 
 const developmentConfig: webpack.Configuration = {
-  entry: ["webpack-plugin-serve/client"],
-  plugins: [new WebpackPluginServe({ port: PORT })],
-  watch: true,
+  devServer: {
+    port: PORT,
+  },
 };
 const productionConfig: webpack.Configuration = {};
 
