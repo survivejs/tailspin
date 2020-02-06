@@ -18,6 +18,8 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
         <h1>tailwind-webpack-starter</h1>
 
         <p>TODO</p>
+
+        <div class="btn btn-blue">Demo button</div>
       </main>
     }
   />

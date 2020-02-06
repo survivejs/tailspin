@@ -73,7 +73,7 @@ const commonConfig: webpack.Configuration = merge(
           },
         },
         {
-          test: /\.(css|pcss)$/,
+          test: /\.(p)css$/,
           use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
         },
       ],
@@ -96,12 +96,7 @@ function generatePages(paths) {
   };
 }
 
-const {
-  generateAttributes,
-  generateCSSReferences,
-  generateJSReferences,
-} = MiniHtmlWebpackPlugin;
-
+const { generateCSSReferences, generateJSReferences } = MiniHtmlWebpackPlugin;
 function generatePage(pagePath): webpack.Plugin {
   const name = path.relative(PATHS.PAGES, pagePath).split(".")[0];
 
@@ -111,7 +106,7 @@ function generatePage(pagePath): webpack.Plugin {
     chunks: ["common", name],
     context: {
       htmlAttributes: { lang: "en" },
-      cssAttributes: { rel: "preload" },
+      cssAttributes: { rel: "preload", as: "style" },
       jsAttributes: { defer: "defer" },
     },
     template: ({
