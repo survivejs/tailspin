@@ -6,7 +6,11 @@ export default ({ head, body, cssTags, jsTags, htmlAttributes }) => (
       {head}
       {cssTags}
     </head>
-    <body>{body}</body>
+    <body>
+      <header>header</header>
+      {body}
+      <footer>footer</footer>
+    </body>
     {jsTags}
   </html>
 );

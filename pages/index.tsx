@@ -17,15 +17,12 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
       ></meta>,
     ]}
     body={
-      <main>
+      <main class="w-full md:w-2/3 md:max-w-2xl mx-auto">
         <h1>tailwind-webpack-starter</h1>
-
         <p>TODO</p>
-
         <div x-state="false">
           Value: <span x-value="state" />
         </div>
-
         <Button label="Demo button" />
       </main>
     }
