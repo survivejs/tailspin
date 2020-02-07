@@ -153,7 +153,6 @@ const productionConfig: webpack.Configuration = {
           extensions: ["html"],
         },
       ],
-      // paths: glob.sync(`${htmlDir}/**/*.html`),
     }),
   ],
 };
