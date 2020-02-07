@@ -10,6 +10,7 @@ import OptimizeCSSAssetsPlugin from "optimize-css-assets-webpack-plugin";
 import { AddDependencyPlugin } from "webpack-add-dependency-plugin";
 import merge from "webpack-merge";
 import glob from "glob";
+import decache from "decache";
 
 const PORT = 8080;
 const ROOT = __dirname;
@@ -67,6 +68,10 @@ const commonConfig: webpack.Configuration = merge(
     ],
   },
   generatePages(ALL_PAGES),
+
+  // Maybe this bit should go to the entry logic during dev mode?
+  generateDependencies(ALL_COMPONENTS),
+  generateDependencies(ALL_LAYOUTS),
   generateDependencies(ALL_PAGES)
 );
 
@@ -96,8 +101,10 @@ function generatePage(pagePath): webpack.Plugin {
       css,
       js,
       publicPath,
-    }) =>
-      requireUncached(pagePath).default({
+    }) => {
+      decache(pagePath);
+
+      return require(pagePath).default({
         htmlAttributes,
         cssTags: generateCSSReferences({
           files: css,
@@ -109,7 +116,8 @@ function generatePage(pagePath): webpack.Plugin {
           attributes: jsAttributes,
           publicPath,
         }),
-      }),
+      });
+    },
   });
 }
 
@@ -117,13 +125,6 @@ function generateDependencies(paths) {
   return {
     plugins: paths.map(path => new AddDependencyPlugin({ path })),
   };
-}
-
-// https://stackoverflow.com/a/16060619/228885
-function requireUncached(module) {
-  delete require.cache[require.resolve(module)];
-
-  return require(module);
 }
 
 const developmentConfig: webpack.Configuration = {
