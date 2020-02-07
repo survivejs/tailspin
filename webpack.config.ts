@@ -7,6 +7,7 @@ import CopyPlugin from "copy-webpack-plugin";
 import PurgeCSSPlugin from "purgecss-webpack-plugin";
 import TerserJSPlugin from "terser-webpack-plugin";
 import OptimizeCSSAssetsPlugin from "optimize-css-assets-webpack-plugin";
+import { AddDependencyPlugin } from "webpack-add-dependency-plugin";
 import merge from "webpack-merge";
 import glob from "glob";
 
@@ -23,33 +24,6 @@ const PATHS = {
 const ALL_COMPONENTS = glob.sync(path.join(PATHS.COMPONENTS, "*.tsx"));
 const ALL_LAYOUTS = glob.sync(path.join(PATHS.LAYOUTS, "*.tsx"));
 const ALL_PAGES = glob.sync(path.join(PATHS.PAGES, "*.tsx"));
-
-interface AddDependencyPluginOptions {
-  path: string;
-}
-
-class AddDependencyPlugin implements webpack.Plugin {
-  private readonly options: AddDependencyPluginOptions;
-
-  constructor(options: AddDependencyPluginOptions) {
-    this.options = options;
-  }
-
-  plugin = (
-    compilation: webpack.compilation.Compilation,
-    callback: () => void
-  ) => {
-    const { path } = this.options;
-
-    compilation.fileDependencies.add(path);
-
-    callback();
-  };
-
-  apply(compiler: webpack.Compiler) {
-    compiler.hooks.emit.tapAsync("AddDependencyPlugin", this.plugin);
-  }
-}
 
 const commonConfig: webpack.Configuration = merge(
   {
