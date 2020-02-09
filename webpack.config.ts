@@ -68,8 +68,6 @@ const commonConfig: webpack.Configuration = merge(
     ],
   },
   generatePages(ALL_PAGES),
-
-  // Maybe this bit should go to the entry logic during dev mode?
   generateDependencies(ALL_COMPONENTS),
   generateDependencies(ALL_LAYOUTS),
   generateDependencies(ALL_PAGES)
