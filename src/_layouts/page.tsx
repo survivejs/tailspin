@@ -8,7 +8,18 @@ export default ({ head, body, cssTags, jsTags, htmlAttributes }) => (
       {cssTags}
     </head>
     <body>
-      <header>header</header>
+      <header>
+        <nav>
+          <ul>
+            <li>
+              <a href="/">/</a>
+            </li>
+            <li>
+              <a href="/another">another</a>
+            </li>
+          </ul>
+        </nav>
+      </header>
       {body}
       <footer>footer</footer>
     </body>
