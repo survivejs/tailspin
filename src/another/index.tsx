@@ -1,5 +1,5 @@
 import * as elements from "typed-html";
-import Page from "../layouts/page";
+import Page from "../_layouts/page";
 
 export default ({ htmlAttributes, cssTags, jsTags }) => (
   <Page

@@ -1,6 +1,6 @@
 # tailwind-webpack-starter
 
-`tailwind-webpack-starter` has been designed for small sites/apps. It implementes the following stack:
+`tailwind-webpack-starter` has been designed for small sites/apps. It implements the following stack:
 
 - [Tailwind.css](https://tailwindcss.com/) for styling
 - [webpack](https://webpack.js.org/) for bundling
@@ -11,6 +11,7 @@ The starter comes with a Prettier/lint-staged setup so your code stays formatted
 
 ## Structure
 
-- `components/` - Component templates should go here. These are the building blocks (buttons etc.).
-- `layouts/` - Same but for layouts. They represent the other end (`html`, `head`, `body`) and should be consumed by individual pages.
-- `pages/` - Each page gets rendered behind a matching HTML page with `index.html` suffixed to it in order to maintain clean urls.
+- `assets/` - Static assets such as favicons.
+- `src/` - The system picks up each `index.tsx` and it follows index-first convention. The idea is that this way you can colocate other related files behind a page directory.
+- `src/_components` - Component templates of the system. These are the building blocks that are used for composing pages.
+- `src/_layouts` - Base layouts of the system. Each page starts from one and these glue scripts and style tags coming from webpack to the page.

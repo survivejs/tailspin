@@ -1,6 +1,6 @@
 import * as elements from "typed-html";
-import Page from "../layouts/page";
-import Button from "../components/button";
+import Page from "./_layouts/page";
+import Button from "./_components/button";
 
 // TODO: Figure out how to inject sidewind attributes.
 // Maybe attribute naming has to change?

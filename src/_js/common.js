@@ -1,4 +1,4 @@
 import "sidewind";
-import "../css/index.pcss";
+import "../_css/index.pcss";
 
 console.log("Hello from common");

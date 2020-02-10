@@ -16,15 +16,12 @@ const PORT = 8080;
 const ROOT = __dirname;
 const PATHS = {
   ASSETS: path.resolve(ROOT, "assets"),
-  COMPONENTS: path.resolve(ROOT, "components"),
-  JS: path.resolve(ROOT, "js"),
-  LAYOUTS: path.resolve(ROOT, "layouts"),
-  PAGES: path.resolve(ROOT, "pages"),
+  JS: path.resolve(ROOT, "src/_js"),
+  SRC: path.resolve(ROOT, "src"),
   OUTPUT: path.resolve(ROOT, "public"),
 };
-const ALL_COMPONENTS = glob.sync(path.join(PATHS.COMPONENTS, "*.tsx"));
-const ALL_LAYOUTS = glob.sync(path.join(PATHS.LAYOUTS, "*.tsx"));
-const ALL_PAGES = glob.sync(path.join(PATHS.PAGES, "*.tsx"));
+const ALL_FILES = glob.sync(path.join(PATHS.SRC, "**/*.tsx"));
+const ALL_PAGES = glob.sync(path.join(PATHS.SRC, "**/index.tsx"));
 
 const commonConfig: webpack.Configuration = merge(
   {
@@ -41,14 +38,14 @@ const commonConfig: webpack.Configuration = merge(
       rules: [
         {
           test: /\.js$/,
-          include: PATHS.PAGES,
+          include: PATHS.SRC,
           use: {
             loader: "babel-loader",
           },
         },
         {
           test: /\.ts(x)$/,
-          include: [PATHS.LAYOUTS, PATHS.PAGES],
+          include: PATHS.SRC,
           use: {
             loader: "ts-loader",
           },
@@ -68,9 +65,7 @@ const commonConfig: webpack.Configuration = merge(
     ],
   },
   generatePages(ALL_PAGES),
-  generateDependencies(ALL_COMPONENTS),
-  generateDependencies(ALL_LAYOUTS),
-  generateDependencies(ALL_PAGES)
+  generateDependencies(ALL_FILES)
 );
 
 function generatePages(paths) {
@@ -81,10 +76,10 @@ function generatePages(paths) {
 
 const { generateCSSReferences, generateJSReferences } = MiniHtmlWebpackPlugin;
 function generatePage(pagePath): webpack.Plugin {
-  const name = path.relative(PATHS.PAGES, pagePath).split(".")[0];
+  const name = path.relative(PATHS.SRC, pagePath).split(".")[0];
 
   return new MiniHtmlWebpackPlugin({
-    filename: name === "index" ? "index.html" : `${name}/index.html`,
+    filename: `${name}.html`,
     publicPath: "/",
     chunks: ["common", name],
     context: {
@@ -145,7 +140,7 @@ const productionConfig: webpack.Configuration = {
   plugins: [
     new PurgeCSSPlugin({
       whitelistPatterns: [], // Example: /^svg-/
-      paths: ALL_COMPONENTS.concat(ALL_PAGES).concat(ALL_LAYOUTS),
+      paths: ALL_FILES,
       extractors: [
         {
           extractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || [],
