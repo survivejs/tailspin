@@ -16,7 +16,6 @@ const PORT = 8080;
 const ROOT = __dirname;
 const PATHS = {
   ASSETS: path.resolve(ROOT, "assets"),
-  JS: path.resolve(ROOT, "src/_js"),
   SRC: path.resolve(ROOT, "src"),
   OUTPUT: path.resolve(ROOT, "public"),
 };
@@ -26,7 +25,7 @@ const ALL_PAGES = glob.sync(path.join(PATHS.SRC, "**/index.tsx"));
 const commonConfig: webpack.Configuration = merge(
   {
     entry: WebpackWatchedGlobEntries.getEntries([
-      path.resolve(PATHS.JS, "**/*.js"),
+      path.resolve(PATHS.SRC, "**/_*.ts"),
     ]),
     output: {
       path: PATHS.OUTPUT,
@@ -36,13 +35,6 @@ const commonConfig: webpack.Configuration = merge(
     },
     module: {
       rules: [
-        {
-          test: /\.js$/,
-          include: PATHS.SRC,
-          use: {
-            loader: "babel-loader",
-          },
-        },
         {
           test: /\.ts(x)$/,
           include: PATHS.SRC,
@@ -76,12 +68,13 @@ function generatePages(paths) {
 
 const { generateCSSReferences, generateJSReferences } = MiniHtmlWebpackPlugin;
 function generatePage(pagePath): webpack.Plugin {
-  const name = path.relative(PATHS.SRC, pagePath).split(".")[0];
+  const pageName = path.relative(PATHS.SRC, pagePath).split(".")[0];
+  const chunkName = `${pageName.split("index")[0]}_page`;
 
   return new MiniHtmlWebpackPlugin({
-    filename: `${name}.html`,
+    filename: `${pageName}.html`,
     publicPath: "/",
-    chunks: ["common", name],
+    chunks: ["_shared", chunkName],
     context: {
       htmlAttributes: { lang: "en" },
       cssAttributes: {},
