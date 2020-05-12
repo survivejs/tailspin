@@ -9,6 +9,7 @@
     "start": "webpack-dev-server --env development",
     "sitemap": "TODO",
     "check-links": "TODO",
+    "check-types": "tsc --noEmit",
     "stats": "npm run build -- --json > stats.json",
     "analyze-stats": "webpack-bundle-analyzer stats.json"
   },
