@@ -1,6 +1,7 @@
 {
-  "include": ["src", "@types/*.d.ts"],
+  "include": ["src", "typings/*.d.ts"],
   "compilerOptions": {
+    "typeRoots": ["./node_modules/@types", "./typings"],
     "target": "es5",
     "module": "commonjs",
     "lib": ["es2019", "dom"],
