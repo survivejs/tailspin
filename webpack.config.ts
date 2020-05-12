@@ -2,7 +2,11 @@ import path from "path";
 import webpack from "webpack";
 import WebpackWatchedGlobEntries from "webpack-watched-glob-entries-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import MiniHtmlWebpackPlugin from "mini-html-webpack-plugin";
+import {
+  MiniHtmlWebpackPlugin,
+  generateCSSReferences,
+  generateJSReferences,
+} from "mini-html-webpack-plugin";
 import CopyPlugin from "copy-webpack-plugin";
 import PurgeCSSPlugin from "purgecss-webpack-plugin";
 import TerserJSPlugin from "terser-webpack-plugin";
@@ -66,7 +70,6 @@ function generatePages(paths) {
   };
 }
 
-const { generateCSSReferences, generateJSReferences } = MiniHtmlWebpackPlugin;
 function generatePage(pagePath): webpack.Plugin {
   const pageName = path.relative(PATHS.SRC, pagePath).split(".")[0];
   const chunkName = `${pageName.split("index")[0]}_page`;
@@ -99,7 +102,7 @@ function generatePage(pagePath): webpack.Plugin {
         }),
         jsTags: generateJSReferences({
           files: js,
-          attributes: jsAttributes,
+          attributes: jsAttributes || {},
           publicPath,
         }),
       });
