@@ -1,3 +1,7 @@
 import * as elements from "typed-html";
 
-export default ({ label }) => <div class="btn btn-blue">{label}</div>;
+export default ({ label, onclick }) => (
+  <button class="btn btn-blue" onclick={onclick}>
+    {label}
+  </button>
+);

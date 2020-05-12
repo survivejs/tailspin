@@ -19,9 +19,13 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
         <h1>tailwind-webpack-starter</h1>
         <p>TODO</p>
         <div x-state="false">
-          Value: <span x="state" />
+          <div class="mb-4">
+            Value: <span x="state" />
+          </div>
+          <div>
+            <Button label="Demo button" onclick="setState(v => !v)" />
+          </div>
         </div>
-        <Button label="Demo button" />
       </main>
     }
   />
