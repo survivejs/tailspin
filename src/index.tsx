@@ -24,7 +24,7 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
               Value: <span x="state" />
             </div>
             <div>
-              <Button label="Demo button" onclick="setState(v => !v)" />
+              <Button onclick="setState(v => !v)">Demo button</Button>
             </div>
           </div>
         </div>
