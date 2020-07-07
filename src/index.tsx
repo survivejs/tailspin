@@ -24,7 +24,9 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
             <div class="mb-4">
               Value: <span x="state" />
             </div>
-            <Alert>This is a demo alert</Alert>
+            <div class="mb-4">
+              <Alert>This is a demo alert</Alert>
+            </div>
             <div>
               <Button onclick="setState(v => !v)">Demo button</Button>
             </div>

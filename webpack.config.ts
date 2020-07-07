@@ -46,10 +46,6 @@ const commonConfig: webpack.Configuration = merge(
             loader: "ts-loader",
           },
         },
-        {
-          test: /\.(p)css$/,
-          use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
-        },
       ],
     },
     plugins: [
@@ -121,6 +117,14 @@ const developmentConfig: webpack.Configuration = {
     port: PORT,
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
+  module: {
+    rules: [
+      {
+        test: /\.(p)css$/,
+        use: ["style-loader", "css-loader", "postcss-loader"],
+      },
+    ],
+  },
 };
 const productionConfig: webpack.Configuration = {
   optimization: {
@@ -145,6 +149,14 @@ const productionConfig: webpack.Configuration = {
       ],
     }),
   ],
+  module: {
+    rules: [
+      {
+        test: /\.(p)css$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
+      },
+    ],
+  },
 };
 
 export default (mode) => {
