@@ -1,5 +1,6 @@
 import * as elements from "typed-html";
 import Page from "./_layouts/page";
+import Alert from "./_components/alert";
 import Button from "./_components/button";
 
 export default ({ htmlAttributes, cssTags, jsTags }) => (
@@ -23,6 +24,7 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
             <div class="mb-4">
               Value: <span x="state" />
             </div>
+            <Alert>This is a demo alert</Alert>
             <div>
               <Button onclick="setState(v => !v)">Demo button</Button>
             </div>
