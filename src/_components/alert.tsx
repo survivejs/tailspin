@@ -1,5 +1,6 @@
 import * as elements from "typed-html";
 
+// https://tailwindcss.com/components/alerts
 export default ({}, message) => (
   <div
     class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
