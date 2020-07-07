@@ -19,7 +19,6 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
       <main class="m-8">
         <div class="w-full mx-auto">
           <h1>tailwind-webpack-starter</h1>
-          <p>TODO</p>
           <div x-state="false">
             <div class="mb-4">
               Value: <span x="state" />

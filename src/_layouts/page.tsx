@@ -1,4 +1,5 @@
 import * as elements from "typed-html";
+import { Navigation, NavigationItem } from "../_components/navigation";
 
 export default ({ head, body, cssTags, jsTags, htmlAttributes }) => (
   <html {...htmlAttributes}>
@@ -9,19 +10,25 @@ export default ({ head, body, cssTags, jsTags, htmlAttributes }) => (
     </head>
     <body>
       <header>
-        <nav>
-          <ul>
-            <li>
-              <a href="/">/</a>
-            </li>
-            <li>
-              <a href="/another">another</a>
-            </li>
-          </ul>
-        </nav>
+        <Navigation>
+          <div class="text-sm lg:flex-grow">
+            <NavigationItem href="/">Documentation</NavigationItem>
+            <NavigationItem href="/components">Components</NavigationItem>
+          </div>
+          <div>
+            <NavigationItem
+              href="https://github.com/survivejs/tailwind-webpack-starter"
+              cls="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white"
+            >
+              Download
+            </NavigationItem>
+          </div>
+        </Navigation>
       </header>
-      {body}
-      <footer>footer</footer>
+      <main class="m-4">{body}</main>
+      <footer class="flex items-center justify-between flex-wrap bg-teal-500 p-6 text-white">
+        footer
+      </footer>
     </body>
     {jsTags}
   </html>

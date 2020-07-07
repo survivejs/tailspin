@@ -9,6 +9,8 @@ declare namespace JSX {
   interface Svg {
     class?: string;
     role?: string;
+    width?: string;
+    height?: string;
     xmlns: string;
     viewBox: string;
   }
