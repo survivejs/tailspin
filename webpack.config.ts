@@ -12,7 +12,7 @@ import PurgeCSSPlugin from "purgecss-webpack-plugin";
 import TerserJSPlugin from "terser-webpack-plugin";
 import OptimizeCSSAssetsPlugin from "optimize-css-assets-webpack-plugin";
 import { AddDependencyPlugin } from "webpack-add-dependency-plugin";
-import merge from "webpack-merge";
+import { merge } from "webpack-merge";
 import glob from "glob";
 import decache from "decache";
 
@@ -57,7 +57,7 @@ const commonConfig: webpack.Configuration = merge(
       new MiniCssExtractPlugin({
         filename: "[name].css",
       }),
-      new CopyPlugin([{ from: PATHS.ASSETS, to: "assets" }]),
+      new CopyPlugin({ patterns: [{ from: PATHS.ASSETS, to: "assets" }] }),
     ],
   },
   generatePages(ALL_PAGES),
@@ -112,7 +112,7 @@ function generatePage(pagePath): webpack.Plugin {
 
 function generateDependencies(paths) {
   return {
-    plugins: paths.map(path => new AddDependencyPlugin({ path })),
+    plugins: paths.map((path) => new AddDependencyPlugin({ path })),
   };
 }
 
@@ -139,7 +139,7 @@ const productionConfig: webpack.Configuration = {
       paths: ALL_FILES,
       extractors: [
         {
-          extractor: content => content.match(/[\w-/.:]+(?<!:)/g) || [],
+          extractor: (content) => content.match(/[\w-/.:]+(?<!:)/g) || [],
           extensions: ["html"],
         },
       ],
@@ -147,7 +147,7 @@ const productionConfig: webpack.Configuration = {
   ],
 };
 
-export default mode => {
+export default (mode) => {
   switch (mode) {
     case "development": {
       return merge(commonConfig, developmentConfig, { mode });
