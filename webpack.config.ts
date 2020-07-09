@@ -121,7 +121,16 @@ const developmentConfig: webpack.Configuration = {
     rules: [
       {
         test: /\.(p)css$/,
-        use: ["style-loader", "css-loader", "postcss-loader"],
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: true,
+            },
+          },
+          "css-loader",
+          "postcss-loader",
+        ],
       },
     ],
   },
