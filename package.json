@@ -5,7 +5,7 @@
   "description": "Opinionated starter for Tailwind/webpack projects",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf public && webpack --env production",
+    "build": "rimraf public && NODE_ENV=production webpack --env production",
     "start": "webpack-dev-server --env development",
     "sitemap": "TODO",
     "check-links": "TODO",
@@ -46,7 +46,6 @@
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss-loader": "^3.0.0",
     "prettier": "^2.0.5",
-    "purgecss-webpack-plugin": "^2.3.0",
     "rimraf": "^3.0.2",
     "sitemap-static": "^0.4.4",
     "tailwindcss": "^1.5.2",

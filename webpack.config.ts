@@ -8,7 +8,6 @@ import {
   generateJSReferences,
 } from "mini-html-webpack-plugin";
 import CopyPlugin from "copy-webpack-plugin";
-import PurgeCSSPlugin from "purgecss-webpack-plugin";
 import TerserJSPlugin from "terser-webpack-plugin";
 import OptimizeCSSAssetsPlugin from "optimize-css-assets-webpack-plugin";
 import { AddDependencyPlugin } from "webpack-add-dependency-plugin";
@@ -146,19 +145,6 @@ const productionConfig: webpack.Configuration = {
       }),
     ],
   },
-  plugins: [
-    new PurgeCSSPlugin({
-      whitelistPatterns: [], // Example: /^svg-/
-      paths: ALL_FILES,
-      extractors: [
-        {
-          extractor: (content) =>
-            content.match(/[^<>"'`\s]*[^<>"'`\s:]/g) || [],
-          extensions: ["html"],
-        },
-      ],
-    }),
-  ],
   module: {
     rules: [
       {

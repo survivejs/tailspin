@@ -3,4 +3,5 @@ module.exports = {
   variants: {},
   corePlugins: {},
   plugins: [],
+  purge: ["./src/**/*.ts", "./src/**/*.tsx"],
 };
