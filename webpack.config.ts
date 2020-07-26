@@ -152,7 +152,8 @@ const productionConfig: webpack.Configuration = {
       paths: ALL_FILES,
       extractors: [
         {
-          extractor: (content) => content.match(/[\w-/.:]+(?<!:)/g) || [],
+          extractor: (content) =>
+            content.match(/[^<>"'`\s]*[^<>"'`\s:]/g) || [],
           extensions: ["html"],
         },
       ],
