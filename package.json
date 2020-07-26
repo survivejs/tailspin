@@ -75,6 +75,8 @@
     "*.{js,css,md}": "prettier --write"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.2.0",
+    "marked": "^1.1.1",
     "sidewind": "^1.2.1"
   }
 }

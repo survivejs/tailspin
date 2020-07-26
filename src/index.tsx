@@ -1,7 +1,32 @@
+import fs from "fs";
+import path from "path";
 import * as elements from "typed-html";
+import marked from "marked";
 import Page from "./_layouts/page";
 import Alert from "./_components/alert";
 import Button from "./_components/button";
+
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  highlight: function (code, language) {
+    const hljs = require("highlight.js");
+    const validLanguage = hljs.getLanguage(language) ? language : "plaintext";
+    return hljs.highlight(validLanguage, code).value;
+  },
+  pedantic: false,
+  gfm: true,
+  breaks: false,
+  sanitize: true,
+  smartLists: true,
+  smartypants: false,
+  xhtml: false,
+});
+
+const readmePath = path.join(__dirname, "..", "README.md");
+const readme = fs.readFileSync(readmePath, { encoding: "utf-8" });
+const readmeAsHtml = marked(readme);
+
+console.log(readmePath, readmeAsHtml);
 
 export default ({ htmlAttributes, cssTags, jsTags }) => (
   <Page
@@ -17,8 +42,9 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
     ]}
     body={
       <main class="m-8">
-        <div class="w-full mx-auto">
-          <h1>tailwind-webpack-starter</h1>
+        <article class="w-full mx-auto prose lg:prose-xl">
+          {readmeAsHtml}
+          <h2>Demo</h2>
           <div x-state="false">
             <div class="mb-4">
               Value: <span x="state" />
@@ -30,7 +56,7 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
               <Button onclick="setState(v => !v)">Demo button</Button>
             </div>
           </div>
-        </div>
+        </article>
       </main>
     }
   />
