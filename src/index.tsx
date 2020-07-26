@@ -10,8 +10,6 @@ const readmePath = path.join(__dirname, "..", "README.md");
 const readme = fs.readFileSync(readmePath, { encoding: "utf-8" });
 const readmeAsHtml = processMarkdown(readme);
 
-console.log(readmePath, readmeAsHtml);
-
 export default ({ htmlAttributes, cssTags, jsTags }) => (
   <Page
     htmlAttributes={htmlAttributes}
