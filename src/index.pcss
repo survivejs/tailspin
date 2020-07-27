@@ -1,24 +1,8 @@
-/**
- * This injects Tailwind's base styles, which is a combination of
- * Normalize.css and some additional base styles.
- *
- * You can see the styles here:
- * https://github.com/tailwindcss/tailwindcss/blob/master/css/preflight.css
- *
- * If using `postcss-import`, use this import instead:
- *
- * @import "tailwindcss/preflight";
- */
+/* https://tailwindcss.com/docs/controlling-file-size/ */
+/* purgecss start ignore */
 @tailwind base;
-
-/**
- * This injects any component classes registered by plugins.
- *
- * If using `postcss-import`, use this import instead:
- *
- * @import "tailwindcss/components";
- */
 @tailwind components;
+/* purgecss end ignore */
 
 /**
  * Here you would add any of your custom component classes; stuff that you'd
