@@ -24,6 +24,8 @@ export type BoxProps = {
   px?: SpacingKeys;
   py?: SpacingKeys;
   // TODO: Figure out the exact type. ColorKeys isn't enough for these
+  // The problem here is nesting. For colors that have objects in them,
+  // combinations have to be allowed.
   color?: string;
   bg?: string;
   // TODO: sx can be only tailwind classes
