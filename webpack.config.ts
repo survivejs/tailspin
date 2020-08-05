@@ -10,6 +10,7 @@ import {
 import CopyPlugin from "copy-webpack-plugin";
 import TerserJSPlugin from "terser-webpack-plugin";
 import OptimizeCSSAssetsPlugin from "optimize-css-assets-webpack-plugin";
+import { WebpackPluginServe } from "webpack-plugin-serve";
 import { AddDependencyPlugin } from "webpack-add-dependency-plugin";
 import { merge } from "webpack-merge";
 import glob from "glob";
@@ -27,9 +28,6 @@ const ALL_PAGES = glob.sync(path.join(PATHS.SRC, "**/index.tsx"));
 
 const commonConfig: webpack.Configuration = merge(
   {
-    entry: WebpackWatchedGlobEntries.getEntries([
-      path.resolve(PATHS.SRC, "**/_*.ts"),
-    ]),
     output: {
       path: PATHS.OUTPUT,
     },
@@ -112,10 +110,24 @@ function generateDependencies(paths) {
 }
 
 const developmentConfig: webpack.Configuration = {
-  devServer: {
-    port: PORT,
-  },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  watch: true,
+  entry: () =>
+    addEntryToAll(
+      WebpackWatchedGlobEntries.getEntries([
+        path.resolve(PATHS.SRC, "**/_*.ts"),
+      ])(),
+      "webpack-plugin-serve/client"
+    ),
+  plugins: [
+    new WebpackPluginServe({
+      port: PORT,
+      // Only live reload for now
+      liveReload: true,
+      // hmr: true,
+      progress: "minimal",
+      static: [PATHS.OUTPUT],
+    }),
+  ],
   module: {
     rules: [
       {
@@ -134,7 +146,21 @@ const developmentConfig: webpack.Configuration = {
     ],
   },
 };
+
+function addEntryToAll(entries, entry) {
+  const ret = {};
+
+  Object.keys(entries).forEach((key) => {
+    ret[key] = [entries[key], entry];
+  });
+
+  return ret;
+}
+
 const productionConfig: webpack.Configuration = {
+  entry: WebpackWatchedGlobEntries.getEntries([
+    path.resolve(PATHS.SRC, "**/_*.ts"),
+  ]),
   optimization: {
     minimizer: [
       new TerserJSPlugin({}),
