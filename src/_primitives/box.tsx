@@ -28,6 +28,7 @@ export type BoxProps = {
   // combinations have to be allowed.
   color?: string;
   bg?: string;
+  role?: string;
   // TODO: sx can be only tailwind classes
   sx?: string;
   // TODO: Is this the right way to do this?
@@ -39,16 +40,22 @@ export default (props: BoxProps = {}, children) =>
   elements.createElement(
     props?.as || "div",
     {
-      ...attachState(props),
+      ...attachExtra(props),
       class: constructTailwindClasses(props).join(" "),
     },
     children.join("")
   );
 
-function attachState(props): object {
-  if (props?.["x-state"]) {
-    return { "x-state": props["x-state"] };
+function attachExtra(props): object {
+  const ret: { [key: string]: string } = {};
+
+  if (props?.["role"]) {
+    ret.role = props.role;
   }
 
-  return {};
+  if (props?.["x-state"]) {
+    ret["x-state"] = props["x-state"];
+  }
+
+  return ret;
 }
