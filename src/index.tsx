@@ -3,6 +3,7 @@ import path from "path";
 import * as elements from "typed-html";
 import Page from "./_layouts/page";
 import Heading from "./_primitives/heading";
+import Box from "./_primitives/box";
 import Alert from "./_patterns/alert";
 import Button from "./_patterns/button";
 import processMarkdown from "./_utils/process-markdown";
@@ -28,19 +29,19 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
         <article class="w-full mx-auto prose lg:prose-xl">
           {readmeAsHtml}
           <Heading as="h2">Demo</Heading>
-          <div x-state="false">
-            <div class="mb-4">
+          <Box x-state="false">
+            <Box mb="4">
               Value: <span x="state" />
-            </div>
-            <div class="mb-4">
+            </Box>
+            <Box mb="4">
               <Alert>This is a demo alert</Alert>
-            </div>
-            <div>
+            </Box>
+            <Box>
               <Button onclick="setState(v => !v)" sx="btn-blue">
                 Demo button
               </Button>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </article>
       </main>
     }
