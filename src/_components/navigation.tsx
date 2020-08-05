@@ -15,9 +15,9 @@ const NavigationItem = ({ sx = "", href }, label) => (
 const Navigation = ({}, children) => (
   <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
     <Flex mr={6} color="white" sx="items-center flex-shrink-0">
-      <span class="font-semibold text-xl tracking-tight">
+      <Box as="span" sx="font-semibold text-xl tracking-tight">
         tailwind-webpack-starter
-      </span>
+      </Box>
     </Flex>
     <Box sx="block lg:hidden">
       <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
