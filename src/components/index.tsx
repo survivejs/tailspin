@@ -45,18 +45,18 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
             </Flex>
           </Box>
 
-          <h2>Patterns</h2>
-
-          <Box mb={4}>
-            <h3>Alert</h3>
-            <Alert>This is a demo alert</Alert>
-          </Box>
-
           <Box mb={4}>
             <h3>Link</h3>
             <Link href="https://github.com/survivejs/tailwind-webpack-starter">
               Download
             </Link>
+          </Box>
+
+          <h2>Patterns</h2>
+
+          <Box mb={4}>
+            <h3>Alert</h3>
+            <Alert>This is a demo alert</Alert>
           </Box>
 
           <Box mb={4}>
