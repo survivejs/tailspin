@@ -19,10 +19,11 @@ const Navigation = ({}, children) => (
     p="6"
     bg="teal-500"
     sx="items-center justify-between flex-wrap"
+    x-state="false"
   >
     <Flex mr="6" color="white" sx="items-center flex-shrink-0">
       <Box as="span" sx="font-semibold text-xl tracking-tight">
-        tailwind-webpack-starter
+        tailwind-webpack-starter <span x="state" />
       </Box>
     </Flex>
     <Box sx="block lg:hidden">
@@ -31,6 +32,7 @@ const Navigation = ({}, children) => (
         px="3"
         py="2"
         sx="items-center border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white"
+        onclick="setState(v => !v)"
       >
         <svg
           class="fill-current h-3 w-3"
@@ -42,7 +44,10 @@ const Navigation = ({}, children) => (
         </svg>
       </Flex>
     </Box>
-    <Box sx="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+    <Box
+      x-class="!state && 'hidden'"
+      sx="w-full block flex-grow lg:flex lg:items-center lg:w-auto"
+    >
       {children.join("")}
     </Box>
   </Flex>

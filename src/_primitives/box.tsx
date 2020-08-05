@@ -31,10 +31,8 @@ export type BoxProps = {
   // Exposed attributes
   onclick?: string;
   role?: string;
-  // TODO: sx can be only tailwind classes
+  // TODO: sx can be only tailwind classes so constraint to those
   sx?: string;
-  // TODO: Is this the right way to do this?
-  "x-state"?: string;
 };
 
 // https://theme-ui.com/components/box
@@ -59,6 +57,10 @@ function attachExtra(props): object {
 
   if (props?.["role"]) {
     ret.role = props.role;
+  }
+
+  if (props?.["x-class"]) {
+    ret["x-class"] = props["x-class"];
   }
 
   if (props?.["x-state"]) {
