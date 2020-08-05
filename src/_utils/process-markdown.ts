@@ -1,5 +1,6 @@
 import marked from "marked";
 
+// TODO: Use a good HTML sanitizer here if you have user input
 marked.setOptions({
   renderer: new marked.Renderer(),
   highlight: function (code, language) {
@@ -11,7 +12,6 @@ marked.setOptions({
   pedantic: false,
   gfm: true,
   breaks: false,
-  sanitize: true,
   smartLists: true,
   smartypants: false,
   xhtml: false,
