@@ -5,13 +5,16 @@
   "description": "Opinionated starter for Tailwind/webpack projects",
   "main": "index.js",
   "scripts": {
+    "prebuild": "npm run generate-tailwind-json",
     "build": "rimraf public && NODE_ENV=production webpack --env production",
+    "prestart": "npm run generate-tailwind-json",
     "start": "webpack-dev-server --env development",
     "sitemap": "TODO",
     "check-links": "TODO",
     "check-types": "tsc --noEmit",
     "stats": "npm run build -- --json > stats.json",
-    "analyze-stats": "webpack-bundle-analyzer stats.json"
+    "analyze-stats": "webpack-bundle-analyzer stats.json",
+    "generate-tailwind-json": "node ./utils/generate-tailwind-json.js"
   },
   "keywords": [
     "tailwind",
