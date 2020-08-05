@@ -4,6 +4,7 @@ import * as elements from "typed-html";
 import Page from "./_layouts/page";
 import Alert from "./_components/alert";
 import Button from "./_components/button";
+import Heading from "./_components/heading";
 import processMarkdown from "./_utils/process-markdown";
 
 const readmePath = path.join(__dirname, "..", "README.md");
@@ -26,7 +27,7 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
       <main class="m-8">
         <article class="w-full mx-auto prose lg:prose-xl">
           {readmeAsHtml}
-          <h2>Demo</h2>
+          <Heading as="h2">Demo</Heading>
           <div x-state="false">
             <div class="mb-4">
               Value: <span x="state" />

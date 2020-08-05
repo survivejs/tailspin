@@ -4,6 +4,7 @@ import Alert from "../_components/alert";
 import Box from "../_components/box";
 import Flex from "../_components/flex";
 import Button from "../_components/button";
+import Heading from "../_components/heading";
 import Link from "../_components/link";
 import { Navigation, NavigationItem } from "../_components/navigation";
 
@@ -22,19 +23,19 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
     body={
       <main>
         <article class="w-full mx-auto prose lg:prose-xl">
-          <h1>Available components</h1>
+          <Heading as="h1">Available components</Heading>
 
-          <h2>Primitives</h2>
+          <Heading as="h2">Primitives</Heading>
 
           <Box mb={4}>
-            <h3>Box</h3>
+            <Heading as="h3">Box</Heading>
             <Box m={2} p={4} color="white" bg="primary">
               Beep
             </Box>
           </Box>
 
           <Box mb={4}>
-            <h3>Flex</h3>
+            <Heading as="h3">Flex</Heading>
             <Flex>
               <Box p={2} bg="primary" sx="flex-auto">
                 Flex
@@ -46,21 +47,26 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
           </Box>
 
           <Box mb={4}>
-            <h3>Link</h3>
+            <Heading as="h3">Heading</Heading>
+            <Heading as="h4">Demo heading</Heading>
+          </Box>
+
+          <Box mb={4}>
+            <Heading as="h3">Link</Heading>
             <Link href="https://github.com/survivejs/tailwind-webpack-starter">
               Download
             </Link>
           </Box>
 
-          <h2>Patterns</h2>
+          <Heading as="h2">Patterns</Heading>
 
           <Box mb={4}>
-            <h3>Alert</h3>
+            <Heading as="h3">Alert</Heading>
             <Alert>This is a demo alert</Alert>
           </Box>
 
           <Box mb={4}>
-            <h3>Button</h3>
+            <Heading as="h3">Button</Heading>
             <Box x-state="false">
               <Box mb={4}>
                 Value: <span x="state" />
@@ -72,7 +78,7 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
           </Box>
 
           <Box>
-            <h3>Navigation</h3>
+            <Heading as="h3">Navigation</Heading>
             <Navigation>
               <Box sx="text-sm lg:flex-grow">
                 <NavigationItem href="/">Documentation</NavigationItem>
