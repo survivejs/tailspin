@@ -15,9 +15,24 @@ export type BoxProps = {
   color?: string;
   bg?: string;
   sx?: string;
+  // TODO: Is this the right way to do this?
+  "x-state"?: string;
 };
 
 // https://theme-ui.com/components/box
 export default (props: BoxProps = {}, children) => (
-  <div class={constructTailwindClasses(props).join(" ")}>{children}</div>
+  <div
+    class={constructTailwindClasses(props).join(" ")}
+    {...attachState(props)}
+  >
+    {children}
+  </div>
 );
+
+function attachState(props) {
+  if (props?.["x-state"]) {
+    return { "x-state": props["x-state"] };
+  }
+
+  return {};
+}

@@ -53,14 +53,14 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
 
           <Box mb={4}>
             <h3>Button</h3>
-            <div x-state="false">
-              <div class="mb-4">
+            <Box x-state="false">
+              <Box mb={4}>
                 Value: <span x="state" />
-              </div>
-              <div>
+              </Box>
+              <Box>
                 <Button onclick="setState(v => !v)">Demo button</Button>
-              </div>
-            </div>
+              </Box>
+            </Box>
           </Box>
 
           <Box>
