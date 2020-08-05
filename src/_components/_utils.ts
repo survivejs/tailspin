@@ -1,4 +1,4 @@
-function constructTailwindClasses(props?: object): string[] {
+function constructTailwindClasses(props?: { classes?: string[] }): string[] {
   if (!props) {
     return [];
   }
@@ -9,9 +9,15 @@ function constructTailwindClasses(props?: object): string[] {
     p: (p) => `p-${p}`,
   };
 
-  return Object.entries(props)
+  const ret = Object.entries(props)
     .map(([k, v]) => rules[k]?.(v))
     .filter(Boolean);
+
+  if (props.classes) {
+    return ret.concat(props.classes);
+  }
+
+  return ret;
 }
 
 function objectToStyle(styles?: object): string {

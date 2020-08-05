@@ -1,15 +1,9 @@
 import * as elements from "typed-html";
-import { constructTailwindClasses, objectToStyle } from "./_utils";
+import Box, { BoxProps } from "./box";
 
 // https://theme-ui.com/components/flex
-export default (
-  props: { p?: number; color?: string; bg?: string; sx?: object } = {},
-  children
-) => (
-  <div
-    class={constructTailwindClasses(props).concat("flex").join(" ")}
-    style={objectToStyle(props?.sx)}
-  >
-    {children}
-  </div>
+export default (props: BoxProps = {}, children) => (
+  <Box {...props} classes={["flex"]}>
+    {children.join("")}
+  </Box>
 );
