@@ -2,6 +2,8 @@ import * as elements from "typed-html";
 import Flex from "./flex";
 import Box from "./box";
 
+// TODO: Likely the a would have to become a Link and it could check the target
+// as well
 const NavigationItem = ({ sx = "", href }, label) => (
   <a
     href={href}
@@ -20,7 +22,12 @@ const Navigation = ({}, children) => (
       </Box>
     </Flex>
     <Box sx="block lg:hidden">
-      <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+      <Flex
+        as="button"
+        px={3}
+        py={2}
+        sx="items-center border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white"
+      >
         <svg
           class="fill-current h-3 w-3"
           viewBox="0 0 20 20"
@@ -29,7 +36,7 @@ const Navigation = ({}, children) => (
           <title>Menu</title>
           <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
         </svg>
-      </button>
+      </Flex>
     </Box>
     <Box sx="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
       {children.join("")}
