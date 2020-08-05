@@ -16,11 +16,11 @@ const NavigationItem = ({ href }, label) => (
 const Navigation = ({}, children) => (
   <Flex
     as="nav"
-    p={6}
+    p="6"
     bg="teal-500"
     sx="items-center justify-between flex-wrap"
   >
-    <Flex mr={6} color="white" sx="items-center flex-shrink-0">
+    <Flex mr="6" color="white" sx="items-center flex-shrink-0">
       <Box as="span" sx="font-semibold text-xl tracking-tight">
         tailwind-webpack-starter
       </Box>
@@ -28,8 +28,8 @@ const Navigation = ({}, children) => (
     <Box sx="block lg:hidden">
       <Flex
         as="button"
-        px={3}
-        py={2}
+        px="3"
+        py="2"
         sx="items-center border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white"
       >
         <svg

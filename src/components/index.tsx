@@ -27,31 +27,31 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
 
           <Heading as="h2">Primitives</Heading>
 
-          <Box mb={4}>
+          <Box mb="4">
             <Heading as="h3">Box</Heading>
-            <Box m={2} p={4} color="white" bg="primary">
+            <Box m="2" p="4" color="white" bg="primary">
               Beep
             </Box>
           </Box>
 
-          <Box mb={4}>
+          <Box mb="4">
             <Heading as="h3">Flex</Heading>
             <Flex>
-              <Box p={2} bg="primary" sx="flex-auto">
+              <Box p="2" bg="primary" sx="flex-auto">
                 Flex
               </Box>
-              <Box p={2} bg="muted">
+              <Box p="2" bg="muted">
                 Box
               </Box>
             </Flex>
           </Box>
 
-          <Box mb={4}>
+          <Box mb="4">
             <Heading as="h3">Heading</Heading>
             <Heading as="h4">Demo heading</Heading>
           </Box>
 
-          <Box mb={4}>
+          <Box mb="4">
             <Heading as="h3">Link</Heading>
             <Link href="https://github.com/survivejs/tailwind-webpack-starter">
               Download
@@ -60,15 +60,15 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
 
           <Heading as="h2">Patterns</Heading>
 
-          <Box mb={4}>
+          <Box mb="4">
             <Heading as="h3">Alert</Heading>
             <Alert>This is a demo alert</Alert>
           </Box>
 
-          <Box mb={4}>
+          <Box mb="4">
             <Heading as="h3">Button</Heading>
             <Box x-state="false">
-              <Box mb={4}>
+              <Box mb="4">
                 Value: <span x="state" />
               </Box>
               <Box>

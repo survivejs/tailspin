@@ -1,24 +1,32 @@
 import * as elements from "typed-html";
 import { constructTailwindClasses } from "./_utils";
+import config from "../../tailwind.json";
+
+const theme = config.theme;
+
+type ColorKeys = keyof typeof theme.colors;
+type SpacingKeys = keyof typeof theme.spacing;
 
 export type BoxProps = {
-  as?: string;
-  m?: number;
-  mb?: number;
-  mt?: number;
-  ml?: number;
-  mr?: number;
-  mx?: number;
-  my?: number;
-  p?: number;
-  pb?: number;
-  pt?: number;
-  pl?: number;
-  pr?: number;
-  px?: number;
-  py?: number;
+  as?: keyof JSX.IntrinsicElements;
+  m?: SpacingKeys;
+  mb?: SpacingKeys;
+  mt?: SpacingKeys;
+  ml?: SpacingKeys;
+  mr?: SpacingKeys;
+  mx?: SpacingKeys;
+  my?: SpacingKeys;
+  p?: SpacingKeys;
+  pb?: SpacingKeys;
+  pt?: SpacingKeys;
+  pl?: SpacingKeys;
+  pr?: SpacingKeys;
+  px?: SpacingKeys;
+  py?: SpacingKeys;
+  // TODO: Figure out the exact type. ColorKeys isn't enough for these
   color?: string;
   bg?: string;
+  // TODO: sx can be only tailwind classes
   sx?: string;
   // TODO: Is this the right way to do this?
   "x-state"?: string;
