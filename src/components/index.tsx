@@ -27,7 +27,7 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
 
           <div class="mb-4">
             <h3>Box</h3>
-            <Box p={4} color="white" bg="primary">
+            <Box m={2} p={4} color="white" bg="primary">
               Beep
             </Box>
           </div>

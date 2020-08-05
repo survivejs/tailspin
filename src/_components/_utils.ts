@@ -6,6 +6,7 @@ function constructTailwindClasses(props?: { classes?: string[] }): string[] {
   const rules = {
     bg: (bg) => `bg-${bg}`,
     color: (color) => `text-${color}`,
+    m: (m) => `m-${m}`,
     p: (p) => `p-${p}`,
   };
 

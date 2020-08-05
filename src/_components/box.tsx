@@ -2,6 +2,7 @@ import * as elements from "typed-html";
 import { constructTailwindClasses, objectToStyle } from "./_utils";
 
 export type BoxProps = {
+  m?: number;
   p?: number;
   color?: string;
   bg?: string;
