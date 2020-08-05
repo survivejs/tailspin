@@ -25,8 +25,8 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
       ></meta>,
     ]}
     body={
-      <main class="m-8">
-        <article class="w-full mx-auto prose lg:prose-xl">
+      <Box as="main" m="8">
+        <Box as="article" sx="w-full mx-auto prose lg:prose-xl">
           {readmeAsHtml}
           <Heading as="h2">Demo</Heading>
           <Box x-state="false">
@@ -42,8 +42,8 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
               </Button>
             </Box>
           </Box>
-        </article>
-      </main>
+        </Box>
+      </Box>
     }
   />
 );
