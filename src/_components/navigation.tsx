@@ -15,7 +15,12 @@ const NavigationItem = ({ sx = "", href }, label) => (
 
 // https://tailwindcss.com/components/navigation
 const Navigation = ({}, children) => (
-  <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
+  <Flex
+    as="nav"
+    p={6}
+    bg="teal-500"
+    sx="items-center justify-between flex-wrap"
+  >
     <Flex mr={6} color="white" sx="items-center flex-shrink-0">
       <Box as="span" sx="font-semibold text-xl tracking-tight">
         tailwind-webpack-starter
@@ -41,7 +46,7 @@ const Navigation = ({}, children) => (
     <Box sx="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
       {children.join("")}
     </Box>
-  </nav>
+  </Flex>
 );
 
 export { Navigation, NavigationItem };
