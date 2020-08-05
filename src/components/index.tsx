@@ -25,33 +25,33 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
 
           <h2>Primitives</h2>
 
-          <div class="mb-4">
+          <Box mb={4}>
             <h3>Box</h3>
             <Box m={2} p={4} color="white" bg="primary">
               Beep
             </Box>
-          </div>
+          </Box>
 
-          <div class="mb-4">
+          <Box mb={4}>
             <h3>Flex</h3>
             <Flex>
-              <Box p={2} bg="primary" sx={{ flex: "1 1 auto" }}>
+              <Box p={2} bg="primary" sx="flex-auto">
                 Flex
               </Box>
               <Box p={2} bg="muted">
                 Box
               </Box>
             </Flex>
-          </div>
+          </Box>
 
           <h2>Patterns</h2>
 
-          <div class="mb-4">
+          <Box mb={4}>
             <h3>Alert</h3>
             <Alert>This is a demo alert</Alert>
-          </div>
+          </Box>
 
-          <div class="mb-4">
+          <Box mb={4}>
             <h3>Button</h3>
             <div x-state="false">
               <div class="mb-4">
@@ -61,16 +61,16 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
                 <Button onclick="setState(v => !v)">Demo button</Button>
               </div>
             </div>
-          </div>
+          </Box>
 
-          <div>
+          <Box>
             <h3>Navigation</h3>
             <Navigation>
-              <div class="text-sm lg:flex-grow">
+              <Box sx="text-sm lg:flex-grow">
                 <NavigationItem href="/">Documentation</NavigationItem>
                 <NavigationItem href="/components">Components</NavigationItem>
-              </div>
-              <div>
+              </Box>
+              <Box>
                 <NavigationItem href="https://github.com/survivejs/tailwind-webpack-starter">
                   Download
                 </NavigationItem>
@@ -80,9 +80,9 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
                 >
                   Download
                 </NavigationItem>
-              </div>
+              </Box>
             </Navigation>
-          </div>
+          </Box>
         </article>
       </main>
     }

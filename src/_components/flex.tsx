@@ -3,7 +3,7 @@ import Box, { BoxProps } from "./box";
 
 // https://theme-ui.com/components/flex
 export default (props: BoxProps = {}, children) => (
-  <Box {...props} classes={["flex"]}>
+  <Box {...props} sx="flex">
     {children.join("")}
   </Box>
 );
