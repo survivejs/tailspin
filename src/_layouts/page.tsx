@@ -1,6 +1,6 @@
 import * as elements from "typed-html";
-import { Navigation, NavigationItem } from "../_components/navigation";
-import Box from "../_components/box";
+import { Navigation, NavigationItem } from "../_patterns/navigation";
+import Box from "../_primitives/box";
 
 export default ({ head, body, cssTags, jsTags, htmlAttributes }) => (
   <html {...htmlAttributes}>

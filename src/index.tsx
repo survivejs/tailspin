@@ -2,9 +2,9 @@ import fs from "fs";
 import path from "path";
 import * as elements from "typed-html";
 import Page from "./_layouts/page";
-import Alert from "./_components/alert";
-import Button from "./_components/button";
-import Heading from "./_components/heading";
+import Heading from "./_primitives/heading";
+import Alert from "./_patterns/alert";
+import Button from "./_patterns/button";
 import processMarkdown from "./_utils/process-markdown";
 
 const readmePath = path.join(__dirname, "..", "README.md");

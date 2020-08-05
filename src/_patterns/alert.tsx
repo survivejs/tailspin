@@ -1,5 +1,6 @@
 import * as elements from "typed-html";
 
+// TODO: Use a Box here
 // https://tailwindcss.com/components/alerts
 export default ({}, message) => (
   <div

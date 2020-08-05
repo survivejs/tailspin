@@ -1,7 +1,7 @@
 import * as elements from "typed-html";
-import Flex from "./flex";
-import Box from "./box";
-import Link from "./link";
+import Flex from "../_primitives/flex";
+import Box from "../_primitives/box";
+import Link from "../_primitives/link";
 
 const NavigationItem = ({ href }, label) => (
   <Link

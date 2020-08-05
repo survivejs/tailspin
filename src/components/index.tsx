@@ -1,12 +1,12 @@
 import * as elements from "typed-html";
 import Page from "../_layouts/page";
-import Alert from "../_components/alert";
-import Box from "../_components/box";
-import Flex from "../_components/flex";
-import Button from "../_components/button";
-import Heading from "../_components/heading";
-import Link from "../_components/link";
-import { Navigation, NavigationItem } from "../_components/navigation";
+import Box from "../_primitives/box";
+import Flex from "../_primitives/flex";
+import Heading from "../_primitives/heading";
+import Link from "../_primitives/link";
+import Alert from "../_patterns/alert";
+import Button from "../_patterns/button";
+import { Navigation, NavigationItem } from "../_patterns/navigation";
 
 export default ({ htmlAttributes, cssTags, jsTags }) => (
   <Page
@@ -47,6 +47,18 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
           </Box>
 
           <Box mb="4">
+            <Heading as="h3">Button</Heading>
+            <Box x-state="false">
+              <Box mb="4">
+                Value: <span x="state" />
+              </Box>
+              <Box>
+                <Button onclick="setState(v => !v)">Demo button</Button>
+              </Box>
+            </Box>
+          </Box>
+
+          <Box mb="4">
             <Heading as="h3">Heading</Heading>
             <Heading as="h4">Demo heading</Heading>
           </Box>
@@ -63,18 +75,6 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
           <Box mb="4">
             <Heading as="h3">Alert</Heading>
             <Alert>This is a demo alert</Alert>
-          </Box>
-
-          <Box mb="4">
-            <Heading as="h3">Button</Heading>
-            <Box x-state="false">
-              <Box mb="4">
-                Value: <span x="state" />
-              </Box>
-              <Box>
-                <Button onclick="setState(v => !v)">Demo button</Button>
-              </Box>
-            </Box>
           </Box>
 
           <Box>
