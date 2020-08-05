@@ -36,7 +36,9 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
               <Alert>This is a demo alert</Alert>
             </div>
             <div>
-              <Button onclick="setState(v => !v)">Demo button</Button>
+              <Button onclick="setState(v => !v)" sx="btn-blue">
+                Demo button
+              </Button>
             </div>
           </div>
         </article>

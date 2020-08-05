@@ -1,9 +1,9 @@
 import * as elements from "typed-html";
+import Box from "../_primitives/box";
 
-// TODO: Use Box for this one
 // https://tailwindcss.com/components/buttons
-export default ({ onclick }, label) => (
-  <button class="btn btn-blue" onclick={onclick}>
+export default (props: { onclick?: string; sx?: string }, label) => (
+  <Box as="button" onclick={props.onclick} sx={`btn ${props.sx || ""}`}>
     {label}
-  </button>
+  </Box>
 );

@@ -28,6 +28,8 @@ export type BoxProps = {
   // combinations have to be allowed.
   color?: string;
   bg?: string;
+  // Exposed attributes
+  onclick?: string;
   role?: string;
   // TODO: sx can be only tailwind classes
   sx?: string;
@@ -46,8 +48,14 @@ export default (props: BoxProps = {}, children) =>
     children.join("")
   );
 
+// TODO: Clean up. Likely there needs to be an enum for these
+// and the code should check against that.
 function attachExtra(props): object {
   const ret: { [key: string]: string } = {};
+
+  if (props?.["onclick"]) {
+    ret.onclick = props.onclick;
+  }
 
   if (props?.["role"]) {
     ret.role = props.role;
