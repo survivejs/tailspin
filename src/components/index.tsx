@@ -1,6 +1,8 @@
 import * as elements from "typed-html";
 import Page from "../_layouts/page";
 import Alert from "../_components/alert";
+import Box from "../_components/box";
+import Flex from "../_components/flex";
 import Button from "../_components/button";
 import { Navigation, NavigationItem } from "../_components/navigation";
 
@@ -21,13 +23,36 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
         <article class="w-full mx-auto prose lg:prose-xl">
           <h1>Available components</h1>
 
+          <h2>Primitives</h2>
+
           <div class="mb-4">
-            <h2>Alert</h2>
+            <h3>Box</h3>
+            <Box p={4} color="white" bg="primary">
+              Beep
+            </Box>
+          </div>
+
+          <div class="mb-4">
+            <h3>Flex</h3>
+            <Flex>
+              <Box p={2} bg="primary" sx={{ flex: "1 1 auto" }}>
+                Flex
+              </Box>
+              <Box p={2} bg="muted">
+                Box
+              </Box>
+            </Flex>
+          </div>
+
+          <h2>Patterns</h2>
+
+          <div class="mb-4">
+            <h3>Alert</h3>
             <Alert>This is a demo alert</Alert>
           </div>
 
           <div class="mb-4">
-            <h2>Button</h2>
+            <h3>Button</h3>
             <div x-state="false">
               <div class="mb-4">
                 Value: <span x="state" />
@@ -39,7 +64,7 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
           </div>
 
           <div>
-            <h2>Navigation</h2>
+            <h3>Navigation</h3>
             <Navigation>
               <div class="text-sm lg:flex-grow">
                 <NavigationItem href="/">Documentation</NavigationItem>
