@@ -1,5 +1,6 @@
 import * as elements from "typed-html";
 import { Navigation, NavigationItem } from "../_components/navigation";
+import Box from "../_components/box";
 
 export default ({ head, body, cssTags, jsTags, htmlAttributes }) => (
   <html {...htmlAttributes}>
@@ -16,11 +17,10 @@ export default ({ head, body, cssTags, jsTags, htmlAttributes }) => (
             <NavigationItem href="/components">Components</NavigationItem>
           </div>
           <div>
-            <NavigationItem
-              href="https://github.com/survivejs/tailwind-webpack-starter"
-              sx="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white"
-            >
-              Download
+            <NavigationItem href="https://github.com/survivejs/tailwind-webpack-starter">
+              <Box sx="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white">
+                Download
+              </Box>
             </NavigationItem>
           </div>
         </Navigation>

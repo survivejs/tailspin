@@ -1,16 +1,15 @@
 import * as elements from "typed-html";
 import Flex from "./flex";
 import Box from "./box";
+import Link from "./link";
 
-// TODO: Likely the a would have to become a Link and it could check the target
-// as well
-const NavigationItem = ({ sx = "", href }, label) => (
-  <a
+const NavigationItem = ({ href }, label) => (
+  <Link
     href={href}
-    class={`${sx} block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4`}
+    sx="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
   >
     {label}
-  </a>
+  </Link>
 );
 
 // https://tailwindcss.com/components/navigation
