@@ -25,7 +25,7 @@ export default (props: BoxProps = {}, children) => (
     class={constructTailwindClasses(props).join(" ")}
     {...attachState(props)}
   >
-    {children}
+    {children.join("")}
   </div>
 );
 

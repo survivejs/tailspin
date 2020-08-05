@@ -1,4 +1,6 @@
 import * as elements from "typed-html";
+import Flex from "./flex";
+import Box from "./box";
 
 const NavigationItem = ({ sx = "", href }, label) => (
   <a
@@ -12,12 +14,12 @@ const NavigationItem = ({ sx = "", href }, label) => (
 // https://tailwindcss.com/components/navigation
 const Navigation = ({}, children) => (
   <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
-    <div class="flex items-center flex-shrink-0 text-white mr-6">
+    <Flex mr={6} color="white" sx="items-center flex-shrink-0">
       <span class="font-semibold text-xl tracking-tight">
         tailwind-webpack-starter
       </span>
-    </div>
-    <div class="block lg:hidden">
+    </Flex>
+    <Box sx="block lg:hidden">
       <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
         <svg
           class="fill-current h-3 w-3"
@@ -28,10 +30,10 @@ const Navigation = ({}, children) => (
           <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
         </svg>
       </button>
-    </div>
-    <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-      {children}
-    </div>
+    </Box>
+    <Box sx="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+      {children.join("")}
+    </Box>
   </nav>
 );
 
