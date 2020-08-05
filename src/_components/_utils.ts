@@ -29,14 +29,4 @@ function constructTailwindClasses(props?: { sx?: string }): string[] {
   return ret;
 }
 
-function objectToStyle(styles?: object): string {
-  if (!styles) {
-    return "";
-  }
-
-  return Object.entries(styles)
-    .map(([k, v]) => `${k}: ${v}`)
-    .join(";");
-}
-
-export { constructTailwindClasses, objectToStyle };
+export { constructTailwindClasses };
