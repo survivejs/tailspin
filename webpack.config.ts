@@ -39,7 +39,7 @@ const commonConfig: webpack.Configuration = merge(
     module: {
       rules: [
         {
-          test: /\.ts(x)$/,
+          test: /\.tsx?$/,
           include: PATHS.SRC,
           use: {
             loader: "ts-loader",
