@@ -12,8 +12,6 @@ module.exports = {
   variants: {},
   corePlugins: {},
   plugins: [require("@tailwindcss/typography")],
-  purge: {
-    mode: "all",
-    content: ["./src/**/*.ts", "./src/**/*.tsx"],
-  },
+  // Purging is handled as a post-process
+  purge: false,
 };
