@@ -12,17 +12,17 @@ export default ({ head, body, cssTags, jsTags, htmlAttributes }) => (
     <body>
       <header>
         <Navigation>
-          <div class="text-sm lg:flex-grow">
+          <Box sx="text-sm lg:flex-grow">
             <NavigationItem href="/">Documentation</NavigationItem>
             <NavigationItem href="/components">Components</NavigationItem>
-          </div>
-          <div>
+          </Box>
+          <Box>
             <NavigationItem href="https://github.com/survivejs/tailwind-webpack-starter">
               <Box sx="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white">
                 Download
               </Box>
             </NavigationItem>
-          </div>
+          </Box>
         </Navigation>
       </header>
       <main class="m-4">{body}</main>
