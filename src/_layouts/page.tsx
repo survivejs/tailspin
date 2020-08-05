@@ -18,7 +18,7 @@ export default ({ head, body, cssTags, jsTags, htmlAttributes }) => (
           <div>
             <NavigationItem
               href="https://github.com/survivejs/tailwind-webpack-starter"
-              cls="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white"
+              sx="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white"
             >
               Download
             </NavigationItem>

@@ -1,9 +1,9 @@
 import * as elements from "typed-html";
 
-const NavigationItem = ({ cls = "", href }, label) => (
+const NavigationItem = ({ sx = "", href }, label) => (
   <a
     href={href}
-    class={`${cls} block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4`}
+    class={`${sx} block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4`}
   >
     {label}
   </a>
