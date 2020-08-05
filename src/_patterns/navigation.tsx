@@ -23,7 +23,7 @@ const Navigation = ({}, children) => (
   >
     <Flex mr="6" color="white" sx="items-center flex-shrink-0">
       <Box as="span" sx="font-semibold text-xl tracking-tight">
-        tailwind-webpack-starter <span x="state" />
+        tailwind-webpack-starter
       </Box>
     </Flex>
     <Box sx="block lg:hidden">
@@ -44,10 +44,7 @@ const Navigation = ({}, children) => (
         </svg>
       </Flex>
     </Box>
-    <Box
-      x-class="!state && 'hidden'"
-      sx="w-full block flex-grow lg:flex lg:items-center lg:w-auto"
-    >
+    <Box x-class="['w-full', 'block', 'flex-grow', 'lg:flex', 'lg:items-center', 'lg:w-auto', !state && 'hidden']">
       {children.join("")}
     </Box>
   </Flex>

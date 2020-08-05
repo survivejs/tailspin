@@ -86,6 +86,6 @@
     "@tailwindcss/typography": "^0.2.0",
     "highlight.js": "^10.1.2",
     "marked": "^1.1.1",
-    "sidewind": "^2.0.0"
+    "sidewind": "^2.0.1"
   }
 }
