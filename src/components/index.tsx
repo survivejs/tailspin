@@ -1,7 +1,7 @@
 import * as elements from "typed-html";
 import Page from "../_layouts/page";
 import Box, * as BoxMeta from "../_primitives/box";
-import Flex from "../_primitives/flex";
+import * as FlexMeta from "../_primitives/flex";
 import Heading from "../_primitives/heading";
 import Link from "../_primitives/link";
 import Alert from "../_patterns/alert";
@@ -33,15 +33,8 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
           </Box>
 
           <Box mb="4">
-            <Heading as="h3">Flex</Heading>
-            <Flex>
-              <Box p="2" bg="primary" sx="flex-auto">
-                Flex
-              </Box>
-              <Box p="2" bg="muted">
-                Box
-              </Box>
-            </Flex>
+            <Heading as="h3">{FlexMeta.displayName}</Heading>
+            <FlexMeta.Example />
           </Box>
 
           <Box mb="4">
