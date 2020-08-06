@@ -41,6 +41,10 @@ const commonConfig: webpack.Configuration = merge(
           include: PATHS.SRC,
           use: {
             loader: "ts-loader",
+            options: {
+              transpileOnly: true,
+              configFile: path.join(__dirname, "tsconfig.webpack.json"),
+            },
           },
         },
       ],
