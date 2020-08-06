@@ -8,6 +8,19 @@ import * as LinkMeta from "../_primitives/link";
 import * as AlertMeta from "../_patterns/alert";
 import * as NavigationMeta from "../_patterns/navigation";
 
+const primitives = [BoxMeta, FlexMeta, ButtonMeta, HeadingMeta, LinkMeta];
+const patterns = [AlertMeta, NavigationMeta];
+
+const Collection = ({ items }) =>
+  items
+    .map(({ displayName, Example }) => (
+      <Box mb="4">
+        <Heading as="h3">{displayName}</Heading>
+        <Example />
+      </Box>
+    ))
+    .join("");
+
 export default ({ htmlAttributes, cssTags, jsTags }) => (
   <Page
     htmlAttributes={htmlAttributes}
@@ -26,43 +39,10 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
           <Heading as="h1">Available components</Heading>
 
           <Heading as="h2">Primitives</Heading>
-
-          <Box mb="4">
-            <Heading as="h3">{BoxMeta.displayName}</Heading>
-            <BoxMeta.Example />
-          </Box>
-
-          <Box mb="4">
-            <Heading as="h3">{FlexMeta.displayName}</Heading>
-            <FlexMeta.Example />
-          </Box>
-
-          <Box mb="4">
-            <Heading as="h3">{ButtonMeta.displayName}</Heading>
-            <ButtonMeta.Example />
-          </Box>
-
-          <Box mb="4">
-            <Heading as="h3">{HeadingMeta.displayName}</Heading>
-            <HeadingMeta.Example />
-          </Box>
-
-          <Box mb="4">
-            <Heading as="h3">{LinkMeta.displayName}</Heading>
-            <LinkMeta.Example />
-          </Box>
+          <Collection items={primitives} />
 
           <Heading as="h2">Patterns</Heading>
-
-          <Box mb="4">
-            <Heading as="h3">{AlertMeta.displayName}</Heading>
-            <AlertMeta.Example />
-          </Box>
-
-          <Box>
-            <Heading as="h3">{NavigationMeta.displayName}</Heading>
-            <NavigationMeta.Example />
-          </Box>
+          <Collection items={patterns} />
         </Box>
       </Box>
     }
