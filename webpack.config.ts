@@ -9,7 +9,6 @@ import {
 } from "mini-html-webpack-plugin";
 import CopyPlugin from "copy-webpack-plugin";
 import TerserJSPlugin from "terser-webpack-plugin";
-import OptimizeCSSAssetsPlugin from "optimize-css-assets-webpack-plugin";
 import { WebpackPluginServe } from "webpack-plugin-serve";
 import { AddDependencyPlugin } from "webpack-add-dependency-plugin";
 import { merge } from "webpack-merge";
@@ -165,15 +164,9 @@ const productionConfig: webpack.Configuration = {
   entry: WebpackWatchedGlobEntries.getEntries([
     path.resolve(PATHS.SRC, "**/_*.ts"),
   ]),
+  devtool: false,
   optimization: {
-    minimizer: [
-      new TerserJSPlugin({}),
-      new OptimizeCSSAssetsPlugin({
-        cssProcessorPluginOptions: {
-          preset: ["default", { discardComments: { removeAll: true } }],
-        },
-      }),
-    ],
+    minimizer: [new TerserJSPlugin({})],
   },
   module: {
     rules: [
