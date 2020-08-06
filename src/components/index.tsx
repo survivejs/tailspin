@@ -4,7 +4,7 @@ import Box, * as BoxMeta from "../_primitives/box";
 import * as FlexMeta from "../_primitives/flex";
 import * as ButtonMeta from "../_primitives/button";
 import Heading, * as HeadingMeta from "../_primitives/heading";
-import Link from "../_primitives/link";
+import Link, * as LinkMeta from "../_primitives/link";
 import Alert from "../_patterns/alert";
 import { Navigation, NavigationItem } from "../_patterns/navigation";
 
@@ -48,10 +48,8 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
           </Box>
 
           <Box mb="4">
-            <Heading as="h3">Link</Heading>
-            <Link href="https://github.com/survivejs/tailwind-webpack-starter">
-              Download
-            </Link>
+            <Heading as="h3">{LinkMeta.displayName}</Heading>
+            <LinkMeta.Example />
           </Box>
 
           <Heading as="h2">Patterns</Heading>
