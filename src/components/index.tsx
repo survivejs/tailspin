@@ -3,7 +3,7 @@ import Page from "../_layouts/page";
 import Box, * as BoxMeta from "../_primitives/box";
 import * as FlexMeta from "../_primitives/flex";
 import * as ButtonMeta from "../_primitives/button";
-import Heading from "../_primitives/heading";
+import Heading, * as HeadingMeta from "../_primitives/heading";
 import Link from "../_primitives/link";
 import Alert from "../_patterns/alert";
 import { Navigation, NavigationItem } from "../_patterns/navigation";
@@ -43,8 +43,8 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
           </Box>
 
           <Box mb="4">
-            <Heading as="h3">Heading</Heading>
-            <Heading as="h4">Demo heading</Heading>
+            <Heading as="h3">{HeadingMeta.displayName}</Heading>
+            <HeadingMeta.Example />
           </Box>
 
           <Box mb="4">
