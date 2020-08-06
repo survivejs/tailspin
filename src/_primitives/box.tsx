@@ -36,7 +36,7 @@ export type BoxProps = {
 };
 
 // https://theme-ui.com/components/box
-export default (props: BoxProps = {}, children) =>
+const Box = (props: BoxProps = {}, children) =>
   elements.createElement(
     props?.as || "div",
     {
@@ -45,6 +45,15 @@ export default (props: BoxProps = {}, children) =>
     },
     children.join("")
   );
+
+export const displayName = "Box";
+export const Example = () => (
+  <Box m="2" p="4" color="white" bg="primary">
+    Beep
+  </Box>
+);
+
+export default Box;
 
 // TODO: Clean up. Likely there needs to be an enum for these
 // and the code should check against that.

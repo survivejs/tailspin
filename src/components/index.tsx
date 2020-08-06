@@ -1,6 +1,6 @@
 import * as elements from "typed-html";
 import Page from "../_layouts/page";
-import Box from "../_primitives/box";
+import Box, * as BoxMeta from "../_primitives/box";
 import Flex from "../_primitives/flex";
 import Heading from "../_primitives/heading";
 import Link from "../_primitives/link";
@@ -28,10 +28,8 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
           <Heading as="h2">Primitives</Heading>
 
           <Box mb="4">
-            <Heading as="h3">Box</Heading>
-            <Box m="2" p="4" color="white" bg="primary">
-              Beep
-            </Box>
+            <Heading as="h3">{BoxMeta.displayName}</Heading>
+            <BoxMeta.Example />
           </Box>
 
           <Box mb="4">
