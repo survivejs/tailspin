@@ -36,7 +36,6 @@
     "@types/webpack": "^4.41.21",
     "@types/webpack-bundle-analyzer": "^3.8.0",
     "@types/webpack-dev-server": "^3.11.0",
-    "@types/webpack-env": "^1.15.2",
     "@types/webpack-merge": "^4.1.5",
     "@types/webpack-watched-glob-entries-plugin": "^2.1.0",
     "autoprefixer": "^9.8.6",
