@@ -55,6 +55,7 @@ const commonConfig: webpack.Configuration = merge(
       }),
       new CopyPlugin({ patterns: [{ from: PATHS.ASSETS, to: "assets" }] }),
     ],
+    stats: "errors-only",
   },
   generatePages(ALL_PAGES),
   generateDependencies(ALL_FILES)
