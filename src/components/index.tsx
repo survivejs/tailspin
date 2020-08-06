@@ -4,8 +4,8 @@ import Box, * as BoxMeta from "../_primitives/box";
 import * as FlexMeta from "../_primitives/flex";
 import * as ButtonMeta from "../_primitives/button";
 import Heading, * as HeadingMeta from "../_primitives/heading";
-import Link, * as LinkMeta from "../_primitives/link";
-import Alert from "../_patterns/alert";
+import * as LinkMeta from "../_primitives/link";
+import Alert, * as AlertMeta from "../_patterns/alert";
 import { Navigation, NavigationItem } from "../_patterns/navigation";
 
 export default ({ htmlAttributes, cssTags, jsTags }) => (
@@ -55,8 +55,8 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
           <Heading as="h2">Patterns</Heading>
 
           <Box mb="4">
-            <Heading as="h3">Alert</Heading>
-            <Alert>This is a demo alert</Alert>
+            <Heading as="h3">{AlertMeta.displayName}</Heading>
+            <AlertMeta.Example />
           </Box>
 
           <Box>

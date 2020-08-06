@@ -2,7 +2,7 @@ import * as elements from "typed-html";
 import Box from "../_primitives/box";
 
 // https://tailwindcss.com/components/alerts
-export default ({}, message) => (
+const Alert = ({}, message) => (
   <Box
     px="4"
     py="3"
@@ -27,3 +27,8 @@ export default ({}, message) => (
     </Box>
   </Box>
 );
+
+export const displayName = "Alert";
+export const Example = () => <Alert>This is a demo alert</Alert>;
+
+export default Alert;
