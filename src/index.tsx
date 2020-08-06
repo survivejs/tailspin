@@ -4,8 +4,8 @@ import * as elements from "typed-html";
 import Page from "./_layouts/page";
 import Heading from "./_primitives/heading";
 import Box from "./_primitives/box";
+import Button from "./_primitives/button";
 import Alert from "./_patterns/alert";
-import Button from "./_patterns/button";
 import processMarkdown from "./_utils/process-markdown";
 
 const readmePath = path.join(__dirname, "..", "README.md");

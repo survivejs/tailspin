@@ -1,5 +1,5 @@
 import * as elements from "typed-html";
-import Box from "../_primitives/box";
+import Box from "./box";
 
 // https://tailwindcss.com/components/buttons
 export default (props: { onclick?: string; sx?: string }, label) => (

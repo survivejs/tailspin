@@ -5,7 +5,7 @@ import * as FlexMeta from "../_primitives/flex";
 import Heading from "../_primitives/heading";
 import Link from "../_primitives/link";
 import Alert from "../_patterns/alert";
-import Button from "../_patterns/button";
+import Button from "../_primitives/button";
 import { Navigation, NavigationItem } from "../_patterns/navigation";
 
 export default ({ htmlAttributes, cssTags, jsTags }) => (
