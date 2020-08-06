@@ -50,4 +50,25 @@ const Navigation = ({}, children) => (
   </Flex>
 );
 
-export { Navigation, NavigationItem };
+const displayName = "Navigation";
+
+const Example = () => (
+  <Navigation>
+    <Box sx="text-sm lg:flex-grow">
+      <NavigationItem href="/">Documentation</NavigationItem>
+      <NavigationItem href="/components">Components</NavigationItem>
+    </Box>
+    <Box>
+      <NavigationItem href="https://github.com/survivejs/tailwind-webpack-starter">
+        Download
+      </NavigationItem>
+      <NavigationItem href="https://github.com/survivejs/tailwind-webpack-starter">
+        <Box sx="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white">
+          Download
+        </Box>
+      </NavigationItem>
+    </Box>
+  </Navigation>
+);
+
+export { Navigation, NavigationItem, displayName, Example };
