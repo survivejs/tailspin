@@ -3,6 +3,13 @@ declare namespace JSX {
     x?: string;
   }
 
+  interface HtmlTextAreaTag {
+    oninput?: string;
+    autocapitalize?: string;
+    autocomplete?: string;
+    autocorrect?: string;
+  }
+
   interface Path {
     d: string;
   }

@@ -135,7 +135,7 @@ const developmentConfig: webpack.Configuration = {
   module: {
     rules: [
       {
-        test: /\.(p)css$/,
+        test: /\.p?css$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
