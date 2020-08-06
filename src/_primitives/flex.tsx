@@ -3,7 +3,7 @@ import Box, { BoxProps } from "./box";
 
 // https://theme-ui.com/components/flex
 const Flex = (props: BoxProps = {}, children) => (
-  <Box {...props} sx={`flex ${props?.sx && props.sx}`}>
+  <Box {...props} sx={`flex ${(props?.sx && props.sx) || ""}`.trim()}>
     {children.join("")}
   </Box>
 );
