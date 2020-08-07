@@ -15,6 +15,7 @@
     "resolveJsonModule": true
   },
   "ts-node": {
+    "logError": true,
     "transpileOnly": true
   }
 }
