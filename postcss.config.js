@@ -18,6 +18,23 @@ module.exports =
 
               return broadMatches.concat(innerMatches);
             },
+            whitelistPatterns: [
+              /^hljs/,
+              /^p-/,
+              /^pr-/,
+              /^pl-/,
+              /^pt-/,
+              /^pb-/,
+              /^px-/,
+              /^py-/,
+              /^m-/,
+              /^mr-/,
+              /^ml-/,
+              /^mt-/,
+              /^mb-/,
+              /^mx-/,
+              /^my-/,
+            ],
           }),
           require("postcss-clean"),
         ],
