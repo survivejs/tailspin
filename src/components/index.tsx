@@ -123,7 +123,6 @@ const Collection = ({ items }) =>
 const EditableExample = ({ source }) => {
   const decodedExample = Buffer.from(source).toString("base64");
 
-  // TODO: Evaluation logic (this needs to go to _page.ts as a global)
   return (
     <section x-state={`{ code: atob('${decodedExample}') }`}>
       <div class="p-4 bg-gray-800 text-white rounded-t-lg overflow-x-auto overflow-y-hidden">
