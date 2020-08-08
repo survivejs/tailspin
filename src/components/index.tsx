@@ -1,5 +1,4 @@
 import * as elements from "typed-html";
-import { decode as decodeHTML } from "html-encoder-decoder";
 import Page from "../_layouts/page";
 import Box, * as BoxMeta from "../_primitives/box";
 import * as FlexMeta from "../_primitives/flex";
