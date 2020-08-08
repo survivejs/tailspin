@@ -74,6 +74,10 @@ function attachAttributes(props): elements.Attributes {
     ret["x-state"] = props["x-state"];
   }
 
+  if (props?.["x"]) {
+    ret["x"] = props["x"];
+  }
+
   const klass = constructTailwindClasses(props).join(" ");
 
   if (klass) {
