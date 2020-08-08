@@ -40,7 +40,7 @@ const Box = (props: BoxProps = {}, children) =>
   elements.createElement(
     props?.as || "div",
     attachAttributes(props),
-    children.join("")
+    Array.isArray(children) ? children.join("") : children
   );
 
 export const displayName = "Box";

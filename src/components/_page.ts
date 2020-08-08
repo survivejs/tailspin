@@ -1,3 +1,4 @@
+import Box from "../_primitives/box";
 import Heading from "../_primitives/heading";
 import Link from "../_primitives/link";
 
@@ -9,6 +10,14 @@ window.evaluateCode = (code) => {
 
   if (!componentNode) {
     return "";
+  }
+
+  if (componentNode.nodeName === "Box") {
+    return Box(
+      // @ts-ignore: Evaluated runtime
+      attributesToObject(componentNode.attributes),
+      componentNode.innerHTML
+    );
   }
 
   if (componentNode.nodeName === "Heading") {
