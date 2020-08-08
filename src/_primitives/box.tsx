@@ -39,10 +39,7 @@ export type BoxProps = {
 const Box = (props: BoxProps = {}, children) =>
   elements.createElement(
     props?.as || "div",
-    {
-      ...attachExtra(props),
-      class: constructTailwindClasses(props).join(" "),
-    },
+    attachAttributes(props),
     children.join("")
   );
 
@@ -57,7 +54,7 @@ export default Box;
 
 // TODO: Clean up. Likely there needs to be an enum for these
 // and the code should check against that.
-function attachExtra(props): object {
+function attachAttributes(props): elements.Attributes {
   const ret: { [key: string]: string } = {};
 
   if (props?.["onclick"]) {
@@ -74,6 +71,12 @@ function attachExtra(props): object {
 
   if (props?.["x-state"]) {
     ret["x-state"] = props["x-state"];
+  }
+
+  const klass = constructTailwindClasses(props).join(" ");
+
+  if (klass) {
+    ret["class"] = klass;
   }
 
   return ret;
