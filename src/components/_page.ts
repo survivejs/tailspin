@@ -1,12 +1,32 @@
 import Heading from "../_primitives/heading";
 
-// TODO: detect heading by name and create it like this
-console.log(Heading({ as: "h4" }, "demo header"));
-
 // @ts-ignore: TODO: Add this to global
 window.evaluateCode = (code) => {
   // TODO: Evaluate all nodes through patterns/primitives
-  const componentNode = new DOMParser().parseFromString(code, "text/html").body;
+  const componentNode = new DOMParser().parseFromString(code, "text/html").body
+    .firstElementChild;
+
+  if (!componentNode) {
+    return "";
+  }
+
+  if (componentNode.nodeName === "HEADING") {
+    return Heading(
+      // @ts-ignore: Evaluated runtime
+      attributesToObject(componentNode.attributes),
+      componentNode.innerHTML
+    );
+  }
 
   return componentNode.innerHTML;
 };
+
+function attributesToObject(attributes: NamedNodeMap) {
+  const ret = {};
+
+  for (let i = 0; i < attributes.length; i++) {
+    ret[attributes[i].nodeName] = attributes[i].nodeValue;
+  }
+
+  return ret;
+}
