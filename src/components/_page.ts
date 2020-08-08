@@ -5,48 +5,53 @@ import Alert from "../_patterns/alert";
 
 // @ts-ignore: TODO: Add this to global
 window.evaluateCode = (code) => {
-  // TODO: Evaluate all nodes through patterns/primitives
-  const componentNode = new DOMParser().parseFromString(code, "text/xml")
+  const node = new DOMParser().parseFromString(code, "text/xml")
     .firstElementChild;
 
-  if (!componentNode) {
-    return "";
-  }
+  return node && evaluateNode(node);
+};
 
-  if (componentNode.nodeName === "Box") {
+function evaluateNode(node: Element) {
+  if (node.nodeName === "Box") {
     return Box(
       // @ts-ignore: Evaluated runtime
-      attributesToObject(componentNode.attributes),
-      componentNode.innerHTML
+      attributesToObject(node.attributes),
+      node.children.length
+        ? collectionToArray(node.children).map(evaluateNode)
+        : node.innerHTML
     );
   }
 
-  if (componentNode.nodeName === "Heading") {
+  if (node.nodeName === "Heading") {
     return Heading(
       // @ts-ignore: Evaluated runtime
-      attributesToObject(componentNode.attributes),
-      componentNode.innerHTML
+      attributesToObject(node.attributes),
+      node.innerHTML
     );
   }
 
-  if (componentNode.nodeName === "Link") {
+  if (node.nodeName === "Link") {
     return Link(
       // @ts-ignore: Evaluated runtime
-      attributesToObject(componentNode.attributes),
-      componentNode.innerHTML
+      attributesToObject(node.attributes),
+      node.innerHTML
     );
   }
 
-  if (componentNode.nodeName === "Alert") {
+  if (node.nodeName === "Alert") {
     return Alert(
       // @ts-ignore: Evaluated runtime
-      attributesToObject(componentNode.attributes),
-      componentNode.innerHTML
+      attributesToObject(node.attributes),
+      node.innerHTML
     );
   }
 
-  return componentNode.innerHTML;
-};
+  return node.innerHTML;
+}
+
+function collectionToArray(collection: HTMLCollection) {
+  return Array.prototype.slice.call(collection);
+}
 
 function attributesToObject(attributes: NamedNodeMap) {
   const ret = {};
