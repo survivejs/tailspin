@@ -168,6 +168,7 @@ const Colors = ({
     .map(([key, color]) =>
       isObject(color) ? (
         <Flex>
+          <Box sx="w-16">{key}</Box>
           {/* @ts-ignore */}
           <Colors parent={key} items={color} />
         </Flex>
