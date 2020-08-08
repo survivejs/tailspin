@@ -19,6 +19,7 @@ const PORT = 8080;
 const ROOT = __dirname;
 const PATHS = {
   ASSETS: path.resolve(ROOT, "assets"),
+  DS: path.resolve(ROOT, "ds"),
   SRC: path.resolve(ROOT, "src"),
   OUTPUT: path.resolve(ROOT, "public"),
 };
@@ -37,7 +38,7 @@ const commonConfig: webpack.Configuration = merge(
       rules: [
         {
           test: /\.tsx?$/,
-          include: PATHS.SRC,
+          include: [PATHS.DS, PATHS.SRC],
           use: {
             loader: "ts-loader",
             options: {

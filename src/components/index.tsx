@@ -6,11 +6,11 @@ import * as prettier from "prettier";
 import { tsquery } from "@phenomnomnominal/tsquery";
 import readableColor from "polished/lib/color/readableColor";
 import glob from "glob";
-import Page from "../_layouts/page";
-import Flex from "../_primitives/flex";
-import Box from "../_primitives/box";
-import Heading from "../_primitives/heading";
-import CodeEditor from "../_patterns/code-editor";
+import Page from "../../ds/layouts/page";
+import CodeEditor from "../../ds/patterns/code-editor";
+import Flex from "../../ds/primitives/flex";
+import Box from "../../ds/primitives/box";
+import Heading from "../../ds/primitives/heading";
 import config from "../../tailwind.json";
 
 const theme = config.theme;
@@ -46,10 +46,10 @@ const Components = ({ htmlAttributes, cssTags, jsTags }) => (
           </Flex>
 
           <Heading as="h2">Primitives</Heading>
-          <Collection items={getComponents("_primitives")} />
+          <Collection items={getComponents("primitives")} />
 
           <Heading as="h2">Patterns</Heading>
-          <Collection items={getComponents("_patterns")} />
+          <Collection items={getComponents("patterns")} />
         </Box>
       </Box>
     }
@@ -57,16 +57,18 @@ const Components = ({ htmlAttributes, cssTags, jsTags }) => (
 );
 
 function getComponents(type) {
-  return glob.sync(_path.join(__dirname, "..", `${type}/*.tsx`)).map((path) => {
-    const source = _fs.readFileSync(path, { encoding: "utf-8" });
+  return glob
+    .sync(_path.join(__dirname, "..", "..", "ds", `${type}/*.tsx`))
+    .map((path) => {
+      const source = _fs.readFileSync(path, { encoding: "utf-8" });
 
-    return {
-      ...require(path),
-      path,
-      source,
-      exampleSource: parseExample({ path, source }),
-    };
-  });
+      return {
+        ...require(path),
+        path,
+        source,
+        exampleSource: parseExample({ path, source }),
+      };
+    });
 }
 
 function parseExample({ path, source }) {

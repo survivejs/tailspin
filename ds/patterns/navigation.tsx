@@ -1,7 +1,7 @@
 import * as elements from "typed-html";
-import Flex from "../_primitives/flex";
-import Box from "../_primitives/box";
-import Link from "../_primitives/link";
+import Flex from "../primitives/flex";
+import Box from "../primitives/box";
+import Link from "../primitives/link";
 
 // https://tailwindcss.com/components/navigation
 const Navigation = ({}, children) => (

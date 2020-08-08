@@ -1,5 +1,5 @@
 import * as elements from "typed-html";
-import Box from "../_primitives/box";
+import Box from "../primitives/box";
 
 // https://tailwindcss.com/components/alerts
 const Alert = ({}, message) => (

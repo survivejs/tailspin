@@ -1,7 +1,6 @@
-const components = {
-  ...loadComponents(require.context("../_primitives", false, /^\.\/.*\.tsx$/)),
-  ...loadComponents(require.context("../_patterns", false, /^\.\/.*\.tsx$/)),
-};
+const components = loadComponents(
+  require.context("../../ds", true, /^\.\/.*\.tsx$/)
+);
 
 // @ts-ignore: TODO: Add this to global
 window.evaluateCode = (code) => {

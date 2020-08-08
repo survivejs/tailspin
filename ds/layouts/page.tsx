@@ -1,8 +1,8 @@
 import * as elements from "typed-html";
-import Navigation from "../_patterns/navigation";
-import Box from "../_primitives/box";
+import Navigation from "../patterns/navigation";
+import Box from "../primitives/box";
 
-export default ({ head, body, cssTags, jsTags, htmlAttributes }) => (
+const Page = ({ head, body, cssTags, jsTags, htmlAttributes }) => (
   <html {...htmlAttributes}>
     <head>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -33,3 +33,10 @@ export default ({ head, body, cssTags, jsTags, htmlAttributes }) => (
     {jsTags}
   </html>
 );
+
+export const displayName = "Page";
+export const Example = () => (
+  <Page head="" body="" cssTags="" jsTags="" htmlAttributes="" />
+);
+
+export default Page;

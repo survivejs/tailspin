@@ -12,6 +12,5 @@ The starter comes with a Prettier/lint-staged setup so your code stays formatted
 ## Structure
 
 - `assets/` - Static assets such as favicons.
-- `src/` - The system picks up each `index.tsx` and it follows index-first convention. The idea is that this way you can colocate other related files behind a page directory. Each page can have optional JavaScript attached to it. The system picks up `_page.ts` by convention. Any logic that should be run on each page should go to `src/_shared.ts`.
-- `src/_components` - Component templates of the system. These are the building blocks that are used for composing pages.
-- `src/_layouts` - Base layouts of the system. Each page starts from one and these glue scripts and style tags coming from webpack to the page.
+- `ds/` - The design system of the project lives here and it contains **layouts**, **patterns**, and **primitives** used to construct the pages.
+- `src/` - The system picks up each `index.tsx` and it follows index-first convention. The idea is that this way you can colocate other related files behind a page directory. Each page can have optional JavaScript attached to it and the system picks up `_page.ts` by convention. Any logic that should be run on each page should go to `src/_shared.ts`.

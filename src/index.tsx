@@ -1,11 +1,11 @@
 import fs from "fs";
 import path from "path";
 import * as elements from "typed-html";
-import Page from "./_layouts/page";
-import Heading from "./_primitives/heading";
-import Box from "./_primitives/box";
-import Button from "./_primitives/button";
-import Alert from "./_patterns/alert";
+import Page from "../ds/layouts/page";
+import Alert from "../ds/patterns/alert";
+import Heading from "../ds/primitives/heading";
+import Box from "../ds/primitives/box";
+import Button from "../ds/primitives/button";
 import processMarkdown from "./_utils/process-markdown";
 
 const readmePath = path.join(__dirname, "..", "README.md");
