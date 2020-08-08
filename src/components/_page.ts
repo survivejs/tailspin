@@ -1,4 +1,5 @@
 import Box from "../_primitives/box";
+import Flex from "../_primitives/flex";
 import Button from "../_primitives/button";
 import Heading from "../_primitives/heading";
 import Link from "../_primitives/link";
@@ -15,6 +16,16 @@ window.evaluateCode = (code) => {
 function evaluateNode(node: Element) {
   if (node.nodeName === "Box") {
     return Box(
+      // @ts-ignore: Evaluated runtime
+      attributesToObject(node.attributes),
+      node.children.length
+        ? collectionToArray(node.children).map(evaluateNode)
+        : node.innerHTML
+    );
+  }
+
+  if (node.nodeName === "Flex") {
+    return Flex(
       // @ts-ignore: Evaluated runtime
       attributesToObject(node.attributes),
       node.children.length
