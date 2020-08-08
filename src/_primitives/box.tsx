@@ -54,34 +54,17 @@ export const Example = () => (
 
 export default Box;
 
-// TODO: Clean up. Likely there needs to be an enum for these
-// and the code should check against that.
+// TODO: Unify with typing, maybe typeof against this one
+const extraProps = ["onclick", "role", "x-class", "x-state", "x", "style"];
+
 function attachAttributes(props): elements.Attributes {
   const ret: { [key: string]: string } = {};
 
-  if (props?.["onclick"]) {
-    ret.onclick = props.onclick;
-  }
-
-  if (props?.["role"]) {
-    ret.role = props.role;
-  }
-
-  if (props?.["x-class"]) {
-    ret["x-class"] = props["x-class"];
-  }
-
-  if (props?.["x-state"]) {
-    ret["x-state"] = props["x-state"];
-  }
-
-  if (props?.["x"]) {
-    ret["x"] = props["x"];
-  }
-
-  if (props?.["style"]) {
-    ret["style"] = props["style"];
-  }
+  extraProps.forEach((extraProp) => {
+    if (props?.[extraProp]) {
+      ret[extraProp] = props[extraProp];
+    }
+  });
 
   const klass = constructTailwindClasses(props).join(" ");
 
