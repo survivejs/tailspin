@@ -1,9 +1,8 @@
 import "highlight.js/styles/dracula.css";
 import "sidewind";
-import hljs from "highlight.js/lib/highlight.js";
-
 import "./index.pcss";
 
+const hljs = require("highlight.js/lib/core.js");
 const html = require("highlight.js/lib/languages/xml");
 const js = require("highlight.js/lib/languages/javascript");
 
