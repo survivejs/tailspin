@@ -4,9 +4,10 @@ import Button from "../_primitives/button";
 import Heading from "../_primitives/heading";
 import Link from "../_primitives/link";
 import Alert from "../_patterns/alert";
+import Navigation from "../_patterns/navigation";
 
-// TODO: Figure out a nice way to maintain this list
-const components = { Box, Flex, Button, Heading, Link, Alert };
+// TODO: Figure out a nice way to maintain this list.
+const components = { Box, Flex, Button, Heading, Link, Alert, Navigation };
 
 // @ts-ignore: TODO: Add this to global
 window.evaluateCode = (code) => {

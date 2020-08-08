@@ -1,5 +1,5 @@
 import * as elements from "typed-html";
-import { Navigation, NavigationItem } from "../_patterns/navigation";
+import Navigation from "../_patterns/navigation";
 import Box from "../_primitives/box";
 
 export default ({ head, body, cssTags, jsTags, htmlAttributes }) => (
@@ -13,15 +13,15 @@ export default ({ head, body, cssTags, jsTags, htmlAttributes }) => (
       <header>
         <Navigation>
           <Box sx="text-sm lg:flex-grow">
-            <NavigationItem href="/">Documentation</NavigationItem>
-            <NavigationItem href="/components">Components</NavigationItem>
+            <Navigation.Item href="/">Documentation</Navigation.Item>
+            <Navigation.Item href="/components">Components</Navigation.Item>
           </Box>
           <Box>
-            <NavigationItem href="https://github.com/survivejs/tailwind-webpack-starter">
+            <Navigation.Item href="https://github.com/survivejs/tailwind-webpack-starter">
               <Box sx="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white">
                 Download
               </Box>
-            </NavigationItem>
+            </Navigation.Item>
           </Box>
         </Navigation>
       </header>

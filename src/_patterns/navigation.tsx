@@ -3,15 +3,6 @@ import Flex from "../_primitives/flex";
 import Box from "../_primitives/box";
 import Link from "../_primitives/link";
 
-const NavigationItem = ({ href }, label) => (
-  <Link
-    href={href}
-    sx="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-  >
-    {label}
-  </Link>
-);
-
 // https://tailwindcss.com/components/navigation
 const Navigation = ({}, children) => (
   <Flex
@@ -50,20 +41,30 @@ const Navigation = ({}, children) => (
   </Flex>
 );
 
-const displayName = "Navigation";
+const NavigationItem = ({ href }, label) => (
+  <Link
+    href={href}
+    sx="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+  >
+    {label}
+  </Link>
+);
 
+Navigation.Item = NavigationItem;
+
+const displayName = "Navigation";
 const Example = () => (
   <Navigation>
     <Box sx="text-sm lg:flex-grow">
-      <NavigationItem href="/">Documentation</NavigationItem>
-      <NavigationItem href="/components">Components</NavigationItem>
+      <Navigation.Item href="/">Documentation</Navigation.Item>
+      <Navigation.Item href="/components">Components</Navigation.Item>
     </Box>
     <Box>
-      <NavigationItem href="https://github.com/survivejs/tailwind-webpack-starter">
+      <Navigation.Item href="https://github.com/survivejs/tailwind-webpack-starter">
         Download
-      </NavigationItem>
+      </Navigation.Item>
     </Box>
   </Navigation>
 );
 
-export { Navigation, NavigationItem, displayName, Example };
+export { Navigation as default, displayName, Example };
