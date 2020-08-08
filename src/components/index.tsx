@@ -4,14 +4,18 @@ import * as elements from "typed-html";
 import * as ts from "typescript";
 import * as prettier from "prettier";
 import { tsquery } from "@phenomnomnominal/tsquery";
+import readableColor from "polished/lib/color/readableColor";
 import glob from "glob";
 import Page from "../_layouts/page";
+import Flex from "../_primitives/flex";
 import Box from "../_primitives/box";
 import Heading from "../_primitives/heading";
 import CodeEditor from "../_patterns/code-editor";
 import config from "../../tailwind.json";
 
-const spacingScale = Object.keys(config.theme.spacing);
+const theme = config.theme;
+const colors = theme.colors;
+const spacingScale = Object.keys(theme.spacing);
 
 const Components = ({ htmlAttributes, cssTags, jsTags }) => (
   <Page
@@ -30,8 +34,16 @@ const Components = ({ htmlAttributes, cssTags, jsTags }) => (
         <Box as="article" sx="w-full mx-auto max-w-3xl">
           <Heading as="h1">Component Library</Heading>
 
-          <Heading as="h2">Spacing scale</Heading>
-          <SpacingScale items={spacingScale} />
+          <Flex sx="flex-col sm:flex-row">
+            <Box sx="flex-auto">
+              <Heading as="h2">Spacing scale</Heading>
+              <SpacingScale items={spacingScale} />
+            </Box>
+            <Box>
+              <Heading as="h2">Colors</Heading>
+              <Colors items={colors} />
+            </Box>
+          </Flex>
 
           <Heading as="h2">Primitives</Heading>
           <Collection items={getComponents("_primitives")} />
@@ -143,5 +155,46 @@ const SpacingScale = ({ items }) =>
       </Box>
     ))
     .join("");
+
+// TODO: Figure out how to handle polymorphism in TS
+const Colors = ({
+  items,
+  parent,
+}: {
+  items: { [key: string]: string | { [key: string]: string } };
+  parent?: string;
+}) =>
+  Object.entries(items)
+    .map(([key, color]) =>
+      isObject(color) ? (
+        <Flex>
+          {/* @ts-ignore */}
+          <Colors parent={key} items={color} />
+        </Flex>
+      ) : (
+        // @ts-ignore
+        <Box
+          p="1"
+          bg={parent ? `${parent}-${key}` : key}
+          style={`color: ${getComplementary(color as string)}`}
+        >
+          {key}
+        </Box>
+      )
+    )
+    .join("");
+
+const isObject = (a) => typeof a === "object";
+
+const getComplementary = (color: string) =>
+  tryTo(() => readableColor(color), "#000");
+
+function tryTo(fn, defaultValue) {
+  try {
+    return fn();
+  } catch (err) {
+    return defaultValue;
+  }
+}
 
 export default Components;

@@ -34,6 +34,7 @@ export type BoxProps = {
   // TODO: sx can be only tailwind classes so constraint to those
   sx?: string;
   x?: any;
+  style?: string;
 };
 
 // https://theme-ui.com/components/box
@@ -76,6 +77,10 @@ function attachAttributes(props): elements.Attributes {
 
   if (props?.["x"]) {
     ret["x"] = props["x"];
+  }
+
+  if (props?.["style"]) {
+    ret["style"] = props["style"];
   }
 
   const klass = constructTailwindClasses(props).join(" ");
