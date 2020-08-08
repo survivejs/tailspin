@@ -11,6 +11,7 @@ const CodeEditor = ({ source }: { source?: string }) => {
   return (
     <section x-state={`{ code: atob('${decodedExample}') }`}>
       <div class="p-4 bg-gray-800 text-white rounded-t-lg overflow-x-auto overflow-y-hidden">
+        <div class="float-right select-none text-xs text-gray-600">Editor</div>
         <div class="inline-block font-mono relative">
           <pre
             class="overflow-hidden mr-16 pr-16 w-full"
