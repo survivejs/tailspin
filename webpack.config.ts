@@ -172,7 +172,7 @@ const productionConfig: webpack.Configuration = {
   module: {
     rules: [
       {
-        test: /\.(p)css$/,
+        test: /\.p?css$/,
         use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
       },
     ],
