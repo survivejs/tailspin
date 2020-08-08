@@ -177,6 +177,7 @@ const Colors = ({
         <Box
           p="1"
           bg={parent ? `${parent}-${key}` : key}
+          color={parent ? `${parent}-${key}` : key}
           style={`color: ${getComplementary(color as string)}`}
         >
           {key}
