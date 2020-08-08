@@ -7,7 +7,16 @@ import Alert from "../_patterns/alert";
 import Navigation from "../_patterns/navigation";
 
 // TODO: Figure out a nice way to maintain this list.
-const components = { Box, Flex, Button, Heading, Link, Alert, Navigation };
+const components = {
+  Box,
+  Flex,
+  Button,
+  Heading,
+  Link,
+  Alert,
+  Navigation,
+  "Navigation.Item": Navigation.Item,
+};
 
 // @ts-ignore: TODO: Add this to global
 window.evaluateCode = (code) => {
@@ -19,6 +28,10 @@ window.evaluateCode = (code) => {
 
 function evaluateNode(node: Element) {
   const foundComponent = components[node.nodeName];
+
+  if (node.nodeName === "Box") {
+    console.log("box children", node.children);
+  }
 
   return foundComponent
     ? foundComponent(
