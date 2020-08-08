@@ -1,6 +1,7 @@
 import Box from "../_primitives/box";
 import Heading from "../_primitives/heading";
 import Link from "../_primitives/link";
+import Alert from "../_patterns/alert";
 
 // @ts-ignore: TODO: Add this to global
 window.evaluateCode = (code) => {
@@ -30,6 +31,14 @@ window.evaluateCode = (code) => {
 
   if (componentNode.nodeName === "Link") {
     return Link(
+      // @ts-ignore: Evaluated runtime
+      attributesToObject(componentNode.attributes),
+      componentNode.innerHTML
+    );
+  }
+
+  if (componentNode.nodeName === "Alert") {
+    return Alert(
       // @ts-ignore: Evaluated runtime
       attributesToObject(componentNode.attributes),
       componentNode.innerHTML
