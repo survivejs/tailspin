@@ -9,6 +9,9 @@ import Page from "../_layouts/page";
 import Box from "../_primitives/box";
 import Heading from "../_primitives/heading";
 import CodeEditor from "../_patterns/code-editor";
+import config from "../../tailwind.json";
+
+const spacingScale = Object.keys(config.theme.spacing);
 
 const Components = ({ htmlAttributes, cssTags, jsTags }) => (
   <Page
@@ -25,7 +28,10 @@ const Components = ({ htmlAttributes, cssTags, jsTags }) => (
     body={
       <Box as="main">
         <Box as="article" sx="w-full mx-auto max-w-3xl">
-          <Heading as="h1">Available components</Heading>
+          <Heading as="h1">Component Library</Heading>
+
+          <Heading as="h2">Spacing scale</Heading>
+          <SpacingScale items={spacingScale} />
 
           <Heading as="h2">Primitives</Heading>
           <Collection items={getComponents("_primitives")} />
@@ -125,6 +131,15 @@ const Collection = ({ items }) =>
       <Box mb="4">
         <Heading as="h3">{displayName}</Heading>
         <CodeEditor source={exampleSource} />
+      </Box>
+    ))
+    .join("");
+
+const SpacingScale = ({ items }) =>
+  items
+    .map((key) => (
+      <Box bg="gray-400" sx={`w-${key}`}>
+        {key}
       </Box>
     ))
     .join("");
