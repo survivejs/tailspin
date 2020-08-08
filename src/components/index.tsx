@@ -1,15 +1,10 @@
+import _fs from "fs";
+import _path from "path";
 import * as elements from "typed-html";
+import glob from "glob";
 import Page from "../_layouts/page";
-import Box, * as BoxMeta from "../_primitives/box";
-import * as FlexMeta from "../_primitives/flex";
-import * as ButtonMeta from "../_primitives/button";
-import Heading, * as HeadingMeta from "../_primitives/heading";
-import * as LinkMeta from "../_primitives/link";
-import * as AlertMeta from "../_patterns/alert";
-import * as NavigationMeta from "../_patterns/navigation";
-
-const primitives = [BoxMeta, FlexMeta, ButtonMeta, HeadingMeta, LinkMeta];
-const patterns = [AlertMeta, NavigationMeta];
+import Box from "../_primitives/box";
+import Heading from "../_primitives/heading";
 
 const Components = ({ htmlAttributes, cssTags, jsTags }) => (
   <Page
@@ -29,29 +24,38 @@ const Components = ({ htmlAttributes, cssTags, jsTags }) => (
           <Heading as="h1">Available components</Heading>
 
           <Heading as="h2">Primitives</Heading>
-          <Collection items={primitives} />
+          <Collection items={getComponents("_primitives")} />
 
           <Heading as="h2">Patterns</Heading>
-          <Collection items={patterns} />
+          <Collection items={getComponents("_patterns")} />
         </Box>
       </Box>
     }
   />
 );
 
+function getComponents(type) {
+  return glob
+    .sync(_path.join(__dirname, "..", `${type}/*.tsx`))
+    .map((path) => ({
+      ...require(path),
+      path,
+      source: _fs.readFileSync(path, { encoding: "utf-8" }),
+    }));
+}
+
 const Collection = ({ items }) =>
   items
-    .map(({ displayName, Example }) => (
+    .map(({ displayName, Example, source }) => (
       <Box mb="4">
         <Heading as="h3">{displayName}</Heading>
-        <EditableExample Example={Example} />
+        <EditableExample Example={Example} source={source} />
       </Box>
     ))
     .join("");
 
-const EditableExample = ({ Example }) => {
-  // TODO: The problem is that this converts to HTML. The transformation
-  // needs to occur later for this to make sense.
+const EditableExample = ({ Example, source }) => {
+  // TODO: decodedExample should be parsed from source
   const example = Example();
   const decodedExample = Buffer.from(example).toString("base64");
 
@@ -76,7 +80,7 @@ const EditableExample = ({ Example }) => {
         </div>
       </div>
       <div class="p-4 bg-gray-200 rounded-b-lg" x="state.code">
-        ${example}
+        <Example />
       </div>
     </section>
   );
