@@ -1,6 +1,6 @@
 import "highlight.js/styles/dracula.css";
 import "sidewind";
-import hljs from "highlight.js";
+import hljs from "highlight.js/lib/highlight.js";
 
 import "./index.pcss";
 
