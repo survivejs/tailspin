@@ -50,6 +50,7 @@ function evaluateNode(node: Element) {
 }
 
 function collectionToArray(collection: HTMLCollection) {
+  // https://stackoverflow.com/questions/222841/most-efficient-way-to-convert-an-htmlcollection-to-an-array
   return Array.prototype.slice.call(collection);
 }
 
