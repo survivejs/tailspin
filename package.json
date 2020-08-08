@@ -27,6 +27,7 @@
   "license": "MIT",
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^2.3.0",
+    "@phenomnomnominal/tsquery": "^4.1.0",
     "@types/autoprefixer": "^9.7.2",
     "@types/copy-webpack-plugin": "^6.0.0",
     "@types/glob": "^7.1.3",

@@ -1,6 +1,9 @@
 import _fs from "fs";
 import _path from "path";
 import * as elements from "typed-html";
+import * as ts from "typescript";
+import * as prettier from "prettier";
+import { tsquery } from "@phenomnomnominal/tsquery";
 import glob from "glob";
 import Page from "../_layouts/page";
 import Box from "../_primitives/box";
@@ -35,30 +38,92 @@ const Components = ({ htmlAttributes, cssTags, jsTags }) => (
 );
 
 function getComponents(type) {
-  return glob
-    .sync(_path.join(__dirname, "..", `${type}/*.tsx`))
-    .map((path) => ({
+  return glob.sync(_path.join(__dirname, "..", `${type}/*.tsx`)).map((path) => {
+    const source = _fs.readFileSync(path, { encoding: "utf-8" });
+
+    return {
       ...require(path),
       path,
-      source: _fs.readFileSync(path, { encoding: "utf-8" }),
-    }));
+      source,
+      exampleSource: parseExample({ path, source }),
+    };
+  });
+}
+
+function parseExample({ path, source }) {
+  const exampleIdentifierNode = queryNode({
+    source,
+    query: `Identifier[name="Example"]`,
+    path,
+  });
+
+  if (!exampleIdentifierNode) {
+    return;
+  }
+
+  const identifierSource = toSource({
+    source,
+    node: exampleIdentifierNode.parent,
+    path,
+  });
+  const exampleJsxNode = queryNode({
+    source: identifierSource,
+    query: "JsxElement",
+    path,
+  });
+
+  if (!exampleJsxNode) {
+    return;
+  }
+
+  return toSource({ source: identifierSource, node: exampleJsxNode, path });
+}
+
+function queryNode({ source, query, path }) {
+  const ast = tsquery.ast(source, path, ts.ScriptKind.TSX);
+  const nodes = tsquery(ast, query);
+
+  if (nodes.length) {
+    return nodes[0];
+  }
+
+  console.error("queryNode - No nodes found");
+
+  return;
+}
+
+function toSource({ path, source, node }) {
+  const sourceFile = ts.createSourceFile(
+    path,
+    source,
+    ts.ScriptTarget.ES2015,
+    false,
+    ts.ScriptKind.TSX
+  );
+  const printer = ts.createPrinter();
+
+  return prettier
+    .format(printer.printNode(ts.EmitHint.Unspecified, node, sourceFile), {
+      parser: "typescript",
+    })
+    .replace(/;/g, "")
+    .trim();
 }
 
 const Collection = ({ items }) =>
   items
-    .map(({ displayName, Example, source }) => (
+    .map(({ displayName, Example, exampleSource }) => (
       <Box mb="4">
         <Heading as="h3">{displayName}</Heading>
-        <EditableExample Example={Example} source={source} />
+        <EditableExample Example={Example} source={exampleSource} />
       </Box>
     ))
     .join("");
 
 const EditableExample = ({ Example, source }) => {
-  // TODO: decodedExample should be parsed from source
-  const example = Example();
-  const decodedExample = Buffer.from(example).toString("base64");
+  const decodedExample = Buffer.from(source).toString("base64");
 
+  // TODO: Evaluation logic (this needs to go to _page.ts as a global)
   return (
     <section x-state={`{ code: atob('${decodedExample}') }`}>
       <div class="p-4 bg-gray-800 text-white rounded-t-lg overflow-x-auto overflow-y-hidden">
@@ -75,7 +140,7 @@ const EditableExample = ({ Example, source }) => {
             autocomplete="off"
             autocorrect="off"
             spellcheck="false"
-            x-rows="state.code.split('\\n').length"
+            x-rows="state.code.split('\n').length"
           ></textarea>
         </div>
       </div>
