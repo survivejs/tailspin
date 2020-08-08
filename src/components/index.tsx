@@ -112,15 +112,15 @@ function toSource({ path, source, node }) {
 
 const Collection = ({ items }) =>
   items
-    .map(({ displayName, Example, exampleSource }) => (
+    .map(({ displayName, exampleSource }) => (
       <Box mb="4">
         <Heading as="h3">{displayName}</Heading>
-        <EditableExample Example={Example} source={exampleSource} />
+        <EditableExample source={exampleSource} />
       </Box>
     ))
     .join("");
 
-const EditableExample = ({ Example, source }) => {
+const EditableExample = ({ source }) => {
   const decodedExample = Buffer.from(source).toString("base64");
 
   // TODO: Evaluation logic (this needs to go to _page.ts as a global)
@@ -144,9 +144,10 @@ const EditableExample = ({ Example, source }) => {
           ></textarea>
         </div>
       </div>
-      <div class="p-4 bg-gray-200 rounded-b-lg" x="state.code">
-        <Example />
-      </div>
+      <div
+        class="p-4 bg-gray-200 rounded-b-lg"
+        x="evaluateCode(state.code)"
+      ></div>
     </section>
   );
 };
