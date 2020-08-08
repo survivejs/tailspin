@@ -1,5 +1,6 @@
 import * as elements from "typed-html";
 
+// TODO: Use Box instead of divs etc. Textarea might need a component of its own.
 const CodeEditor = ({ source }: { source?: string }) => {
   if (!source) {
     return null;
