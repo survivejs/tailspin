@@ -12,7 +12,7 @@ export const displayName = "Button";
 export const Example = () => (
   <Box x-state="false">
     <Box mb="4">
-      Value: <span x="state" />
+      Value: <Box as="span" x="state" />
     </Box>
     <Box>
       <Button onclick="setState(v => !v)" sx="btn-blue">

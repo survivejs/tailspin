@@ -33,6 +33,7 @@ export type BoxProps = {
   role?: string;
   // TODO: sx can be only tailwind classes so constraint to those
   sx?: string;
+  x?: any;
 };
 
 // https://theme-ui.com/components/box

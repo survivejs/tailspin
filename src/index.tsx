@@ -31,7 +31,7 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
           <Heading as="h2">Demo</Heading>
           <Box x-state="false">
             <Box mb="4">
-              Value: <span x="state" />
+              Value: <Box as="span" x="state" />
             </Box>
             <Box mb="4">
               <Alert>This is a demo alert</Alert>
