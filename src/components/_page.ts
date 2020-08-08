@@ -1,4 +1,5 @@
 import Box from "../_primitives/box";
+import Button from "../_primitives/button";
 import Heading from "../_primitives/heading";
 import Link from "../_primitives/link";
 import Alert from "../_patterns/alert";
@@ -24,6 +25,14 @@ function evaluateNode(node: Element) {
 
   if (node.nodeName === "Heading") {
     return Heading(
+      // @ts-ignore: Evaluated runtime
+      attributesToObject(node.attributes),
+      node.innerHTML
+    );
+  }
+
+  if (node.nodeName === "Button") {
+    return Button(
       // @ts-ignore: Evaluated runtime
       attributesToObject(node.attributes),
       node.innerHTML
