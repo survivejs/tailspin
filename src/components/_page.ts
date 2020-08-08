@@ -1,23 +1,6 @@
-import Box from "../_primitives/box";
-import Flex from "../_primitives/flex";
-import Button from "../_primitives/button";
-import Heading from "../_primitives/heading";
-import Link from "../_primitives/link";
-import Alert from "../_patterns/alert";
-import CodeEditor from "../_patterns/code-editor";
-import Navigation from "../_patterns/navigation";
-
-// TODO: Figure out a nice way to maintain this list.
 const components = {
-  Box,
-  CodeEditor,
-  Flex,
-  Button,
-  Heading,
-  Link,
-  Alert,
-  Navigation,
-  "Navigation.Item": Navigation.Item,
+  ...loadComponents(require.context("../_primitives", false, /^\.\/.*\.tsx$/)),
+  ...loadComponents(require.context("../_patterns", false, /^\.\/.*\.tsx$/)),
 };
 
 // @ts-ignore: TODO: Add this to global
@@ -53,6 +36,22 @@ function attributesToObject(attributes: NamedNodeMap) {
   for (let i = 0; i < attributes.length; i++) {
     ret[attributes[i].nodeName] = attributes[i].nodeValue;
   }
+
+  return ret;
+}
+
+function loadComponents(context) {
+  const ret = {};
+
+  context.keys().forEach((key) => {
+    const { displayName, default: def } = context(key);
+
+    ret[displayName] = def;
+
+    Object.keys(def).forEach((k) => {
+      ret[`${displayName}.${k}`] = def[k];
+    });
+  });
 
   return ret;
 }
