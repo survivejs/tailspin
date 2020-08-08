@@ -36,7 +36,7 @@ const Page = ({ head, body, cssTags, jsTags, htmlAttributes }) => (
 
 export const displayName = "Page";
 export const Example = () => (
-  <Page head="" body="" cssTags="" jsTags="" htmlAttributes="" />
+  <Page head="" body="Hello from body" cssTags="" jsTags="" htmlAttributes="" />
 );
 
 export default Page;

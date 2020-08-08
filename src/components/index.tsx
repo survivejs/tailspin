@@ -50,6 +50,9 @@ const Components = ({ htmlAttributes, cssTags, jsTags }) => (
 
           <Heading as="h2">Patterns</Heading>
           <Collection items={getComponents("patterns")} />
+
+          <Heading as="h2">Layouts</Heading>
+          <Collection items={getComponents("layouts")} />
         </Box>
       </Box>
     }
