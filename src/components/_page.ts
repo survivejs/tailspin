@@ -5,6 +5,9 @@ import Heading from "../_primitives/heading";
 import Link from "../_primitives/link";
 import Alert from "../_patterns/alert";
 
+// TODO: Figure out a nice way to maintain this list
+const components = { Box, Flex, Button, Heading, Link, Alert };
+
 // @ts-ignore: TODO: Add this to global
 window.evaluateCode = (code) => {
   const node = new DOMParser().parseFromString(code, "text/xml")
@@ -14,59 +17,17 @@ window.evaluateCode = (code) => {
 };
 
 function evaluateNode(node: Element) {
-  if (node.nodeName === "Box") {
-    return Box(
-      // @ts-ignore: Evaluated runtime
-      attributesToObject(node.attributes),
-      node.children.length
-        ? collectionToArray(node.children).map(evaluateNode)
-        : node.innerHTML
-    );
-  }
+  const foundComponent = components[node.nodeName];
 
-  if (node.nodeName === "Flex") {
-    return Flex(
-      // @ts-ignore: Evaluated runtime
-      attributesToObject(node.attributes),
-      node.children.length
-        ? collectionToArray(node.children).map(evaluateNode)
-        : node.innerHTML
-    );
-  }
-
-  if (node.nodeName === "Heading") {
-    return Heading(
-      // @ts-ignore: Evaluated runtime
-      attributesToObject(node.attributes),
-      node.innerHTML
-    );
-  }
-
-  if (node.nodeName === "Button") {
-    return Button(
-      // @ts-ignore: Evaluated runtime
-      attributesToObject(node.attributes),
-      node.innerHTML
-    );
-  }
-
-  if (node.nodeName === "Link") {
-    return Link(
-      // @ts-ignore: Evaluated runtime
-      attributesToObject(node.attributes),
-      node.innerHTML
-    );
-  }
-
-  if (node.nodeName === "Alert") {
-    return Alert(
-      // @ts-ignore: Evaluated runtime
-      attributesToObject(node.attributes),
-      node.innerHTML
-    );
-  }
-
-  return node.innerHTML;
+  return foundComponent
+    ? foundComponent(
+        // @ts-ignore: Evaluated runtime
+        attributesToObject(node.attributes),
+        node.children.length
+          ? collectionToArray(node.children).map(evaluateNode)
+          : node.innerHTML
+      )
+    : node.innerHTML;
 }
 
 function collectionToArray(collection: HTMLCollection) {
