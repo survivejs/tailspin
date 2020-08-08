@@ -8,6 +8,7 @@ import glob from "glob";
 import Page from "../_layouts/page";
 import Box from "../_primitives/box";
 import Heading from "../_primitives/heading";
+import CodeEditor from "../_patterns/code-editor";
 
 const Components = ({ htmlAttributes, cssTags, jsTags }) => (
   <Page
@@ -66,14 +67,24 @@ function parseExample({ path, source }) {
     node: exampleIdentifierNode.parent,
     path,
   });
-  const exampleJsxNode = queryNode({
+  let exampleJsxNode = queryNode({
     source: identifierSource,
     query: "JsxElement",
     path,
   });
 
   if (!exampleJsxNode) {
-    return;
+    exampleJsxNode = queryNode({
+      source: identifierSource,
+      query: "JsxSelfClosingElement",
+      path,
+    });
+
+    if (!exampleJsxNode) {
+      console.error("queryNode - No nodes found", { source, path });
+
+      return;
+    }
   }
 
   return toSource({ source: identifierSource, node: exampleJsxNode, path });
@@ -86,8 +97,6 @@ function queryNode({ source, query, path }) {
   if (nodes.length) {
     return nodes[0];
   }
-
-  console.error("queryNode - No nodes found");
 
   return;
 }
@@ -115,40 +124,9 @@ const Collection = ({ items }) =>
     .map(({ displayName, exampleSource }) => (
       <Box mb="4">
         <Heading as="h3">{displayName}</Heading>
-        <EditableExample source={exampleSource} />
+        <CodeEditor source={exampleSource} />
       </Box>
     ))
     .join("");
-
-const EditableExample = ({ source }) => {
-  const decodedExample = Buffer.from(source).toString("base64");
-
-  return (
-    <section x-state={`{ code: atob('${decodedExample}') }`}>
-      <div class="p-4 bg-gray-800 text-white rounded-t-lg overflow-x-auto overflow-y-hidden">
-        <div class="inline-block font-mono relative">
-          <pre
-            class="overflow-hidden mr-16 pr-16 w-full"
-            x="highlight('html', state.code)"
-          ></pre>
-          <textarea
-            class="overflow-hidden absolute min-w-full top-0 left-0 outline-none opacity-50 bg-none whitespace-pre resize-none"
-            oninput="setState({ code: this.value })"
-            x="state.code"
-            autocapitalize="off"
-            autocomplete="off"
-            autocorrect="off"
-            spellcheck="false"
-            x-rows="state.code.split('\n').length"
-          ></textarea>
-        </div>
-      </div>
-      <div
-        class="p-4 bg-gray-200 rounded-b-lg"
-        x="evaluateCode(state.code)"
-      ></div>
-    </section>
-  );
-};
 
 export default Components;

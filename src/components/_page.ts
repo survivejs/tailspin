@@ -4,11 +4,13 @@ import Button from "../_primitives/button";
 import Heading from "../_primitives/heading";
 import Link from "../_primitives/link";
 import Alert from "../_patterns/alert";
+import CodeEditor from "../_patterns/code-editor";
 import Navigation from "../_patterns/navigation";
 
 // TODO: Figure out a nice way to maintain this list.
 const components = {
   Box,
+  CodeEditor,
   Flex,
   Button,
   Heading,
@@ -28,10 +30,6 @@ window.evaluateCode = (code) => {
 
 function evaluateNode(node: Element) {
   const foundComponent = components[node.nodeName];
-
-  if (node.nodeName === "Box") {
-    console.log("box children", node.children);
-  }
 
   return foundComponent
     ? foundComponent(
