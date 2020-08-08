@@ -11,7 +11,7 @@ const Link = (props: { href: string; sx?: string }, label) => (
 export const displayName = "Link";
 export const Example = () => (
   <Link href="https://github.com/survivejs/tailwind-webpack-starter">
-    Download
+    Star at GitHub
   </Link>
 );
 

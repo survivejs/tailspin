@@ -61,7 +61,7 @@ const Example = () => (
     </Box>
     <Box>
       <Navigation.Item href="https://github.com/survivejs/tailwind-webpack-starter">
-        Download
+        Star at GitHub
       </Navigation.Item>
     </Box>
   </Navigation>
