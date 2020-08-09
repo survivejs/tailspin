@@ -152,23 +152,60 @@ function parseProps({ displayName, path, source }) {
     path,
   });
 
-  if (!propNodes.length) {
-    return;
+  if (propNodes.length) {
+    return propNodes.map(
+      // @ts-ignore: Figure out the exact type
+      ({ name: nameNode, questionToken, type: typeNode }) => {
+        const name = nameNode.getText();
+        const isOptional = !!questionToken;
+        const type = typeNode.getText();
+
+        return { name, isOptional, type };
+      }
+    );
   }
 
   // TODO: Perform a lookup for Box and Flex
   // For Box, it's a TypeReference (identifier: props) that's pointing to TypeAliasDeclaration with identifier BoxProps
   // In Flex, it's a TypeReference (identifier: props) that's pointing to ImportSpecifier with identifier BoxProps, the problem then is to parse BoxProps from the file where it points.
-  return propNodes.map(
-    // @ts-ignore: Figure out the exact type
-    ({ name: nameNode, questionToken, type: typeNode }) => {
-      const name = nameNode.getText();
-      const isOptional = !!questionToken;
-      const type = typeNode.getText();
 
-      return { name, isOptional, type };
+  if (displayName === "Box") {
+    // TODO: Likely it would be better to select the first parameter instead
+    // getTypeParameters(), getParameters()
+    // https://github.com/microsoft/TypeScript/blob/master/src/services/services.ts
+    const referenceNode = queryNode({
+      source: componentSource,
+      query: `Identifier[name="props"]`,
+      path,
+    });
+
+    if (referenceNode) {
+      // @ts-ignore
+      const referenceName = referenceNode.parent.type.getText();
+
+      // const program = ts.createProgram([path], {});
+      // const checker = program.getTypeChecker();
+
+      // TODO: Figure out how to ask the type checker for the complete type
+      console.log(referenceNode.parent, referenceName);
+
+      /*
+      // @ts-ignore
+      const symbol = checker.getSymbolAtLocation(referenceNode.parent);
+
+      // @ts-ignore
+      const type = checker.getDeclaredTypeOfSymbol(symbol);
+      const properties = checker.getPropertiesOfType(type);
+
+      console.log(referenceName, properties);
+
+      properties.forEach((declaration) => {
+        console.log(declaration.name);
+        // prints username, info
+      });
+      */
     }
-  );
+  }
 }
 
 function queryNode({ source, query, path }) {
