@@ -20,11 +20,11 @@ const ROOT = __dirname;
 const PATHS = {
   ASSETS: path.resolve(ROOT, "assets"),
   DS: path.resolve(ROOT, "ds"),
-  SRC: path.resolve(ROOT, "src"),
+  PAGES: path.resolve(ROOT, "pages"),
   OUTPUT: path.resolve(ROOT, "public"),
 };
-const ALL_FILES = glob.sync(path.join(PATHS.SRC, "**/*.tsx"));
-const ALL_PAGES = glob.sync(path.join(PATHS.SRC, "**/index.tsx"));
+const ALL_FILES = glob.sync(path.join(PATHS.PAGES, "**/*.tsx"));
+const ALL_PAGES = glob.sync(path.join(PATHS.PAGES, "**/index.tsx"));
 
 const commonConfig: webpack.Configuration = merge(
   {
@@ -38,7 +38,7 @@ const commonConfig: webpack.Configuration = merge(
       rules: [
         {
           test: /\.tsx?$/,
-          include: [PATHS.DS, PATHS.SRC],
+          include: [PATHS.DS, PATHS.PAGES],
           use: {
             loader: "ts-loader",
             options: {
@@ -69,7 +69,7 @@ function generatePages(paths) {
 }
 
 function generatePage(pagePath): webpack.Plugin {
-  const pageName = path.relative(PATHS.SRC, pagePath).split(".")[0];
+  const pageName = path.relative(PATHS.PAGES, pagePath).split(".")[0];
   const chunkName = `${pageName.split("index")[0]}_page`;
 
   return new MiniHtmlWebpackPlugin({
@@ -119,7 +119,7 @@ const developmentConfig: webpack.Configuration = {
   entry: () =>
     addEntryToAll(
       WebpackWatchedGlobEntries.getEntries([
-        path.resolve(PATHS.SRC, "**/_*.ts"),
+        path.resolve(PATHS.PAGES, "**/_*.ts"),
       ])(),
       "webpack-plugin-serve/client"
     ),
@@ -164,7 +164,7 @@ function addEntryToAll(entries, entry) {
 
 const productionConfig: webpack.Configuration = {
   entry: WebpackWatchedGlobEntries.getEntries([
-    path.resolve(PATHS.SRC, "**/_*.ts"),
+    path.resolve(PATHS.PAGES, "**/_*.ts"),
   ]),
   devtool: false,
   optimization: {

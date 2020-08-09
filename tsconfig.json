@@ -1,5 +1,5 @@
 {
-  "include": ["ds", "src", "typings/*.d.ts"],
+  "include": ["ds", "pages", "typings/*.d.ts"],
   "compilerOptions": {
     "typeRoots": ["./node_modules/@types", "./typings"],
     "target": "es5",
