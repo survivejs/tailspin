@@ -31,7 +31,7 @@ const Components = ({ htmlAttributes, cssTags, jsTags }) => (
     ]}
     body={
       <Box as="main">
-        <Box as="article" sx="w-full mx-auto max-w-3xl space-y-8">
+        <Box as="article" sx="w-full mx-auto max-w-3xl space-y-16">
           <Heading as="h1">Design System</Heading>
 
           <Flex as="section" sx="flex-col sm:flex-row">
@@ -202,10 +202,10 @@ function toSource({ path, source, node }) {
 const Collection = ({ items }) =>
   items
     .map(({ displayName, exampleSource, props }) => (
-      <Box>
+      <Box sx="space-y-4">
         <Heading as="h3">{displayName}</Heading>
         <CodeEditor source={exampleSource} />
-        <Box>{JSON.stringify(props, null, 2)}</Box>
+        <Types props={props} />
       </Box>
     ))
     .join("");
@@ -250,6 +250,50 @@ const Colors = ({
       )
     )
     .join("");
+
+const Types = ({
+  props = [],
+}: {
+  props: {
+    name: string;
+    isOptional: boolean;
+    type: "string";
+  }[];
+}) =>
+  props.length > 0 ? (
+    <Box as="table" sx="table w-full">
+      <Box as="thead">
+        <Box as="tr" sx="table-row">
+          {["Name", "Type", "Is optional"]
+            .map((name) => (
+              <Box as="th" sx="table-cell text-left">
+                {name}
+              </Box>
+            ))
+            .join("")}
+        </Box>
+      </Box>
+      <Box as="tbody">
+        {props
+          .map(({ name, isOptional, type }) => (
+            <Box as="tr" sx="table-row">
+              <Box as="td" sx="table-cell">
+                <Box as="code">{name}</Box>
+              </Box>
+              <Box as="td" sx="table-cell">
+                {type}
+              </Box>
+              <Box as="td" sx="table-cell">
+                {isOptional ? "✓" : ""}
+              </Box>
+            </Box>
+          ))
+          .join("")}
+      </Box>
+    </Box>
+  ) : (
+    ""
+  );
 
 const isObject = (a) => typeof a === "object";
 
