@@ -8,6 +8,7 @@ import readableColor from "polished/lib/color/readableColor";
 import glob from "glob";
 import Page from "../../ds/layouts/page";
 import CodeEditor from "../../ds/patterns/code-editor";
+import Table from "../../ds/patterns/table";
 import Flex from "../../ds/primitives/flex";
 import Box from "../../ds/primitives/box";
 import Heading from "../../ds/primitives/heading";
@@ -261,36 +262,28 @@ const Types = ({
   }[];
 }) =>
   props.length > 0 ? (
-    <Box as="table" sx="table w-full">
-      <Box as="thead">
-        <Box as="tr" sx="table-row">
-          {["Name", "Type", "Is optional"]
-            .map((name) => (
-              <Box as="th" sx="table-cell text-left">
-                {name}
-              </Box>
-            ))
-            .join("")}
-        </Box>
-      </Box>
-      <Box as="tbody">
+    <Table>
+      <Table.Header>
+        <Table.Row>
+          <Table.HeaderCell>Name</Table.HeaderCell>
+          <Table.HeaderCell>Type</Table.HeaderCell>
+          <Table.HeaderCell>Is optional</Table.HeaderCell>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
         {props
           .map(({ name, isOptional, type }) => (
-            <Box as="tr" sx="table-row">
-              <Box as="td" sx="table-cell">
+            <Table.Row>
+              <Table.BodyCell>
                 <Box as="code">{name}</Box>
-              </Box>
-              <Box as="td" sx="table-cell">
-                {type}
-              </Box>
-              <Box as="td" sx="table-cell">
-                {isOptional ? "✓" : ""}
-              </Box>
-            </Box>
+              </Table.BodyCell>
+              <Table.BodyCell>{type}</Table.BodyCell>
+              <Table.BodyCell>{isOptional ? "✓" : ""}</Table.BodyCell>
+            </Table.Row>
           ))
           .join("")}
-      </Box>
-    </Box>
+      </Table.Body>
+    </Table>
   ) : (
     ""
   );
