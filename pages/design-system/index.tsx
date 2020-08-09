@@ -23,7 +23,7 @@ const Components = ({ htmlAttributes, cssTags, jsTags }) => (
     cssTags={cssTags}
     jsTags={jsTags}
     head={[
-      <title>tailwind-webpack-starter</title>,
+      <title>tailwind-webpack-starter - Design System</title>,
       <meta
         name="description"
         content="tailwind-webpack-starter combines webpack with Tailwind and provides a starting point for site projects"
@@ -32,7 +32,7 @@ const Components = ({ htmlAttributes, cssTags, jsTags }) => (
     body={
       <Box as="main">
         <Box as="article" sx="w-full mx-auto max-w-3xl">
-          <Heading as="h1">Component Library</Heading>
+          <Heading as="h1">Design System</Heading>
 
           <Flex sx="flex-col sm:flex-row">
             <Box sx="flex-auto">

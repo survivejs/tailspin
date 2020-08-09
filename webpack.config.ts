@@ -2,6 +2,7 @@ import path from "path";
 import webpack from "webpack";
 import WebpackWatchedGlobEntries from "webpack-watched-glob-entries-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import RedirectWebpackPlugin from "redirect-webpack-plugin";
 import {
   MiniHtmlWebpackPlugin,
   generateCSSReferences,
@@ -55,6 +56,11 @@ const commonConfig: webpack.Configuration = merge(
         filename: "[name].css",
       }),
       new CopyPlugin({ patterns: [{ from: PATHS.ASSETS, to: "assets" }] }),
+      new RedirectWebpackPlugin({
+        redirects: {
+          components: "/design-system/",
+        },
+      }),
     ],
     stats: "errors-only",
   },

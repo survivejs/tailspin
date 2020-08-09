@@ -60,7 +60,7 @@ const Example = () => (
   <Navigation>
     <Box sx="text-sm lg:flex-grow">
       <Navigation.Item href="/">Documentation</Navigation.Item>
-      <Navigation.Item href="/components">Components</Navigation.Item>
+      <Navigation.Item href="/design-system/">Components</Navigation.Item>
     </Box>
     <Box>
       <Navigation.Item href="https://github.com/survivejs/tailwind-webpack-starter">
