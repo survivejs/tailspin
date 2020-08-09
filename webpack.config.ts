@@ -48,6 +48,11 @@ const commonConfig: webpack.Configuration = merge(
             },
           },
         },
+        {
+          test: /\.js$/,
+          enforce: "pre",
+          use: "source-map-loader",
+        },
       ],
     },
     plugins: [
