@@ -31,10 +31,10 @@ const Components = ({ htmlAttributes, cssTags, jsTags }) => (
     ]}
     body={
       <Box as="main">
-        <Box as="article" sx="w-full mx-auto max-w-3xl">
+        <Box as="article" sx="w-full mx-auto max-w-3xl space-y-8">
           <Heading as="h1">Design System</Heading>
 
-          <Flex sx="flex-col sm:flex-row">
+          <Flex as="section" sx="flex-col sm:flex-row">
             <Box sx="flex-auto">
               <Heading as="h2">Spacing scale</Heading>
               <SpacingScale items={spacingScale} />
@@ -45,14 +45,20 @@ const Components = ({ htmlAttributes, cssTags, jsTags }) => (
             </Box>
           </Flex>
 
-          <Heading as="h2">Primitives</Heading>
-          <Collection items={getComponents("primitives")} />
+          <Box as="section">
+            <Heading as="h2">Primitives</Heading>
+            <Collection items={getComponents("primitives")} />
+          </Box>
 
-          <Heading as="h2">Patterns</Heading>
-          <Collection items={getComponents("patterns")} />
+          <Box as="section">
+            <Heading as="h2">Patterns</Heading>
+            <Collection items={getComponents("patterns")} />
+          </Box>
 
-          <Heading as="h2">Layouts</Heading>
-          <Collection items={getComponents("layouts")} />
+          <Box as="section">
+            <Heading as="h2">Layouts</Heading>
+            <Collection items={getComponents("layouts")} />
+          </Box>
         </Box>
       </Box>
     }
