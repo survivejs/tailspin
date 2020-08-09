@@ -156,6 +156,7 @@ function parseProps({ displayName, path, source }) {
     return;
   }
 
+  // TODO: Perform a lookup for Box and Flex
   return propNodes.map(
     // @ts-ignore: Figure out the exact type
     ({ name: nameNode, questionToken, type: typeNode }) => {
@@ -224,6 +225,7 @@ const SpacingScale = ({ items }) =>
     .join("");
 
 // TODO: Figure out how to handle polymorphism in TS
+// Likely this one is easier to solve against expandedColors
 const Colors = ({
   items,
   parent,
