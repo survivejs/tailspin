@@ -102,7 +102,7 @@ function generatePage(pagePath): webpack.Plugin {
     }) => {
       decache(pagePath);
 
-      return require(pagePath).default({
+      return `<!DOCTYPE html>\n${require(pagePath).default({
         htmlAttributes,
         cssTags: generateCSSReferences({
           files: css,
@@ -114,7 +114,7 @@ function generatePage(pagePath): webpack.Plugin {
           attributes: jsAttributes || {},
           publicPath,
         }),
-      });
+      })}`;
     },
   });
 }
