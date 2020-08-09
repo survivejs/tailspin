@@ -76,12 +76,14 @@ function getComponents(type) {
     .sync(_path.join(__dirname, "..", "..", "ds", `${type}/*.tsx`))
     .map((path) => {
       const source = _fs.readFileSync(path, { encoding: "utf-8" });
+      const component = require(path);
 
       return {
-        ...require(path),
+        ...component,
         path,
         source,
         exampleSource: parseExample({ path, source }),
+        props: parseProps({ displayName: component.displayName, path, source }),
       };
     });
 }
@@ -125,15 +127,51 @@ function parseExample({ path, source }) {
   return toSource({ source: identifierSource, node: exampleJsxNode, path });
 }
 
+function parseProps({ displayName, path, source }) {
+  const componentNode = queryNode({
+    source,
+    query: `Identifier[name="${displayName}"]`,
+    path,
+  });
+
+  if (!componentNode) {
+    return;
+  }
+
+  const componentSource = toSource({
+    source,
+    node: componentNode.parent,
+    path,
+  });
+  const propNodes = queryNodes({
+    source: componentSource,
+    query: "TypeLiteral PropertySignature",
+    path,
+  });
+
+  if (!propNodes.length) {
+    return;
+  }
+
+  // TODO: Get Identifier, QuestionToken, and StringKeyword for each
+  // and construct types based on that.
+  console.log("juho - type node", displayName, propNodes);
+}
+
 function queryNode({ source, query, path }) {
-  const ast = tsquery.ast(source, path, ts.ScriptKind.TSX);
-  const nodes = tsquery(ast, query);
+  const nodes = queryNodes({ source, query, path });
 
   if (nodes.length) {
     return nodes[0];
   }
 
   return;
+}
+
+function queryNodes({ source, query, path }) {
+  const ast = tsquery.ast(source, path, ts.ScriptKind.TSX);
+
+  return tsquery(ast, query);
 }
 
 function toSource({ path, source, node }) {
