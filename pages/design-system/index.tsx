@@ -47,17 +47,23 @@ const Components = ({ htmlAttributes, cssTags, jsTags }) => (
 
           <Box as="section">
             <Heading as="h2">Primitives</Heading>
-            <Collection items={getComponents("primitives")} />
+            <Box sx="space-y-4">
+              <Collection items={getComponents("primitives")} />
+            </Box>
           </Box>
 
           <Box as="section">
             <Heading as="h2">Patterns</Heading>
-            <Collection items={getComponents("patterns")} />
+            <Box sx="space-y-4">
+              <Collection items={getComponents("patterns")} />
+            </Box>
           </Box>
 
           <Box as="section">
             <Heading as="h2">Layouts</Heading>
-            <Collection items={getComponents("layouts")} />
+            <Box sx="space-y-4">
+              <Collection items={getComponents("layouts")} />
+            </Box>
           </Box>
         </Box>
       </Box>
@@ -151,7 +157,7 @@ function toSource({ path, source, node }) {
 const Collection = ({ items }) =>
   items
     .map(({ displayName, exampleSource }) => (
-      <Box mb="4">
+      <Box>
         <Heading as="h3">{displayName}</Heading>
         <CodeEditor source={exampleSource} />
       </Box>
