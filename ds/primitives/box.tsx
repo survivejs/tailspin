@@ -2,10 +2,8 @@ import * as elements from "typed-html";
 import { constructTailwindClasses } from "./_utils";
 import config from "../../tailwind.json";
 
-const theme = config.theme;
-
-type ColorKeys = keyof typeof theme.colors;
-type SpacingKeys = keyof typeof theme.spacing;
+type ColorKeys = keyof typeof config.expandedColors;
+type SpacingKeys = keyof typeof config.theme.spacing;
 
 export type BoxProps = {
   as?: keyof JSX.IntrinsicElements;
@@ -23,18 +21,15 @@ export type BoxProps = {
   pr?: SpacingKeys;
   px?: SpacingKeys;
   py?: SpacingKeys;
-  // TODO: Figure out the exact type. ColorKeys isn't enough for these
-  // The problem here is nesting. For colors that have objects in them,
-  // combinations have to be allowed.
-  color?: string;
-  bg?: string;
+  color?: ColorKeys;
+  bg?: ColorKeys;
   // Exposed attributes
   onclick?: string;
   role?: string;
-  // TODO: sx can be only tailwind classes so constraint to those
-  sx?: string;
   x?: any;
   style?: string;
+  // TODO: sx can be only tailwind classes so constraint to those
+  sx?: string;
 };
 
 // https://theme-ui.com/components/box

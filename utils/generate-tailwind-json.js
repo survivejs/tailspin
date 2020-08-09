@@ -6,12 +6,40 @@ const resolveConfig = require("tailwindcss/resolveConfig");
 const tailwindConfig = require(process.cwd() + "/tailwind.config.js");
 
 try {
-  let fullConfig = resolveConfig(tailwindConfig);
-  fullConfig = JSON.stringify(fullConfig, null, 2);
+  const fullConfig = resolveConfig(tailwindConfig);
+  const expandedConfig = {
+    ...fullConfig,
+    expandedColors: expandColors(fullConfig.theme.colors),
+  };
 
-  fs.writeFileSync(process.cwd() + "/tailwind.json", fullConfig, {
-    encoding: "utf-8",
-  });
+  fs.writeFileSync(
+    process.cwd() + "/tailwind.json",
+    JSON.stringify(expandedConfig, null, 2),
+    {
+      encoding: "utf-8",
+    }
+  );
 } catch (error) {
   console.error(error);
+}
+
+function expandColors(colors) {
+  const ret = {};
+
+  // This assumes one level of nesting so no recursion is needed
+  Object.entries(colors).forEach(([key, value]) => {
+    if (isObject(value)) {
+      Object.entries(value).forEach(([k, v]) => {
+        ret[`${key}-${k}`] = v;
+      });
+    } else {
+      ret[key] = value;
+    }
+  });
+
+  return ret;
+}
+
+function isObject(a) {
+  return typeof a === "object";
 }
