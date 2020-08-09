@@ -157,6 +157,8 @@ function parseProps({ displayName, path, source }) {
   }
 
   // TODO: Perform a lookup for Box and Flex
+  // For Box, it's a TypeReference (identifier: props) that's pointing to TypeAliasDeclaration with identifier BoxProps
+  // In Flex, it's a TypeReference (identifier: props) that's pointing to ImportSpecifier with identifier BoxProps, the problem then is to parse BoxProps from the file where it points.
   return propNodes.map(
     // @ts-ignore: Figure out the exact type
     ({ name: nameNode, questionToken, type: typeNode }) => {
