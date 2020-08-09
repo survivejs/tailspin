@@ -153,9 +153,16 @@ function parseProps({ displayName, path, source }) {
     return;
   }
 
-  // TODO: Get Identifier, QuestionToken, and StringKeyword for each
-  // and construct types based on that.
-  console.log("juho - type node", displayName, propNodes);
+  return propNodes.map(
+    // @ts-ignore: Figure out the exact type
+    ({ name: nameNode, questionToken, type: typeNode }) => {
+      const name = nameNode.getText();
+      const isOptional = !!questionToken;
+      const type = typeNode.getText();
+
+      return { name, isOptional, type };
+    }
+  );
 }
 
 function queryNode({ source, query, path }) {
@@ -194,10 +201,11 @@ function toSource({ path, source, node }) {
 
 const Collection = ({ items }) =>
   items
-    .map(({ displayName, exampleSource }) => (
+    .map(({ displayName, exampleSource, props }) => (
       <Box>
         <Heading as="h3">{displayName}</Heading>
         <CodeEditor source={exampleSource} />
+        <Box>{JSON.stringify(props, null, 2)}</Box>
       </Box>
     ))
     .join("");
