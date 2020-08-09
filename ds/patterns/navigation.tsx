@@ -35,7 +35,10 @@ const Navigation = ({}, children) => (
         </svg>
       </Flex>
     </Box>
-    <Box x-class="['w-full', 'block', 'flex-grow', 'lg:flex', 'lg:items-center', 'lg:w-auto', !state && 'hidden']">
+    <Box
+      x-class="!state && 'hidden'"
+      sx="w-full block flex-grow lg:flex lg:items-center lg:w-auto"
+    >
       {children.join("")}
     </Box>
   </Flex>

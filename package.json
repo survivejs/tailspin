@@ -43,7 +43,7 @@
     "@types/webpack-watched-glob-entries-plugin": "^2.1.0",
     "autoprefixer": "^9.8.6",
     "copy-webpack-plugin": "^6.0.3",
-    "css-loader": "^4.2.0",
+    "css-loader": "^4.2.1",
     "decache": "^4.6.0",
     "glob": "^7.1.6",
     "husky": "^4.2.5",
@@ -89,6 +89,6 @@
     "highlight.js": "^10.1.2",
     "marked": "^1.1.1",
     "polished": "^3.6.5",
-    "sidewind": "^2.0.2"
+    "sidewind": "^2.1.1"
   }
 }
