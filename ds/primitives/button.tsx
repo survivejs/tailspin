@@ -1,5 +1,6 @@
 import * as elements from "typed-html";
 import Box from "./box";
+import Flex from "./flex";
 
 // https://tailwindcss.com/components/buttons
 const Button = (props: { onclick?: string; sx?: string }, label) => (
@@ -10,19 +11,12 @@ const Button = (props: { onclick?: string; sx?: string }, label) => (
 
 export const displayName = "Button";
 export const Example = () => (
-  <Box x-state="false">
-    <Box mb="4">
-      <Box as="span" mr="1">
-        Value:
-      </Box>
-      <Box as="span" x="state" />
-    </Box>
-    <Box>
-      <Button onclick="setState(v => !v)" sx="btn-blue">
-        Demo button
-      </Button>
-    </Box>
-  </Box>
+  <Flex x-state="false" sx="flex-col space-y-4">
+    <Box as="span" x="'Value: ' + state" />
+    <Button onclick="setState(v => !v)" sx="btn-blue">
+      Demo button
+    </Button>
+  </Flex>
 );
 
 export default Button;
