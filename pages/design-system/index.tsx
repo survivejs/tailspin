@@ -169,6 +169,7 @@ function parseProps({ displayName, path, source }) {
   // For Box, it's a TypeReference (identifier: props) that's pointing to TypeAliasDeclaration with identifier BoxProps
   // In Flex, it's a TypeReference (identifier: props) that's pointing to ImportSpecifier with identifier BoxProps, the problem then is to parse BoxProps from the file where it points.
 
+  // https://github.com/Microsoft/TypeScript/wiki/Using-the-Compiler-API
   if (displayName === "Box") {
     // TODO: Likely it would be better to select the first parameter instead
     // getTypeParameters(), getParameters()
