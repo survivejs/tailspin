@@ -11,7 +11,7 @@ const Heading = ({ as }: { as: Heading }, label) => <Box as={as}>{label}</Box>;
 const ids: { [key: string]: number } = {};
 
 const HeadingWithAnchor = ({ as }: { as: Heading }, label) => {
-  let id = slugify(label);
+  let id = slugify(label.join(""));
 
   if (ids[id]) {
     ids[id]++;
@@ -33,7 +33,7 @@ const HeadingWithAnchor = ({ as }: { as: Heading }, label) => {
   );
 };
 
-const slugify = (idBase) =>
+const slugify = (idBase: string) =>
   idBase
     .toLowerCase()
     .replace(/`/g, "")

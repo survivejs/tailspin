@@ -33,35 +33,35 @@ const Components = ({ htmlAttributes, cssTags, jsTags }) => (
     body={
       <Box as="main">
         <Box as="article" sx="w-full mx-auto max-w-3xl space-y-16">
-          <Heading as="h1">Design System</Heading>
+          <Heading.withAnchor as="h1">Design System</Heading.withAnchor>
 
           <Flex as="section" sx="flex-col sm:flex-row">
             <Box sx="flex-auto">
-              <Heading as="h2">Spacing scale</Heading>
+              <Heading.withAnchor as="h2">Spacing scale</Heading.withAnchor>
               <SpacingScale items={spacingScale} />
             </Box>
             <Box>
-              <Heading as="h2">Colors</Heading>
+              <Heading.withAnchor as="h2">Colors</Heading.withAnchor>
               <Colors items={colors} />
             </Box>
           </Flex>
 
           <Box as="section">
-            <Heading as="h2">Primitives</Heading>
+            <Heading.withAnchor as="h2">Primitives</Heading.withAnchor>
             <Box sx="space-y-4">
               <Collection items={getComponents("primitives")} />
             </Box>
           </Box>
 
           <Box as="section">
-            <Heading as="h2">Patterns</Heading>
+            <Heading.withAnchor as="h2">Patterns</Heading.withAnchor>
             <Box sx="space-y-4">
               <Collection items={getComponents("patterns")} />
             </Box>
           </Box>
 
           <Box as="section">
-            <Heading as="h2">Layouts</Heading>
+            <Heading.withAnchor as="h2">Layouts</Heading.withAnchor>
             <Box sx="space-y-4">
               <Collection items={getComponents("layouts")} />
             </Box>
@@ -204,7 +204,7 @@ const Collection = ({ items }) =>
   items
     .map(({ displayName, description, exampleSource, props }) => (
       <Box sx="space-y-4">
-        <Heading as="h3">{displayName}</Heading>
+        <Heading.withAnchor as="h3">{displayName}</Heading.withAnchor>
         <Box as="p">{description ? description : ""}</Box>
         <CodeEditor source={exampleSource} />
         <Types props={props} />
