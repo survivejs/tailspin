@@ -8,6 +8,13 @@ type Heading = "h1" | "h2" | "h3" | "h4";
 const Heading = ({ as }: { as: Heading }, label) => <Box as={as}>{label}</Box>;
 
 export const displayName = "Heading";
-export const Example = () => <Heading as="h4">Demo heading</Heading>;
+export const Example = () => (
+  <Box>
+    <Heading as="h1">h1 heading</Heading>
+    <Heading as="h2">h2 heading</Heading>
+    <Heading as="h3">h3 heading</Heading>
+    <Heading as="h4">h4 heading</Heading>
+  </Box>
+);
 
 export default Heading;
