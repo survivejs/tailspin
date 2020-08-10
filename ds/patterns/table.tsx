@@ -2,23 +2,25 @@ import * as elements from "typed-html";
 import Box from "../primitives/box";
 
 // https://tailwindcss.com/docs/display/#table
-const Table = ({}, containers) => (
+const Table = ({}, containers: string[]) => (
   <Box as="table" sx="table w-full">
     {containers.join("")}
   </Box>
 );
 
-const TableRow = ({}, rows) => (
+const TableRow = ({}, rows: string[]) => (
   <Box as="tr" sx="table-row">
     {rows.join("")}
   </Box>
 );
 Table.Row = TableRow;
 
-const TableHeader = ({}, rows) => <Box as="thead">{rows.join("")}</Box>;
+const TableHeader = ({}, rows: string[]) => (
+  <Box as="thead">{rows.join("")}</Box>
+);
 Table.Header = TableHeader;
 
-const TableHeaderCell = ({}, content) => (
+const TableHeaderCell = ({}, content: string[]) => (
   <Box as="th" sx="table-cell text-left">
     {content}
   </Box>
@@ -28,9 +30,9 @@ Table.HeaderCell = TableHeaderCell;
 const TableBody = ({}, rows) => <Box as="tbody">{rows.join("")}</Box>;
 Table.Body = TableBody;
 
-const TableBodyCell = ({}, content) => (
+const TableBodyCell = ({}, content: string[]) => (
   <Box as="td" sx="table-cell">
-    {Array.isArray(content) ? content.join("") : content}
+    {content.join("")}
   </Box>
 );
 Table.BodyCell = TableBodyCell;

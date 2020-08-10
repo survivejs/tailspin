@@ -3,7 +3,7 @@ import Box from "./box";
 import Flex from "./flex";
 
 // https://tailwindcss.com/components/buttons
-const Button = (props: { onclick?: string; sx?: string }, label) => (
+const Button = (props: { onclick?: string; sx?: string }, label: string[]) => (
   <Box as="button" onclick={props.onclick} sx={`btn ${props.sx || ""}`}>
     {label}
   </Box>

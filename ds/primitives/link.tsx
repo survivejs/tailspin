@@ -6,11 +6,14 @@ import Flex from "./flex";
 
 type InternalLinks = keyof typeof config.internalLinks;
 
-const Link = (props: { href: InternalLinks; sx?: string }, label) => (
+const Link = (props: { href: InternalLinks; sx?: string }, label: string[]) => (
   <LinkExternal {...props}>{label}</LinkExternal>
 );
 
-const LinkExternal = (props: { href: string; sx?: string }, label) => (
+const LinkExternal = (
+  props: { href: string; sx?: string },
+  label: string[]
+) => (
   <a href={props.href} class={constructTailwindClasses(props).join(" ")}>
     {label}
   </a>

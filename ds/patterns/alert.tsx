@@ -2,7 +2,7 @@ import * as elements from "typed-html";
 import Box from "../primitives/box";
 
 // https://tailwindcss.com/components/alerts
-const Alert = ({}, message) => (
+const Alert = ({}, message: string[]) => (
   <Box
     px="4"
     py="3"

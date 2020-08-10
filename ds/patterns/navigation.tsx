@@ -4,7 +4,7 @@ import Box from "../primitives/box";
 import Link from "../primitives/link";
 
 // https://tailwindcss.com/components/navigation
-const Navigation = ({}, children) => (
+const Navigation = ({}, children: string[]) => (
   <Flex
     as="nav"
     p="6"

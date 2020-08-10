@@ -34,11 +34,11 @@ export type BoxProps = {
 };
 
 // https://theme-ui.com/components/box
-const Box = (props: BoxProps = {}, children) =>
+const Box = (props: BoxProps = {}, children: string[]) =>
   elements.createElement(
     props?.as || "div",
     attachAttributes(props),
-    Array.isArray(children) ? children.join("") : children
+    children.join("")
   );
 
 export const displayName = "Box";
