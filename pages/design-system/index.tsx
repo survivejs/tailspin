@@ -153,60 +153,46 @@ function parseProps({ displayName, path, source }) {
   });
 
   if (propNodes.length) {
-    return propNodes.map(
-      // @ts-ignore: Figure out the exact type
-      ({ name: nameNode, questionToken, type: typeNode }) => {
-        const name = nameNode.getText();
-        const isOptional = !!questionToken;
-        const type = typeNode.getText();
-
-        return { name, isOptional, type };
-      }
-    );
+    return parseProperties(propNodes);
   }
 
-  // TODO: Perform a lookup for Box and Flex
-  // For Box, it's a TypeReference (identifier: props) that's pointing to TypeAliasDeclaration with identifier BoxProps
+  // TODO: Perform a lookup for Flex
   // In Flex, it's a TypeReference (identifier: props) that's pointing to ImportSpecifier with identifier BoxProps, the problem then is to parse BoxProps from the file where it points.
 
-  // https://github.com/Microsoft/TypeScript/wiki/Using-the-Compiler-API
-  if (displayName === "Box") {
-    // TODO: Likely it would be better to select the first parameter instead
-    // getTypeParameters(), getParameters()
-    // https://github.com/microsoft/TypeScript/blob/master/src/services/services.ts
-    const referenceNode = queryNode({
-      source: componentSource,
-      query: `Identifier[name="props"]`,
+  // TODO: Likely it would be better to select the first parameter instead
+  const referenceNode = queryNode({
+    source: componentSource,
+    query: `Identifier[name="props"] ~ TypeReference`,
+    path,
+  });
+
+  if (referenceNode) {
+    const referenceType = referenceNode.getText();
+    const propertySignatureNodes = queryNodes({
+      source: source,
+      query: `Identifier[name="${referenceType}"] ~ TypeLiteral > PropertySignature`,
       path,
     });
 
-    if (referenceNode) {
-      // @ts-ignore
-      const referenceName = referenceNode.parent.type.getText();
-
-      // const program = ts.createProgram([path], {});
-      // const checker = program.getTypeChecker();
-
-      // TODO: Figure out how to ask the type checker for the complete type
-      console.log(referenceNode.parent, referenceName);
-
-      /*
-      // @ts-ignore
-      const symbol = checker.getSymbolAtLocation(referenceNode.parent);
-
-      // @ts-ignore
-      const type = checker.getDeclaredTypeOfSymbol(symbol);
-      const properties = checker.getPropertiesOfType(type);
-
-      console.log(referenceName, properties);
-
-      properties.forEach((declaration) => {
-        console.log(declaration.name);
-        // prints username, info
-      });
-      */
-    }
+    return parseProperties(propertySignatureNodes);
   }
+}
+
+function parseProperties(nodes: ts.Node[]) {
+  if (!nodes.length) {
+    return;
+  }
+
+  return nodes.map(
+    // @ts-ignore: Figure out the exact type
+    ({ name: nameNode, questionToken, type: typeNode }) => {
+      const name = nameNode.getText();
+      const isOptional = !!questionToken;
+      const type = typeNode.getText();
+
+      return { name, isOptional, type };
+    }
+  );
 }
 
 function queryNode({ source, query, path }) {
@@ -222,7 +208,7 @@ function queryNode({ source, query, path }) {
 function queryNodes({ source, query, path }) {
   const ast = tsquery.ast(source, path, ts.ScriptKind.TSX);
 
-  return tsquery(ast, query);
+  return tsquery(ast, query, { visitAllChildren: true });
 }
 
 function toSource({ path, source, node }) {
