@@ -24,8 +24,8 @@ const PATHS = {
   PAGES: path.resolve(ROOT, "pages"),
   OUTPUT: path.resolve(ROOT, "public"),
 };
-const ALL_FILES = glob.sync(path.join(PATHS.PAGES, "**/*.tsx"));
-const ALL_PAGES = glob.sync(path.join(PATHS.PAGES, "**/index.tsx"));
+const ALL_FILES = glob.sync(path.join(PATHS.PAGES, "**", "*.tsx"));
+const ALL_PAGES = glob.sync(path.join(PATHS.PAGES, "**", "index.tsx"));
 
 const commonConfig: webpack.Configuration = merge(
   {

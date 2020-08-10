@@ -2,6 +2,8 @@
 // https://github.com/impulse/tailwind.json/blob/main/index.js
 
 const fs = require("fs");
+const path = require("path");
+const glob = require("glob");
 const resolveConfig = require("tailwindcss/resolveConfig");
 const tailwindConfig = require(process.cwd() + "/tailwind.config.js");
 
@@ -10,6 +12,7 @@ try {
   const expandedConfig = {
     ...fullConfig,
     expandedColors: expandColors(fullConfig.theme.colors),
+    internalLinks: getInternalLinks(),
   };
 
   fs.writeFileSync(
@@ -21,6 +24,24 @@ try {
   );
 } catch (error) {
   console.error(error);
+}
+
+function getInternalLinks() {
+  // TODO: Share path and glob with webpack config?
+  const pagesRoot = path.join(__dirname, "..", "pages");
+  const pagesGlob = path.join(pagesRoot, "**", "index.tsx");
+  const internalLinks = glob
+    .sync(pagesGlob)
+    .map((p) => path.relative(pagesRoot, p))
+    .map((p) => p.replace("/index.tsx", "").replace("index.tsx", "/"))
+    .map((p) => (p === "/" ? p : `/${p}/`));
+  const ret = {};
+
+  internalLinks.forEach((link) => {
+    ret[link] = link;
+  });
+
+  return ret;
 }
 
 function expandColors(colors) {
