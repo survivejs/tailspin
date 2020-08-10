@@ -75,20 +75,31 @@ const DesignSystemPage = (props) => (
 );
 
 function getComponents(type) {
-  return glob
-    .sync(_path.join(__dirname, "..", "..", "ds", `${type}/*.tsx`))
-    .map((path) => {
-      const source = _fs.readFileSync(path, { encoding: "utf-8" });
-      const component = require(path);
+  const componentDirectory = _path.join(__dirname, "..", "..", "ds", type);
 
-      return {
-        ...component,
+  return glob
+    .sync(_path.join(componentDirectory, "*.tsx"))
+    .map(getComponent(componentDirectory));
+}
+
+function getComponent(componentDirectory: string) {
+  return (path: string) => {
+    const source = _fs.readFileSync(path, { encoding: "utf-8" });
+    const component = require(path);
+
+    return {
+      ...component,
+      path,
+      source,
+      exampleSource: parseExample({ path, source }),
+      props: parseProps({
+        componentDirectory,
+        displayName: component.displayName,
         path,
         source,
-        exampleSource: parseExample({ path, source }),
-        props: parseProps({ displayName: component.displayName, path, source }),
-      };
-    });
+      }),
+    };
+  };
 }
 
 function parseExample({ path, source }) {
@@ -130,7 +141,17 @@ function parseExample({ path, source }) {
   return toSource({ source: identifierSource, node: exampleJsxNode, path });
 }
 
-function parseProps({ displayName, path, source }) {
+function parseProps({
+  componentDirectory,
+  displayName,
+  path,
+  source,
+}: {
+  componentDirectory: string;
+  displayName: string;
+  path: string;
+  source: string;
+}) {
   const componentNode = queryNode({
     source,
     query: `Identifier[name="${displayName}"]`,
@@ -191,10 +212,13 @@ function parseProps({ displayName, path, source }) {
 
       // TODO: Tidy up
       // @ts-ignore
-      const moduleTarget = identifierNode?.parent?.parent?.parent?.parent?.moduleSpecifier?.getText();
+      const moduleTarget = identifierNode?.parent?.parent?.parent?.parent?.moduleSpecifier
+        ?.getText()
+        .replace(/"/g, "");
+      const component = require(_path.join(componentDirectory, moduleTarget));
 
       // TODO: Figure out how to dig the type from the target (recursion)
-      console.log("got flex", moduleTarget);
+      console.log("got flex", moduleTarget, component);
     }
   }
 }
