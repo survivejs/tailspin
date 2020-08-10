@@ -19,7 +19,7 @@ function evaluateNode(node: Element) {
         attributesToObject(node.attributes),
         node.children.length
           ? collectionToArray(node.children).map(evaluateNode)
-          : node.innerHTML
+          : [node.innerHTML]
       )
     : node.innerHTML;
 }
