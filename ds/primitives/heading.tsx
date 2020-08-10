@@ -8,9 +8,18 @@ type Heading = "h1" | "h2" | "h3" | "h4";
 // This one is more strict than the reference one and it enforced "as".
 const Heading = ({ as }: { as: Heading }, label) => <Box as={as}>{label}</Box>;
 
+const ids: { [key: string]: number } = {};
+
 const HeadingWithAnchor = ({ as }: { as: Heading }, label) => {
-  // TODO: Keep track of these + generate unique ids
-  const id = label;
+  let id = slugify(label);
+
+  if (ids[id]) {
+    ids[id]++;
+
+    id += `-${ids[id]}`;
+  } else {
+    ids[id] = 1;
+  }
 
   return (
     <Box>
@@ -23,6 +32,12 @@ const HeadingWithAnchor = ({ as }: { as: Heading }, label) => {
     </Box>
   );
 };
+
+const slugify = (idBase) =>
+  idBase
+    .toLowerCase()
+    .replace(/`/g, "")
+    .replace(/[^\w]+/g, "-");
 
 Heading.withAnchor = HeadingWithAnchor;
 
