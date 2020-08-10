@@ -28,6 +28,7 @@ export type BoxProps = {
   role?: string;
   x?: any;
   style?: string;
+  id?: string;
   // TODO: sx can be only tailwind classes so constraint to those
   sx?: string;
 };
@@ -50,7 +51,15 @@ export const Example = () => (
 export default Box;
 
 // TODO: Unify with typing, maybe typeof against this one
-const extraProps = ["onclick", "role", "x-class", "x-state", "x", "style"];
+const extraProps = [
+  "onclick",
+  "role",
+  "x-class",
+  "x-state",
+  "x",
+  "style",
+  "id",
+];
 
 function attachAttributes(props): elements.Attributes {
   const ret: { [key: string]: string } = {};
