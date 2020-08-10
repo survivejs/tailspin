@@ -177,9 +177,6 @@ function parseProps({
     return parseProperties(propNodes);
   }
 
-  // TODO: Perform a lookup for Flex
-  // In Flex, it's a TypeReference (identifier: props) that's pointing to ImportSpecifier with identifier BoxProps, the problem then is to parse BoxProps from the file where it points.
-
   // TODO: Likely it would be better to select the first parameter instead
   const referenceNode = queryNode({
     source: componentSource,
@@ -199,27 +196,29 @@ function parseProps({
       return parseProperties(propertySignatureNodes);
     }
 
-    if (displayName === "Flex") {
-      const identifierNode = queryNode({
-        source,
-        query: `Identifier[name="${referenceType}"]`,
-        path,
-      });
+    const identifierNode = queryNode({
+      source,
+      query: `Identifier[name="${referenceType}"]`,
+      path,
+    });
 
-      if (!identifierNode) {
-        return;
-      }
-
-      // TODO: Tidy up
-      // @ts-ignore
-      const moduleTarget = identifierNode?.parent?.parent?.parent?.parent?.moduleSpecifier
-        ?.getText()
-        .replace(/"/g, "");
-      const component = require(_path.join(componentDirectory, moduleTarget));
-
-      // TODO: Figure out how to dig the type from the target (recursion)
-      console.log("got flex", moduleTarget, component);
+    if (!identifierNode) {
+      return;
     }
+
+    // TODO: Tidy up
+    // @ts-ignore
+    const moduleTarget = identifierNode?.parent?.parent?.parent?.parent?.moduleSpecifier
+      ?.getText()
+      .replace(/"/g, "");
+    const componentPath = _path.join(componentDirectory, `${moduleTarget}.tsx`);
+
+    return parseProps({
+      componentDirectory,
+      displayName: require(componentPath).displayName,
+      path: componentPath,
+      source: _fs.readFileSync(componentPath, { encoding: "utf-8" }),
+    });
   }
 }
 
