@@ -174,7 +174,28 @@ function parseProps({ displayName, path, source }) {
       path,
     });
 
-    return parseProperties(propertySignatureNodes);
+    if (propertySignatureNodes.length) {
+      return parseProperties(propertySignatureNodes);
+    }
+
+    if (displayName === "Flex") {
+      const identifierNode = queryNode({
+        source,
+        query: `Identifier[name="${referenceType}"]`,
+        path,
+      });
+
+      if (!identifierNode) {
+        return;
+      }
+
+      // TODO: Tidy up
+      // @ts-ignore
+      const moduleTarget = identifierNode?.parent?.parent?.parent?.parent?.moduleSpecifier?.getText();
+
+      // TODO: Figure out how to dig the type from the target (recursion)
+      console.log("got flex", moduleTarget);
+    }
   }
 }
 
