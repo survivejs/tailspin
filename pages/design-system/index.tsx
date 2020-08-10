@@ -152,6 +152,8 @@ function parseProps({
   path: string;
   source: string;
 }) {
+  // This isn't fool proof. It would be better to find specifically a function
+  // to avoid matching something else.
   const componentNode = queryNode({
     source,
     query: `Identifier[name="${displayName}"]`,
@@ -178,14 +180,14 @@ function parseProps({
   }
 
   // TODO: Likely it would be better to select the first parameter instead
-  const referenceNode = queryNode({
+  const typeReferenceNode = queryNode({
     source: componentSource,
     query: `Identifier[name="props"] ~ TypeReference`,
     path,
   });
 
-  if (referenceNode) {
-    const referenceType = referenceNode.getText();
+  if (typeReferenceNode) {
+    const referenceType = typeReferenceNode.getText();
     const propertySignatureNodes = queryNodes({
       source: source,
       query: `Identifier[name="${referenceType}"] ~ TypeLiteral > PropertySignature`,

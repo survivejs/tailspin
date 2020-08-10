@@ -2,17 +2,17 @@ import * as elements from "typed-html";
 import Box from "./box";
 import Link from "./link";
 
-type Heading = "h1" | "h2" | "h3" | "h4";
+type HeadingProps = "h1" | "h2" | "h3" | "h4";
 
 // https://theme-ui.com/components/heading
 // This one is more strict than the reference one and it enforced "as".
-const Heading = ({ as }: { as: Heading }, label: string[]) => (
+const Heading = ({ as }: { as: HeadingProps }, label: string[]) => (
   <Box as={as}>{label}</Box>
 );
 
 const ids: { [key: string]: number } = {};
 
-const HeadingWithAnchor = ({ as }: { as: Heading }, label) => {
+const HeadingWithAnchor = ({ as }: { as: HeadingProps }, label) => {
   let id = slugify(label.join(""));
 
   if (ids[id]) {
