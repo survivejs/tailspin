@@ -31,7 +31,7 @@ const Components = ({ htmlAttributes, cssTags, jsTags }) => (
       ></meta>,
     ]}
     body={
-      <Flex as="main" m="8">
+      <Flex as="main" sx="lg:m-8">
         <Box as="aside" sx="hidden lg:inline lg:w-1/3">
           <Sidebar />
         </Box>
