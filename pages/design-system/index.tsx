@@ -8,8 +8,8 @@ import readableColor from "polished/lib/color/readableColor";
 import glob from "glob";
 import Page from "../../ds/layouts/page";
 import CodeEditor from "../../ds/patterns/code-editor";
-import Sidebar from "../../ds/patterns/sidebar";
 import Table from "../../ds/patterns/table";
+import Toc from "../../ds/patterns/toc";
 import Flex from "../../ds/primitives/flex";
 import Box from "../../ds/primitives/box";
 import Heading from "../../ds/primitives/heading";
@@ -34,7 +34,7 @@ const Components = ({ htmlAttributes, cssTags, jsTags }) => (
     body={
       <Flex as="main" sx="lg:m-8">
         <Box as="aside" sx="hidden lg:inline lg:w-1/3">
-          <Sidebar />
+          <Toc />
         </Box>
         <Box as="article" sx="w-full lg:w-2/3 lg:max-w-2xl space-y-16">
           <Heading.withAnchor as="h1">Design System</Heading.withAnchor>

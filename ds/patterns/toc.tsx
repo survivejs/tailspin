@@ -1,7 +1,7 @@
 import * as elements from "typed-html";
 import Box from "../primitives/box";
 
-const Sidebar = () => (
+const Toc = () => (
   <Box
     sx="sticky top-0"
     x-label="parent"
@@ -26,8 +26,8 @@ const Sidebar = () => (
   </Box>
 );
 
-export const description = `Sidebar constructs its contents based on h2 and h3 elements while maintaining active state while the page is scrolled.`;
-export const displayName = "Sidebar";
-export const Example = () => <Sidebar />;
+export const description = `Toc (table of contents) constructs its contents based on h2 and h3 elements while maintaining active state while the page is scrolled.`;
+export const displayName = "Toc";
+export const Example = () => <Toc />;
 
-export default Sidebar;
+export default Toc;
