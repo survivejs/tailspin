@@ -31,8 +31,11 @@ const Components = ({ htmlAttributes, cssTags, jsTags }) => (
       ></meta>,
     ]}
     body={
-      <Box as="main">
-        <Box as="article" sx="w-full mx-auto max-w-3xl space-y-16">
+      <Flex as="main" m="8">
+        <Box as="aside" sx="hidden lg:inline lg:w-1/3">
+          <Sidebar />
+        </Box>
+        <Box as="article" sx="w-full lg:w-2/3 lg:max-w-2xl space-y-16">
           <Heading.withAnchor as="h1">Design System</Heading.withAnchor>
 
           <Flex as="section" sx="flex-col sm:flex-row">
@@ -67,9 +70,34 @@ const Components = ({ htmlAttributes, cssTags, jsTags }) => (
             </Box>
           </Box>
         </Box>
-      </Box>
+      </Flex>
     }
   />
+);
+
+// TODO: Tidy up and extract as a pattern
+const Sidebar = () => (
+  <nav
+    class="sticky top-0"
+    x-label="parent"
+    x-state="{ closest: {}, headings: Array.from(document.querySelectorAll('h2, h3')) }"
+    x-closest="{ state: { closest: document.querySelectorAll('h2, h3') } }"
+  >
+    <ul>
+      <template x-each="headings">
+        <li>
+          <a
+            x-href="'#' + state.id"
+            x="state.textContent"
+            x-class="[
+              state.textContent === parent.closest.textContent && 'font-bold',
+              state.tagName === 'H3' && 'ml-2'
+            ]"
+          ></a>
+        </li>
+      </template>
+    </ul>
+  </nav>
 );
 
 function getComponents(type) {

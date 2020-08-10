@@ -12,8 +12,8 @@ export type BoxProps = {
   mt?: SpacingKeys;
   ml?: SpacingKeys;
   mr?: SpacingKeys;
-  mx?: SpacingKeys;
-  my?: SpacingKeys;
+  mx?: SpacingKeys | "auto";
+  my?: SpacingKeys | "auto";
   p?: SpacingKeys;
   pb?: SpacingKeys;
   pt?: SpacingKeys;
