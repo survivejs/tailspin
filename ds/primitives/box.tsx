@@ -26,7 +26,7 @@ export type BoxProps = {
   // Exposed attributes
   onclick?: string;
   role?: string;
-  x?: any;
+  x?: string;
   style?: string;
   id?: string;
   // TODO: sx can be only tailwind classes so constraint to those
