@@ -202,9 +202,10 @@ function toSource({ path, source, node }) {
 
 const Collection = ({ items }) =>
   items
-    .map(({ displayName, exampleSource, props }) => (
+    .map(({ displayName, description, exampleSource, props }) => (
       <Box sx="space-y-4">
         <Heading as="h3">{displayName}</Heading>
+        <Box as="p">{description ? description : ""}</Box>
         <CodeEditor source={exampleSource} />
         <Types props={props} />
       </Box>

@@ -17,6 +17,7 @@ const LinkExternal = (props: { href: string; sx?: string }, label) => (
 );
 Link.External = LinkExternal;
 
+export const description = `Regular Links are meant to be used internally and they are type-checked. The external variant omits type-checking and you should check those links using another tool.`;
 export const displayName = "Link";
 export const Example = () => (
   <Flex sx="flex-col">
