@@ -50,21 +50,12 @@ export const Example = () => (
 
 export default Box;
 
-// TODO: Unify with typing, maybe typeof against this one
-const extraProps = ["onclick", "role", "x", "style", "id"];
-
 function attachAttributes(props): elements.Attributes {
   if (!props) {
     return {};
   }
 
   const ret: { [key: string]: string } = {};
-
-  extraProps.forEach((extraProp) => {
-    if (props?.[extraProp]) {
-      ret[extraProp] = props[extraProp];
-    }
-  });
 
   Object.entries(props).forEach(([k, v]) => {
     if (k.split("-").length) {
@@ -78,5 +69,5 @@ function attachAttributes(props): elements.Attributes {
     ret["class"] = klass;
   }
 
-  return ret;
+  return { ...props, ...ret };
 }
