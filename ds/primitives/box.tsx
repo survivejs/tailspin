@@ -51,27 +51,24 @@ export const Example = () => (
 export default Box;
 
 // TODO: Unify with typing, maybe typeof against this one
-const extraProps = [
-  "onclick",
-  "role",
-  "x-class",
-  "x-closest",
-  "x-each",
-  "x-href",
-  "x-label",
-  "x-state",
-  "x",
-  "style",
-  "id",
-];
+const extraProps = ["onclick", "role", "x", "style", "id"];
 
-// TODO: Likely this should be data- and x- agnostic
 function attachAttributes(props): elements.Attributes {
+  if (!props) {
+    return {};
+  }
+
   const ret: { [key: string]: string } = {};
 
   extraProps.forEach((extraProp) => {
     if (props?.[extraProp]) {
       ret[extraProp] = props[extraProp];
+    }
+  });
+
+  Object.entries(props).forEach(([k, v]) => {
+    if (k.split("-").length) {
+      ret[k] = v as string;
     }
   });
 
