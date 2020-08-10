@@ -57,6 +57,7 @@ const extraProps = [
   "x-class",
   "x-closest",
   "x-each",
+  "x-href",
   "x-label",
   "x-state",
   "x",
