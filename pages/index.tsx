@@ -40,9 +40,9 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
               <Alert>This is a demo alert</Alert>
             </Box>
             <Box>
-              <Button onclick="setState(v => !v)" sx="btn-blue">
+              <Button.Primary onclick="setState(v => !v)">
                 Demo button
-              </Button>
+              </Button.Primary>
             </Box>
           </Box>
         </Box>
