@@ -55,12 +55,16 @@ const extraProps = [
   "onclick",
   "role",
   "x-class",
+  "x-closest",
+  "x-each",
+  "x-label",
   "x-state",
   "x",
   "style",
   "id",
 ];
 
+// TODO: Likely this should be data- and x- agnostic
 function attachAttributes(props): elements.Attributes {
   const ret: { [key: string]: string } = {};
 

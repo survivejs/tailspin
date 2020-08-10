@@ -8,6 +8,7 @@ import readableColor from "polished/lib/color/readableColor";
 import glob from "glob";
 import Page from "../../ds/layouts/page";
 import CodeEditor from "../../ds/patterns/code-editor";
+import Sidebar from "../../ds/patterns/sidebar";
 import Table from "../../ds/patterns/table";
 import Flex from "../../ds/primitives/flex";
 import Box from "../../ds/primitives/box";
@@ -73,31 +74,6 @@ const Components = ({ htmlAttributes, cssTags, jsTags }) => (
       </Flex>
     }
   />
-);
-
-// TODO: Tidy up and extract as a pattern
-const Sidebar = () => (
-  <nav
-    class="sticky top-0"
-    x-label="parent"
-    x-state="{ closest: {}, headings: Array.from(document.querySelectorAll('h2, h3')) }"
-    x-closest="{ state: { closest: document.querySelectorAll('h2, h3') } }"
-  >
-    <ul>
-      <template x-each="headings">
-        <li>
-          <a
-            x-href="'#' + state.id"
-            x="state.textContent"
-            x-class="[
-              state.textContent === parent.closest.textContent && 'font-bold',
-              state.tagName === 'H3' && 'ml-2'
-            ]"
-          ></a>
-        </li>
-      </template>
-    </ul>
-  </nav>
 );
 
 function getComponents(type) {
