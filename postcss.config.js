@@ -19,7 +19,10 @@ module.exports =
               return broadMatches.concat(innerMatches);
             },
             whitelistPatterns: [
+              // A lot of these classes are included due to the design system bit
+              // In practice you should keep this list to minimum.
               /^hljs/,
+              /^border-/,
               /^p-/,
               /^pr-/,
               /^pl-/,
