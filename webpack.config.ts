@@ -149,6 +149,7 @@ const developmentConfig: webpack.Configuration = {
       // hmr: true,
       progress: "minimal",
       static: [PATHS.OUTPUT],
+      waitForBuild: true,
     }),
   ],
   module: {
