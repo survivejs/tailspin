@@ -2,7 +2,8 @@ import * as elements from "typed-html";
 import Navigation from "../patterns/navigation";
 import Box from "../primitives/box";
 
-const Page = ({ head, body, cssTags, jsTags, htmlAttributes }) => (
+// TODO: Add types
+const Page = ({ head, body, cssTags, jsTags, htmlAttributes, url }) => (
   <html {...htmlAttributes}>
     <head>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,8 +14,13 @@ const Page = ({ head, body, cssTags, jsTags, htmlAttributes }) => (
       <header>
         <Navigation>
           <Box sx="text-sm lg:flex-grow">
-            <Navigation.Item href="/">Documentation</Navigation.Item>
-            <Navigation.Item href="/design-system/">
+            <Navigation.Item href="/" isSelected={url === "/"}>
+              Documentation
+            </Navigation.Item>
+            <Navigation.Item
+              href="/design-system/"
+              isSelected={url === "/design-system/"}
+            >
               Design system
             </Navigation.Item>
           </Box>
@@ -38,7 +44,14 @@ const Page = ({ head, body, cssTags, jsTags, htmlAttributes }) => (
 
 export const displayName = "Page";
 export const Example = () => (
-  <Page head="" body="Hello from body" cssTags="" jsTags="" htmlAttributes="" />
+  <Page
+    head=""
+    body="Hello from body"
+    cssTags=""
+    jsTags=""
+    htmlAttributes=""
+    url="/"
+  />
 );
 
 export default Page;

@@ -19,11 +19,9 @@ const theme = config.theme;
 const colors = theme.colors;
 const spacingScale = Object.keys(theme.spacing);
 
-const Components = ({ htmlAttributes, cssTags, jsTags }) => (
+const DesignSystemPage = (props) => (
   <Page
-    htmlAttributes={htmlAttributes}
-    cssTags={cssTags}
-    jsTags={jsTags}
+    {...props}
     head={[
       <title>tailwind-webpack-starter - Design System</title>,
       <meta
@@ -306,4 +304,4 @@ function tryTo(fn, defaultValue) {
   }
 }
 
-export default Components;
+export default DesignSystemPage;

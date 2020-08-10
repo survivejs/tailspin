@@ -1,7 +1,7 @@
 import * as elements from "typed-html";
 import Flex from "../primitives/flex";
 import Box from "../primitives/box";
-import Link from "../primitives/link";
+import Link, { LinkProps } from "../primitives/link";
 
 // https://tailwindcss.com/components/navigation
 const Navigation = ({}, children: string[]) => (
@@ -44,13 +44,18 @@ const Navigation = ({}, children: string[]) => (
   </Flex>
 );
 
-const NavigationItem = ({ href }, label) => (
-  <Link
+const NavigationItem = (
+  { href, isSelected }: ExternalLinkProps & { isSelected?: boolean },
+  label
+) => (
+  <Link.withExternal
     href={href}
-    sx="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+    sx={`${
+      isSelected ? "font-bold" : ""
+    } block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4`}
   >
     {label}
-  </Link>
+  </Link.withExternal>
 );
 
 Navigation.Item = NavigationItem;
@@ -60,7 +65,9 @@ const Example = () => (
   <Navigation>
     <Box sx="text-sm lg:flex-grow">
       <Navigation.Item href="/">Documentation</Navigation.Item>
-      <Navigation.Item href="/design-system/">Design system</Navigation.Item>
+      <Navigation.Item href="/design-system/" isSelected="true">
+        Design system
+      </Navigation.Item>
     </Box>
     <Box>
       <Navigation.Item href="https://github.com/survivejs/tailwind-webpack-starter">

@@ -12,11 +12,9 @@ const readmePath = path.join(__dirname, "..", "README.md");
 const readme = fs.readFileSync(readmePath, { encoding: "utf-8" });
 const readmeAsHtml = processMarkdown(readme);
 
-export default ({ htmlAttributes, cssTags, jsTags }) => (
+const IndexPage = (props) => (
   <Page
-    htmlAttributes={htmlAttributes}
-    cssTags={cssTags}
-    jsTags={jsTags}
+    {...props}
     head={[
       <title>tailwind-webpack-starter</title>,
       <meta
@@ -50,3 +48,5 @@ export default ({ htmlAttributes, cssTags, jsTags }) => (
     }
   />
 );
+
+export default IndexPage;

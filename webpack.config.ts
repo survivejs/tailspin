@@ -103,6 +103,7 @@ function generatePage(pagePath): webpack.Plugin {
       decache(pagePath);
 
       return `<!DOCTYPE html>\n${require(pagePath).default({
+        url: resolveUrl(pageName),
         htmlAttributes,
         cssTags: generateCSSReferences({
           files: css,
@@ -117,6 +118,12 @@ function generatePage(pagePath): webpack.Plugin {
       })}`;
     },
   });
+}
+
+function resolveUrl(p) {
+  const ret = p.replace("/index", "").replace("index", "/");
+
+  return ret === "/" ? ret : `/${ret}/`;
 }
 
 function generateDependencies(paths) {
