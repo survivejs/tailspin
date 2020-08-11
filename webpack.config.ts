@@ -84,7 +84,7 @@ function generateBlogPages(paths) {
   console.log("generate blog pages", paths);
   // TODO: Get this from GraphQL
   // TODO: Add images
-  const urlPrefix = "blog";
+  const urlPrefix = "/blog/";
   const pages = [
     {
       title: "Demo post 1",
@@ -124,7 +124,7 @@ function generateBlogPages(paths) {
 
 function generateBlogIndex({ layout, urlPrefix, pages }): webpack.Plugin {
   return new MiniHtmlWebpackPlugin({
-    filename: `${urlPrefix}/index.html`,
+    filename: `${urlPrefix}index.html`,
     publicPath: "/",
     chunks: ["_shared"],
     context: {
@@ -162,12 +162,12 @@ function generateBlogIndex({ layout, urlPrefix, pages }): webpack.Plugin {
 }
 
 function generateBlogPage({
-  urlPrefix,
   slug,
+  urlPrefix,
   layout,
   ...content
 }): webpack.Plugin {
-  const url = `${urlPrefix}/${slug}`;
+  const url = `${urlPrefix}${slug}`;
 
   return new MiniHtmlWebpackPlugin({
     filename: `${url}/index.html`,
