@@ -19,13 +19,15 @@ import decache from "decache";
 const PORT = 8080;
 const ROOT = __dirname;
 const PATHS = {
-  ASSETS: path.resolve(ROOT, "assets"),
-  DS: path.resolve(ROOT, "ds"),
-  PAGES: path.resolve(ROOT, "pages"),
-  OUTPUT: path.resolve(ROOT, "public"),
+  ASSETS: path.join(ROOT, "assets"),
+  BLOG: path.join(ROOT, "data", "blog"),
+  DS: path.join(ROOT, "ds"),
+  PAGES: path.join(ROOT, "pages"),
+  OUTPUT: path.join(ROOT, "public"),
 };
 const ALL_FILES = glob.sync(path.join(PATHS.PAGES, "**", "*.tsx"));
 const ALL_PAGES = glob.sync(path.join(PATHS.PAGES, "**", "index.tsx"));
+const BLOG_PAGES = glob.sync(path.join(PATHS.BLOG, "**", "*.md"));
 
 const commonConfig: webpack.Configuration = merge(
   {
@@ -69,9 +71,20 @@ const commonConfig: webpack.Configuration = merge(
     ],
     stats: "errors-only",
   },
+  generateBlogPages(BLOG_PAGES),
   generatePages(ALL_PAGES),
   generateDependencies(ALL_FILES)
 );
+
+// TODO: Handle this with a GraphQL connector.
+// It would have to generate a blog index + page per each
+// -> MiniHtmlWebpackPlugin for each of these
+// This will have to be async (push earlier in the process).
+function generateBlogPages(paths) {
+  console.log("generate blog pages", paths);
+
+  return {};
+}
 
 function generatePages(paths) {
   return {

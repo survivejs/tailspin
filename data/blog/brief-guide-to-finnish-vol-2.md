@@ -6,7 +6,7 @@ description: >-
 date: "2019-02-04T10:18:30.273Z"
 categories: []
 keywords: []
-slug: /@bebraw/brief-guide-to-finnish-vol-2-a72607379e4c
+slug: brief-guide-to-finnish-vol-2
 ---
 
 ![Finnish cookies ([Pixabay](https://pixabay.com/en/gingerbread-cookie-flag-of-finland-3023207/))](img/1__copWTZQ4r2y9RD0fKmrkbw.jpeg)

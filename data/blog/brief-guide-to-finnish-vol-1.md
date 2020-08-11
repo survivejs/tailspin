@@ -6,7 +6,7 @@ description: >-
 date: "2018-01-20T12:21:01.230Z"
 categories: []
 keywords: []
-slug: /@bebraw/brief-guide-to-finnish-7f43f37d5017
+slug: brief-guide-to-finnish-vol-1
 ---
 
 ![Finland — The most peaceful country out there?](img/1__cFvPk3sJHNFfFFDO3585__g.jpeg)
