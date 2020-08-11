@@ -7,11 +7,12 @@ import Link, { LinkProps } from "../primitives/link";
 const Navigation = ({}, children: string[]) => (
   <Flex
     as="nav"
+    direction="row"
     p="6"
     sx="items-center justify-between flex-wrap"
     x-state="false"
   >
-    <Flex mr="6" sx="items-center flex-shrink-0">
+    <Flex mr="6" direction="row" sx="items-center flex-shrink-0">
       <Box as="span" sx="font-semibold text-xl tracking-tight">
         tailwind-webpack-starter
       </Box>
@@ -19,6 +20,7 @@ const Navigation = ({}, children: string[]) => (
     <Box sx="block lg:hidden">
       <Flex
         as="button"
+        direction="column"
         px="3"
         py="2"
         sx="items-center border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white"

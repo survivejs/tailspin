@@ -33,7 +33,7 @@ Button.Secondary = ButtonSecondary;
 
 export const displayName = "Button";
 export const Example = () => (
-  <Flex x-state="'foobar'" sx="flex-col space-y-4">
+  <Flex x-state="'foobar'" direction="column" sx="space-y-4">
     <Box as="span" x="'Value: ' + state" />
     <Button
       onclick="setState('foobar')"

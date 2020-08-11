@@ -30,7 +30,7 @@ const DesignSystemPage = (props) => (
       ></meta>,
     ]}
     body={
-      <Flex sx="lg:m-8">
+      <Flex direction="row" sx="lg:m-8">
         <Box as="aside" sx="hidden lg:inline lg:w-1/3">
           <Toc />
         </Box>
@@ -308,7 +308,7 @@ const Colors = ({
   Object.entries(items)
     .map(([key, color]) =>
       isObject(color) ? (
-        <Flex>
+        <Flex direction="row">
           <Box ml="1" sx="w-16">
             {key}
           </Box>

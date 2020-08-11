@@ -39,6 +39,7 @@ const Page = ({ head, body, cssTags, jsTags, htmlAttributes, url }) => (
       </Box>
       <Flex
         p="6"
+        direction="row"
         color="white"
         bg="primary"
         sx="items-center justify-between flex-wrap"

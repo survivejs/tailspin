@@ -12,7 +12,7 @@ type Direction = "column" | "row";
 //  sx="flex-col sm:flex-row"
 // https://theme-ui.com/components/flex
 const Flex = (
-  props: BoxProps & { direction?: Direction | Direction[] } = {
+  props: BoxProps & { direction: Direction | Direction[] } = {
     direction: "column",
   },
   children: string[]

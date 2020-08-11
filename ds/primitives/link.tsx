@@ -24,7 +24,7 @@ Link.withExternal = LinkExternal;
 export const description = `Regular Links are meant to be used internally and they are type-checked. The external variant omits type-checking and you should check those links using another tool.`;
 export const displayName = "Link";
 export const Example = () => (
-  <Flex sx="flex-col">
+  <Flex direction="column">
     <Box>
       <Link href="/design-system/">Design system</Link>
     </Box>
