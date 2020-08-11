@@ -31,10 +31,6 @@ const ALL_FILES = glob.sync(path.join(PATHS.PAGES, "**", "*.tsx"));
 const ALL_PAGES = glob.sync(path.join(PATHS.PAGES, "**", "index.tsx"));
 const BLOG_PAGES = glob.sync(path.join(PATHS.BLOG, "**", "*.md"));
 
-const blogContent = BLOG_PAGES.map((p) =>
-  processMarkdownWithFrontmatter(fs.readFileSync(p, { encoding: "utf-8" }))
-);
-
 const commonConfig: webpack.Configuration = merge(
   {
     output: {
@@ -77,53 +73,62 @@ const commonConfig: webpack.Configuration = merge(
     ],
     stats: "errors-only",
   },
-  generateBlogPages("/blog/", "./ds/layouts/blog-page", blogContent),
+  generateBlogPages("/blog/", "./ds/layouts/blog-page", BLOG_PAGES),
   generatePages(ALL_PAGES),
   generateDependencies(ALL_FILES),
   generateDependencies(BLOG_PAGES)
 );
 
-function generateBlogPages(urlPrefix, layout, pages) {
-  pages = pages.map((page) => ({
-    ...page,
-    urlPrefix,
-    layout,
-  }));
+function generateBlogPages(urlPrefix, layout, pagePaths) {
+  const getAllPages = () =>
+    pagePaths.map((p) => ({
+      ...getPageContent(p),
+      urlPrefix,
+      layout,
+      pagePath: p,
+    }));
 
-  // TODO: Load page content inside webpack within the template function.
-  // Now it's too early in the process. It's enough to have paths here (callback).
   return {
     plugins: [
       generatePage({
-        pagePath: `${urlPrefix}index`,
+        modulePath: `${urlPrefix}index`,
         layout: "./ds/layouts/blog-index",
-        pageName: urlPrefix,
+        pageName: `${urlPrefix}/index`,
         url: urlPrefix,
-        attributes: { pages },
+        getAttributes: () => ({
+          pages: getAllPages(),
+        }),
       }),
     ].concat(
-      pages.map(({ slug, urlPrefix, layout, ...attributes }) =>
+      getAllPages().map(({ pagePath, slug, urlPrefix, layout }) =>
         generatePage({
-          pagePath: layout,
+          modulePath: layout,
+          pagePath,
           layout,
           pageName: `${urlPrefix}${slug}/index`,
           url: `${urlPrefix}${slug}`,
-          attributes,
+          getAttributes: (p) => ({ ...getPageContent(p), urlPrefix, layout }),
         })
       )
     ),
   };
 }
 
+function getPageContent(p) {
+  return processMarkdownWithFrontmatter(
+    fs.readFileSync(p, { encoding: "utf-8" })
+  );
+}
+
 function generatePages(paths) {
   return {
-    plugins: paths.map((pagePath) => {
-      const pageName = path.relative(PATHS.PAGES, pagePath).split(".")[0];
+    plugins: paths.map((modulePath) => {
+      const pageName = path.relative(PATHS.PAGES, modulePath).split(".")[0];
       const chunkName = `${pageName.split("index")[0]}_page`;
 
       return generatePage({
-        pagePath,
-        layout: pagePath,
+        modulePath,
+        layout: modulePath,
         pageName,
         chunkName,
         url: resolveUrl(pageName),
@@ -133,12 +138,13 @@ function generatePages(paths) {
 }
 
 function generatePage({
-  pagePath,
+  modulePath,
+  pagePath = "",
   layout,
   pageName,
   chunkName = null,
   url,
-  attributes = {},
+  getAttributes = (pagePath: string) => {},
 }): webpack.Plugin {
   return new MiniHtmlWebpackPlugin({
     filename: `${pageName}.html`,
@@ -157,7 +163,7 @@ function generatePage({
       js,
       publicPath,
     }) => {
-      decache(pagePath);
+      decache(modulePath);
 
       return `<!DOCTYPE html>\n${require(layout).default({
         url,
@@ -172,7 +178,7 @@ function generatePage({
           attributes: jsAttributes || {},
           publicPath,
         }),
-        attributes,
+        attributes: getAttributes(pagePath),
       })}`;
     },
   });
