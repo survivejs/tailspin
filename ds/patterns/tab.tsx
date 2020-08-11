@@ -2,6 +2,7 @@ import * as elements from "typed-html";
 import Box from "../primitives/box";
 import Flex from "../primitives/flex";
 
+// https://tailwindcss.com/components/navigation/#tabs
 const TabContainer = (
   { selectedTab }: { selectedTab: string },
   children: string[]
@@ -17,17 +18,18 @@ const TabHeader = ({}, children: string[]) => (
 );
 const TabHeaderItem = ({ tabId }: { tabId: string }, children: string[]) => (
   <Box
-    p="2"
-    sx="cursor-pointer w-full"
-    color="white"
-    x-class={`state === '${tabId}' ? 'bg-primary' : 'bg-secondary'`}
+    py="2"
+    sx="cursor-pointer w-full text-center"
+    x-class={`state === '${tabId}' ? 'border-l border-t border-r rounded-t' : 'border-b'`}
     onclick={`setState('${tabId}')`}
   >
     {children.join("")}
   </Box>
 );
 const TabBody = ({}, children: string[]) => (
-  <Box m="2">{children.join("")}</Box>
+  <Box p="2" sx="border-l border-b border-r rounded-b">
+    {children.join("")}
+  </Box>
 );
 const TabBodyItem = ({ tabId }: { tabId: string }, children: string[]) => (
   <Box x-class={`state === '${tabId}' ? '' : 'hidden'`}>
