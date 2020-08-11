@@ -104,7 +104,12 @@ function generateBlogPages(paths) {
       author: "Juho Vepsäläinen",
       article: "Demo post 2 content goes here",
     },
-  ].map((page) => ({ ...page, urlPrefix, layout: "./ds/layouts/blog-page" }));
+  ].map((page) => ({
+    ...page,
+    slug: `${page.slug}/`,
+    urlPrefix,
+    layout: "./ds/layouts/blog-page",
+  }));
 
   return {
     plugins: [

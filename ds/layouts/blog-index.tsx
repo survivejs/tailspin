@@ -1,11 +1,18 @@
 import * as elements from "typed-html";
 import PageLayout from "./page";
+import Tag from "../patterns/tag";
 import Box from "../primitives/box";
+import Flex from "../primitives/flex";
+import Heading from "../primitives/heading";
+import Link from "../primitives/link";
 
 // TODO: Add types
-const BlogIndexLayout = (props) => (
+const BlogIndexLayout = ({ cssTags, jsTags, htmlAttributes, url, pages }) => (
   <PageLayout
-    {...props}
+    cssTags={cssTags}
+    jsTags={jsTags}
+    htmlAttributes={htmlAttributes}
+    url={url}
     head={[
       <title>tailwind-webpack-starter</title>,
       <meta
@@ -14,8 +21,25 @@ const BlogIndexLayout = (props) => (
       ></meta>,
     ]}
     body={
-      <Box as="article" m="8" sx="w-full mx-auto prose lg:prose-xl">
-        Blog index goes here
+      <Box as="article" mx="auto" mb="8" sx="w-full lg:w-2/3 lg:max-w-2xl">
+        <Heading as="h1">Blog pages</Heading>
+        <Flex direction="column" sx="prose lg:prose-xl">
+          {pages
+            .map(({ title, description, slug, categories }) => (
+              <Flex as="section" direction="column">
+                <Heading as="h2">
+                  <Link href={slug}>{title}</Link>
+                </Heading>
+                <Box>{description}</Box>
+                <Flex direction="row">
+                  {categories
+                    .map((category) => <Tag>{category}</Tag>)
+                    .join(", ")}
+                </Flex>
+              </Flex>
+            ))
+            .join("")}
+        </Flex>
       </Box>
     }
   />
@@ -23,14 +47,7 @@ const BlogIndexLayout = (props) => (
 
 export const displayName = "BlogIndexLayout";
 export const Example = () => (
-  <BlogIndexLayout
-    head=""
-    body="Hello from body"
-    cssTags=""
-    jsTags=""
-    htmlAttributes=""
-    url="/"
-  />
+  <BlogIndexLayout cssTags="" jsTags="" htmlAttributes="" url="/" pages="" />
 );
 
 export default BlogIndexLayout;

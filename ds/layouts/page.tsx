@@ -18,6 +18,9 @@ const PageLayout = ({ head, body, cssTags, jsTags, htmlAttributes, url }) => (
             <Navigation.Item href="/" isSelected={url === "/"}>
               Documentation
             </Navigation.Item>
+            <Navigation.Item href="/blog/" isSelected={url === "/blog/"}>
+              Blog
+            </Navigation.Item>
             <Navigation.Item
               href="/design-system/"
               isSelected={url === "/design-system/"}
