@@ -9,6 +9,7 @@ import glob from "glob";
 import Page from "../../ds/layouts/page";
 import CodeEditor from "../../ds/patterns/code-editor";
 import Table from "../../ds/patterns/table";
+import Tab from "../../ds/patterns/tab";
 import Toc from "../../ds/patterns/toc";
 import Flex from "../../ds/primitives/flex";
 import Box from "../../ds/primitives/box";
@@ -281,8 +282,20 @@ const Collection = ({ items }) =>
       <Box sx="space-y-4">
         <Heading.withAnchor as="h3">{displayName}</Heading.withAnchor>
         <Box as="p">{description ? description : ""}</Box>
-        <CodeEditor source={exampleSource} />
-        <Types props={props} />
+        <Tab.Container selectedTab="example">
+          <Tab.Header>
+            <Tab.HeaderItem tabId="example">Example</Tab.HeaderItem>
+            <Tab.HeaderItem tabId="props">Props</Tab.HeaderItem>
+          </Tab.Header>
+          <Tab.Body>
+            <Tab.BodyItem tabId="example">
+              <CodeEditor source={exampleSource} />
+            </Tab.BodyItem>
+            <Tab.BodyItem tabId="props">
+              <Types props={props} />
+            </Tab.BodyItem>
+          </Tab.Body>
+        </Tab.Container>
       </Box>
     ))
     .join("");
