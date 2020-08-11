@@ -82,8 +82,124 @@ const commonConfig: webpack.Configuration = merge(
 // This will have to be async (push earlier in the process).
 function generateBlogPages(paths) {
   console.log("generate blog pages", paths);
+  // TODO: Get this from GraphQL
+  // TODO: Add images
+  const urlPrefix = "blog";
+  const pages = [
+    {
+      title: "Demo post 1",
+      description: "demo description 1",
+      date: new Date().toString(),
+      categories: ["demo"],
+      slug: "demo-post-1",
+      author: "Juho Vepsäläinen",
+      article: "Demo post 1 content goes here",
+    },
+    {
+      title: "Demo post 2",
+      description: "demo description 2",
+      date: new Date().toString(),
+      categories: ["demo"],
+      slug: "demo-post-2",
+      author: "Juho Vepsäläinen",
+      article: "Demo post 2 content goes here",
+    },
+  ].map((page) => ({ ...page, urlPrefix, layout: "./ds/layouts/blog-page" }));
 
-  return {};
+  return {
+    plugins: [
+      generateBlogIndex({
+        layout: "./ds/layouts/blog-index",
+        urlPrefix,
+        pages,
+      }),
+    ].concat(pages.map(generateBlogPage)),
+  };
+}
+
+function generateBlogIndex({ layout, urlPrefix, pages }): webpack.Plugin {
+  return new MiniHtmlWebpackPlugin({
+    filename: `${urlPrefix}/index.html`,
+    publicPath: "/",
+    chunks: ["_shared"],
+    context: {
+      htmlAttributes: { lang: "en" },
+      cssAttributes: {},
+      jsAttributes: { defer: "defer" },
+    },
+    template: ({
+      cssAttributes,
+      jsAttributes,
+      htmlAttributes,
+      css,
+      js,
+      publicPath,
+    }) => {
+      decache(layout);
+
+      return `<!DOCTYPE html>\n${require(layout).default({
+        url: urlPrefix,
+        htmlAttributes,
+        cssTags: generateCSSReferences({
+          files: css,
+          attributes: cssAttributes,
+          publicPath,
+        }),
+        jsTags: generateJSReferences({
+          files: js,
+          attributes: jsAttributes || {},
+          publicPath,
+        }),
+        pages,
+      })}`;
+    },
+  });
+}
+
+function generateBlogPage({
+  urlPrefix,
+  slug,
+  layout,
+  ...content
+}): webpack.Plugin {
+  const url = `${urlPrefix}/${slug}`;
+
+  return new MiniHtmlWebpackPlugin({
+    filename: `${url}/index.html`,
+    publicPath: "/",
+    chunks: ["_shared"],
+    context: {
+      htmlAttributes: { lang: "en" },
+      cssAttributes: {},
+      jsAttributes: { defer: "defer" },
+    },
+    template: ({
+      cssAttributes,
+      jsAttributes,
+      htmlAttributes,
+      css,
+      js,
+      publicPath,
+    }) => {
+      decache(layout);
+
+      return `<!DOCTYPE html>\n${require(layout).default({
+        url,
+        htmlAttributes,
+        cssTags: generateCSSReferences({
+          files: css,
+          attributes: cssAttributes,
+          publicPath,
+        }),
+        jsTags: generateJSReferences({
+          files: js,
+          attributes: jsAttributes || {},
+          publicPath,
+        }),
+        content,
+      })}`;
+    },
+  });
 }
 
 function generatePages(paths) {

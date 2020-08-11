@@ -1,11 +1,16 @@
 import * as elements from "typed-html";
 import PageLayout from "./page";
 import Box from "../primitives/box";
+import Flex from "../primitives/flex";
+import Heading from "../primitives/heading";
 
 // TODO: Add types
-const BlogPageLayout = (props) => (
+const BlogPageLayout = ({ cssTags, jsTags, htmlAttributes, url, content }) => (
   <PageLayout
-    {...props}
+    cssTags={cssTags}
+    jsTags={jsTags}
+    htmlAttributes={htmlAttributes}
+    url={url}
     head={[
       <title>tailwind-webpack-starter</title>,
       <meta
@@ -15,7 +20,23 @@ const BlogPageLayout = (props) => (
     ]}
     body={
       <Box as="article" m="8" sx="w-full mx-auto prose lg:prose-xl">
-        Blog page goes here
+        <Heading as="h1">{content?.title}</Heading>
+        <Box sx="space-y-8">
+          <Box>{content?.categories.join(", ")}</Box>
+          <Box>{content?.article}</Box>
+          <Flex direction="row" sx="justify-between text-sm">
+            <Box>{content?.author}</Box>
+            <Box>
+              {content?.date
+                ? new Intl.DateTimeFormat("en", {
+                    year: "numeric",
+                    month: "short",
+                    day: "2-digit",
+                  }).format(new Date(content.date))
+                : ""}
+            </Box>
+          </Flex>
+        </Box>
       </Box>
     }
   />
@@ -23,14 +44,7 @@ const BlogPageLayout = (props) => (
 
 export const displayName = "BlogPageLayout";
 export const Example = () => (
-  <BlogPageLayout
-    head=""
-    body="Hello from body"
-    cssTags=""
-    jsTags=""
-    htmlAttributes=""
-    url="/"
-  />
+  <BlogPageLayout cssTags="" jsTags="" htmlAttributes="" url="/" content="" />
 );
 
 export default BlogPageLayout;
