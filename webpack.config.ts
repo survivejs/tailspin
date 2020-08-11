@@ -79,13 +79,10 @@ const commonConfig: webpack.Configuration = merge(
   },
   generateBlogPages("/blog/", "./ds/layouts/blog-page", blogContent),
   generatePages(ALL_PAGES),
-  generateDependencies(ALL_FILES)
+  generateDependencies(ALL_FILES),
+  generateDependencies(BLOG_PAGES)
 );
 
-// TODO: Handle this with a GraphQL connector.
-// It would have to generate a blog index + page per each
-// -> MiniHtmlWebpackPlugin for each of these
-// This will have to be async (push earlier in the process).
 function generateBlogPages(urlPrefix, layout, pages) {
   pages = pages.map((page) => ({
     ...page,
@@ -93,6 +90,8 @@ function generateBlogPages(urlPrefix, layout, pages) {
     layout,
   }));
 
+  // TODO: Load page content inside webpack within the template function.
+  // Now it's too early in the process. It's enough to have paths here (callback).
   return {
     plugins: [
       generatePage({
