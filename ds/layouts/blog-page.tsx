@@ -1,5 +1,6 @@
 import * as elements from "typed-html";
 import PageLayout from "./page";
+import Tag from "../patterns/tag";
 import Box from "../primitives/box";
 import Flex from "../primitives/flex";
 import Heading from "../primitives/heading";
@@ -22,7 +23,11 @@ const BlogPageLayout = ({ cssTags, jsTags, htmlAttributes, url, content }) => (
       <Box as="article" m="8" sx="w-full mx-auto prose lg:prose-xl">
         <Heading as="h1">{content?.title}</Heading>
         <Box sx="space-y-8">
-          <Box>{content?.categories.join(", ")}</Box>
+          <Flex direction="row">
+            {content?.categories
+              .map((category) => <Tag>{category}</Tag>)
+              .join(", ")}
+          </Flex>
           <Box>{content?.article}</Box>
           <Flex direction="row" sx="justify-between text-sm">
             <Box>{content?.author}</Box>
