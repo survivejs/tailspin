@@ -37,7 +37,7 @@ const DesignSystemPage = (props) => (
         <Box as="article" sx="w-full lg:w-2/3 lg:max-w-2xl space-y-16">
           <Heading.withAnchor as="h1">Design System</Heading.withAnchor>
 
-          <Flex as="section" sx="flex-col sm:flex-row">
+          <Flex as="section" direction={["column", "row"]}>
             <Box sx="flex-auto">
               <Heading.withAnchor as="h2">Spacing scale</Heading.withAnchor>
               <SpacingScale items={spacingScale} />
