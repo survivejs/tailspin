@@ -30,7 +30,7 @@ const DesignSystemPage = (props) => (
       ></meta>,
     ]}
     body={
-      <Flex as="main" sx="lg:m-8">
+      <Flex sx="lg:m-8">
         <Box as="aside" sx="hidden lg:inline lg:w-1/3">
           <Toc />
         </Box>

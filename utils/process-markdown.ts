@@ -18,7 +18,9 @@ marked.setOptions({
 });
 
 function processMarkdown(input) {
-  return sanitizeHtml(marked(input));
+  return sanitizeHtml(marked(input), {
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat(["h1", "h2"]),
+  });
 }
 
 export default processMarkdown;

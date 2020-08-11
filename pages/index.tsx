@@ -23,25 +23,23 @@ const IndexPage = (props) => (
       ></meta>,
     ]}
     body={
-      <Box as="main" m="8">
-        <Box as="article" sx="w-full mx-auto prose lg:prose-xl">
-          {readmeAsHtml}
-          <Heading as="h2">Demo</Heading>
-          <Box x-state="false">
-            <Box mb="4">
-              <Box as="span" mr="1">
-                Value:
-              </Box>
-              <Box as="span" x="state" />
+      <Box as="article" m="8" sx="w-full mx-auto prose lg:prose-xl">
+        {readmeAsHtml}
+        <Heading as="h2">Demo</Heading>
+        <Box x-state="false">
+          <Box mb="4">
+            <Box as="span" mr="1">
+              Value:
             </Box>
-            <Box mb="4">
-              <Alert>This is a demo alert</Alert>
-            </Box>
-            <Box>
-              <Button.Primary onclick="setState(v => !v)">
-                Demo button
-              </Button.Primary>
-            </Box>
+            <Box as="span" x="state" />
+          </Box>
+          <Box mb="4">
+            <Alert>This is a demo alert</Alert>
+          </Box>
+          <Box>
+            <Button.Primary onclick="setState(v => !v)">
+              Demo button
+            </Button.Primary>
           </Box>
         </Box>
       </Box>
