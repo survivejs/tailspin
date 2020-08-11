@@ -58,6 +58,7 @@
     "prettier": "^2.0.5",
     "redirect-webpack-plugin": "^0.1.1",
     "rimraf": "^3.0.2",
+    "sanitize-html": "^1.27.2",
     "sitemap-static": "^0.4.4",
     "source-map-loader": "^1.0.1",
     "tailwindcss": "^1.6.2",

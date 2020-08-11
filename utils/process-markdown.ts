@@ -1,7 +1,7 @@
 import marked from "marked";
 import hljs from "highlight.js";
+import sanitizeHtml from "sanitize-html";
 
-// TODO: Use a good HTML sanitizer here if you have user input
 marked.setOptions({
   renderer: new marked.Renderer(),
   highlight: function (code, language) {
@@ -17,4 +17,8 @@ marked.setOptions({
   xhtml: false,
 });
 
-export default marked;
+function processMarkdown(input) {
+  return sanitizeHtml(marked(input));
+}
+
+export default processMarkdown;
