@@ -5,18 +5,19 @@
   "description": "Opinionated starter for Tailwind/webpack projects",
   "main": "index.js",
   "scripts": {
-    "prebuild": "npm run generate-tailwind-json",
-    "build": "rimraf public && NODE_ENV=production webpack --env production",
+    "prebuild": "npm run generate-meta",
+    "build": "npm run clean && NODE_ENV=production webpack --env production",
     "postbuild": "npm run purge-css",
     "purge-css": "NODE_ENV=purge postcss public/_shared.css --verbose --replace",
-    "prestart": "npm run generate-tailwind-json",
+    "prestart": "npm run clean && npm run generate-meta",
     "start": "webpack --env development",
-    "sitemap": "TODO",
+    "clean": "rimraf public",
+    "generate-sitemap": "TODO",
     "check-links": "TODO",
     "check-types": "tsc --noEmit",
     "stats": "npm run build -- --json > stats.json",
     "analyze-stats": "webpack-bundle-analyzer stats.json",
-    "generate-tailwind-json": "node ./utils/generate-tailwind-json.js"
+    "generate-meta": "node ./utils/generate-meta.js"
   },
   "keywords": [
     "tailwind",
