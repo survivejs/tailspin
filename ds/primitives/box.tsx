@@ -58,7 +58,7 @@ function attachAttributes(props): elements.Attributes {
   const ret: { [key: string]: string } = {};
 
   Object.entries(props).forEach(([k, v]) => {
-    if (k === "sx") {
+    if (k === "as" || k === "sx") {
       return;
     }
 
