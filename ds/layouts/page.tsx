@@ -1,6 +1,7 @@
 import * as elements from "typed-html";
 import Navigation from "../patterns/navigation";
 import Box from "../primitives/box";
+import Flex from "../primitives/flex";
 
 // TODO: Add types
 const Page = ({ head, body, cssTags, jsTags, htmlAttributes, url }) => (
@@ -11,7 +12,7 @@ const Page = ({ head, body, cssTags, jsTags, htmlAttributes, url }) => (
       {cssTags}
     </head>
     <body>
-      <header>
+      <Box as="header" bg="primary" color="white">
         <Navigation>
           <Box sx="text-sm lg:flex-grow">
             <Navigation.Item href="/" isSelected={url === "/"}>
@@ -32,11 +33,18 @@ const Page = ({ head, body, cssTags, jsTags, htmlAttributes, url }) => (
             </Navigation.Item>
           </Box>
         </Navigation>
-      </header>
-      <main class="m-4">{body}</main>
-      <footer class="flex items-center justify-between flex-wrap bg-teal-500 p-6 text-white">
+      </Box>
+      <Box as="main" m="4">
+        {body}
+      </Box>
+      <Flex
+        p="6"
+        color="white"
+        bg="primary"
+        sx="items-center justify-between flex-wrap"
+      >
         footer
-      </footer>
+      </Flex>
     </body>
     {jsTags}
   </html>

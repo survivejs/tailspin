@@ -8,11 +8,10 @@ const Navigation = ({}, children: string[]) => (
   <Flex
     as="nav"
     p="6"
-    bg="teal-500"
     sx="items-center justify-between flex-wrap"
     x-state="false"
   >
-    <Flex mr="6" color="white" sx="items-center flex-shrink-0">
+    <Flex mr="6" sx="items-center flex-shrink-0">
       <Box as="span" sx="font-semibold text-xl tracking-tight">
         tailwind-webpack-starter
       </Box>
