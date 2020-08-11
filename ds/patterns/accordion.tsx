@@ -2,7 +2,6 @@ import * as elements from "typed-html";
 import Box from "../primitives/box";
 import Flex from "../primitives/flex";
 
-// https://tailwindcss.com/components/alerts
 const Accordion = ({ title }: { title: string }, children: string[]) => (
   <Box mb="2" x-state="false">
     <Flex

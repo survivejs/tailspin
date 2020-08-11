@@ -34,7 +34,7 @@
     "@types/highlight.js": "^9.12.4",
     "@types/mini-css-extract-plugin": "^0.9.1",
     "@types/rimraf": "^3.0.0",
-    "@types/terser-webpack-plugin": "^4.0.0",
+    "@types/terser-webpack-plugin": "^4.1.0",
     "@types/webpack": "^4.41.21",
     "@types/webpack-bundle-analyzer": "^3.8.0",
     "@types/webpack-dev-server": "^3.11.0",
@@ -47,9 +47,9 @@
     "decache": "^4.6.0",
     "glob": "^7.1.6",
     "husky": "^4.2.5",
-    "hyperlink": "^4.5.0",
+    "hyperlink": "^4.5.1",
     "lint-staged": "^10.2.11",
-    "mini-css-extract-plugin": "^0.9.0",
+    "mini-css-extract-plugin": "^0.10.0",
     "mini-html-webpack-plugin": "^3.0.7",
     "object.omit": "^3.0.0",
     "postcss": "^7.0.32",
@@ -64,7 +64,7 @@
     "source-map-loader": "^1.0.1",
     "tailwindcss": "^1.6.2",
     "tap-spot": "^1.1.1",
-    "terser-webpack-plugin": "^4.0.0",
+    "terser-webpack-plugin": "^4.1.0",
     "ts-loader": "^8.0.2",
     "ts-node": "^8.10.2",
     "typed-html": "^2.0.0",
@@ -93,6 +93,6 @@
     "highlight.js": "^10.1.2",
     "marked": "^1.1.1",
     "polished": "^3.6.5",
-    "sidewind": "^2.1.1"
+    "sidewind": "^2.1.2"
   }
 }
