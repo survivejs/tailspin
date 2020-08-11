@@ -113,52 +113,15 @@ function generateBlogPages(paths) {
 
   return {
     plugins: [
-      generateBlogIndex({
+      generatePage({
+        pagePath: `${urlPrefix}index`,
         layout: "./ds/layouts/blog-index",
-        urlPrefix,
-        pages,
+        pageName: urlPrefix,
+        url: urlPrefix,
+        attributes: { pages },
       }),
     ].concat(pages.map(generateBlogPage)),
   };
-}
-
-function generateBlogIndex({ layout, urlPrefix, pages }): webpack.Plugin {
-  return new MiniHtmlWebpackPlugin({
-    filename: `${urlPrefix}index.html`,
-    publicPath: "/",
-    chunks: ["_shared"],
-    context: {
-      htmlAttributes: { lang: "en" },
-      cssAttributes: {},
-      jsAttributes: { defer: "defer" },
-    },
-    template: ({
-      cssAttributes,
-      jsAttributes,
-      htmlAttributes,
-      css,
-      js,
-      publicPath,
-    }) => {
-      decache(layout);
-
-      return `<!DOCTYPE html>\n${require(layout).default({
-        url: urlPrefix,
-        htmlAttributes,
-        cssTags: generateCSSReferences({
-          files: css,
-          attributes: cssAttributes,
-          publicPath,
-        }),
-        jsTags: generateJSReferences({
-          files: js,
-          attributes: jsAttributes || {},
-          publicPath,
-        }),
-        pages,
-      })}`;
-    },
-  });
 }
 
 function generateBlogPage({
@@ -209,18 +172,33 @@ function generateBlogPage({
 
 function generatePages(paths) {
   return {
-    plugins: paths.map(generatePage),
+    plugins: paths.map((pagePath) => {
+      const pageName = path.relative(PATHS.PAGES, pagePath).split(".")[0];
+      const chunkName = `${pageName.split("index")[0]}_page`;
+
+      return generatePage({
+        pagePath,
+        layout: pagePath,
+        pageName,
+        chunkName,
+        url: resolveUrl(pageName),
+      });
+    }),
   };
 }
 
-function generatePage(pagePath): webpack.Plugin {
-  const pageName = path.relative(PATHS.PAGES, pagePath).split(".")[0];
-  const chunkName = `${pageName.split("index")[0]}_page`;
-
+function generatePage({
+  pagePath,
+  layout,
+  pageName,
+  chunkName = null,
+  url,
+  attributes = {},
+}): webpack.Plugin {
   return new MiniHtmlWebpackPlugin({
     filename: `${pageName}.html`,
     publicPath: "/",
-    chunks: ["_shared", chunkName],
+    chunks: ["_shared"].concat(chunkName || []),
     context: {
       htmlAttributes: { lang: "en" },
       cssAttributes: {},
@@ -236,8 +214,8 @@ function generatePage(pagePath): webpack.Plugin {
     }) => {
       decache(pagePath);
 
-      return `<!DOCTYPE html>\n${require(pagePath).default({
-        url: resolveUrl(pageName),
+      return `<!DOCTYPE html>\n${require(layout).default({
+        url,
         htmlAttributes,
         cssTags: generateCSSReferences({
           files: css,
@@ -249,6 +227,7 @@ function generatePage(pagePath): webpack.Plugin {
           attributes: jsAttributes || {},
           publicPath,
         }),
+        ...attributes,
       })}`;
     },
   });
