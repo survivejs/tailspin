@@ -120,54 +120,18 @@ function generateBlogPages(paths) {
         url: urlPrefix,
         attributes: { pages },
       }),
-    ].concat(pages.map(generateBlogPage)),
+    ].concat(
+      pages.map(({ slug, urlPrefix, layout, ...content }) =>
+        generatePage({
+          pagePath: layout,
+          layout,
+          pageName: `${urlPrefix}${slug}/index`,
+          url: `${urlPrefix}${slug}`,
+          attributes: { content },
+        })
+      )
+    ),
   };
-}
-
-function generateBlogPage({
-  slug,
-  urlPrefix,
-  layout,
-  ...content
-}): webpack.Plugin {
-  const url = `${urlPrefix}${slug}`;
-
-  return new MiniHtmlWebpackPlugin({
-    filename: `${url}/index.html`,
-    publicPath: "/",
-    chunks: ["_shared"],
-    context: {
-      htmlAttributes: { lang: "en" },
-      cssAttributes: {},
-      jsAttributes: { defer: "defer" },
-    },
-    template: ({
-      cssAttributes,
-      jsAttributes,
-      htmlAttributes,
-      css,
-      js,
-      publicPath,
-    }) => {
-      decache(layout);
-
-      return `<!DOCTYPE html>\n${require(layout).default({
-        url,
-        htmlAttributes,
-        cssTags: generateCSSReferences({
-          files: css,
-          attributes: cssAttributes,
-          publicPath,
-        }),
-        jsTags: generateJSReferences({
-          files: js,
-          attributes: jsAttributes || {},
-          publicPath,
-        }),
-        content,
-      })}`;
-    },
-  });
 }
 
 function generatePages(paths) {
