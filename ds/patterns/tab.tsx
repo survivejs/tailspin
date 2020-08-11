@@ -27,7 +27,7 @@ const TabHeaderItem = ({ tabId }: { tabId: string }, children: string[]) => (
   </Box>
 );
 const TabBody = ({}, children: string[]) => (
-  <Box m={2}>{children.join("")}</Box>
+  <Box m="2">{children.join("")}</Box>
 );
 const TabBodyItem = ({ tabId }: { tabId: string }, children: string[]) => (
   <Box x-class={`state === '${tabId}' ? '' : 'hidden'`}>
