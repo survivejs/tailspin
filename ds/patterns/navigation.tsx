@@ -1,7 +1,7 @@
 import * as elements from "typed-html";
 import Flex from "../primitives/flex";
 import Box from "../primitives/box";
-import Link, { LinkProps } from "../primitives/link";
+import Link, { ExternalLinkProps } from "../primitives/link";
 
 // https://tailwindcss.com/components/navigation
 const Navigation = ({}, children: string[]) => (
@@ -63,19 +63,21 @@ Navigation.Item = NavigationItem;
 
 const displayName = "Navigation";
 const Example = () => (
-  <Navigation>
-    <Box sx="text-sm lg:flex-grow">
-      <Navigation.Item href="/">Documentation</Navigation.Item>
-      <Navigation.Item href="/design-system/" isSelected="true">
-        Design system
-      </Navigation.Item>
-    </Box>
-    <Box>
-      <Navigation.Item href="https://github.com/survivejs/tailwind-webpack-starter">
-        Star at GitHub
-      </Navigation.Item>
-    </Box>
-  </Navigation>
+  <Box bg="primary" color="white">
+    <Navigation>
+      <Box sx="text-sm lg:flex-grow">
+        <Navigation.Item href="/">Documentation</Navigation.Item>
+        <Navigation.Item href="/design-system/" isSelected="true">
+          Design system
+        </Navigation.Item>
+      </Box>
+      <Box>
+        <Navigation.Item href="https://github.com/survivejs/tailwind-webpack-starter">
+          Star at GitHub
+        </Navigation.Item>
+      </Box>
+    </Navigation>
+  </Box>
 );
 
 export { Navigation as default, displayName, Example };
