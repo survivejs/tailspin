@@ -6,7 +6,7 @@ import Alert from "../ds/patterns/alert";
 import Heading from "../ds/primitives/heading";
 import Box from "../ds/primitives/box";
 import Button from "../ds/primitives/button";
-import processMarkdown from "./_utils/process-markdown";
+import processMarkdown from "../utils/process-markdown";
 
 const readmePath = path.join(__dirname, "..", "README.md");
 const readme = fs.readFileSync(readmePath, { encoding: "utf-8" });
