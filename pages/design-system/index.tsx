@@ -6,7 +6,7 @@ import * as prettier from "prettier";
 import { tsquery } from "@phenomnomnominal/tsquery";
 import readableColor from "polished/lib/color/readableColor";
 import glob from "glob";
-import Page from "../../ds/layouts/page";
+import PageLayout from "../../ds/layouts/page";
 import CodeEditor from "../../ds/patterns/code-editor";
 import Table from "../../ds/patterns/table";
 import Tab from "../../ds/patterns/tab";
@@ -21,7 +21,7 @@ const colors = theme.colors;
 const spacingScale = Object.keys(theme.spacing);
 
 const DesignSystemPage = (props) => (
-  <Page
+  <PageLayout
     {...props}
     head={[
       <title>tailwind-webpack-starter - Design System</title>,

@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import * as elements from "typed-html";
-import Page from "../ds/layouts/page";
+import PageLayout from "../ds/layouts/page";
 import Alert from "../ds/patterns/alert";
 import Heading from "../ds/primitives/heading";
 import Box from "../ds/primitives/box";
@@ -13,7 +13,7 @@ const readme = fs.readFileSync(readmePath, { encoding: "utf-8" });
 const readmeAsHtml = processMarkdown(readme);
 
 const IndexPage = (props) => (
-  <Page
+  <PageLayout
     {...props}
     head={[
       <title>tailwind-webpack-starter</title>,

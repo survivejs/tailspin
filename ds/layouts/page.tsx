@@ -4,7 +4,7 @@ import Box from "../primitives/box";
 import Flex from "../primitives/flex";
 
 // TODO: Add types
-const Page = ({ head, body, cssTags, jsTags, htmlAttributes, url }) => (
+const PageLayout = ({ head, body, cssTags, jsTags, htmlAttributes, url }) => (
   <html {...htmlAttributes}>
     <head>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -51,9 +51,9 @@ const Page = ({ head, body, cssTags, jsTags, htmlAttributes, url }) => (
   </html>
 );
 
-export const displayName = "Page";
+export const displayName = "PageLayout";
 export const Example = () => (
-  <Page
+  <PageLayout
     head=""
     body="Hello from body"
     cssTags=""
@@ -63,4 +63,4 @@ export const Example = () => (
   />
 );
 
-export default Page;
+export default PageLayout;
