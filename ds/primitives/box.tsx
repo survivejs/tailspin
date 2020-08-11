@@ -1,5 +1,5 @@
 import * as elements from "typed-html";
-import { constructTailwindClasses } from "./_utils";
+import { constructTailwindClasses, tailwindKeys } from "./_utils";
 import config from "../../tailwind.json";
 
 type ColorKeys = keyof typeof config.expandedColors;
@@ -58,7 +58,11 @@ function attachAttributes(props): elements.Attributes {
   const ret: { [key: string]: string } = {};
 
   Object.entries(props).forEach(([k, v]) => {
-    if (k.split("-").length) {
+    if (k === "sx") {
+      return;
+    }
+
+    if (k.split("-").length > 1 || !tailwindKeys.includes(k)) {
       ret[k] = v as string;
     }
   });
@@ -69,5 +73,5 @@ function attachAttributes(props): elements.Attributes {
     ret["class"] = klass;
   }
 
-  return { ...props, ...ret };
+  return ret;
 }
