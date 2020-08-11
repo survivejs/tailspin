@@ -285,15 +285,23 @@ const Collection = ({ items }) =>
         <Tab.Container selectedTab="example">
           <Tab.Header>
             <Tab.HeaderItem tabId="example">Example</Tab.HeaderItem>
-            <Tab.HeaderItem tabId="props">Props</Tab.HeaderItem>
+            {props?.length > 0 ? (
+              <Tab.HeaderItem tabId="props">Props</Tab.HeaderItem>
+            ) : (
+              ""
+            )}
           </Tab.Header>
           <Tab.Body>
             <Tab.BodyItem tabId="example">
               <CodeEditor source={exampleSource} />
             </Tab.BodyItem>
-            <Tab.BodyItem tabId="props">
-              <Types props={props} />
-            </Tab.BodyItem>
+            {props?.length > 0 ? (
+              <Tab.BodyItem tabId="props">
+                <Types props={props} />
+              </Tab.BodyItem>
+            ) : (
+              ""
+            )}
           </Tab.Body>
         </Tab.Container>
       </Box>
