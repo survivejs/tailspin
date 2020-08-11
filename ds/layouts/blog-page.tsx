@@ -6,7 +6,13 @@ import Flex from "../primitives/flex";
 import Heading from "../primitives/heading";
 
 // TODO: Add types
-const BlogPageLayout = ({ cssTags, jsTags, htmlAttributes, url, content }) => (
+const BlogPageLayout = ({
+  cssTags,
+  jsTags,
+  htmlAttributes,
+  url,
+  attributes,
+}) => (
   <PageLayout
     cssTags={cssTags}
     jsTags={jsTags}
@@ -21,24 +27,22 @@ const BlogPageLayout = ({ cssTags, jsTags, htmlAttributes, url, content }) => (
     ]}
     body={
       <Box as="article" m="8" sx="w-full mx-auto prose lg:prose-xl">
-        <Heading as="h1">{content?.title}</Heading>
+        <Heading as="h1">{attributes.title}</Heading>
         <Box sx="space-y-8">
           <Flex direction="row">
-            {content?.categories
+            {attributes.categories
               .map((category) => <Tag>{category}</Tag>)
               .join(", ")}
           </Flex>
-          <Box>{content?.article}</Box>
+          <Box>{attributes.body}</Box>
           <Flex direction="row" sx="justify-between text-sm">
-            <Box>{content?.author}</Box>
+            <Box>{attributes.author}</Box>
             <Box>
-              {content?.date
-                ? new Intl.DateTimeFormat("en", {
-                    year: "numeric",
-                    month: "short",
-                    day: "2-digit",
-                  }).format(new Date(content.date))
-                : ""}
+              {new Intl.DateTimeFormat("en", {
+                year: "numeric",
+                month: "short",
+                day: "2-digit",
+              }).format(new Date(attributes.date))}
             </Box>
           </Flex>
         </Box>

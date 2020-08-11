@@ -1,3 +1,4 @@
+import fs from "fs";
 import path from "path";
 import webpack from "webpack";
 import WebpackWatchedGlobEntries from "webpack-watched-glob-entries-plugin";
@@ -15,6 +16,7 @@ import { AddDependencyPlugin } from "webpack-add-dependency-plugin";
 import { merge } from "webpack-merge";
 import glob from "glob";
 import decache from "decache";
+import { processMarkdownWithFrontmatter } from "./utils/process-markdown";
 
 const PORT = 8080;
 const ROOT = __dirname;
@@ -28,6 +30,10 @@ const PATHS = {
 const ALL_FILES = glob.sync(path.join(PATHS.PAGES, "**", "*.tsx"));
 const ALL_PAGES = glob.sync(path.join(PATHS.PAGES, "**", "index.tsx"));
 const BLOG_PAGES = glob.sync(path.join(PATHS.BLOG, "**", "*.md"));
+
+const blogContent = BLOG_PAGES.map((p) =>
+  processMarkdownWithFrontmatter(fs.readFileSync(p, { encoding: "utf-8" }))
+);
 
 const commonConfig: webpack.Configuration = merge(
   {
@@ -71,7 +77,7 @@ const commonConfig: webpack.Configuration = merge(
     ],
     stats: "errors-only",
   },
-  generateBlogPages(BLOG_PAGES),
+  generateBlogPages("/blog/", "./ds/layouts/blog-page", blogContent),
   generatePages(ALL_PAGES),
   generateDependencies(ALL_FILES)
 );
@@ -80,35 +86,11 @@ const commonConfig: webpack.Configuration = merge(
 // It would have to generate a blog index + page per each
 // -> MiniHtmlWebpackPlugin for each of these
 // This will have to be async (push earlier in the process).
-function generateBlogPages(paths) {
-  console.log("generate blog pages", paths);
-  // TODO: Get this from GraphQL
-  // TODO: Add images
-  const urlPrefix = "/blog/";
-  const pages = [
-    {
-      title: "Demo post 1",
-      description: "demo description 1",
-      date: new Date().toString(),
-      categories: ["demo"],
-      slug: "demo-post-1",
-      author: "Juho Vepsäläinen",
-      article: "Demo post 1 content goes here",
-    },
-    {
-      title: "Demo post 2",
-      description: "demo description 2",
-      date: new Date().toString(),
-      categories: ["demo"],
-      slug: "demo-post-2",
-      author: "Juho Vepsäläinen",
-      article: "Demo post 2 content goes here",
-    },
-  ].map((page) => ({
+function generateBlogPages(urlPrefix, layout, pages) {
+  pages = pages.map((page) => ({
     ...page,
-    slug: `${page.slug}/`,
     urlPrefix,
-    layout: "./ds/layouts/blog-page",
+    layout,
   }));
 
   return {
@@ -121,13 +103,13 @@ function generateBlogPages(paths) {
         attributes: { pages },
       }),
     ].concat(
-      pages.map(({ slug, urlPrefix, layout, ...content }) =>
+      pages.map(({ slug, urlPrefix, layout, ...attributes }) =>
         generatePage({
           pagePath: layout,
           layout,
           pageName: `${urlPrefix}${slug}/index`,
           url: `${urlPrefix}${slug}`,
-          attributes: { content },
+          attributes,
         })
       )
     ),
@@ -191,7 +173,7 @@ function generatePage({
           attributes: jsAttributes || {},
           publicPath,
         }),
-        ...attributes,
+        attributes,
       })}`;
     },
   });
