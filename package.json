@@ -51,6 +51,7 @@
     "copy-webpack-plugin": "^6.0.3",
     "css-loader": "^4.2.1",
     "decache": "^4.6.0",
+    "escodegen": "^2.0.0",
     "front-matter": "^4.0.2",
     "glob": "^7.1.6",
     "husky": "^4.2.5",

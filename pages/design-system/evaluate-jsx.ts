@@ -1,5 +1,6 @@
 import { Parser } from "acorn";
 import jsx from "acorn-jsx";
+import { generate } from "escodegen";
 
 const JsxParser = Parser.extend(jsx());
 
@@ -47,7 +48,13 @@ function attributesToObject(attributes: acorn.Node[]) {
 
   attributes.forEach((attribute) => {
     // @ts-ignore
-    ret[attribute?.name?.name] = attribute?.value?.value;
+    if (attribute?.value?.expression) {
+      // @ts-ignore
+      ret[attribute?.name?.name] = eval(generate(attribute.value.expression));
+    } else {
+      // @ts-ignore
+      ret[attribute?.name?.name] = attribute?.value?.value;
+    }
   });
 
   return ret;
