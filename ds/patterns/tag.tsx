@@ -20,5 +20,6 @@ export const Example = () => (
     <Tag>Vue</Tag>
   </Flex>
 );
+export const showCodeEditor = true;
 
 export default Tag;

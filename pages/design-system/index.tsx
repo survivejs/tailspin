@@ -278,35 +278,58 @@ function toSource({ path, source, node }) {
 
 const Collection = ({ items }) =>
   items
-    .map(({ displayName, description, exampleSource, props }) => (
-      <Box sx="space-y-4">
-        <Heading.withAnchor as="h3">{displayName}</Heading.withAnchor>
-        <Box as="p">{description ? description : ""}</Box>
-        <Tab.Container selectedTab="example">
-          <Tab.Header>
-            <Tab.HeaderItem tabId="example">Example</Tab.HeaderItem>
-            {props?.length > 0 ? (
-              <Tab.HeaderItem tabId="props">Props</Tab.HeaderItem>
-            ) : (
-              ""
-            )}
-          </Tab.Header>
-          <Tab.Body>
-            <Tab.BodyItem tabId="example">
-              <CodeEditor source={exampleSource} />
-            </Tab.BodyItem>
-            {props?.length > 0 ? (
-              <Tab.BodyItem tabId="props">
-                <Types props={props} />
+    .map(
+      ({
+        displayName,
+        description,
+        exampleSource,
+        componentSource,
+        props,
+        showCodeEditor,
+      }) => (
+        <Box sx="space-y-4">
+          <Heading.withAnchor as="h3">{displayName}</Heading.withAnchor>
+          <Box as="p">{description ? description : ""}</Box>
+          <Tab.Container selectedTab="example">
+            <Tab.Header>
+              <Tab.HeaderItem tabId="example">Example</Tab.HeaderItem>
+              {props?.length > 0 ? (
+                <Tab.HeaderItem tabId="props">Props</Tab.HeaderItem>
+              ) : (
+                ""
+              )}
+              {showCodeEditor ? (
+                <Tab.HeaderItem tabId="code-editor">Code editor</Tab.HeaderItem>
+              ) : (
+                ""
+              )}
+            </Tab.Header>
+            <Tab.Body>
+              <Tab.BodyItem tabId="example">
+                <CodeEditor source={exampleSource} />
               </Tab.BodyItem>
-            ) : (
-              ""
-            )}
-          </Tab.Body>
-        </Tab.Container>
-      </Box>
-    ))
+              {props?.length > 0 ? (
+                <Tab.BodyItem tabId="props">
+                  <Types props={props} />
+                </Tab.BodyItem>
+              ) : (
+                ""
+              )}
+              {showCodeEditor ? (
+                <Tab.BodyItem tabId="code-editor">
+                  <SourceEditor source={componentSource} />
+                </Tab.BodyItem>
+              ) : (
+                ""
+              )}
+            </Tab.Body>
+          </Tab.Container>
+        </Box>
+      )
+    )
     .join("");
+
+const SourceEditor = ({ source }) => "source editor goes here";
 
 const SpacingScale = ({ items }) =>
   items
