@@ -39,6 +39,6 @@ const CodeEditor = ({ source }: { source?: string }) => {
 };
 
 export const displayName = "CodeEditor";
-export const Example = () => <CodeEditor source="Type source here" />;
+export const Example = () => <CodeEditor source="'Type source here'" />;
 
 export default CodeEditor;
