@@ -87,18 +87,19 @@ function getComponent(componentDirectory: string) {
   return (path: string) => {
     const source = _fs.readFileSync(path, { encoding: "utf-8" });
     const component = require(path);
+    const { displayName } = component;
 
     return {
       ...component,
       path,
       source,
       componentSource: component.showCodeEditor
-        ? parseComponentSource({ path, source })
+        ? parseSource({ name: displayName, path, source })
         : "",
-      exampleSource: parseExample({ path, source }),
+      exampleSource: parseSource({ name: "Example", path, source }),
       props: parseProps({
         componentDirectory,
-        displayName: component.displayName,
+        displayName,
         path,
         source,
       }),
@@ -106,14 +107,10 @@ function getComponent(componentDirectory: string) {
   };
 }
 
-function parseComponentSource({ path, source }) {
-  return "component source goes here";
-}
-
-function parseExample({ path, source }) {
+function parseSource({ name, path, source }) {
   const exampleIdentifierNode = queryNode({
     source,
-    query: `Identifier[name="Example"]`,
+    query: `Identifier[name="${name}"]`,
     path,
   });
 
