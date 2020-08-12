@@ -41,7 +41,9 @@ export const Example = () => (
     >
       Set to foobar
     </Button>
-    <Button.Primary onclick="setState('foo')">Set to primary</Button.Primary>
+    <Button.Primary onclick="setState('primary')">
+      Set to primary
+    </Button.Primary>
     <Button.Secondary onclick="setState('secondary')">
       Set to secondary
     </Button.Secondary>
