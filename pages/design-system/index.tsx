@@ -92,6 +92,9 @@ function getComponent(componentDirectory: string) {
       ...component,
       path,
       source,
+      componentSource: component.showCodeEditor
+        ? parseComponentSource({ path, source })
+        : "",
       exampleSource: parseExample({ path, source }),
       props: parseProps({
         componentDirectory,
@@ -101,6 +104,10 @@ function getComponent(componentDirectory: string) {
       }),
     };
   };
+}
+
+function parseComponentSource({ path, source }) {
+  return "component source goes here";
 }
 
 function parseExample({ path, source }) {
@@ -279,14 +286,7 @@ function toSource({ path, source, node }) {
 const Collection = ({ items }) =>
   items
     .map(
-      ({
-        displayName,
-        description,
-        exampleSource,
-        componentSource,
-        props,
-        showCodeEditor,
-      }) => (
+      ({ displayName, description, exampleSource, componentSource, props }) => (
         <Box sx="space-y-4">
           <Heading.withAnchor as="h3">{displayName}</Heading.withAnchor>
           <Box as="p">{description ? description : ""}</Box>
@@ -298,7 +298,7 @@ const Collection = ({ items }) =>
               ) : (
                 ""
               )}
-              {showCodeEditor ? (
+              {componentSource ? (
                 <Tab.HeaderItem tabId="code-editor">Code editor</Tab.HeaderItem>
               ) : (
                 ""
@@ -315,9 +315,9 @@ const Collection = ({ items }) =>
               ) : (
                 ""
               )}
-              {showCodeEditor ? (
+              {componentSource ? (
                 <Tab.BodyItem tabId="code-editor">
-                  <SourceEditor source={componentSource} />
+                  <CodeEditor source={componentSource} />
                 </Tab.BodyItem>
               ) : (
                 ""
@@ -328,8 +328,6 @@ const Collection = ({ items }) =>
       )
     )
     .join("");
-
-const SourceEditor = ({ source }) => "source editor goes here";
 
 const SpacingScale = ({ items }) =>
   items
