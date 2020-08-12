@@ -19,11 +19,8 @@ const BlogPageLayout = ({
     htmlAttributes={htmlAttributes}
     url={url}
     head={[
-      <title>tailwind-webpack-starter</title>,
-      <meta
-        name="description"
-        content="tailwind-webpack-starter combines webpack with Tailwind and provides a starting point for site projects"
-      ></meta>,
+      <title>tailwind-webpack-starter - {attributes.title}</title>,
+      <meta name="description" content={attributes.description}></meta>,
     ]}
     body={
       <Box as="article" m="8" sx="w-full mx-auto prose lg:prose-xl">
@@ -53,7 +50,20 @@ const BlogPageLayout = ({
 
 export const displayName = "BlogPageLayout";
 export const Example = () => (
-  <BlogPageLayout cssTags="" jsTags="" htmlAttributes="" url="/" content="" />
+  <BlogPageLayout
+    cssTags=""
+    jsTags=""
+    htmlAttributes=""
+    url="/"
+    attributes={{
+      title: "Demo post",
+      categories: [],
+      description: "This is a demo post",
+      body: "Demo post content goes here",
+      author: "John Doe",
+      date: "2020-08-12T13:19:52.922Z",
+    }}
+  />
 );
 
 export default BlogPageLayout;

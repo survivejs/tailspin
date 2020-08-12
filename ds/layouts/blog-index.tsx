@@ -53,7 +53,24 @@ const BlogIndexLayout = ({
 
 export const displayName = "BlogIndexLayout";
 export const Example = () => (
-  <BlogIndexLayout cssTags="" jsTags="" htmlAttributes="" url="/" pages="" />
+  <BlogIndexLayout
+    cssTags=""
+    jsTags=""
+    htmlAttributes=""
+    url="/"
+    attributes={{
+      pages: [
+        {
+          title: "Demo post",
+          categories: [],
+          description: "This is a demo post",
+          body: "Demo post content goes here",
+          author: "John Doe",
+          date: "2020-08-12T13:19:52.922Z",
+        },
+      ],
+    }}
+  />
 );
 
 export default BlogIndexLayout;
