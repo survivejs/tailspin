@@ -6,7 +6,7 @@ import Link from "../primitives/link";
 // https://tailwindcss.com/components/alerts
 const Tag = ({}, children: string[]) => (
   <Box px="1" color="white" bg="primary" sx="rounded-full text-sm">
-    {children}
+    {children.join("")}
   </Box>
 );
 
