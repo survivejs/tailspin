@@ -295,11 +295,6 @@ const Collection = ({ items }) =>
               ) : (
                 ""
               )}
-              {componentSource ? (
-                <Tab.HeaderItem tabId="code-editor">Code editor</Tab.HeaderItem>
-              ) : (
-                ""
-              )}
             </Tab.Header>
             <Tab.Body>
               <Tab.BodyItem tabId="example">
@@ -312,15 +307,16 @@ const Collection = ({ items }) =>
               ) : (
                 ""
               )}
-              {componentSource ? (
-                <Tab.BodyItem tabId="code-editor">
-                  <CodeEditor source={componentSource} />
-                </Tab.BodyItem>
-              ) : (
-                ""
-              )}
             </Tab.Body>
           </Tab.Container>
+          {componentSource ? (
+            <CodeEditor
+              source={componentSource}
+              onUpdate={`updateComponent('${displayName}', state.code)`}
+            />
+          ) : (
+            ""
+          )}
         </Box>
       )
     )

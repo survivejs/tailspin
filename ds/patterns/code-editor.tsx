@@ -1,7 +1,13 @@
 import * as elements from "typed-html";
 
 // TODO: Use Box instead of divs etc. Textarea might need a component of its own.
-const CodeEditor = ({ source }: { source?: string }) => {
+const CodeEditor = ({
+  source,
+  onUpdate,
+}: {
+  source?: string;
+  onUpdate?: string;
+}) => {
   if (!source) {
     return null;
   }
@@ -31,7 +37,7 @@ const CodeEditor = ({ source }: { source?: string }) => {
       </div>
       <div
         class="p-4 bg-gray-200 rounded-b-lg"
-        x="evaluateCode(state.code)"
+        x={onUpdate || "evaluateCode(state.code)"}
       ></div>
     </section>
   );

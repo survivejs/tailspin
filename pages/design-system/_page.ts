@@ -28,6 +28,13 @@ function loadComponents(context) {
 // @ts-ignore: TODO: Add this to global
 window.updateComponent = (name, code) => {
   if (components[name]) {
-    components[name] = () => evaluateCode(code);
+    components[name] = () => {
+      console.log("rendering patched version");
+
+      // TODO: How to let the component parent to know sibling should update?
+      // -> Likely the state for both needs to be managed at the parent.
+      // TODO: The problem is that this evaluated children as well
+      return evaluateCode(code);
+    };
   }
 };
