@@ -4,8 +4,10 @@ const components = loadComponents(
   require.context("../../ds", true, /^\.\/.*\.tsx$/)
 );
 
+const evaluateCode = (code) => evaluateJSX(code, components);
+
 // @ts-ignore: TODO: Add this to global
-window.evaluateCode = (code) => evaluateJSX(code, components);
+window.evaluateCode = evaluateCode;
 
 function loadComponents(context) {
   const ret = {};
@@ -22,3 +24,10 @@ function loadComponents(context) {
 
   return ret;
 }
+
+// @ts-ignore: TODO: Add this to global
+window.updateComponent = (name, code) => {
+  if (components[name]) {
+    components[name] = () => evaluateCode(code);
+  }
+};
