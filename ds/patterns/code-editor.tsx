@@ -1,4 +1,5 @@
 import * as elements from "typed-html";
+import Box from "../primitives/box";
 
 // TODO: Use Box instead of divs etc. Textarea might need a component of its own.
 const CodeEditor = ({ source }: { source?: string }) => {
@@ -38,6 +39,6 @@ const CodeEditor = ({ source }: { source?: string }) => {
 };
 
 export const displayName = "CodeEditor";
-export const Example = () => <CodeEditor source="" />;
+export const Example = () => <CodeEditor source="Type source here" />;
 
 export default CodeEditor;

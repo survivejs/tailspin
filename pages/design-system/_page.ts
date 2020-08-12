@@ -1,53 +1,11 @@
-import { Parser } from "acorn";
-import jsx from "acorn-jsx";
-
-const JsxParser = Parser.extend(jsx());
+import evaluateJSX from "./evaluate-jsx";
 
 const components = loadComponents(
   require.context("../../ds", true, /^\.\/.*\.tsx$/)
 );
 
 // @ts-ignore: TODO: Add this to global
-window.evaluateCode = (code) => {
-  // TODO: Write good test driven implementation for acorn based parser
-  // TODO: Convert each Node to a function and evaluate each expression
-  // If child is JSXAttribute, use the same logic
-  console.log("juho", JsxParser.parse(code));
-
-  const node = new DOMParser().parseFromString(code, "text/xml")
-    .firstElementChild;
-
-  return node && evaluateNode(node);
-};
-
-function evaluateNode(node: Element) {
-  const foundComponent = components[node.nodeName];
-
-  return foundComponent
-    ? foundComponent(
-        // @ts-ignore: Evaluated runtime
-        attributesToObject(node.attributes),
-        node.children.length
-          ? collectionToArray(node.children).map(evaluateNode)
-          : [node.innerHTML]
-      )
-    : node.innerHTML;
-}
-
-function collectionToArray(collection: HTMLCollection) {
-  // https://stackoverflow.com/questions/222841/most-efficient-way-to-convert-an-htmlcollection-to-an-array
-  return Array.prototype.slice.call(collection);
-}
-
-function attributesToObject(attributes: NamedNodeMap) {
-  const ret = {};
-
-  for (let i = 0; i < attributes.length; i++) {
-    ret[attributes[i].nodeName] = attributes[i].nodeValue;
-  }
-
-  return ret;
-}
+window.evaluateCode = (code) => evaluateJSX(code, components);
 
 function loadComponents(context) {
   const ret = {};
