@@ -26,10 +26,10 @@ const BlogPageLayout = ({
       <Box as="article" m="8" sx="w-full mx-auto prose lg:prose-xl">
         <Heading as="h1">{attributes.title}</Heading>
         <Box sx="space-y-8">
-          <Flex direction="row">
+          <Flex direction="row" sx="space-x-2">
             {attributes.categories
               .map((category) => <Tag>{category}</Tag>)
-              .join(", ")}
+              .join("")}
           </Flex>
           <Box>{attributes.body}</Box>
           <Flex direction="row" sx="justify-between text-sm">
@@ -57,7 +57,7 @@ export const Example = () => (
     url="/"
     attributes={{
       title: "Demo post",
-      categories: [],
+      categories: ["demo", "tech", "demo"],
       description: "This is a demo post",
       body: "Demo post content goes here",
       author: "John Doe",

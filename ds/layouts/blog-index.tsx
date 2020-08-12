@@ -37,7 +37,7 @@ const BlogIndexLayout = ({
                   <Link href={slug}>{title}</Link>
                 </Heading>
                 <Box>{description}</Box>
-                <Flex direction="row">
+                <Flex direction="row" sx="space-x-2">
                   {categories.map((category) => <Tag>{category}</Tag>).join("")}
                 </Flex>
               </Flex>
@@ -60,7 +60,7 @@ export const Example = () => (
       pages: [
         {
           title: "Demo post",
-          categories: [],
+          categories: ["demo", "testing"],
           description: "This is a demo post",
           body: "Demo post content goes here",
           author: "John Doe",
