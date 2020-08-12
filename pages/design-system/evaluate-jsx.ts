@@ -20,19 +20,39 @@ function evaluateJSXElement(JSXElement: acorn.Node, components: Components) {
   // @ts-ignore
   const firstJSXOpeningElement = JSXElement?.openingElement;
   const firstJSXElementAttributes = firstJSXOpeningElement?.attributes;
-  const firstJSXElementName = firstJSXOpeningElement?.name?.name;
+  const firstJSXElementName = resolveJSXElementName(firstJSXOpeningElement);
 
   if (firstJSXElementName) {
-    const foundComponent = components[firstJSXElementName];
+    const foundComponent = components[firstJSXElementName.name];
 
     if (foundComponent) {
-      return foundComponent(
+      // @ts-ignore
+      return (firstJSXElementName.property
+        ? // @ts-ignore
+          foundComponent[firstJSXElementName.property]
+        : foundComponent)(
         attributesToObject(firstJSXElementAttributes, components),
         // @ts-ignore
         childrenToString(JSXElement.children, components)
       );
     }
   }
+}
+
+function resolveJSXElementName(JSXElement: acorn.Node) {
+  // @ts-ignore
+  const name = JSXElement?.name;
+
+  if (!name) {
+    return;
+  }
+
+  return name.name
+    ? { name: name.name }
+    : {
+        name: name.object.name,
+        property: name.property.name,
+      };
 }
 
 function findFirst(type: string, nodes: acorn.Node[]) {

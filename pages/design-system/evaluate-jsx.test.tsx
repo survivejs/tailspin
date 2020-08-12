@@ -16,6 +16,18 @@ describe("JSX evaluator", () => {
     ).toBe("<div>test</div>");
   });
 
+  test("should evaluate components from components", () => {
+    const Show = ({}, children: string[]) => <div>parent: {children}</div>;
+    const Children = ({}, children: string[]) => <div>{children}</div>;
+    Show.Children = Children;
+
+    expect(
+      evaluateJSX("<Show.Children>test</Show.Children>", {
+        Show,
+      })
+    ).toBe("<div>test</div>");
+  });
+
   test("should evaluate nested components", () => {
     const ShowChildren = ({}, children: string[]) => <div>{children}</div>;
 
