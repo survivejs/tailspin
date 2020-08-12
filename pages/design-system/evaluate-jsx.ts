@@ -4,13 +4,21 @@ import { generate } from "escodegen";
 
 const JsxParser = Parser.extend(jsx());
 
-function evaluateJSX(
-  code: string,
-  components: { [key: string]: (any, children: string[]) => string }
-) {
-  // @ts-ignore: body property is missing from the root
-  const firstJSXElement = findFirst("JSXElement", JsxParser.parse(code)?.body);
-  const firstJSXOpeningElement = firstJSXElement?.openingElement;
+type Components = { [key: string]: (any, children: string[]) => string };
+
+function evaluateJSX(code: string, components: Components) {
+  return (
+    evaluateJSXElement(
+      // @ts-ignore: body property is missing from the root
+      findFirst("JSXElement", JsxParser.parse(code)?.body),
+      components
+    ) || code
+  );
+}
+
+function evaluateJSXElement(JSXElement: acorn.Node, components: Components) {
+  // @ts-ignore
+  const firstJSXOpeningElement = JSXElement?.openingElement;
   const firstJSXElementAttributes = firstJSXOpeningElement?.attributes;
   const firstJSXElementName = firstJSXOpeningElement?.name?.name;
 
@@ -20,12 +28,11 @@ function evaluateJSX(
     if (foundComponent) {
       return foundComponent(
         attributesToObject(firstJSXElementAttributes),
-        childrenToString(firstJSXElement.children)
+        // @ts-ignore
+        childrenToString(JSXElement.children, components)
       );
     }
   }
-
-  return code;
 }
 
 function findFirst(type: string, nodes: acorn.Node[]) {
@@ -61,8 +68,12 @@ function attributesToObject(attributes: acorn.Node[]) {
   return ret;
 }
 
-function childrenToString(children: acorn.Node[]) {
+function childrenToString(children: acorn.Node[], components: Components) {
   return children.map((child) => {
+    if (child.type === "JSXElement") {
+      return evaluateJSXElement(child, components);
+    }
+
     // @ts-ignore
     if (child.expression) {
       // @ts-ignore
