@@ -28,6 +28,16 @@ describe("JSX evaluator", () => {
     ).toBe("<div>test</div>");
   });
 
+  test("should evaluate children", () => {
+    const ShowChildren = ({}, children: string[]) => <div>{children}</div>;
+
+    expect(
+      evaluateJSX(`<ShowChildren>{1 + 1}</ShowChildren>`, {
+        ShowChildren,
+      })
+    ).toBe("<div>2</div>");
+  });
+
   test("should evaluate expression props", () => {
     const PassProps = ({ test }: { test: string }, children: string[]) => (
       <div>{test}</div>

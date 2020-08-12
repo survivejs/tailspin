@@ -18,9 +18,10 @@ function evaluateJSX(
     const foundComponent = components[firstJSXElementName];
 
     if (foundComponent) {
-      return foundComponent(attributesToObject(firstJSXElementAttributes), [
-        firstJSXElement.children[0]?.value,
-      ]);
+      return foundComponent(
+        attributesToObject(firstJSXElementAttributes),
+        childrenToString(firstJSXElement.children)
+      );
     }
   }
 
@@ -58,6 +59,19 @@ function attributesToObject(attributes: acorn.Node[]) {
   });
 
   return ret;
+}
+
+function childrenToString(children: acorn.Node[]) {
+  return children.map((child) => {
+    // @ts-ignore
+    if (child.expression) {
+      // @ts-ignore
+      return eval(generate(child.expression));
+    }
+
+    // @ts-ignore
+    return child.value;
+  });
 }
 
 export default evaluateJSX;
