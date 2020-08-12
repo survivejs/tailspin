@@ -38,9 +38,7 @@ const BlogIndexLayout = ({
                 </Heading>
                 <Box>{description}</Box>
                 <Flex direction="row">
-                  {categories
-                    .map((category) => <Tag>{category}</Tag>)
-                    .join(", ")}
+                  {categories.map((category) => <Tag>{category}</Tag>).join("")}
                 </Flex>
               </Flex>
             ))
