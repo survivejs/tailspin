@@ -67,6 +67,7 @@ export const Example = () => (
           body: "Demo post content goes here",
           author: "John Doe",
           date: "2020-08-12T13:19:52.922Z",
+          slug: "demo-post",
         },
       ],
     }}
