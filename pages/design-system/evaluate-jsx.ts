@@ -27,7 +27,7 @@ function evaluateJSXElement(JSXElement: acorn.Node, components: Components) {
 
     if (foundComponent) {
       return foundComponent(
-        attributesToObject(firstJSXElementAttributes),
+        attributesToObject(firstJSXElementAttributes, components),
         // @ts-ignore
         childrenToString(JSXElement.children, components)
       );
@@ -51,14 +51,24 @@ function findFirst(type: string, nodes: acorn.Node[]) {
   }
 }
 
-function attributesToObject(attributes: acorn.Node[]) {
+function attributesToObject(attributes: acorn.Node[], components: Components) {
   const ret = {};
 
   attributes.forEach((attribute) => {
     // @ts-ignore
     if (attribute?.value?.expression) {
       // @ts-ignore
-      ret[attribute?.name?.name] = eval(generate(attribute.value.expression));
+      const expression = attribute.value.expression;
+
+      if (expression.type === "JSXElement") {
+        // @ts-ignore
+        ret[attribute?.name?.name] = evaluateJSXElement(expression, components);
+
+        return;
+      }
+
+      // @ts-ignore
+      ret[attribute?.name?.name] = eval(generate(expression));
     } else {
       // @ts-ignore
       ret[attribute?.name?.name] = attribute?.value?.value;
