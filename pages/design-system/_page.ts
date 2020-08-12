@@ -1,9 +1,19 @@
+import { Parser } from "acorn";
+import jsx from "acorn-jsx";
+
+const JsxParser = Parser.extend(jsx());
+
 const components = loadComponents(
   require.context("../../ds", true, /^\.\/.*\.tsx$/)
 );
 
 // @ts-ignore: TODO: Add this to global
 window.evaluateCode = (code) => {
+  // TODO: Write good test driven implementation for acorn based parser
+  // TODO: Convert each Node to a function and evaluate each expression
+  // If child is JSXAttribute, use the same logic
+  console.log("juho", JsxParser.parse(code));
+
   const node = new DOMParser().parseFromString(code, "text/xml")
     .firstElementChild;
 
