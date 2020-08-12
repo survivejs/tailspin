@@ -18,7 +18,7 @@ function evaluateJSX(
 
     if (foundComponent) {
       return foundComponent(attributesToObject(firstJSXElementAttributes), [
-        "test",
+        firstJSXElement.children[0]?.value,
       ]);
     }
   }
