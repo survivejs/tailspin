@@ -81,6 +81,19 @@ describe("JSX evaluator", () => {
     ).toBe("<div>foobarbaz</div>");
   });
 
+  test("should evaluate arrays of objects within objects as component props", () => {
+    const PassProps = (
+      { attributes }: { attributes: { pages: { title: string }[] } },
+      children: string[]
+    ) => <div>{attributes.pages[0].title}</div>;
+
+    expect(
+      evaluateJSX(`<PassProps attributes={{ pages: [{ title: "Demo" }] }} />`, {
+        PassProps,
+      })
+    ).toBe("<div>Demo</div>");
+  });
+
   test("should evaluate numbers within objects as component props", () => {
     const PassProps = (
       { attributes }: { attributes: { number: number } },

@@ -120,7 +120,7 @@ function objectExpressionToObject(node: acorn.Node) {
 function valueToObject(node: acorn.Node) {
   if (node.type === "ArrayExpression") {
     // @ts-ignore
-    return node.elements.map(({ value }) => value);
+    return node.elements.map(valueToObject);
   }
 
   if (node.type === "ObjectExpression") {
