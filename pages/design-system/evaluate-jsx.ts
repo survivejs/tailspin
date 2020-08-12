@@ -87,8 +87,16 @@ function attributesToObject(attributes: acorn.Node[], components: Components) {
         return;
       }
 
+      if (expression.type === "ObjectExpression") {
+        // @ts-ignore
+        ret[attribute?.name?.name] = objectExpressionToObject(expression);
+
+        return;
+      }
+
       // @ts-ignore
       ret[attribute?.name?.name] = eval(generate(expression));
+      // @ts.ignore
     } else {
       // @ts-ignore
       ret[attribute?.name?.name] = attribute?.value?.value;
@@ -96,6 +104,37 @@ function attributesToObject(attributes: acorn.Node[], components: Components) {
   });
 
   return ret;
+}
+
+function objectExpressionToObject(node: acorn.Node) {
+  const ret = {};
+
+  // @ts-ignore
+  node.properties?.forEach((property) => {
+    ret[property.key.name] = valueToObject(property.value);
+  });
+
+  return ret;
+}
+
+function valueToObject(node: acorn.Node) {
+  if (node.type === "ArrayExpression") {
+    // @ts-ignore
+    return node.elements.map(({ value }) => value);
+  }
+
+  if (node.type === "ObjectExpression") {
+    return objectExpressionToObject(node);
+  }
+
+  if (node.type === "Literal") {
+    // @ts-ignore
+    return node.value;
+  }
+
+  throw new Error(
+    `valueToObject - Node type ${node.type} has not been implemented yet`
+  );
 }
 
 function childrenToString(children: acorn.Node[], components: Components) {

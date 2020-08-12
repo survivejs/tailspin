@@ -53,6 +53,73 @@ describe("JSX evaluator", () => {
     ).toBe("<div>test</div>");
   });
 
+  test("should evaluate arrays as component props", () => {
+    const PassProps = ({ pages }: { pages: string[] }, children: string[]) => (
+      <div>{pages.join("")}</div>
+    );
+
+    expect(
+      evaluateJSX(`<PassProps pages={['foo', 'bar', 'baz']} />`, {
+        PassProps,
+      })
+    ).toBe("<div>foobarbaz</div>");
+  });
+
+  test("should evaluate arrays within objects as component props", () => {
+    const PassProps = (
+      { attributes }: { attributes: { pages: string[] } },
+      children: string[]
+    ) => <div>{attributes.pages.join("")}</div>;
+
+    expect(
+      evaluateJSX(
+        `<PassProps attributes={{ pages: ['foo', 'bar', 'baz'] }} />`,
+        {
+          PassProps,
+        }
+      )
+    ).toBe("<div>foobarbaz</div>");
+  });
+
+  test("should evaluate numbers within objects as component props", () => {
+    const PassProps = (
+      { attributes }: { attributes: { number: number } },
+      children: string[]
+    ) => <div>{attributes.number}</div>;
+
+    expect(
+      evaluateJSX(`<PassProps attributes={{ number: 21 }} />`, {
+        PassProps,
+      })
+    ).toBe("<div>21</div>");
+  });
+
+  test("should evaluate strings within objects as component props", () => {
+    const PassProps = (
+      { attributes }: { attributes: { str: string } },
+      children: string[]
+    ) => <div>{attributes.str}</div>;
+
+    expect(
+      evaluateJSX(`<PassProps attributes={{ str: "foo" }} />`, {
+        PassProps,
+      })
+    ).toBe("<div>foo</div>");
+  });
+
+  test("should evaluate objects within objects as component props", () => {
+    const PassProps = (
+      { attributes }: { attributes: { page: { title: string } } },
+      children: string[]
+    ) => <div>{attributes.page.title}</div>;
+
+    expect(
+      evaluateJSX(`<PassProps attributes={{ page: { title: "Demo" } }} />`, {
+        PassProps,
+      })
+    ).toBe("<div>Demo</div>");
+  });
+
   test("should evaluate children", () => {
     const ShowChildren = ({}, children: string[]) => <div>{children}</div>;
 
