@@ -29,8 +29,7 @@ function loadComponents(context) {
 window.updateComponent = (name, code) => {
   if (components[name]) {
     components[name] = (props, children) => {
-      console.log("rendering patched version", props, children);
-
+      // TODO: Handle props
       // TODO: How to let the component parent to know sibling should update?
       // -> Likely the state for both needs to be managed at the parent.
       return evaluateCode(code.replace(/children/g, JSON.stringify(children)));
