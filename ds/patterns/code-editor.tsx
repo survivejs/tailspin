@@ -7,8 +7,25 @@ const CodeEditor = ({
   onUpdate,
 }: {
   source?: string;
-  onUpdate?: string;
-}) => {
+  onUpdate: string;
+}) => (
+  <Container source={source}>
+    <Box
+      p="4"
+      bg="gray-800"
+      color="white"
+      sx="rounded-t-lg overflow-x-auto overflow-y-hidden"
+    >
+      <Box color="gray-600" sx="float-right select-none text-xs">
+        Editor
+      </Box>
+      <Editor />
+    </Box>
+    <Box p="4" bg="gray-200" sx="rounded-b-lg" x={onUpdate}></Box>
+  </Container>
+);
+
+const Container = ({ source }: { source?: string }, children: string[]) => {
   if (!source) {
     return null;
   }
@@ -16,27 +33,12 @@ const CodeEditor = ({
   const decodedExample = Buffer.from(source).toString("base64");
 
   return (
-    <section x-state={`{ code: atob('${decodedExample}') }`}>
-      <Box
-        p="4"
-        bg="gray-800"
-        color="white"
-        sx="rounded-t-lg overflow-x-auto overflow-y-hidden"
-      >
-        <Box color="gray-600" sx="float-right select-none text-xs">
-          Editor
-        </Box>
-        <Editor />
-      </Box>
-      <Box
-        p="4"
-        bg="gray-200"
-        sx="rounded-b-lg"
-        x={onUpdate || "evaluateCode(state.code)"}
-      ></Box>
-    </section>
+    <Box as="section" x-state={`{ code: atob('${decodedExample}') }`}>
+      {children.join("")}
+    </Box>
   );
 };
+CodeEditor.Container = Container;
 
 // TODO: Textarea
 const Editor = () => (
@@ -57,8 +59,11 @@ const Editor = () => (
     ></textarea>
   </Box>
 );
+CodeEditor.Editor = Editor;
 
 export const displayName = "CodeEditor";
-export const Example = () => <CodeEditor source="'Type source here'" />;
+export const Example = () => (
+  <CodeEditor source="'Type source here'" onUpdate="evaluateCode(state.code)" />
+);
 
 export default CodeEditor;

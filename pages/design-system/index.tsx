@@ -298,7 +298,10 @@ const Collection = ({ items }) =>
             </Tab.Header>
             <Tab.Body>
               <Tab.BodyItem tabId="example">
-                <CodeEditor source={exampleSource} />
+                <CodeEditor
+                  source={exampleSource}
+                  onUpdate="evaluateCode(state.code)"
+                />
               </Tab.BodyItem>
               {props?.length > 0 ? (
                 <Tab.BodyItem tabId="props">
