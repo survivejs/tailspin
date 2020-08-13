@@ -285,45 +285,80 @@ const Collection = ({ items }) =>
     .map(
       ({ displayName, description, exampleSource, componentSource, props }) => (
         <Box sx="space-y-4">
-          <Heading.withAnchor as="h3">{displayName}</Heading.withAnchor>
-          <Box as="p">{description ? description : ""}</Box>
-          <Tab.Container selectedTab="example">
-            <Tab.Header>
-              <Tab.HeaderItem tabId="example">Example</Tab.HeaderItem>
-              {props?.length > 0 ? (
-                <Tab.HeaderItem tabId="props">Props</Tab.HeaderItem>
-              ) : (
-                ""
-              )}
-            </Tab.Header>
-            <Tab.Body>
-              <Tab.BodyItem tabId="example">
-                <CodeEditor
-                  source={exampleSource}
-                  onUpdate="evaluateCode(state.code)"
-                />
-              </Tab.BodyItem>
-              {props?.length > 0 ? (
-                <Tab.BodyItem tabId="props">
-                  <Types props={props} />
+          <CodeEditor.DemoContainer
+            componentSource={componentSource}
+            exampleSource={exampleSource}
+          >
+            <Heading.withAnchor as="h3">{displayName}</Heading.withAnchor>
+            <Box as="p">{description ? description : ""}</Box>
+            {/*<Tab.Container selectedTab="example">
+              <Tab.Header>
+                <Tab.HeaderItem tabId="example">Example</Tab.HeaderItem>
+                {props?.length > 0 ? (
+                  <Tab.HeaderItem tabId="props">Props</Tab.HeaderItem>
+                ) : (
+                  ""
+                )}
+              </Tab.Header>
+              <Tab.Body>
+                <Tab.BodyItem tabId="example">
+                  <CodeEditor.Editor value="exampleSource" />
+                  <Box
+                    p="4"
+                    bg="gray-200"
+                    sx="rounded-b-lg"
+                    x="evaluateCode(state.exampleSource)"
+                  />
                 </Tab.BodyItem>
-              ) : (
-                ""
-              )}
-            </Tab.Body>
-          </Tab.Container>
-          {componentSource ? (
-            <CodeEditor.Container source={componentSource} sx="space-y-4">
-              <Heading as="h3">Component source</Heading>
-              <CodeEditor.Editor />
-              <Box
-                sx="hidden"
-                x={`updateComponent('${displayName}', state.code)`}
-              />
-            </CodeEditor.Container>
-          ) : (
-            ""
-          )}
+                {props?.length > 0 ? (
+                  <Tab.BodyItem tabId="props">
+                    <Types props={props} />
+                  </Tab.BodyItem>
+                ) : (
+                  ""
+                )}
+              </Tab.Body>
+                </Tab.Container>*/}
+            <Box
+              p="4"
+              bg="gray-800"
+              color="white"
+              sx="rounded-t-lg overflow-x-auto overflow-y-hidden"
+            >
+              <Box color="gray-600" sx="float-right select-none text-xs">
+                Editor
+              </Box>
+              <CodeEditor.Editor value="exampleSource" />
+            </Box>
+            <Box
+              p="4"
+              bg="gray-200"
+              sx="rounded-b-lg"
+              x="evaluateCode(state.exampleSource)"
+            />
+            {componentSource ? (
+              <Box sx="space-y-4">
+                <Heading as="h3">Component source</Heading>
+                <Box
+                  p="4"
+                  bg="gray-800"
+                  color="white"
+                  sx="rounded-t-lg overflow-x-auto overflow-y-hidden"
+                >
+                  <Box color="gray-600" sx="float-right select-none text-xs">
+                    Editor
+                  </Box>
+                  <CodeEditor.Editor value="componentSource" />
+                </Box>
+                <Box
+                  sx="hidden"
+                  x={`updateComponent('${displayName}', state.componentSource)`}
+                />
+              </Box>
+            ) : (
+              ""
+            )}
+          </CodeEditor.DemoContainer>
         </Box>
       )
     )
