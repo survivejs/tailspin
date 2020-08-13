@@ -24,7 +24,10 @@ const CodeEditor = ({
   </Container>
 );
 
-const Container = ({ source }: { source?: string }, children: string[]) => {
+const Container = (
+  { source, sx }: { source?: string; sx?: string },
+  children: string[]
+) => {
   if (!source) {
     return null;
   }
@@ -32,7 +35,7 @@ const Container = ({ source }: { source?: string }, children: string[]) => {
   const decodedExample = Buffer.from(source).toString("base64");
 
   return (
-    <Box as="section" x-state={`{ code: atob('${decodedExample}') }`}>
+    <Box as="section" x-state={`{ code: atob('${decodedExample}') }`} sx={sx}>
       {children.join("")}
     </Box>
   );
@@ -48,7 +51,7 @@ const Editor = () => (
       pr="16"
       sx="overflow-hidden w-full"
       x="highlight('html', state.code)"
-    ></Box>
+    />
     <textarea
       class="overflow-hidden absolute min-w-full top-0 left-0 outline-none opacity-50 bg-none whitespace-pre resize-none"
       oninput="setState({ code: this.value })"

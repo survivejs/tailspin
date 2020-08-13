@@ -313,10 +313,14 @@ const Collection = ({ items }) =>
             </Tab.Body>
           </Tab.Container>
           {componentSource ? (
-            <CodeEditor
-              source={componentSource}
-              onUpdate={`updateComponent('${displayName}', state.code)`}
-            />
+            <CodeEditor.Container source={componentSource} sx="space-y-4">
+              <Heading as="h3">Component source</Heading>
+              <CodeEditor.Editor />
+              <Box
+                sx="hidden"
+                x={`updateComponent('${displayName}', state.code)`}
+              />
+            </CodeEditor.Container>
           ) : (
             ""
           )}
