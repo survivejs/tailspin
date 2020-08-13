@@ -1,7 +1,6 @@
 import * as elements from "typed-html";
 import Box from "../primitives/box";
 
-// TODO: Use Box instead of divs etc.
 const CodeEditor = ({
   source,
   onUpdate,
@@ -43,10 +42,13 @@ CodeEditor.Container = Container;
 // TODO: Textarea
 const Editor = () => (
   <Box sx="inline-block font-mono relative">
-    <pre
-      class="overflow-hidden mr-16 pr-16 w-full"
+    <Box
+      as="pre"
+      mr="16"
+      pr="16"
+      sx="overflow-hidden w-full"
       x="highlight('html', state.code)"
-    ></pre>
+    ></Box>
     <textarea
       class="overflow-hidden absolute min-w-full top-0 left-0 outline-none opacity-50 bg-none whitespace-pre resize-none"
       oninput="setState({ code: this.value })"
