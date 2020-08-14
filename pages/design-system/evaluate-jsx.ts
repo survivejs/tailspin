@@ -9,8 +9,11 @@ type Components = { [key: string]: (any, children: string[]) => string };
 function evaluateJSX(code: string, components: Components) {
   return (
     evaluateJSXElement(
-      // @ts-ignore: body property is missing from the root
-      findFirst("JSXElement", JsxParser.parse(code)?.body),
+      findFirst(
+        "JSXElement",
+        // @ts-ignore: body property is missing from the root
+        JsxParser.parse(code, { ecmaVersion: 2015 })?.body
+      ),
       components
     ) || code
   );
