@@ -310,7 +310,7 @@ const Collection = ({ items }) =>
                 )}
               </Tab.Header>
               <Tab.Body>
-                <Tab.BodyItem tabId="exampleSource">
+                <Tab.BodyItem tabId="exampleSource" showAsFallback>
                   <CodeEditor.Editor
                     parent="codeEditor"
                     value="exampleSource"

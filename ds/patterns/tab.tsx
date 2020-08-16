@@ -31,8 +31,14 @@ const TabBody = ({}, children: string[]) => (
     {children.join("")}
   </Box>
 );
-const TabBodyItem = ({ tabId }: { tabId: string }, children: string[]) => (
-  <Box x-class={`state === '${tabId}' ? '' : 'hidden'`}>
+const TabBodyItem = (
+  { tabId, showAsFallback }: { tabId: string; showAsFallback?: boolean },
+  children: string[]
+) => (
+  <Box
+    sx={!showAsFallback ? "hidden" : ""}
+    x-class={`state === '${tabId}' ? '' : 'hidden'`}
+  >
     {children.join("")}
   </Box>
 );
