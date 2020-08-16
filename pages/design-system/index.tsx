@@ -333,6 +333,7 @@ const Collection = ({ items }) =>
                 )}
               </Tab.Body>
             </Tab.Container>
+            {/* TODO: Add a fallback (evaluate code) here to work progressively */}
             <Box
               p="4"
               bg="gray-200"
