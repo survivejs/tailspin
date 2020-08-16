@@ -2,7 +2,7 @@ import * as elements from "typed-html";
 import Box from "../primitives/box";
 
 // https://tailwindcss.com/components/alerts
-const Alert = ({}, message: string[]) => (
+const Alert = ({}, children: string[]) => (
   <Box
     px="4"
     py="3"
@@ -12,7 +12,7 @@ const Alert = ({}, message: string[]) => (
     role="alert"
   >
     <Box as="span" sx="sm:inline">
-      {message}
+      {children}
     </Box>
     <Box as="span" px="4" py="3" sx="absolute top-0 bottom-0 right-0">
       <svg
@@ -30,5 +30,6 @@ const Alert = ({}, message: string[]) => (
 
 export const displayName = "Alert";
 export const Example = () => <Alert>This is a demo alert</Alert>;
+export const showCodeEditor = true;
 
 export default Alert;
