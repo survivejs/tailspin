@@ -86,7 +86,7 @@ const Editor = ({
         mr="16"
         pr="16"
         sx="overflow-hidden w-full"
-        x={`highlight('html', ${parent}.${value})`}
+        x={`highlight('html', ${parent}.${value} || '')`}
       />
       <textarea
         class="overflow-hidden absolute min-w-full top-0 left-0 outline-none opacity-50 bg-none whitespace-pre resize-none"
@@ -98,7 +98,7 @@ const Editor = ({
         autocomplete="off"
         autocorrect="off"
         spellcheck="false"
-        x-rows={`${parent}.${value}.split('\n').length"`}
+        x-rows={`${parent}.${value}?.split('\\n').length`}
       ></textarea>
     </Box>
   </Box>
