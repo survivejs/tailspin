@@ -14,6 +14,7 @@ const CodeEditor = ({
   </Container>
 );
 
+// TODO: Likely this should be removed through better abstraction (Container)
 const DemoContainer = (
   {
     componentSource,
