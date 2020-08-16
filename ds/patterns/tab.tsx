@@ -32,13 +32,10 @@ const TabBody = ({}, children: string[]) => (
   </Box>
 );
 const TabBodyItem = (
-  { tabId, showAsFallback }: { tabId: string; showAsFallback?: boolean },
+  { tabId }: { tabId: string; showAsFallback?: boolean },
   children: string[]
 ) => (
-  <Box
-    sx={!showAsFallback ? "hidden" : ""}
-    x-class={`state === '${tabId}' ? '' : 'hidden'`}
-  >
+  <Box x-class={`state === '${tabId}' ? '' : 'hidden'`}>
     {children.join("")}
   </Box>
 );
