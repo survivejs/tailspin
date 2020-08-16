@@ -331,9 +331,6 @@ const Collection = ({ items }) =>
                 )}
               </Tab.Body>
             </Tab.Container>
-            <Box onclick="setState({ exampleSource: 'demo' }, { parent: 'codeEditor' })">
-              change example source
-            </Box>
             <Box
               p="4"
               bg="gray-200"
