@@ -9,17 +9,7 @@ const CodeEditor = ({
   onUpdate: string;
 }) => (
   <Container source={source}>
-    <Box
-      p="4"
-      bg="gray-800"
-      color="white"
-      sx="rounded-t-lg overflow-x-auto overflow-y-hidden"
-    >
-      <Box color="gray-600" sx="float-right select-none text-xs">
-        Editor
-      </Box>
-      <Editor />
-    </Box>
+    <Editor />
     <Box p="4" bg="gray-200" sx="rounded-b-lg" x={onUpdate} />
   </Container>
 );
@@ -69,24 +59,34 @@ CodeEditor.Container = Container;
 
 // TODO: Textarea
 const Editor = ({ value = "code" }: { value?: string }) => (
-  <Box sx="inline-block font-mono relative">
-    <Box
-      as="pre"
-      mr="16"
-      pr="16"
-      sx="overflow-hidden w-full"
-      x={`highlight('html', state.${value})`}
-    />
-    <textarea
-      class="overflow-hidden absolute min-w-full top-0 left-0 outline-none opacity-50 bg-none whitespace-pre resize-none"
-      oninput={`setState({ ${value}: this.value })`}
-      x={`state.${value}`}
-      autocapitalize="off"
-      autocomplete="off"
-      autocorrect="off"
-      spellcheck="false"
-      x-rows={`state.${value}.split('\n').length"`}
-    ></textarea>
+  <Box
+    p="4"
+    bg="gray-800"
+    color="white"
+    sx="rounded-t-lg overflow-x-auto overflow-y-hidden"
+  >
+    <Box color="gray-600" sx="float-right select-none text-xs">
+      Editor
+    </Box>
+    <Box sx="inline-block font-mono relative">
+      <Box
+        as="pre"
+        mr="16"
+        pr="16"
+        sx="overflow-hidden w-full"
+        x={`highlight('html', state.${value})`}
+      />
+      <textarea
+        class="overflow-hidden absolute min-w-full top-0 left-0 outline-none opacity-50 bg-none whitespace-pre resize-none"
+        oninput={`setState({ ${value}: this.value })`}
+        x={`state.${value}`}
+        autocapitalize="off"
+        autocomplete="off"
+        autocorrect="off"
+        spellcheck="false"
+        x-rows={`state.${value}.split('\n').length"`}
+      ></textarea>
+    </Box>
   </Box>
 );
 CodeEditor.Editor = Editor;

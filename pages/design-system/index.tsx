@@ -319,17 +319,7 @@ const Collection = ({ items }) =>
                 )}
               </Tab.Body>
                 </Tab.Container>*/}
-            <Box
-              p="4"
-              bg="gray-800"
-              color="white"
-              sx="rounded-t-lg overflow-x-auto overflow-y-hidden"
-            >
-              <Box color="gray-600" sx="float-right select-none text-xs">
-                Editor
-              </Box>
-              <CodeEditor.Editor value="exampleSource" />
-            </Box>
+            <CodeEditor.Editor value="exampleSource" />
             <Box
               p="4"
               bg="gray-200"
@@ -339,17 +329,7 @@ const Collection = ({ items }) =>
             {componentSource ? (
               <Box sx="space-y-4">
                 <Heading as="h3">Component source</Heading>
-                <Box
-                  p="4"
-                  bg="gray-800"
-                  color="white"
-                  sx="rounded-t-lg overflow-x-auto overflow-y-hidden"
-                >
-                  <Box color="gray-600" sx="float-right select-none text-xs">
-                    Editor
-                  </Box>
-                  <CodeEditor.Editor value="componentSource" />
-                </Box>
+                <CodeEditor.Editor value="componentSource" />
                 <Box
                   sx="hidden"
                   x={`updateComponent('${displayName}', state.componentSource)`}
