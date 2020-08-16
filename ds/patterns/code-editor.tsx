@@ -1,15 +1,23 @@
 import * as elements from "typed-html";
 import Box from "../primitives/box";
+import * as hljs from "highlight.js";
+const html = require("highlight.js/lib/languages/xml");
+
+hljs.registerLanguage("html", html);
+
+function highlight(language, str) {
+  return hljs.highlight(language, str).value;
+}
 
 const CodeEditor = ({
   source,
   onUpdate,
 }: {
-  source?: string;
+  source: string;
   onUpdate: string;
 }) => (
   <Container source={source} value="code">
-    <Editor value="code" />
+    <Editor value="code" fallback={source} />
     <Box p="4" bg="gray-200" sx="rounded-b-lg" x={onUpdate} />
   </Container>
 );
@@ -67,9 +75,11 @@ CodeEditor.Container = Container;
 const Editor = ({
   parent = "this",
   value = "code",
+  fallback,
 }: {
   parent?: string;
   value: string;
+  fallback: string;
 }) => (
   <Box
     p="4"
@@ -87,7 +97,9 @@ const Editor = ({
         pr="16"
         sx="overflow-hidden w-full"
         x={`highlight('html', ${parent}.${value} || '')`}
-      />
+      >
+        {highlight("html", fallback)}
+      </Box>
       <textarea
         class="overflow-hidden absolute min-w-full top-0 left-0 outline-none opacity-50 bg-none whitespace-pre resize-none"
         oninput={`setState({ ${value}: this.value }, { parent: ${

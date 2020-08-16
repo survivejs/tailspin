@@ -314,12 +314,14 @@ const Collection = ({ items }) =>
                   <CodeEditor.Editor
                     parent="codeEditor"
                     value="exampleSource"
+                    fallback={exampleSource}
                   />
                 </Tab.BodyItem>
                 <Tab.BodyItem tabId="componentSource">
                   <CodeEditor.Editor
                     parent="codeEditor"
                     value="componentSource"
+                    fallback={componentSource}
                   />
                 </Tab.BodyItem>
                 {props?.length > 0 ? (
