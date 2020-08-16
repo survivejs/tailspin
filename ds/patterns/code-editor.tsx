@@ -8,8 +8,8 @@ const CodeEditor = ({
   source?: string;
   onUpdate: string;
 }) => (
-  <Container source={source}>
-    <Editor />
+  <Container source={source} value="code">
+    <Editor value="code" />
     <Box p="4" bg="gray-200" sx="rounded-b-lg" x={onUpdate} />
   </Container>
 );
@@ -30,6 +30,7 @@ const DemoContainer = (
   return (
     <Box
       as="section"
+      x-label="codeEditor"
       x-state={`{ componentSource: atob('${decodedComponentSource}'), exampleSource: atob('${decodedExampleSource}') }`}
       sx={sx}
     >
@@ -40,7 +41,7 @@ const DemoContainer = (
 CodeEditor.DemoContainer = DemoContainer;
 
 const Container = (
-  { source, sx }: { source?: string; sx?: string },
+  { source, sx, value }: { source?: string; sx?: string; value: string },
   children: string[]
 ) => {
   if (!source) {
@@ -50,7 +51,11 @@ const Container = (
   const decodedExample = Buffer.from(source).toString("base64");
 
   return (
-    <Box as="section" x-state={`{ code: atob('${decodedExample}') }`} sx={sx}>
+    <Box
+      as="section"
+      x-state={`{ ${value}: atob('${decodedExample}') }`}
+      sx={sx}
+    >
       {children.join("")}
     </Box>
   );
@@ -58,7 +63,13 @@ const Container = (
 CodeEditor.Container = Container;
 
 // TODO: Textarea
-const Editor = ({ value = "code" }: { value?: string }) => (
+const Editor = ({
+  parent = "this",
+  value = "code",
+}: {
+  parent?: string;
+  value: string;
+}) => (
   <Box
     p="4"
     bg="gray-800"
@@ -74,17 +85,19 @@ const Editor = ({ value = "code" }: { value?: string }) => (
         mr="16"
         pr="16"
         sx="overflow-hidden w-full"
-        x={`highlight('html', state.${value})`}
+        x={`highlight('html', ${parent}.${value})`}
       />
       <textarea
         class="overflow-hidden absolute min-w-full top-0 left-0 outline-none opacity-50 bg-none whitespace-pre resize-none"
-        oninput={`setState({ ${value}: this.value })`}
-        x={`state.${value}`}
+        oninput={`setState({ ${value}: this.value }, { parent: ${
+          parent === "this" ? "this" : "'" + parent + "'"
+        } })`}
+        x={`${parent}.${value}`}
         autocapitalize="off"
         autocomplete="off"
         autocorrect="off"
         spellcheck="false"
-        x-rows={`state.${value}.split('\n').length"`}
+        x-rows={`${parent}.${value}.split('\n').length"`}
       ></textarea>
     </Box>
   </Box>

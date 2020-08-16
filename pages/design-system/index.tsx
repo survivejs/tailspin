@@ -291,9 +291,18 @@ const Collection = ({ items }) =>
           >
             <Heading.withAnchor as="h3">{displayName}</Heading.withAnchor>
             <Box as="p">{description ? description : ""}</Box>
-            {/*<Tab.Container selectedTab="example">
+            <Tab.Container selectedTab="exampleSource">
               <Tab.Header>
-                <Tab.HeaderItem tabId="example">Example</Tab.HeaderItem>
+                <Tab.HeaderItem tabId="exampleSource">
+                  Example source
+                </Tab.HeaderItem>
+                {componentSource ? (
+                  <Tab.HeaderItem tabId="componentSource">
+                    Component source
+                  </Tab.HeaderItem>
+                ) : (
+                  ""
+                )}
                 {props?.length > 0 ? (
                   <Tab.HeaderItem tabId="props">Props</Tab.HeaderItem>
                 ) : (
@@ -301,13 +310,16 @@ const Collection = ({ items }) =>
                 )}
               </Tab.Header>
               <Tab.Body>
-                <Tab.BodyItem tabId="example">
-                  <CodeEditor.Editor value="exampleSource" />
-                  <Box
-                    p="4"
-                    bg="gray-200"
-                    sx="rounded-b-lg"
-                    x="evaluateCode(state.exampleSource)"
+                <Tab.BodyItem tabId="exampleSource">
+                  <CodeEditor.Editor
+                    parent="codeEditor"
+                    value="exampleSource"
+                  />
+                </Tab.BodyItem>
+                <Tab.BodyItem tabId="componentSource">
+                  <CodeEditor.Editor
+                    parent="codeEditor"
+                    value="componentSource"
                   />
                 </Tab.BodyItem>
                 {props?.length > 0 ? (
@@ -318,26 +330,16 @@ const Collection = ({ items }) =>
                   ""
                 )}
               </Tab.Body>
-                </Tab.Container>*/}
-            <CodeEditor.Editor value="exampleSource" />
+            </Tab.Container>
+            <Box onclick="setState({ exampleSource: 'demo' }, { parent: 'codeEditor' })">
+              change example source
+            </Box>
             <Box
               p="4"
               bg="gray-200"
               sx="rounded-b-lg"
-              x="evaluateCode(state.exampleSource)"
+              x="evaluateCode(codeEditor.exampleSource)"
             />
-            {componentSource ? (
-              <Box sx="space-y-4">
-                <Heading as="h3">Component source</Heading>
-                <CodeEditor.Editor value="componentSource" />
-                <Box
-                  sx="hidden"
-                  x={`updateComponent('${displayName}', state.componentSource)`}
-                />
-              </Box>
-            ) : (
-              ""
-            )}
           </CodeEditor.DemoContainer>
         </Box>
       )
