@@ -15,6 +15,7 @@ import Flex from "../../ds/primitives/flex";
 import Box from "../../ds/primitives/box";
 import Heading from "../../ds/primitives/heading";
 import config from "../../tailwind.json";
+import evaluateCode from "./evaluate-code";
 
 const theme = config.theme;
 const colors = theme.colors;
@@ -280,8 +281,10 @@ function toSource({ path, source, node }) {
     .trim();
 }
 
-const Collection = ({ items }) =>
-  items
+const Collection = ({ items }) => {
+  const componentSources = getComponentSources(items);
+
+  return items
     .map(
       ({ displayName, description, exampleSource, componentSource, props }) => (
         <Box sx="space-y-4">
@@ -339,12 +342,25 @@ const Collection = ({ items }) =>
               bg="gray-200"
               sx="rounded-b-lg"
               x={`evaluateCode(codeEditor.exampleSource, '${displayName}', codeEditor.componentSource)`}
-            />
+            >
+              {evaluateCode(componentSources, exampleSource, displayName)}
+            </Box>
           </CodeEditor.DemoContainer>
         </Box>
       )
     )
     .join("");
+};
+
+function getComponentSources(items) {
+  const ret = {};
+
+  items.forEach(({ displayName, default: def }) => {
+    ret[displayName] = def;
+  });
+
+  return ret;
+}
 
 const SpacingScale = ({ items }) =>
   items

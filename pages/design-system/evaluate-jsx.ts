@@ -28,6 +28,7 @@ function evaluateJSXElement(JSXElement: acorn.Node, components: Components) {
   if (firstJSXElementName) {
     const foundComponent = components[firstJSXElementName.name];
 
+    // TODO: Add a check to assert the found component is a function
     if (foundComponent) {
       // @ts-ignore
       return (firstJSXElementName.property
