@@ -4,7 +4,21 @@ const components = loadComponents(
   require.context("../../ds", true, /^\.\/.*\.tsx$/)
 );
 
-const evaluateCode = (code) => evaluateJSX(code, components);
+const evaluateCode = (exampleSource, componentName?, componentSource?) => {
+  // TODO: Refine this by doing children + prop replacement within evaluateJSX against AST
+  if (componentSource) {
+    return evaluateJSX(exampleSource, {
+      ...components,
+      [componentName]: (props, children) =>
+        evaluateJSX(
+          componentSource.replace(/children/g, JSON.stringify(children)),
+          components
+        ),
+    });
+  }
+
+  return evaluateJSX(exampleSource, components);
+};
 
 // @ts-ignore: TODO: Add this to global
 window.evaluateCode = evaluateCode;
@@ -24,15 +38,3 @@ function loadComponents(context) {
 
   return ret;
 }
-
-// @ts-ignore: TODO: Add this to global
-window.updateComponent = (name, code) => {
-  if (components[name]) {
-    components[name] = (props, children) => {
-      // TODO: Handle props
-      // TODO: How to let the component parent to know sibling should update?
-      // -> Likely the state for both needs to be managed at the parent.
-      return evaluateCode(code.replace(/children/g, JSON.stringify(children)));
-    };
-  }
-};

@@ -335,7 +335,7 @@ const Collection = ({ items }) =>
               p="4"
               bg="gray-200"
               sx="rounded-b-lg"
-              x="evaluateCode(codeEditor.exampleSource)"
+              x={`evaluateCode(codeEditor.exampleSource, '${displayName}', codeEditor.componentSource)`}
             />
           </CodeEditor.DemoContainer>
         </Box>
