@@ -26,5 +26,6 @@ export const Example = () => (
     Junior engineer description goes here
   </Accordion>
 );
+export const showCodeEditor = true;
 
 export default Accordion;
