@@ -179,7 +179,14 @@ function childrenToString(
 
     if (child.type === "JSXExpressionContainer") {
       // @ts-ignore
-      const expressionName = child?.expression?.name;
+      const expression = child?.expression;
+
+      if (expression.type === "CallExpression") {
+        return evaluate(generate(expression), replacements);
+      }
+
+      // @ts-ignore
+      const expressionName = expression?.name;
       const replacement = replacements[expressionName];
 
       if (!replacement) {
@@ -199,6 +206,18 @@ function childrenToString(
     // @ts-ignore
     return child.value;
   });
+}
+
+// TODO: Consume from sidewind?
+function evaluate(expression: string, value: Replacements) {
+  try {
+    return Function.apply(
+      null,
+      Object.keys(value).concat(`return ${expression}`)
+    )(...Object.values(value));
+  } catch (err) {
+    console.error("Failed to evaluate", expression, value, err);
+  }
 }
 
 export default evaluateJSX;

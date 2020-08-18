@@ -6,12 +6,12 @@ const evaluateCode = (
   componentName?,
   componentSource?
 ) => {
-  // TODO: Refine this by doing prop replacement within evaluateJSX against AST
   if (componentSource) {
     return evaluateJSX(exampleSource, {
       ...componentSources,
       [componentName]: (props, children) =>
         evaluateJSX(componentSource, componentSources, {
+          ...props,
           children,
         }),
     });
