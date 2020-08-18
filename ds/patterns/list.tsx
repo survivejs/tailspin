@@ -5,12 +5,12 @@ type ListType = "none" | "disc" | "decimal";
 
 // https://tailwindcss.com/components/alerts
 const List = ({ type }: { type: ListType }, children: string[]) => (
-  <Box as="ul" sx={`list-${type}`}>
+  <Box as={type == "decimal" ? "ol" : "ul"} sx={`list-${type}`}>
     {children.join("")}
   </Box>
 );
 
-const Item = ({}, children: string[]) => <Box as="li">{children.join()}</Box>;
+const Item = ({}, children: string[]) => <Box as="li">{children.join("")}</Box>;
 List.Item = Item;
 
 export const displayName = "List";
