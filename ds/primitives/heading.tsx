@@ -57,7 +57,7 @@ export const Example = () => (
     <Heading as="h2">h2 heading</Heading>
     <Heading as="h3">h3 heading</Heading>
     <Heading as="h4">h4 heading</Heading>
-    <Heading as="h4" withAnchor={true}>
+    <Heading as="h4" withAnchor>
       h4 heading with anchor
     </Heading>
   </Box>
