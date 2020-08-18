@@ -49,8 +49,24 @@ function evaluateJSXElement(
         attributesToObject(firstJSXElementAttributes, components),
         childrenToString(JSXElement.children, components, replacements)
       );
+    } else {
+      const attributesString = attributesToString(
+        attributesToObject(firstJSXElementAttributes, components)
+      );
+
+      return `<${firstJSXElementName.name}${
+        attributesString ? " " + attributesString : ""
+      }>${childrenToString(JSXElement.children, components, replacements).join(
+        ""
+      )}</${firstJSXElementName.name}>`;
     }
   }
+}
+
+function attributesToString(attributes: { [key: string]: string }) {
+  return Object.entries(attributes)
+    .map(([key, value]) => `${key}="${value}"`)
+    .join(" ");
 }
 
 function resolveJSXElementName(JSXElement: acorn.Node) {

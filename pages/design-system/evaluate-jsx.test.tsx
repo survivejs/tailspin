@@ -257,4 +257,58 @@ describe("JSX evaluator", () => {
       )
     ).toBe("<div>replaced</div>");
   });
+
+  test("should replace children with elements", () => {
+    const ShowChildren = ({}, children: string[]) => (
+      <div>{children.join("")}</div>
+    );
+
+    expect(
+      evaluateJSX("<ShowChildren><div>Demo</div></ShowChildren>", {
+        ShowChildren,
+      })
+    ).toBe("<div><div>Demo</div></div>");
+  });
+
+  test.only("should replace children with elements and attributes", () => {
+    const ShowChildren = ({}, children: string[]) => (
+      <div>{children.join("")}</div>
+    );
+
+    expect(
+      evaluateJSX(`<ShowChildren><div title="test">Demo</div></ShowChildren>`, {
+        ShowChildren,
+      })
+    ).toBe(`<div><div title="test">Demo</div></div>`);
+  });
+
+  test("should replace children with multiple elements", () => {
+    const ShowChildren = ({}, children: string[]) => (
+      <div>{children.join("")}</div>
+    );
+
+    expect(
+      evaluateJSX(
+        "<ShowChildren><div>Demo</div><div>Another demo</div></ShowChildren>",
+        {
+          ShowChildren,
+        }
+      )
+    ).toBe("<div><div>Demo</div><div>Another demo</div></div>");
+  });
+
+  test("should replace children with multiple children", () => {
+    const ShowChildren = ({}, children: string[]) => (
+      <div>{children.join("")}</div>
+    );
+
+    expect(
+      evaluateJSX(
+        "<ShowChildren><div><span>Foo</span><span>Bar</span></div></ShowChildren>",
+        {
+          ShowChildren,
+        }
+      )
+    ).toBe("<div><div><span>Foo</span><span>Bar</span></div></div>");
+  });
 });
