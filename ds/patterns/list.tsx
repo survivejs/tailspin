@@ -10,8 +10,10 @@ const List = ({ type }: { type: ListType }, children: string[]) => (
   </Box>
 );
 
-const Item = ({}, children: string[]) => <Box as="li">{children.join("")}</Box>;
-List.Item = Item;
+const ListItem = ({}, children: string[]) => (
+  <Box as="li">{children.join("")}</Box>
+);
+List.Item = ListItem;
 
 export const displayName = "List";
 export const Example = () => (
@@ -22,4 +24,5 @@ export const Example = () => (
   </List>
 );
 
+// TODO: Export List and ListItem and drop namespacing
 export default List;
