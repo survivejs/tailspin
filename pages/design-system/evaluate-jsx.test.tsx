@@ -189,4 +189,56 @@ describe("JSX evaluator", () => {
       )
     ).toBe("<div>prop\nchildren</div>");
   });
+
+  test("should evaluate component with svg", () => {
+    const svg = (
+      <svg
+        class="fill-current"
+        role="button"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+      >
+        <title>Close</title>
+      </svg>
+    );
+
+    const ShowSvg = () => <div>{svg}</div>;
+
+    expect(
+      evaluateJSX("<ShowSvg />", {
+        ShowSvg,
+      })
+    ).toBe(
+      `<div><svg class="fill-current" role="button" xmlns="http://www.w3.org/2000/svg" view-box="0 0 20 20"><title>Close</title></svg></div>`
+    );
+  });
+
+  test("should evaluate component with svg and a custom component", () => {
+    const PassChildren = ({}, children: string[]) => <div>{children}</div>;
+    const svg = (
+      <svg
+        class="fill-current"
+        role="button"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+      >
+        <title>Close</title>
+      </svg>
+    );
+
+    const ShowSvg = () => (
+      <div>
+        <PassChildren>{svg}</PassChildren>
+      </div>
+    );
+
+    expect(
+      evaluateJSX("<ShowSvg />", {
+        ShowSvg,
+        PassChildren,
+      })
+    ).toBe(
+      `<div><div><svg class="fill-current" role="button" xmlns="http://www.w3.org/2000/svg" view-box="0 0 20 20"><title>Close</title></svg></div></div>`
+    );
+  });
 });
