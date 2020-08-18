@@ -270,7 +270,7 @@ describe("JSX evaluator", () => {
     ).toBe("<div>replaced</div>");
   });
 
-  test.only("should replace calling children", () => {
+  test("should replace calling children", () => {
     const ShowChildren = ({}, children: string[]) => <div>{children}</div>;
 
     expect(
@@ -298,7 +298,7 @@ describe("JSX evaluator", () => {
     ).toBe("<div><div>Demo</div></div>");
   });
 
-  test.only("should replace children with elements and attributes", () => {
+  test("should replace children with elements and attributes", () => {
     const ShowChildren = ({}, children: string[]) => (
       <div>{children.join("")}</div>
     );
