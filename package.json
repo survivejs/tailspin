@@ -72,7 +72,7 @@
     "sanitize-html": "^1.27.3",
     "sitemap-static": "^0.4.4",
     "source-map-loader": "^1.0.1",
-    "tailwindcss": "^1.6.2",
+    "tailwindcss": "^1.7.0",
     "tap-spot": "^1.1.1",
     "terser-webpack-plugin": "^4.1.0",
     "ts-jest": "^26.2.0",
@@ -84,7 +84,7 @@
     "webpack-add-dependency-plugin": "^0.1.2",
     "webpack-bundle-analyzer": "^3.8.0",
     "webpack-cli": "^3.3.12",
-    "webpack-merge": "^5.1.1",
+    "webpack-merge": "^5.1.2",
     "webpack-plugin-serve": "^1.0.1",
     "webpack-watched-glob-entries-plugin": "^2.1.7"
   },
