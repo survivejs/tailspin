@@ -129,7 +129,9 @@ function attributesToObject(attributes: acorn.Node[], components: Components) {
       // @ts.ignore
     } else {
       // @ts-ignore
-      ret[attribute?.name?.name] = attribute?.value?.value;
+      ret[attribute?.name?.name] =
+        // @ts-ignore
+        attribute?.value === null ? true : attribute?.value?.value;
     }
   });
 
