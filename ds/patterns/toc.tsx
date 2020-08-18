@@ -1,5 +1,6 @@
 import * as elements from "typed-html";
 import Box from "../primitives/box";
+import List from "./list";
 
 const Toc = () => (
   <Box
@@ -8,9 +9,9 @@ const Toc = () => (
     x-state="{ closest: {}, headings: Array.from(document.querySelectorAll('h2, h3')) }"
     x-closest="{ state: { closest: document.querySelectorAll('h2, h3') } }"
   >
-    <Box as="ul">
+    <List type="none">
       <Box as="template" x-each="headings">
-        <Box as="li">
+        <List.Item>
           <Box
             as="a"
             x-href="'#' + state.id"
@@ -20,9 +21,9 @@ const Toc = () => (
               state.tagName === 'H3' && 'ml-2'
             ]"
           ></Box>
-        </Box>
+        </List.Item>
       </Box>
-    </Box>
+    </List>
   </Box>
 );
 
