@@ -67,7 +67,7 @@ const Example = () => (
     <Navigation>
       <Box sx="text-sm lg:flex-grow">
         <Navigation.Item href="/">Documentation</Navigation.Item>
-        <Navigation.Item href="/design-system/" isSelected="true">
+        <Navigation.Item href="/design-system/" isSelected={true}>
           Design system
         </Navigation.Item>
       </Box>
