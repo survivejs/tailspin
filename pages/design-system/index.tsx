@@ -37,35 +37,47 @@ const DesignSystemPage = (props) => (
           <Toc />
         </Box>
         <Box as="article" sx="w-full lg:w-2/3 lg:max-w-2xl space-y-16">
-          <Heading.withAnchor as="h1">Design System</Heading.withAnchor>
+          <Heading as="h1" withAnchor>
+            Design System
+          </Heading>
 
           <Flex as="section" direction={["column", "row"]}>
             <Box sx="flex-auto">
-              <Heading.withAnchor as="h2">Spacing scale</Heading.withAnchor>
+              <Heading as="h2" withAnchor>
+                Spacing scale
+              </Heading>
               <SpacingScale items={spacingScale} />
             </Box>
             <Box>
-              <Heading.withAnchor as="h2">Colors</Heading.withAnchor>
+              <Heading as="h2" withAnchor>
+                Colors
+              </Heading>
               <Colors items={colors} />
             </Box>
           </Flex>
 
           <Box as="section">
-            <Heading.withAnchor as="h2">Primitives</Heading.withAnchor>
+            <Heading as="h2" withAnchor>
+              Primitives
+            </Heading>
             <Box sx="space-y-4">
               <Collection items={getComponents("primitives")} />
             </Box>
           </Box>
 
           <Box as="section">
-            <Heading.withAnchor as="h2">Patterns</Heading.withAnchor>
+            <Heading as="h2" withAnchor>
+              Patterns
+            </Heading>
             <Box sx="space-y-4">
               <Collection items={getComponents("patterns")} />
             </Box>
           </Box>
 
           <Box as="section">
-            <Heading.withAnchor as="h2">Layouts</Heading.withAnchor>
+            <Heading as="h2" withAnchor>
+              Layouts
+            </Heading>
             <Box sx="space-y-4">
               <Collection items={getComponents("layouts")} />
             </Box>
@@ -292,7 +304,9 @@ const Collection = ({ items }) => {
             componentSource={componentSource}
             exampleSource={exampleSource}
           >
-            <Heading.withAnchor as="h3">{displayName}</Heading.withAnchor>
+            <Heading as="h3" withAnchor>
+              {displayName}
+            </Heading>
             <Box as="p">{description ? description : ""}</Box>
             <Tab.Container selectedTab="exampleSource">
               <Tab.Header>

@@ -6,14 +6,23 @@ type HeadingProps = "h1" | "h2" | "h3" | "h4";
 
 // https://theme-ui.com/components/heading
 // This one is more strict than the reference one and it enforced "as".
-const Heading = ({ as }: { as: HeadingProps }, label: string[]) => (
-  <Box as={as}>{label}</Box>
-);
+const Heading = (
+  { as, withAnchor }: { as: HeadingProps; withAnchor?: boolean },
+  children: string[]
+) =>
+  withAnchor ? (
+    <HeadingWithAnchor as={as}>{children}</HeadingWithAnchor>
+  ) : (
+    <Box as={as}>{children}</Box>
+  );
 
 const ids: { [key: string]: number } = {};
 
-const HeadingWithAnchor = ({ as }: { as: HeadingProps }, label) => {
-  let id = slugify(label.join(""));
+const HeadingWithAnchor = (
+  { as }: { as: HeadingProps },
+  children: string[]
+) => {
+  let id = slugify(children.join(""));
 
   if (ids[id]) {
     ids[id]++;
@@ -26,7 +35,7 @@ const HeadingWithAnchor = ({ as }: { as: HeadingProps }, label) => {
   return (
     <Box>
       <Box as={as} sx="inline" id={id}>
-        {label}
+        {children}
       </Box>
       <Box ml="2" color="primary" sx="inline hover:secondary cursor-pointer">
         <Link.withExternal href={`#${id}`}>#</Link.withExternal>
@@ -41,8 +50,6 @@ const slugify = (idBase: string) =>
     .replace(/`/g, "")
     .replace(/[^\w]+/g, "-");
 
-Heading.withAnchor = HeadingWithAnchor;
-
 export const displayName = "Heading";
 export const Example = () => (
   <Box>
@@ -50,7 +57,9 @@ export const Example = () => (
     <Heading as="h2">h2 heading</Heading>
     <Heading as="h3">h3 heading</Heading>
     <Heading as="h4">h4 heading</Heading>
-    <Heading.withAnchor as="h4">h4 heading with anchor</Heading.withAnchor>
+    <Heading as="h4" withAnchor={true}>
+      h4 heading with anchor
+    </Heading>
   </Box>
 );
 
