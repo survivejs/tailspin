@@ -12,7 +12,7 @@ const Alert = ({}, children: string[]) => (
     role="alert"
   >
     <Box as="span" sx="sm:inline">
-      {children}
+      {children.join("")}
     </Box>
     <Box as="span" px="4" py="3" sx="absolute top-0 bottom-0 right-0">
       <svg
