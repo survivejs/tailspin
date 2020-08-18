@@ -29,5 +29,6 @@ const Toc = () => (
 export const description = `Toc (table of contents) constructs its contents based on h2 and h3 elements while maintaining active state while the page is scrolled.`;
 export const displayName = "Toc";
 export const Example = () => <Toc />;
+export const showCodeEditor = true;
 
 export default Toc;
