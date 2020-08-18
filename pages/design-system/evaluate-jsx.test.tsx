@@ -241,4 +241,20 @@ describe("JSX evaluator", () => {
       `<div><div><svg class="fill-current" role="button" xmlns="http://www.w3.org/2000/svg" view-box="0 0 20 20"><title>Close</title></svg></div></div>`
     );
   });
+
+  test("should replace children", () => {
+    const ShowChildren = ({}, children: string[]) => <div>{children}</div>;
+
+    expect(
+      evaluateJSX(
+        "<ShowChildren>{children}</ShowChildren>",
+        {
+          ShowChildren,
+        },
+        {
+          children: ["replaced"],
+        }
+      )
+    ).toBe("<div>replaced</div>");
+  });
 });

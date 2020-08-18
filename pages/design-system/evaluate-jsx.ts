@@ -4,9 +4,15 @@ import { generate } from "escodegen";
 
 const JsxParser = Parser.extend(jsx());
 
+type JSXNode = acorn.Node & { children: JSXNode[] };
 type Components = { [key: string]: (any, children: string[]) => string };
+type Replacements = { [key: string]: string[] };
 
-function evaluateJSX(code: string, components: Components) {
+function evaluateJSX(
+  code: string,
+  components: Components,
+  replacements: Replacements = {}
+) {
   return (
     evaluateJSXElement(
       findFirst(
@@ -14,12 +20,17 @@ function evaluateJSX(code: string, components: Components) {
         // @ts-ignore: body property is missing from the root
         JsxParser.parse(code, { ecmaVersion: 2015 })?.body
       ),
-      components
+      components,
+      replacements
     ) || code
   );
 }
 
-function evaluateJSXElement(JSXElement: acorn.Node, components: Components) {
+function evaluateJSXElement(
+  JSXElement: JSXNode,
+  components: Components,
+  replacements: Replacements
+) {
   // @ts-ignore
   const firstJSXOpeningElement = JSXElement?.openingElement;
   const firstJSXElementAttributes = firstJSXOpeningElement?.attributes;
@@ -36,8 +47,7 @@ function evaluateJSXElement(JSXElement: acorn.Node, components: Components) {
           foundComponent[firstJSXElementName.property]
         : foundComponent)(
         attributesToObject(firstJSXElementAttributes, components),
-        // @ts-ignore
-        childrenToString(JSXElement.children, components)
+        childrenToString(JSXElement.children, components, replacements)
       );
     }
   }
@@ -141,10 +151,27 @@ function valueToObject(node: acorn.Node) {
   );
 }
 
-function childrenToString(children: acorn.Node[], components: Components) {
+function childrenToString(
+  children: JSXNode[],
+  components: Components,
+  replacements: Replacements
+) {
   return children.map((child) => {
     if (child.type === "JSXElement") {
-      return evaluateJSXElement(child, components);
+      return evaluateJSXElement(child, components, replacements);
+    }
+
+    if (child.type === "JSXExpressionContainer") {
+      // @ts-ignore
+      const expressionName = child?.expression?.name;
+      const replacement = replacements[expressionName];
+
+      if (!replacement) {
+        // @ts-ignore
+        return eval(generate(child.expression));
+      }
+
+      return replacement;
     }
 
     // @ts-ignore
