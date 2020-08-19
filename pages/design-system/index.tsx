@@ -50,19 +50,19 @@ const DesignSystemPage = (props) => (
           <Toc />
         </Box>
         <Box as="article" sx="w-full lg:w-2/3 lg:max-w-2xl space-y-16">
-          <Heading as="h1" withAnchor>
+          <Heading as="h1" size="4xl" withAnchor>
             Design System
           </Heading>
 
           <Flex as="section" direction={["column", "row"]}>
             <Box sx="flex-auto">
-              <Heading as="h2" withAnchor>
+              <Heading as="h2" size="2xl" withAnchor>
                 Spacing scale
               </Heading>
               <SpacingScale items={spacingScale} />
             </Box>
             <Box>
-              <Heading as="h2" withAnchor>
+              <Heading as="h2" size="2xl" withAnchor>
                 Colors
               </Heading>
               <Colors items={colors} />
@@ -70,7 +70,7 @@ const DesignSystemPage = (props) => (
           </Flex>
 
           <Box as="section">
-            <Heading as="h2" withAnchor>
+            <Heading as="h2" size="2xl" withAnchor>
               Primitives
             </Heading>
             <Box sx="space-y-4">
@@ -79,7 +79,7 @@ const DesignSystemPage = (props) => (
           </Box>
 
           <Box as="section">
-            <Heading as="h2" withAnchor>
+            <Heading as="h2" size="2xl" withAnchor>
               Patterns
             </Heading>
             <Box sx="space-y-4">
@@ -88,7 +88,7 @@ const DesignSystemPage = (props) => (
           </Box>
 
           <Box as="section">
-            <Heading as="h2" withAnchor>
+            <Heading as="h2" size="2xl" withAnchor>
               Layouts
             </Heading>
             <Box sx="space-y-4">
@@ -317,7 +317,7 @@ const Collection = ({ items }) => {
             componentSource={componentSource}
             exampleSource={exampleSource}
           >
-            <Heading as="h3" withAnchor>
+            <Heading as="h3" size="xl" withAnchor>
               {displayName}
             </Heading>
             <Box as="p">{description ? description : ""}</Box>

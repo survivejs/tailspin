@@ -1,25 +1,39 @@
 import * as elements from "typed-html";
 import Box from "./box";
 import Link from "./link";
+import config from "../../tailwind.json";
 
-type HeadingProps = "h1" | "h2" | "h3" | "h4";
+type HeadingAs = "h1" | "h2" | "h3" | "h4";
+type HeadingSize = keyof typeof config.theme.fontSize;
 
 // https://theme-ui.com/components/heading
 // This one is more strict than the reference one and it enforced "as".
 const Heading = (
-  { as, withAnchor }: { as: HeadingProps; withAnchor?: boolean },
+  {
+    as,
+    size,
+    withAnchor,
+  }: { as: HeadingAs; size: HeadingSize; withAnchor?: boolean },
   children: string[]
 ) =>
   withAnchor ? (
-    <HeadingWithAnchor as={as}>{children}</HeadingWithAnchor>
+    <HeadingWithAnchor as={as} sx={getSizeClass(size)}>
+      {children}
+    </HeadingWithAnchor>
   ) : (
-    <Box as={as}>{children}</Box>
+    <Box as={as} sx={getSizeClass(size)}>
+      {children}
+    </Box>
   );
+
+function getSizeClass(size: HeadingSize) {
+  return `text-${size}`;
+}
 
 const ids: { [key: string]: number } = {};
 
 const HeadingWithAnchor = (
-  { as }: { as: HeadingProps },
+  { as, sx }: { as: HeadingAs; sx: string },
   children: string[]
 ) => {
   let id = slugify(children.join(""));
@@ -33,7 +47,7 @@ const HeadingWithAnchor = (
   }
 
   return (
-    <Box>
+    <Box sx={sx}>
       <Box as={as} sx="inline" id={id}>
         {children}
       </Box>
@@ -53,11 +67,19 @@ const slugify = (idBase: string) =>
 export const displayName = "Heading";
 export const Example = () => (
   <Box>
-    <Heading as="h1">h1 heading</Heading>
-    <Heading as="h2">h2 heading</Heading>
-    <Heading as="h3">h3 heading</Heading>
-    <Heading as="h4">h4 heading</Heading>
-    <Heading as="h4" withAnchor>
+    <Heading as="h1" size="4xl">
+      h1 heading
+    </Heading>
+    <Heading as="h2" size="2xl">
+      h2 heading
+    </Heading>
+    <Heading as="h3" size="xl">
+      h3 heading
+    </Heading>
+    <Heading as="h4" size="lg">
+      h4 heading
+    </Heading>
+    <Heading as="h4" size="md" withAnchor>
       h4 heading with anchor
     </Heading>
   </Box>

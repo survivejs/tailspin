@@ -28,12 +28,14 @@ const BlogIndexLayout = ({
     ]}
     body={
       <Box as="article" mx="auto" mb="8" sx="w-full lg:w-2/3 lg:max-w-2xl">
-        <Heading as="h1">Blog pages</Heading>
+        <Heading as="h1" size="4xl">
+          Blog pages
+        </Heading>
         <Flex direction="column" sx="prose lg:prose-xl">
           {attributes.pages
             .map(({ title, description, slug, categories }) => (
               <Flex as="section" direction="column">
-                <Heading as="h2">
+                <Heading as="h2" size="2xl">
                   <Link href={slug}>{title}</Link>
                 </Heading>
                 <Box>{description}</Box>
