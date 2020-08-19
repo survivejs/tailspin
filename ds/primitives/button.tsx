@@ -3,33 +3,36 @@ import Box from "./box";
 import Flex from "./flex";
 
 type ButtonProps = { onclick?: string; sx?: string };
+type Variant = "primary" | "secondary";
 
 // https://tailwindcss.com/components/buttons
-const Button = (props: ButtonProps, label: string[]) => (
+const Button = (
+  { onclick, sx, variant }: ButtonProps & { variant?: Variant },
+  label: string[]
+) => (
   <Box
     as="button"
-    onclick={props.onclick}
+    onclick={onclick}
     py="2"
     px="4"
-    sx={`font-bold rounded ${props.sx || ""}`}
+    sx={`${sx} ${getVariantClasses(variant)}`}
   >
     {label}
   </Box>
 );
 
-const ButtonPrimary = (props: ButtonProps, label: string[]) => (
-  <Button {...props} sx="bg-primary text-white hover:bg-secondary">
-    {label}
-  </Button>
-);
-Button.Primary = ButtonPrimary;
+function getVariantClasses(variant?: Variant) {
+  const sharedClasses = "font-bold rounded";
 
-const ButtonSecondary = (props: ButtonProps, label: string[]) => (
-  <Button {...props} sx="bg-secondary text-white hover:bg-primary">
-    {label}
-  </Button>
-);
-Button.Secondary = ButtonSecondary;
+  switch (variant) {
+    case "primary":
+      return `${sharedClasses} bg-primary text-white hover:bg-secondary`;
+    case "secondary":
+      return `${sharedClasses} bg-secondary text-white hover:bg-primary`;
+  }
+
+  return sharedClasses;
+}
 
 export const displayName = "Button";
 export const Example = () => (
@@ -41,12 +44,12 @@ export const Example = () => (
     >
       Set to foobar
     </Button>
-    <Button.Primary onclick="setState('primary')">
+    <Button variant="primary" onclick="setState('primary')">
       Set to primary
-    </Button.Primary>
-    <Button.Secondary onclick="setState('secondary')">
+    </Button>
+    <Button variant="secondary" onclick="setState('secondary')">
       Set to secondary
-    </Button.Secondary>
+    </Button>
   </Flex>
 );
 

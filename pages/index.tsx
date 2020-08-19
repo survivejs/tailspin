@@ -37,9 +37,9 @@ const IndexPage = (props) => (
             <Alert>This is a demo alert</Alert>
           </Box>
           <Box>
-            <Button.Primary onclick="setState(v => !v)">
+            <Button variant="primary" onclick="setState(v => !v)">
               Demo button
-            </Button.Primary>
+            </Button>
           </Box>
         </Box>
       </Box>
