@@ -9,7 +9,13 @@ import glob from "glob";
 import PageLayout from "../../ds/layouts/page";
 import CodeEditor from "../../ds/patterns/code-editor";
 import Table from "../../ds/patterns/table";
-import Tab from "../../ds/patterns/tab";
+import {
+  TabContainer,
+  TabHeader,
+  TabHeaderItem,
+  TabBody,
+  TabBodyItem,
+} from "../../ds/patterns/tab";
 import Toc from "../../ds/patterns/toc";
 import Flex from "../../ds/primitives/flex";
 import Box from "../../ds/primitives/box";
@@ -308,48 +314,48 @@ const Collection = ({ items }) => {
               {displayName}
             </Heading>
             <Box as="p">{description ? description : ""}</Box>
-            <Tab.Container selectedTab="exampleSource">
-              <Tab.Header>
-                <Tab.HeaderItem tabId="exampleSource">
+            <TabContainer selectedTab="exampleSource">
+              <TabHeader>
+                <TabHeaderItem tabId="exampleSource">
                   Example source
-                </Tab.HeaderItem>
+                </TabHeaderItem>
                 {componentSource ? (
-                  <Tab.HeaderItem tabId="componentSource">
+                  <TabHeaderItem tabId="componentSource">
                     Component source
-                  </Tab.HeaderItem>
+                  </TabHeaderItem>
                 ) : (
                   ""
                 )}
                 {props?.length > 0 ? (
-                  <Tab.HeaderItem tabId="props">Props</Tab.HeaderItem>
+                  <TabHeaderItem tabId="props">Props</TabHeaderItem>
                 ) : (
                   ""
                 )}
-              </Tab.Header>
-              <Tab.Body>
-                <Tab.BodyItem tabId="exampleSource">
+              </TabHeader>
+              <TabBody>
+                <TabBodyItem tabId="exampleSource">
                   <CodeEditor.Editor
                     parent="codeEditor"
                     value="exampleSource"
                     fallback={exampleSource}
                   />
-                </Tab.BodyItem>
-                <Tab.BodyItem tabId="componentSource">
+                </TabBodyItem>
+                <TabBodyItem tabId="componentSource">
                   <CodeEditor.Editor
                     parent="codeEditor"
                     value="componentSource"
                     fallback={componentSource}
                   />
-                </Tab.BodyItem>
+                </TabBodyItem>
                 {props?.length > 0 ? (
-                  <Tab.BodyItem tabId="props">
+                  <TabBodyItem tabId="props">
                     <Types props={props} />
-                  </Tab.BodyItem>
+                  </TabBodyItem>
                 ) : (
                   ""
                 )}
-              </Tab.Body>
-            </Tab.Container>
+              </TabBody>
+            </TabContainer>
             {/* TODO: Add a fallback (evaluate code) here to work progressively */}
             <Box
               p="4"

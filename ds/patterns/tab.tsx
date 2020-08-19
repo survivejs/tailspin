@@ -40,30 +40,22 @@ const TabBodyItem = (
   </Box>
 );
 
-const Tab = {
-  Container: TabContainer,
-  Header: TabHeader,
-  HeaderItem: TabHeaderItem,
-  Body: TabBody,
-  BodyItem: TabBodyItem,
-};
-
 export const description =
   "Use Tabs when you have a limited amount of space and a related group of items to explain.";
 export const displayName = "Tab";
 export const Example = () => (
-  <Tab.Container selectedTab="animals">
-    <Tab.Header>
-      <Tab.HeaderItem tabId="animals">Animals</Tab.HeaderItem>
-      <Tab.HeaderItem tabId="languages">Languages</Tab.HeaderItem>
-      <Tab.HeaderItem tabId="colors">Colors</Tab.HeaderItem>
-    </Tab.Header>
-    <Tab.Body>
-      <Tab.BodyItem tabId="animals">Cats, dogs, monkeys</Tab.BodyItem>
-      <Tab.BodyItem tabId="languages">German, Finnish, English</Tab.BodyItem>
-      <Tab.BodyItem tabId="colors">blue, green, red</Tab.BodyItem>
-    </Tab.Body>
-  </Tab.Container>
+  <TabContainer selectedTab="animals">
+    <TabHeader>
+      <TabHeaderItem tabId="animals">Animals</TabHeaderItem>
+      <TabHeaderItem tabId="languages">Languages</TabHeaderItem>
+      <TabHeaderItem tabId="colors">Colors</TabHeaderItem>
+    </TabHeader>
+    <TabBody>
+      <TabBodyItem tabId="animals">Cats, dogs, monkeys</TabBodyItem>
+      <TabBodyItem tabId="languages">German, Finnish, English</TabBodyItem>
+      <TabBodyItem tabId="colors">blue, green, red</TabBodyItem>
+    </TabBody>
+  </TabContainer>
 );
 
-export default Tab;
+export { TabContainer, TabHeader, TabHeaderItem, TabBody, TabBodyItem };
