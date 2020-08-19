@@ -8,7 +8,7 @@ type Variant = "primary" | "secondary";
 // https://tailwindcss.com/components/buttons
 const Button = (
   { onclick, sx, variant }: ButtonProps & { variant?: Variant },
-  label: string[]
+  children: string[]
 ) => (
   <Box
     as="button"
@@ -17,7 +17,7 @@ const Button = (
     px="4"
     sx={`${sx} ${getVariantClasses(variant)}`}
   >
-    {label}
+    {children}
   </Box>
 );
 
