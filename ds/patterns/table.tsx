@@ -2,33 +2,33 @@ import * as elements from "typed-html";
 import Box from "../primitives/box";
 
 // https://tailwindcss.com/docs/display/#table
-const Table = ({}, containers: string[]) => (
+const Table = ({}, children: string[]) => (
   <Box as="table" sx="table w-full">
-    {containers.join("")}
+    {children.join("")}
   </Box>
 );
 
-const TableRow = ({}, rows: string[]) => (
+const TableRow = ({}, children: string[]) => (
   <Box as="tr" sx="table-row">
-    {rows.join("")}
+    {children.join("")}
   </Box>
 );
 
-const TableHeader = ({}, rows: string[]) => (
-  <Box as="thead">{rows.join("")}</Box>
+const TableHeader = ({}, children: string[]) => (
+  <Box as="thead">{children.join("")}</Box>
 );
 
-const TableHeaderCell = ({}, content: string[]) => (
+const TableHeaderCell = ({}, children: string[]) => (
   <Box as="th" sx="table-cell text-left">
-    {content}
+    {children}
   </Box>
 );
 
-const TableBody = ({}, rows) => <Box as="tbody">{rows.join("")}</Box>;
+const TableBody = ({}, children) => <Box as="tbody">{children.join("")}</Box>;
 
-const TableBodyCell = ({}, content: string[]) => (
+const TableBodyCell = ({}, children: string[]) => (
   <Box as="td" sx="table-cell">
-    {content.join("")}
+    {children.join("")}
   </Box>
 );
 
@@ -57,6 +57,7 @@ export const Example = () => (
     </TableBody>
   </Table>
 );
+export const showCodeEditor = true;
 
 export {
   Table,
