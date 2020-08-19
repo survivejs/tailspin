@@ -8,7 +8,14 @@ import readableColor from "polished/lib/color/readableColor";
 import glob from "glob";
 import PageLayout from "../../ds/layouts/page";
 import CodeEditor from "../../ds/patterns/code-editor";
-import Table from "../../ds/patterns/table";
+import {
+  Table,
+  TableHeader,
+  TableHeaderCell,
+  TableBody,
+  TableBodyCell,
+  TableRow,
+} from "../../ds/patterns/table";
 import {
   TabContainer,
   TabHeader,
@@ -435,26 +442,26 @@ const Types = ({
 }) =>
   props.length > 0 ? (
     <Table>
-      <Table.Header>
-        <Table.Row>
-          <Table.HeaderCell>Name</Table.HeaderCell>
-          <Table.HeaderCell>Type</Table.HeaderCell>
-          <Table.HeaderCell>Is optional</Table.HeaderCell>
-        </Table.Row>
-      </Table.Header>
-      <Table.Body>
+      <TableHeader>
+        <TableRow>
+          <TableHeaderCell>Name</TableHeaderCell>
+          <TableHeaderCell>Type</TableHeaderCell>
+          <TableHeaderCell>Is optional</TableHeaderCell>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
         {props
           .map(({ name, isOptional, type }) => (
-            <Table.Row>
-              <Table.BodyCell>
+            <TableRow>
+              <TableBodyCell>
                 <Box as="code">{name}</Box>
-              </Table.BodyCell>
-              <Table.BodyCell>{type}</Table.BodyCell>
-              <Table.BodyCell>{isOptional ? "✓" : ""}</Table.BodyCell>
-            </Table.Row>
+              </TableBodyCell>
+              <TableBodyCell>{type}</TableBodyCell>
+              <TableBodyCell>{isOptional ? "✓" : ""}</TableBodyCell>
+            </TableRow>
           ))
           .join("")}
-      </Table.Body>
+      </TableBody>
     </Table>
   ) : (
     ""
