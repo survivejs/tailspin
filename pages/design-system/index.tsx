@@ -17,12 +17,12 @@ import {
   TableRow,
 } from "../../ds/patterns/table";
 import {
-  TabContainer,
+  Tabs,
   TabHeader,
   TabHeaderItem,
   TabBody,
   TabBodyItem,
-} from "../../ds/patterns/tab";
+} from "../../ds/patterns/tabs";
 import Toc from "../../ds/patterns/toc";
 import Flex from "../../ds/primitives/flex";
 import Box from "../../ds/primitives/box";
@@ -321,7 +321,7 @@ const Collection = ({ items }) => {
               {displayName}
             </Heading>
             <Box as="p">{description ? description : ""}</Box>
-            <TabContainer selectedTab="exampleSource">
+            <Tabs selectedTab="exampleSource">
               <TabHeader>
                 <TabHeaderItem tabId="exampleSource">
                   Example source
@@ -362,7 +362,7 @@ const Collection = ({ items }) => {
                   ""
                 )}
               </TabBody>
-            </TabContainer>
+            </Tabs>
             {/* TODO: Add a fallback (evaluate code) here to work progressively */}
             <Box
               p="4"

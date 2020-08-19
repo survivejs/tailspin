@@ -3,10 +3,7 @@ import Box from "../primitives/box";
 import Flex from "../primitives/flex";
 
 // https://tailwindcss.com/components/navigation/#tabs
-const TabContainer = (
-  { selectedTab }: { selectedTab: string },
-  children: string[]
-) => (
+const Tabs = ({ selectedTab }: { selectedTab: string }, children: string[]) => (
   <Flex direction="column" x-state={`'${selectedTab}'`}>
     {children.join("")}
   </Flex>
@@ -42,9 +39,9 @@ const TabBodyItem = (
 
 export const description =
   "Use Tabs when you have a limited amount of space and a related group of items to explain.";
-export const displayName = "Tab";
+export const displayName = "Tabs";
 export const Example = () => (
-  <TabContainer selectedTab="animals">
+  <Tabs selectedTab="animals">
     <TabHeader>
       <TabHeaderItem tabId="animals">Animals</TabHeaderItem>
       <TabHeaderItem tabId="languages">Languages</TabHeaderItem>
@@ -55,7 +52,7 @@ export const Example = () => (
       <TabBodyItem tabId="languages">German, Finnish, English</TabBodyItem>
       <TabBodyItem tabId="colors">blue, green, red</TabBodyItem>
     </TabBody>
-  </TabContainer>
+  </Tabs>
 );
 
-export { TabContainer, TabHeader, TabHeaderItem, TabBody, TabBodyItem };
+export { Tabs, TabHeader, TabHeaderItem, TabBody, TabBodyItem };
