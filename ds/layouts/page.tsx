@@ -1,5 +1,5 @@
 import * as elements from "typed-html";
-import Navigation from "../patterns/navigation";
+import { Navigation, NavigationItem } from "../patterns/navigation";
 import Box from "../primitives/box";
 import Flex from "../primitives/flex";
 
@@ -15,25 +15,25 @@ const PageLayout = ({ head, body, cssTags, jsTags, htmlAttributes, url }) => (
       <Box as="header" bg="primary" color="white">
         <Navigation>
           <Box sx="text-sm lg:flex-grow">
-            <Navigation.Item href="/" isSelected={url === "/"}>
+            <NavigationItem href="/" isSelected={url === "/"}>
               Documentation
-            </Navigation.Item>
-            <Navigation.Item href="/blog/" isSelected={url === "/blog/"}>
+            </NavigationItem>
+            <NavigationItem href="/blog/" isSelected={url === "/blog/"}>
               Blog
-            </Navigation.Item>
-            <Navigation.Item
+            </NavigationItem>
+            <NavigationItem
               href="/design-system/"
               isSelected={url === "/design-system/"}
             >
               Design system
-            </Navigation.Item>
+            </NavigationItem>
           </Box>
           <Box>
-            <Navigation.Item href="https://github.com/survivejs/tailwind-webpack-starter">
+            <NavigationItem href="https://github.com/survivejs/tailwind-webpack-starter">
               <Box sx="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white">
                 Star at GitHub
               </Box>
-            </Navigation.Item>
+            </NavigationItem>
           </Box>
         </Navigation>
       </Box>

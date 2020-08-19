@@ -59,25 +59,23 @@ const NavigationItem = (
   </Link.withExternal>
 );
 
-Navigation.Item = NavigationItem;
-
 const displayName = "Navigation";
 const Example = () => (
   <Box bg="primary" color="white">
     <Navigation>
       <Box sx="text-sm lg:flex-grow">
-        <Navigation.Item href="/">Documentation</Navigation.Item>
-        <Navigation.Item href="/design-system/" isSelected={true}>
+        <NavigationItem href="/">Documentation</NavigationItem>
+        <NavigationItem href="/design-system/" isSelected={true}>
           Design system
-        </Navigation.Item>
+        </NavigationItem>
       </Box>
       <Box>
-        <Navigation.Item href="https://github.com/survivejs/tailwind-webpack-starter">
+        <NavigationItem href="https://github.com/survivejs/tailwind-webpack-starter">
           Star at GitHub
-        </Navigation.Item>
+        </NavigationItem>
       </Box>
     </Navigation>
   </Box>
 );
 
-export { Navigation as default, displayName, Example };
+export { Navigation, NavigationItem, displayName, Example };
