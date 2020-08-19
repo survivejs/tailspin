@@ -77,5 +77,6 @@ const Example = () => (
     </Navigation>
   </Box>
 );
+export const showCodeEditor = true;
 
 export { Navigation, NavigationItem, displayName, Example };
