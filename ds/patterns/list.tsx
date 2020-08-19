@@ -13,16 +13,14 @@ const List = ({ type }: { type: ListType }, children: string[]) => (
 const ListItem = ({}, children: string[]) => (
   <Box as="li">{children.join("")}</Box>
 );
-List.Item = ListItem;
 
 export const displayName = "List";
 export const Example = () => (
   <List type="none">
-    <List.Item>Red</List.Item>
-    <List.Item>Yellow</List.Item>
-    <List.Item>Green</List.Item>
+    <ListItem>Red</ListItem>
+    <ListItem>Yellow</ListItem>
+    <ListItem>Green</ListItem>
   </List>
 );
 
-// TODO: Export List and ListItem and drop namespacing
-export default List;
+export { List, ListItem };

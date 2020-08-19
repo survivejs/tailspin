@@ -12,13 +12,25 @@ function loadComponents(context) {
   const ret = {};
 
   context.keys().forEach((key) => {
-    const { displayName, default: def } = context(key);
+    const {
+      displayName,
+      default: def,
+      showCodeEditor,
+      Example,
+      ...rest
+    } = context(key);
 
-    ret[displayName] = def;
+    if (def) {
+      ret[displayName] = def;
 
-    Object.keys(def).forEach((k) => {
-      ret[`${displayName}.${k}`] = def[k];
-    });
+      Object.keys(def).forEach((k) => {
+        ret[`${displayName}.${k}`] = def[k];
+      });
+    } else {
+      Object.entries(rest).forEach(([k, v]) => {
+        ret[k] = v;
+      });
+    }
   });
 
   return ret;

@@ -1,6 +1,6 @@
 import * as elements from "typed-html";
 import Box from "../primitives/box";
-import List from "./list";
+import { List, ListItem } from "./list";
 
 const Toc = () => (
   <Box
@@ -11,7 +11,7 @@ const Toc = () => (
   >
     <List type="none">
       <Box as="template" x-each="headings">
-        <List.Item>
+        <ListItem>
           <Box
             as="a"
             x-href="'#' + state.id"
@@ -21,7 +21,7 @@ const Toc = () => (
               state.tagName === 'H3' && 'ml-2'
             ]"
           ></Box>
-        </List.Item>
+        </ListItem>
       </Box>
     </List>
   </Box>
