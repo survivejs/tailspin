@@ -54,5 +54,6 @@ export const Example = () => (
     </TabBody>
   </Tabs>
 );
+export const showCodeEditor = true;
 
 export { Tabs, TabHeader, TabHeaderItem, TabBody, TabBodyItem };
