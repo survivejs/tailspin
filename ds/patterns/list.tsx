@@ -4,8 +4,8 @@ import Box from "../primitives/box";
 type ListType = "none" | "disc" | "decimal";
 
 // https://tailwindcss.com/components/alerts
-const List = ({ type }: { type: ListType }, children: string[]) => (
-  <Box as={type == "decimal" ? "ol" : "ul"} sx={`list-${type}`}>
+const List = ({ variant }: { variant: ListType }, children: string[]) => (
+  <Box as={variant == "decimal" ? "ol" : "ul"} sx={`list-${variant}`}>
     {children.join("")}
   </Box>
 );
@@ -16,7 +16,7 @@ const ListItem = ({}, children: string[]) => (
 
 export const displayName = "List";
 export const Example = () => (
-  <List type="none">
+  <List variant="none">
     <ListItem>Red</ListItem>
     <ListItem>Yellow</ListItem>
     <ListItem>Green</ListItem>

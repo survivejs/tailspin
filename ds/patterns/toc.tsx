@@ -9,7 +9,7 @@ const Toc = () => (
     x-state="{ closest: {}, headings: Array.from(document.querySelectorAll('h2, h3')) }"
     x-closest="{ state: { closest: document.querySelectorAll('h2, h3') } }"
   >
-    <List type="none">
+    <List variant="none">
       <Box as="template" x-each="headings">
         <ListItem>
           <Box
