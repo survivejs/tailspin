@@ -22,5 +22,6 @@ export const Example = () => (
     <ListItem>Green</ListItem>
   </List>
 );
+export const showCodeEditor = true;
 
 export { List, ListItem };

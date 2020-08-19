@@ -46,12 +46,12 @@ function evaluateJSXElement(
         ? // @ts-ignore
           foundComponent[firstJSXElementName.property]
         : foundComponent)(
-        attributesToObject(firstJSXElementAttributes, components),
+        attributesToObject(firstJSXElementAttributes, components, replacements),
         childrenToString(JSXElement.children, components, replacements)
       );
     } else {
       const attributesString = attributesToString(
-        attributesToObject(firstJSXElementAttributes, components)
+        attributesToObject(firstJSXElementAttributes, components, replacements)
       );
 
       return `<${firstJSXElementName.name}${
@@ -101,7 +101,11 @@ function findFirst(type: string, nodes: acorn.Node[]) {
   }
 }
 
-function attributesToObject(attributes: acorn.Node[], components: Components) {
+function attributesToObject(
+  attributes: acorn.Node[],
+  components: Components,
+  replacements: Replacements
+) {
   const ret = {};
 
   attributes.forEach((attribute) => {
@@ -125,7 +129,7 @@ function attributesToObject(attributes: acorn.Node[], components: Components) {
       }
 
       // @ts-ignore
-      ret[attribute?.name?.name] = eval(generate(expression));
+      ret[attribute?.name?.name] = evaluate(generate(expression), replacements);
       // @ts.ignore
     } else {
       // @ts-ignore
@@ -211,14 +215,14 @@ function childrenToString(
 }
 
 // TODO: Consume from sidewind?
-function evaluate(expression: string, value: Replacements) {
+function evaluate(expression: string, replacements: Replacements) {
   try {
     return Function.apply(
       null,
-      Object.keys(value).concat(`return ${expression}`)
-    )(...Object.values(value));
+      Object.keys(replacements).concat(`return ${expression}`)
+    )(...Object.values(replacements));
   } catch (err) {
-    console.error("Failed to evaluate", expression, value, err);
+    console.error("Failed to evaluate", expression, replacements, err);
   }
 }
 
