@@ -19,7 +19,7 @@
     "analyze-stats": "webpack-bundle-analyzer stats.json",
     "generate-meta": "node ./utils/generate-meta.js",
     "test": "jest",
-    "lint-styles": "stylelint pages/index.pcss"
+    "lint-styles": "stylelint --fix pages/index.pcss"
   },
   "keywords": [
     "tailwind",
