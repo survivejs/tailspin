@@ -10,7 +10,7 @@
     "postbuild": "npm run purge-css",
     "purge-css": "NODE_ENV=purge postcss public/_shared.css --verbose --replace",
     "prestart": "npm run clean && npm run generate-meta",
-    "start": "node --trace-deprecation node_modules/.bin/webpack --env development",
+    "start": "webpack --env development",
     "clean": "rimraf public",
     "generate-sitemap": "TODO",
     "check-links": "TODO",
