@@ -18,7 +18,8 @@
     "stats": "npm run build -- --json > stats.json",
     "analyze-stats": "webpack-bundle-analyzer stats.json",
     "generate-meta": "node ./utils/generate-meta.js",
-    "test": "jest"
+    "test": "jest",
+    "lint-styles": "stylelint pages/index.pcss"
   },
   "keywords": [
     "tailwind",
@@ -72,6 +73,8 @@
     "sanitize-html": "^1.27.3",
     "sitemap-static": "^0.4.4",
     "source-map-loader": "^1.0.2",
+    "stylelint": "^13.6.1",
+    "stylelint-config-standard": "^20.0.0",
     "tailwindcss": "^1.7.2",
     "tap-spot": "^1.1.1",
     "terser-webpack-plugin": "^4.1.0",
