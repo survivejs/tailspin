@@ -36,7 +36,7 @@ const IndexPage = (props) => (
             <Box as="span" x="state" />
           </Box>
           <Box mb="4">
-            <Alert>This is a demo alert</Alert>
+            <Alert variant="info">This is a demo alert</Alert>
           </Box>
           <Box>
             <Button variant="primary" onclick="setState(v => !v)">

@@ -18,6 +18,8 @@ declare namespace JSX {
     role?: string;
     width?: string;
     height?: string;
+    fill?: string;
+    stroke?: string;
     xmlns: string;
     viewBox: string;
   }
