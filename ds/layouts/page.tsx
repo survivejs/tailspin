@@ -2,6 +2,7 @@ import * as elements from "typed-html";
 import { Navigation, NavigationItem } from "../patterns/navigation";
 import Box from "../primitives/box";
 import Flex from "../primitives/flex";
+import Link from "../primitives/link";
 
 // TODO: Add types
 const PageLayout = ({ head, body, cssTags, jsTags, htmlAttributes, url }) => (
@@ -47,7 +48,12 @@ const PageLayout = ({ head, body, cssTags, jsTags, htmlAttributes, url }) => (
         bg="primary"
         sx="items-center justify-between flex-wrap"
       >
-        footer
+        <Box as="p">
+          Created by{" "}
+          <Link.withExternal href="https://twitter.com/bebraw">
+            Juho Vepsäläinen
+          </Link.withExternal>
+        </Box>
       </Flex>
     </body>
     {jsTags}
