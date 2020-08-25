@@ -25,8 +25,8 @@ export type BoxProps = {
   pr?: PaddingKeys | { [k in ScreenKeys | "default"]?: PaddingKeys };
   px?: PaddingKeys | { [k in ScreenKeys | "default"]?: PaddingKeys };
   py?: PaddingKeys | { [k in ScreenKeys | "default"]?: PaddingKeys };
-  color?: ColorKeys;
-  bg?: ColorKeys;
+  color?: ColorKeys | { [k in ScreenKeys | "default"]?: ColorKeys };
+  bg?: ColorKeys | { [k in ScreenKeys | "default"]?: ColorKeys };
   w?: WidthKeys | { [k in ScreenKeys | "default"]?: WidthKeys };
   h?: HeightKeys | { [k in ScreenKeys | "default"]?: HeightKeys };
   // Exposed attributes

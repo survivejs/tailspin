@@ -1,6 +1,6 @@
 const rules = {
-  bg: (bg) => `bg-${bg}`,
-  color: (color) => `text-${color}`,
+  bg: convertToClasses("bg"),
+  color: convertToClasses("text"),
   m: convertToClasses("m"),
   mx: convertToClasses("mx"),
   my: convertToClasses("my"),
