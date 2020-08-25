@@ -50,7 +50,7 @@ const HeadingWithAnchor = (
 
   return (
     // @ts-ignore
-    <Flex as={`h${level}`} direction="row" sx={sx}>
+    <Flex as={`h${level}`} direction="row" id={id} sx={sx}>
       <Link.withExternal
         href={`#${id}`}
         sx={`-ml-${
@@ -58,9 +58,7 @@ const HeadingWithAnchor = (
         } text-primary absolute hover:secondary cursor-pointer no-underline after-hash`}
       ></Link.withExternal>
       {/* @ts-ignore */}
-      <Box as="span" id={id}>
-        {children}
-      </Box>
+      <Box as="span">{children}</Box>
     </Flex>
   );
 };
