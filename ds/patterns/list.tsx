@@ -1,10 +1,10 @@
 import * as elements from "typed-html";
 import Box from "../primitives/box";
 
-type ListType = "none" | "disc" | "decimal";
+type Variant = "none" | "disc" | "decimal";
 
 // https://tailwindcss.com/components/alerts
-const List = ({ variant }: { variant: ListType }, children: string[]) => (
+const List = ({ variant }: { variant: Variant }, children: string[]) => (
   <Box as={variant == "decimal" ? "ol" : "ul"} sx={`list-${variant}`}>
     {children.join("")}
   </Box>
