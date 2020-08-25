@@ -4,6 +4,7 @@ import Flex from "../primitives/flex";
 
 type Variant = "info" | "warning" | "error" | "success";
 
+// TODO: Generate examples using available variants
 // https://tailwindcss.com/components/alerts
 const Alert = ({ variant }: { variant: Variant }, children: string[]) => {
   const { color, icon } = getStyle(variant);
