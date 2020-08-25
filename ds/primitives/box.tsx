@@ -7,6 +7,7 @@ type MarginKeys = keyof typeof config.theme.margin;
 type PaddingKeys = keyof typeof config.theme.padding;
 type WidthKeys = keyof typeof config.theme.width;
 type HeightKeys = keyof typeof config.theme.height;
+type ScreenKeys = keyof typeof config.theme.screens;
 
 export type BoxProps = {
   as?: keyof JSX.IntrinsicElements;
@@ -26,8 +27,8 @@ export type BoxProps = {
   py?: PaddingKeys;
   color?: ColorKeys;
   bg?: ColorKeys;
-  w?: WidthKeys;
-  h?: HeightKeys;
+  w?: WidthKeys | { [k in ScreenKeys | "default"]?: WidthKeys };
+  h?: HeightKeys | { [k in ScreenKeys | "default"]?: HeightKeys };
   // Exposed attributes
   onclick?: string;
   role?: string;
@@ -38,7 +39,6 @@ export type BoxProps = {
   sx?: string;
 };
 
-// TODO: w-full lg:w-auto -> { default: 'full', lg: 'auto' }
 // https://theme-ui.com/components/box
 const Box = (props: BoxProps = {}, children: string[]) =>
   elements.createElement(
@@ -49,7 +49,13 @@ const Box = (props: BoxProps = {}, children: string[]) =>
 
 export const displayName = "Box";
 export const Example = () => (
-  <Box m="2" p="4" color="white" bg="primary">
+  <Box
+    m="2"
+    p="4"
+    w={{ default: "full", lg: "auto" }}
+    color="white"
+    bg="primary"
+  >
     Beep
   </Box>
 );

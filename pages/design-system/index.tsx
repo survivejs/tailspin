@@ -46,10 +46,14 @@ const DesignSystemPage = (props) => (
     ]}
     body={
       <Flex direction="row" sx="lg:m-8">
-        <Box as="aside" sx="hidden lg:inline lg:w-1/3">
+        <Box as="aside" w={{ lg: "1/3" }} sx="hidden lg:inline">
           <Toc />
         </Box>
-        <Box as="article" w="full" sx="lg:w-2/3 lg:max-w-2xl space-y-16">
+        <Box
+          as="article"
+          w={{ default: "full", lg: "2/3" }}
+          sx="lg:max-w-2xl space-y-16"
+        >
           <Heading level={1} size="4xl" withAnchor>
             Design System
           </Heading>

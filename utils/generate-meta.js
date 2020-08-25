@@ -7,6 +7,8 @@ const glob = require("glob");
 const resolveConfig = require("tailwindcss/resolveConfig");
 const tailwindConfig = require(process.cwd() + "/tailwind.config.js");
 
+const isObject = (a) => typeof a === "object";
+
 try {
   const fullConfig = resolveConfig(tailwindConfig);
   const expandedConfig = {
@@ -59,8 +61,4 @@ function expandColors(colors) {
   });
 
   return ret;
-}
-
-function isObject(a) {
-  return typeof a === "object";
 }

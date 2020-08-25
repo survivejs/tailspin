@@ -15,8 +15,8 @@ const rules = {
   pt: (p) => `pt-${p}`,
   pl: (p) => `pl-${p}`,
   pr: (p) => `pr-${p}`,
-  w: (w) => `w-${w}`,
-  h: (h) => `h-${h}`,
+  w: convertToClasses("w"),
+  h: convertToClasses("h"),
 };
 
 const tailwindKeys = Object.keys(rules);
@@ -39,5 +39,19 @@ function constructTailwindClasses(
 
   return ret.concat(classes);
 }
+
+function convertToClasses(prefix) {
+  return (value) => {
+    if (isObject(value)) {
+      return Object.entries(value)
+        .map(([k, v]) => `${k === "default" ? "" : k + ":"}${prefix}-${v}`)
+        .join(" ");
+    }
+
+    return `${prefix}-${value}`;
+  };
+}
+
+const isObject = (a) => typeof a === "object";
 
 export { constructTailwindClasses, tailwindKeys };
