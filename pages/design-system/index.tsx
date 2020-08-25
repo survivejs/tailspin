@@ -45,7 +45,7 @@ const DesignSystemPage = (props) => (
       ></meta>,
     ]}
     body={
-      <Flex direction="row" sx="lg:m-8">
+      <Flex direction="row" m={{ lg: "8" }}>
         <Box as="aside" w={{ lg: "1/3" }} sx="hidden lg:inline">
           <Toc />
         </Box>

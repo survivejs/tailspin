@@ -26,7 +26,7 @@ const BlogPageLayout = ({
       <meta name="description" content={attributes.description}></meta>,
     ]}
     body={
-      <Box as="article" m="8" sx="w-full mx-auto prose lg:prose-xl">
+      <Box as="article" m="8" mx="auto" w="full" sx="prose lg:prose-xl">
         <Heading level={1} size="4xl">
           {attributes.title}
         </Heading>

@@ -31,7 +31,12 @@ const PageLayout = ({ head, body, cssTags, jsTags, htmlAttributes, url }) => (
           </Box>
           <Box>
             <NavigationItem href="https://github.com/survivejs/tailwind-webpack-starter">
-              <Box sx="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white">
+              <Box
+                px="4"
+                py="2"
+                color="white"
+                sx="inline-block text-sm leading-none border rounded border-white hover:border-transparent hover:text-teal-500 hover:bg-white"
+              >
                 Star at GitHub
               </Box>
             </NavigationItem>
