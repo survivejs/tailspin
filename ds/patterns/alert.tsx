@@ -11,7 +11,6 @@ type Variant = "info" | "warning" | "error" | "success";
 const Alert = ({ variant }: { variant: Variant }, children: string[]) => {
   const { color, bg, icon } = getStyle(variant);
 
-  // TODO: Expose w/h scales from a Box
   return (
     <Flex
       direction="row"
