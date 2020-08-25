@@ -3,24 +3,25 @@ import { constructTailwindClasses, tailwindKeys } from "./_utils";
 import config from "../../tailwind.json";
 
 type ColorKeys = keyof typeof config.expandedColors;
-type SpacingKeys = keyof typeof config.theme.spacing;
+type MarginKeys = keyof typeof config.theme.margin;
+type PaddingKeys = keyof typeof config.theme.padding;
 
 export type BoxProps = {
   as?: keyof JSX.IntrinsicElements;
-  m?: SpacingKeys;
-  mb?: SpacingKeys;
-  mt?: SpacingKeys;
-  ml?: SpacingKeys;
-  mr?: SpacingKeys;
-  mx?: SpacingKeys | "auto";
-  my?: SpacingKeys | "auto";
-  p?: SpacingKeys;
-  pb?: SpacingKeys;
-  pt?: SpacingKeys;
-  pl?: SpacingKeys;
-  pr?: SpacingKeys;
-  px?: SpacingKeys;
-  py?: SpacingKeys;
+  m?: MarginKeys;
+  mb?: MarginKeys;
+  mt?: MarginKeys;
+  ml?: MarginKeys;
+  mr?: MarginKeys;
+  mx?: MarginKeys | "auto";
+  my?: MarginKeys | "auto";
+  p?: PaddingKeys;
+  pb?: PaddingKeys;
+  pt?: PaddingKeys;
+  pl?: PaddingKeys;
+  pr?: PaddingKeys;
+  px?: PaddingKeys;
+  py?: PaddingKeys;
   color?: ColorKeys;
   bg?: ColorKeys;
   // Exposed attributes

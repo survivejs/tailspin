@@ -24,7 +24,7 @@ const BlogPageLayout = ({
     ]}
     body={
       <Box as="article" m="8" sx="w-full mx-auto prose lg:prose-xl">
-        <Heading as="h1">{attributes.title}</Heading>
+        <Heading level={1}>{attributes.title}</Heading>
         <Box sx="space-y-8">
           <Flex direction="row" sx="space-x-2">
             {attributes.categories

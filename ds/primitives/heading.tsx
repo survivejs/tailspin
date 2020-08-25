@@ -1,27 +1,29 @@
 import * as elements from "typed-html";
 import Box from "./box";
+import Flex from "./flex";
 import Link from "./link";
 import config from "../../tailwind.json";
 
-type HeadingAs = "h1" | "h2" | "h3" | "h4";
+type HeadingLevel = 1 | 2 | 3 | 4;
 type HeadingSize = keyof typeof config.theme.fontSize;
 
 // https://theme-ui.com/components/heading
 // This one is more strict than the reference one and it enforced "as".
 const Heading = (
   {
-    as,
+    level,
     size,
     withAnchor,
-  }: { as: HeadingAs; size: HeadingSize; withAnchor?: boolean },
+  }: { level: HeadingLevel; size: HeadingSize; withAnchor?: boolean },
   children: string[]
 ) =>
   withAnchor ? (
-    <HeadingWithAnchor as={as} sx={getSizeClass(size)}>
+    <HeadingWithAnchor level={level} sx={getSizeClass(size)}>
       {children}
     </HeadingWithAnchor>
   ) : (
-    <Box as={as} sx={getSizeClass(size)}>
+    // @ts-ignore
+    <Box as={`h${level}`} sx={getSizeClass(size)}>
       {children}
     </Box>
   );
@@ -33,7 +35,7 @@ function getSizeClass(size: HeadingSize) {
 const ids: { [key: string]: number } = {};
 
 const HeadingWithAnchor = (
-  { as, sx }: { as: HeadingAs; sx: string },
+  { level, sx }: { level: HeadingLevel; sx: string },
   children: string[]
 ) => {
   let id = slugify(children.join(""));
@@ -47,14 +49,19 @@ const HeadingWithAnchor = (
   }
 
   return (
-    <Box sx={sx}>
-      <Box as={as} sx="inline" id={id}>
+    // @ts-ignore
+    <Flex as={`h${level}`} direction="row" sx={sx}>
+      <Link.withExternal
+        href={`#${id}`}
+        sx={`-ml-${
+          { 1: 6, 2: 5, 3: 4, 4: 4 }[level]
+        } text-primary absolute hover:secondary cursor-pointer no-underline after-hash`}
+      ></Link.withExternal>
+      {/* @ts-ignore */}
+      <Box as="span" id={id}>
         {children}
       </Box>
-      <Box ml="2" color="primary" sx="inline hover:secondary cursor-pointer">
-        <Link.withExternal href={`#${id}`}>#</Link.withExternal>
-      </Box>
-    </Box>
+    </Flex>
   );
 };
 
@@ -67,19 +74,19 @@ const slugify = (idBase: string) =>
 export const displayName = "Heading";
 export const Example = () => (
   <Box>
-    <Heading as="h1" size="4xl">
+    <Heading level={1} size="4xl">
       h1 heading
     </Heading>
-    <Heading as="h2" size="2xl">
+    <Heading level={2} size="2xl">
       h2 heading
     </Heading>
-    <Heading as="h3" size="xl">
+    <Heading level={3} size="xl">
       h3 heading
     </Heading>
-    <Heading as="h4" size="lg">
+    <Heading level={4} size="lg">
       h4 heading
     </Heading>
-    <Heading as="h4" size="md" withAnchor>
+    <Heading level={4} size="base" withAnchor>
       h4 heading with anchor
     </Heading>
   </Box>
