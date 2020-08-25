@@ -1,13 +1,15 @@
 import * as elements from "typed-html";
 import Box from "../primitives/box";
 import Flex from "../primitives/flex";
+import config from "../../tailwind.json";
 
+type ColorKeys = keyof typeof config.expandedColors;
 type Variant = "info" | "warning" | "error" | "success";
 
 // TODO: Generate examples using available variants
 // https://tailwindcss.com/components/alerts
 const Alert = ({ variant }: { variant: Variant }, children: string[]) => {
-  const { color, icon } = getStyle(variant);
+  const { color, bg, icon } = getStyle(variant);
 
   // TODO: Expose w/h scales from a Box
   return (
@@ -15,8 +17,8 @@ const Alert = ({ variant }: { variant: Variant }, children: string[]) => {
       direction="row"
       px="4"
       py="3"
-      color={`${color}-700`}
-      bg={`${color}-100`}
+      color={color}
+      bg={bg}
       sx={`border border-${color}-400 rounded relative`}
       role="alert"
     >
@@ -29,11 +31,14 @@ const Alert = ({ variant }: { variant: Variant }, children: string[]) => {
 };
 
 // Icons from https://heroicons.com/
-function getStyle(variant: Variant) {
+function getStyle(
+  variant: Variant
+): { color: ColorKeys; bg: ColorKeys; icon: string } {
   switch (variant) {
     case "info":
       return {
-        color: "blue",
+        color: "blue-700",
+        bg: "blue-100",
         icon: (
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +57,8 @@ function getStyle(variant: Variant) {
       };
     case "success":
       return {
-        color: "green",
+        color: "green-700",
+        bg: "green-100",
         icon: (
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +77,8 @@ function getStyle(variant: Variant) {
       };
     case "warning":
       return {
-        color: "yellow",
+        color: "yellow-700",
+        bg: "yellow-100",
         icon: (
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -90,7 +97,8 @@ function getStyle(variant: Variant) {
       };
     case "error":
       return {
-        color: "red",
+        color: "red-700",
+        bg: "red-100",
         icon: (
           <svg
             xmlns="http://www.w3.org/2000/svg"
