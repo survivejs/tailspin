@@ -9,7 +9,7 @@ const screenPrefixes = [""].concat(
 
 type Direction = "column" | "row";
 
-//  sx="flex-col sm:flex-row"
+// TODO: Support media query syntax (use convertToClasses)
 // https://theme-ui.com/components/flex
 const Flex = (
   props: BoxProps & { direction: Direction | Direction[] } = {
