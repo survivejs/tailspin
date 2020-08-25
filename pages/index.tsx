@@ -24,7 +24,7 @@ const IndexPage = (props) => (
       ></meta>,
     ]}
     body={
-      <Box as="article" m="8" sx="w-full mx-auto prose lg:prose-xl">
+      <Box as="article" m="8" mx="auto" w="full" sx="prose lg:prose-xl">
         {readmeAsHtml}
         <Heading level={2} size="2xl">
           Demo

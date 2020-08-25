@@ -5,6 +5,8 @@ import config from "../../tailwind.json";
 type ColorKeys = keyof typeof config.expandedColors;
 type MarginKeys = keyof typeof config.theme.margin;
 type PaddingKeys = keyof typeof config.theme.padding;
+type WidthKeys = keyof typeof config.theme.width;
+type HeightKeys = keyof typeof config.theme.height;
 
 export type BoxProps = {
   as?: keyof JSX.IntrinsicElements;
@@ -24,6 +26,8 @@ export type BoxProps = {
   py?: PaddingKeys;
   color?: ColorKeys;
   bg?: ColorKeys;
+  w?: WidthKeys;
+  h?: HeightKeys;
   // Exposed attributes
   onclick?: string;
   role?: string;
@@ -34,6 +38,7 @@ export type BoxProps = {
   sx?: string;
 };
 
+// TODO: w-full lg:w-auto -> { default: 'full', lg: 'auto' }
 // https://theme-ui.com/components/box
 const Box = (props: BoxProps = {}, children: string[]) =>
   elements.createElement(

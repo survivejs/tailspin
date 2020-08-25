@@ -49,7 +49,7 @@ const DesignSystemPage = (props) => (
         <Box as="aside" sx="hidden lg:inline lg:w-1/3">
           <Toc />
         </Box>
-        <Box as="article" sx="w-full lg:w-2/3 lg:max-w-2xl space-y-16">
+        <Box as="article" w="full" sx="lg:w-2/3 lg:max-w-2xl space-y-16">
           <Heading level={1} size="4xl" withAnchor>
             Design System
           </Heading>
@@ -235,7 +235,7 @@ const Colors = ({
     .map(([key, color]) =>
       isObject(color) ? (
         <Flex direction="row">
-          <Box ml="1" sx="w-16">
+          <Box ml="1" w="16">
             {key}
           </Box>
           {/* @ts-ignore */}

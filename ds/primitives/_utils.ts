@@ -15,6 +15,8 @@ const rules = {
   pt: (p) => `pt-${p}`,
   pl: (p) => `pl-${p}`,
   pr: (p) => `pr-${p}`,
+  w: (w) => `w-${w}`,
+  h: (h) => `h-${h}`,
 };
 
 const tailwindKeys = Object.keys(rules);

@@ -28,7 +28,7 @@ const Navigation = ({}, children: string[]) => (
         onclick="setState(v => !v)"
       >
         <svg
-          class="fill-current h-3 w-3"
+          class="fill-current w-3 h-3"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -39,7 +39,8 @@ const Navigation = ({}, children: string[]) => (
     </Box>
     <Box
       x-class="!state && 'hidden'"
-      sx="w-full block flex-grow lg:flex lg:items-center lg:w-auto"
+      w="full"
+      sx="block flex-grow lg:flex lg:items-center lg:w-auto"
     >
       {children.join("")}
     </Box>

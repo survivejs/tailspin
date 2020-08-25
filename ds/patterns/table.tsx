@@ -3,7 +3,7 @@ import Box from "../primitives/box";
 
 // https://tailwindcss.com/docs/display/#table
 const Table = ({}, children: string[]) => (
-  <Box as="table" sx="table w-full">
+  <Box as="table" w="full" sx="table">
     {children.join("")}
   </Box>
 );

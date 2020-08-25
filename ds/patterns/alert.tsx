@@ -20,7 +20,7 @@ const Alert = ({ variant }: { variant: Variant }, children: string[]) => {
       sx={`border border-${color}-400 rounded relative`}
       role="alert"
     >
-      <Box mr="2" sx="w-6 h-6">
+      <Box mr="2" w="6" h="6">
         {icon}
       </Box>
       <Box>{children.join("")}</Box>

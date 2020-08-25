@@ -16,7 +16,8 @@ const TabHeader = ({}, children: string[]) => (
 const TabHeaderItem = ({ tabId }: { tabId: string }, children: string[]) => (
   <Box
     py="2"
-    sx="cursor-pointer w-full text-center"
+    w="full"
+    sx="cursor-pointer text-center"
     x-class={`state === '${tabId}' ? 'border-l border-t border-r rounded-t' : 'border-b'`}
     onclick={`setState('${tabId}')`}
   >
