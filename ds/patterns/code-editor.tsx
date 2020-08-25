@@ -22,32 +22,24 @@ const CodeEditor = ({
   </Container>
 );
 
-// TODO: Likely this should be removed through better abstraction (Container)
-const DemoContainer = (
-  {
-    componentSource,
-    exampleSource,
-    sx,
-  }: { componentSource: string; exampleSource: string; sx?: string },
+const StateContainer = (
+  { sources }: { sources: { [key: string]: string } },
   children: string[]
 ) => {
-  const decodedComponentSource = Buffer.from(componentSource).toString(
-    "base64"
-  );
-  const decodedExampleSource = Buffer.from(exampleSource).toString("base64");
+  const state = `{ ${Object.entries(sources)
+    .map(
+      ([name, source]) =>
+        `${name}: atob('${Buffer.from(source as string).toString("base64")}')`
+    )
+    .join(", ")} }`;
 
   return (
-    <Box
-      as="section"
-      x-label="codeEditor"
-      x-state={`{ componentSource: atob('${decodedComponentSource}'), exampleSource: atob('${decodedExampleSource}') }`}
-      sx={sx}
-    >
+    <Box as="section" x-label="codeEditor" x-state={state}>
       {children.join("")}
     </Box>
   );
 };
-CodeEditor.DemoContainer = DemoContainer;
+CodeEditor.StateContainer = StateContainer;
 
 const Container = (
   { source, sx, value }: { source?: string; sx?: string; value: string },

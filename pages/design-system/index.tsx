@@ -139,9 +139,8 @@ const Collection = ({ items }) => {
     .map(
       ({ displayName, description, exampleSource, componentSource, props }) => (
         <Box sx="space-y-4">
-          <CodeEditor.DemoContainer
-            componentSource={componentSource}
-            exampleSource={exampleSource}
+          <CodeEditor.StateContainer
+            sources={{ componentSource, exampleSource }}
           >
             <Heading as="h3" size="xl" withAnchor>
               {displayName}
@@ -198,7 +197,7 @@ const Collection = ({ items }) => {
             >
               {evaluateCode(componentSources, exampleSource, displayName)}
             </Box>
-          </CodeEditor.DemoContainer>
+          </CodeEditor.StateContainer>
         </Box>
       )
     )
