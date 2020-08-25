@@ -16,13 +16,13 @@ const CodeEditor = ({
   source: string;
   onUpdate: string;
 }) => (
-  <Container source={source} value="code">
+  <Container sources={{ code: source }}>
     <Editor value="code" fallback={source} />
     <Box p="4" bg="gray-200" sx="rounded-b-lg" x={onUpdate} />
   </Container>
 );
 
-const StateContainer = (
+const Container = (
   { sources }: { sources: { [key: string]: string } },
   children: string[]
 ) => {
@@ -35,28 +35,6 @@ const StateContainer = (
 
   return (
     <Box as="section" x-label="codeEditor" x-state={state}>
-      {children.join("")}
-    </Box>
-  );
-};
-CodeEditor.StateContainer = StateContainer;
-
-const Container = (
-  { source, sx, value }: { source?: string; sx?: string; value: string },
-  children: string[]
-) => {
-  if (!source) {
-    return null;
-  }
-
-  const decodedExample = Buffer.from(source).toString("base64");
-
-  return (
-    <Box
-      as="section"
-      x-state={`{ ${value}: atob('${decodedExample}') }`}
-      sx={sx}
-    >
       {children.join("")}
     </Box>
   );
