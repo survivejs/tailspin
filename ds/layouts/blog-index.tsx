@@ -5,6 +5,7 @@ import Box from "../primitives/box";
 import Flex from "../primitives/flex";
 import Heading from "../primitives/heading";
 import Link from "../primitives/link";
+import { name } from "../../package.json";
 
 // TODO: Add types
 const BlogIndexLayout = ({
@@ -20,7 +21,7 @@ const BlogIndexLayout = ({
     htmlAttributes={htmlAttributes}
     url={url}
     head={[
-      <title>tailwind-webpack-starter</title>,
+      <title>{name} - Blog</title>,
       <meta
         name="description"
         content="tailwind-webpack-starter combines webpack with Tailwind and provides a starting point for site projects"

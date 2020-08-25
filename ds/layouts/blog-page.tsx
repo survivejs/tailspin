@@ -4,6 +4,7 @@ import Tag from "../patterns/tag";
 import Box from "../primitives/box";
 import Flex from "../primitives/flex";
 import Heading from "../primitives/heading";
+import { name } from "../../package.json";
 
 // TODO: Add types
 const BlogPageLayout = ({
@@ -19,12 +20,16 @@ const BlogPageLayout = ({
     htmlAttributes={htmlAttributes}
     url={url}
     head={[
-      <title>tailwind-webpack-starter - {attributes.title}</title>,
+      <title>
+        {name} - {attributes.title}
+      </title>,
       <meta name="description" content={attributes.description}></meta>,
     ]}
     body={
       <Box as="article" m="8" sx="w-full mx-auto prose lg:prose-xl">
-        <Heading level={1}>{attributes.title}</Heading>
+        <Heading level={1} size="4xl">
+          {attributes.title}
+        </Heading>
         <Box sx="space-y-8">
           <Flex direction="row" sx="space-x-2">
             {attributes.categories

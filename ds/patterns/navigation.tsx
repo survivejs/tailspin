@@ -2,6 +2,7 @@ import * as elements from "typed-html";
 import Flex from "../primitives/flex";
 import Box from "../primitives/box";
 import Link, { ExternalLinkProps } from "../primitives/link";
+import { name } from "../../package.json";
 
 // https://tailwindcss.com/components/navigation
 const Navigation = ({}, children: string[]) => (
@@ -14,7 +15,7 @@ const Navigation = ({}, children: string[]) => (
   >
     <Flex mr="6" direction="row" sx="items-center flex-shrink-0">
       <Box as="span" sx="font-semibold text-xl tracking-tight">
-        tailwind-webpack-starter
+        {name}
       </Box>
     </Flex>
     <Box sx="block lg:hidden">

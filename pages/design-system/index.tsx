@@ -28,6 +28,7 @@ import config from "../../tailwind.json";
 import evaluateCode from "./evaluate-code";
 import parseCode from "./parse-code";
 import parseProps from "./parse-props";
+import { name } from "../../package.json";
 
 const theme = config.theme;
 const colors = theme.colors;
@@ -37,7 +38,7 @@ const DesignSystemPage = (props) => (
   <PageLayout
     {...props}
     head={[
-      <title>tailwind-webpack-starter - Design System</title>,
+      <title>{name} - Design System</title>,
       <meta
         name="description"
         content="tailwind-webpack-starter combines webpack with Tailwind and provides a starting point for site projects"

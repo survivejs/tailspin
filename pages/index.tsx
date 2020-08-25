@@ -7,6 +7,7 @@ import Heading from "../ds/primitives/heading";
 import Box from "../ds/primitives/box";
 import Button from "../ds/primitives/button";
 import { processMarkdown } from "../utils/process-markdown";
+import { name } from "../package.json";
 
 const readmePath = path.join(__dirname, "..", "README.md");
 const readme = fs.readFileSync(readmePath, { encoding: "utf-8" });
@@ -16,7 +17,7 @@ const IndexPage = (props) => (
   <PageLayout
     {...props}
     head={[
-      <title>tailwind-webpack-starter</title>,
+      <title>{name}</title>,
       <meta
         name="description"
         content="tailwind-webpack-starter combines webpack with Tailwind and provides a starting point for site projects"
