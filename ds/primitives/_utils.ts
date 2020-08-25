@@ -1,13 +1,13 @@
 const rules = {
   bg: (bg) => `bg-${bg}`,
   color: (color) => `text-${color}`,
-  m: (m) => `m-${m}`,
-  mx: (m) => `mx-${m}`,
-  my: (m) => `my-${m}`,
-  mb: (m) => (m > 0 ? `mb-${m}` : `-mb-${Math.abs(m)}`),
-  mt: (m) => (m > 0 ? `mt-${m}` : `-mt-${Math.abs(m)}`),
-  ml: (m) => (m > 0 ? `ml-${m}` : `-ml-${Math.abs(m)}`),
-  mr: (m) => (m > 0 ? `mr-${m}` : `-mr-${Math.abs(m)}`),
+  m: convertToClasses("m"),
+  mx: convertToClasses("mx"),
+  my: convertToClasses("my"),
+  mb: convertToClasses("mb", supportNegative),
+  mt: convertToClasses("mt", supportNegative),
+  ml: convertToClasses("ml", supportNegative),
+  mr: convertToClasses("mr", supportNegative),
   p: convertToClasses("p"),
   px: convertToClasses("px"),
   py: convertToClasses("py"),
@@ -18,6 +18,10 @@ const rules = {
   w: convertToClasses("w"),
   h: convertToClasses("h"),
 };
+
+function supportNegative(prefix, v) {
+  return v > 0 ? `${prefix}-${v}` : `-${prefix}-${Math.abs(v)}`;
+}
 
 const tailwindKeys = Object.keys(rules);
 
@@ -40,16 +44,23 @@ function constructTailwindClasses(
   return ret.concat(classes);
 }
 
-function convertToClasses(prefix) {
+function convertToClasses(prefix, customizeValue = defaultValue) {
   return (value) => {
     if (isObject(value)) {
       return Object.entries(value)
-        .map(([k, v]) => `${k === "default" ? "" : k + ":"}${prefix}-${v}`)
+        .map(
+          ([k, v]) =>
+            `${k === "default" ? "" : k + ":"}${customizeValue(prefix, v)}`
+        )
         .join(" ");
     }
 
-    return `${prefix}-${value}`;
+    return customizeValue(prefix, value);
   };
+}
+
+function defaultValue(prefix, value) {
+  return `${prefix}-${value}`;
 }
 
 const isObject = (a) => typeof a === "object";

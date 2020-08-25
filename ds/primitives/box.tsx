@@ -11,13 +11,13 @@ type ScreenKeys = keyof typeof config.theme.screens;
 
 export type BoxProps = {
   as?: keyof JSX.IntrinsicElements;
-  m?: MarginKeys;
-  mb?: MarginKeys;
-  mt?: MarginKeys;
-  ml?: MarginKeys;
-  mr?: MarginKeys;
-  mx?: MarginKeys | "auto";
-  my?: MarginKeys | "auto";
+  m?: MarginKeys | { [k in ScreenKeys | "default"]?: MarginKeys };
+  mb?: MarginKeys | { [k in ScreenKeys | "default"]?: MarginKeys };
+  mt?: MarginKeys | { [k in ScreenKeys | "default"]?: MarginKeys };
+  ml?: MarginKeys | { [k in ScreenKeys | "default"]?: MarginKeys };
+  mr?: MarginKeys | { [k in ScreenKeys | "default"]?: MarginKeys };
+  mx?: MarginKeys | { [k in ScreenKeys | "default"]?: MarginKeys };
+  my?: MarginKeys | { [k in ScreenKeys | "default"]?: MarginKeys };
   p?: PaddingKeys | { [k in ScreenKeys | "default"]?: PaddingKeys };
   pb?: PaddingKeys | { [k in ScreenKeys | "default"]?: PaddingKeys };
   pt?: PaddingKeys | { [k in ScreenKeys | "default"]?: PaddingKeys };
