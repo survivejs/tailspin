@@ -9,20 +9,7 @@ function highlight(language, str) {
   return hljs.highlight(language, str).value;
 }
 
-const CodeEditor = ({
-  source,
-  onUpdate,
-}: {
-  source: string;
-  onUpdate: string;
-}) => (
-  <Container sources={{ code: source }}>
-    <Editor value="code" fallback={source} />
-    <Box p="4" bg="gray-200" sx="rounded-b-lg" x={onUpdate} />
-  </Container>
-);
-
-const Container = (
+const CodeContainer = (
   { sources }: { sources: { [key: string]: string } },
   children: string[]
 ) => {
@@ -39,10 +26,9 @@ const Container = (
     </Box>
   );
 };
-CodeEditor.Container = Container;
 
 // TODO: Textarea
-const Editor = ({
+const CodeEditor = ({
   parent = "this",
   value = "code",
   fallback,
@@ -85,11 +71,13 @@ const Editor = ({
     </Box>
   </Box>
 );
-CodeEditor.Editor = Editor;
 
 export const displayName = "CodeEditor";
 export const Example = () => (
-  <CodeEditor source="'Type source here'" onUpdate="evaluateCode(state.code)" />
+  <CodeContainer sources={{ code: "'Type source here'" }}>
+    <CodeEditor value="code" fallback="'Type source here'" />
+    <Box p="4" bg="gray-200" sx="rounded-b-lg" x="evaluateCode(state.code)" />
+  </CodeContainer>
 );
 
-export default CodeEditor;
+export { CodeContainer, CodeEditor };

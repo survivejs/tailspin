@@ -4,7 +4,7 @@ import * as elements from "typed-html";
 import readableColor from "polished/lib/color/readableColor";
 import glob from "glob";
 import PageLayout from "../../ds/layouts/page";
-import CodeEditor from "../../ds/patterns/code-editor";
+import { CodeContainer, CodeEditor } from "../../ds/patterns/code-editor";
 import {
   Table,
   TableHeader,
@@ -139,7 +139,7 @@ const Collection = ({ items }) => {
     .map(
       ({ displayName, description, exampleSource, componentSource, props }) => (
         <Box sx="space-y-4">
-          <CodeEditor.Container sources={{ componentSource, exampleSource }}>
+          <CodeContainer sources={{ componentSource, exampleSource }}>
             <Heading as="h3" size="xl" withAnchor>
               {displayName}
             </Heading>
@@ -164,14 +164,14 @@ const Collection = ({ items }) => {
               </TabHeader>
               <TabBody>
                 <TabBodyItem tabId="exampleSource">
-                  <CodeEditor.Editor
+                  <CodeEditor
                     parent="codeEditor"
                     value="exampleSource"
                     fallback={exampleSource}
                   />
                 </TabBodyItem>
                 <TabBodyItem tabId="componentSource">
-                  <CodeEditor.Editor
+                  <CodeEditor
                     parent="codeEditor"
                     value="componentSource"
                     fallback={componentSource}
@@ -195,7 +195,7 @@ const Collection = ({ items }) => {
             >
               {evaluateCode(componentSources, exampleSource, displayName)}
             </Box>
-          </CodeEditor.Container>
+          </CodeContainer>
         </Box>
       )
     )
