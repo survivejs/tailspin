@@ -1,9 +1,6 @@
 import _fs from "fs";
 import _path from "path";
 import * as elements from "typed-html";
-import * as ts from "typescript";
-import * as prettier from "prettier";
-import { tsquery } from "@phenomnomnominal/tsquery";
 import readableColor from "polished/lib/color/readableColor";
 import glob from "glob";
 import PageLayout from "../../ds/layouts/page";
@@ -29,6 +26,8 @@ import Box from "../../ds/primitives/box";
 import Heading from "../../ds/primitives/heading";
 import config from "../../tailwind.json";
 import evaluateCode from "./evaluate-code";
+import parseCode from "./parse-code";
+import parseProps from "./parse-props";
 
 const theme = config.theme;
 const colors = theme.colors;
@@ -120,9 +119,9 @@ function getComponent(componentDirectory: string) {
       path,
       source,
       componentSource: component.showCodeEditor
-        ? parseSource({ name: displayName, path, source })
+        ? parseCode({ name: displayName, path, source })
         : "",
-      exampleSource: parseSource({ name: "Example", path, source }),
+      exampleSource: parseCode({ name: "Example", path, source }),
       props: parseProps({
         componentDirectory,
         displayName,
@@ -131,179 +130,6 @@ function getComponent(componentDirectory: string) {
       }),
     };
   };
-}
-
-function parseSource({ name, path, source }) {
-  const exampleIdentifierNode = queryNode({
-    source,
-    query: `Identifier[name="${name}"]`,
-    path,
-  });
-
-  if (!exampleIdentifierNode) {
-    return;
-  }
-
-  const identifierSource = toSource({
-    source,
-    node: exampleIdentifierNode.parent,
-    path,
-  });
-  let exampleJsxNode = queryNode({
-    source: identifierSource,
-    query: "JsxElement",
-    path,
-  });
-
-  if (!exampleJsxNode) {
-    exampleJsxNode = queryNode({
-      source: identifierSource,
-      query: "JsxSelfClosingElement",
-      path,
-    });
-
-    if (!exampleJsxNode) {
-      console.error("queryNode - No nodes found", { source, path });
-
-      return;
-    }
-  }
-
-  return toSource({ source: identifierSource, node: exampleJsxNode, path });
-}
-
-function parseProps({
-  componentDirectory,
-  displayName,
-  path,
-  source,
-}: {
-  componentDirectory: string;
-  displayName: string;
-  path: string;
-  source: string;
-}) {
-  // This isn't fool proof. It would be better to find specifically a function
-  // to avoid matching something else.
-  const componentNode = queryNode({
-    source,
-    query: `Identifier[name="${displayName}"]`,
-    path,
-  });
-
-  if (!componentNode) {
-    return;
-  }
-
-  const componentSource = toSource({
-    source,
-    node: componentNode.parent,
-    path,
-  });
-  const propNodes = queryNodes({
-    source: componentSource,
-    query: "TypeLiteral PropertySignature",
-    path,
-  });
-
-  if (propNodes.length) {
-    return parseProperties(propNodes);
-  }
-
-  // TODO: Likely it would be better to select the first parameter instead
-  const typeReferenceNode = queryNode({
-    source: componentSource,
-    query: `Identifier[name="props"] ~ TypeReference`,
-    path,
-  });
-
-  if (typeReferenceNode) {
-    const referenceType = typeReferenceNode.getText();
-    const propertySignatureNodes = queryNodes({
-      source: source,
-      query: `Identifier[name="${referenceType}"] ~ TypeLiteral > PropertySignature`,
-      path,
-    });
-
-    if (propertySignatureNodes.length) {
-      return parseProperties(propertySignatureNodes);
-    }
-
-    const identifierNode = queryNode({
-      source,
-      query: `Identifier[name="${referenceType}"]`,
-      path,
-    });
-
-    if (!identifierNode) {
-      return;
-    }
-
-    // TODO: Tidy up
-    // @ts-ignore
-    const moduleTarget = identifierNode?.parent?.parent?.parent?.parent?.moduleSpecifier
-      ?.getText()
-      .replace(/"/g, "");
-    const componentPath = _path.join(componentDirectory, `${moduleTarget}.tsx`);
-
-    return parseProps({
-      componentDirectory,
-      displayName: require(componentPath).displayName,
-      path: componentPath,
-      source: _fs.readFileSync(componentPath, { encoding: "utf-8" }),
-    });
-  }
-}
-
-function parseProperties(nodes: ts.Node[]) {
-  if (!nodes.length) {
-    return;
-  }
-
-  return nodes.map(
-    // @ts-ignore: Figure out the exact type
-    ({ name: nameNode, questionToken, type: typeNode }) => {
-      const name = nameNode.getText();
-      const isOptional = !!questionToken;
-      const type = typeNode.getText();
-
-      return { name, isOptional, type };
-    }
-  );
-}
-
-function queryNode({ source, query, path }) {
-  const nodes = queryNodes({ source, query, path });
-
-  if (nodes.length) {
-    return nodes[0];
-  }
-
-  return;
-}
-
-function queryNodes({ source, query, path }) {
-  const ast = tsquery.ast(source, path, ts.ScriptKind.TSX);
-
-  return tsquery(ast, query, { visitAllChildren: true });
-}
-
-function toSource({ path, source, node }) {
-  const sourceFile = ts.createSourceFile(
-    path,
-    source,
-    ts.ScriptTarget.ES2015,
-    false,
-    ts.ScriptKind.TSX
-  );
-  const printer = ts.createPrinter();
-
-  return prettier
-    .format(printer.printNode(ts.EmitHint.Unspecified, node, sourceFile), {
-      parser: "typescript",
-    })
-    .replace(/;/g, "")
-    .trim();
 }
 
 const Collection = ({ items }) => {
