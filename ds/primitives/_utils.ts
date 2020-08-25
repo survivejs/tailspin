@@ -19,7 +19,10 @@ const rules = {
 
 const tailwindKeys = Object.keys(rules);
 
-function constructTailwindClasses(props?: { sx?: string }): string[] {
+function constructTailwindClasses(
+  props?: { sx?: string },
+  classes?: string[]
+): string[] {
   if (!props) {
     return [];
   }
@@ -29,10 +32,10 @@ function constructTailwindClasses(props?: { sx?: string }): string[] {
     .filter(Boolean);
 
   if (props.sx) {
-    return ret.concat(props.sx);
+    return ret.concat(props.sx).concat(classes);
   }
 
-  return ret;
+  return ret.concat(classes);
 }
 
 export { constructTailwindClasses, tailwindKeys };
