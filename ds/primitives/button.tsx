@@ -15,14 +15,14 @@ const Button = (
     onclick={onclick}
     py="2"
     px="4"
-    sx={`${sx} ${getVariantClasses(variant)}`}
+    sx={`${sx || ""} ${getVariantClasses(variant)}`.trim()}
   >
     {children}
   </Box>
 );
 
 function getVariantClasses(variant?: Variant) {
-  const sharedClasses = "font-bold rounded";
+  const sharedClasses = "font-bold rounded cursor-pointer";
 
   switch (variant) {
     case "primary":

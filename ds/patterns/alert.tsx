@@ -21,9 +21,9 @@ const Alert = ({ variant }: { variant: Variant }, children: string[]) => {
       sx={`border border-${color}-400 rounded relative`}
       role="alert"
     >
-      <Box mr="2" w="6" h="6">
+      <Flex direction="column" mr="2" sx="justify-center">
         {icon}
-      </Box>
+      </Flex>
       <Box>{children.join("")}</Box>
     </Flex>
   );
@@ -40,6 +40,7 @@ function getStyle(
         bg: "blue-100",
         icon: (
           <svg
+            class="w-6 h-6"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -60,6 +61,7 @@ function getStyle(
         bg: "green-100",
         icon: (
           <svg
+            class="w-6 h-6"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -80,6 +82,7 @@ function getStyle(
         bg: "yellow-100",
         icon: (
           <svg
+            class="w-6 h-6"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -100,6 +103,7 @@ function getStyle(
         bg: "red-100",
         icon: (
           <svg
+            class="w-6 h-6"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"

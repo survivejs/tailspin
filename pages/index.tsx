@@ -29,21 +29,14 @@ const IndexPage = (props) => (
         <Heading level={2} size="2xl">
           Demo
         </Heading>
-        <Box x-state="false">
-          <Box mb="4">
-            <Box as="span" mr="1">
-              Value:
-            </Box>
-            <Box as="span" x="state" />
+        <Box x-state="false" sx="space-y-4">
+          <Box as="span" mr="1">
+            Value: <Box as="span" x="state" />
           </Box>
-          <Box mb="4">
-            <Alert variant="info">This is a demo alert</Alert>
-          </Box>
-          <Box>
-            <Button variant="primary" onclick="setState(v => !v)">
-              Demo button
-            </Button>
-          </Box>
+          <Alert variant="info">This is a demo alert</Alert>
+          <Button variant="primary" onclick="setState(v => !v)">
+            Demo button
+          </Button>
         </Box>
       </Box>
     }
