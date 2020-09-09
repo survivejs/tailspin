@@ -69,9 +69,16 @@ function parseDirectionClass(direction: StackProps["direction"]) {
 export const displayName = "Stack";
 export const Example = () => (
   <Stack direction="column" spacing="2">
-    <Box>First</Box>
-    <Box>Second</Box>
-    <Box>Third</Box>
+    <Stack direction="column" spacing="2" color="white" bg="secondary">
+      <Box p="2">First</Box>
+      <Box p="2">Second</Box>
+      <Box p="2">Third</Box>
+    </Stack>
+    <Stack direction="row" spacing="2" color="white" bg="secondary">
+      <Box p="2">First</Box>
+      <Box p="2">Second</Box>
+      <Box p="2">Third</Box>
+    </Stack>
   </Stack>
 );
 
