@@ -7,6 +7,7 @@ import config from "../../tailwind.json";
 type HeadingLevel = 1 | 2 | 3 | 4;
 type HeadingSize = keyof typeof config.theme.fontSize;
 
+// TODO: Support responsive syntax
 // https://theme-ui.com/components/heading
 // This one is more strict than the reference one and it enforced "as".
 const Heading = (
