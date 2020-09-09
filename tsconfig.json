@@ -4,6 +4,7 @@
     "typeRoots": ["./node_modules/@types", "./typings"],
     "target": "es5",
     "module": "commonjs",
+    "moduleResolution": "node",
     "lib": ["es2019", "dom"],
     "jsx": "react",
     "jsxFactory": "elements.createElement",
