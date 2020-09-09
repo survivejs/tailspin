@@ -61,7 +61,7 @@ const DesignSystemPage = (props) => (
             Design System
           </Heading>
 
-          <Flex as="section" direction={["column", "row"]}>
+          <Flex as="section" direction={{ default: "column", md: "row" }}>
             <Box sx="flex-auto">
               <Heading level={2} size="2xl" withAnchor>
                 Spacing scale
