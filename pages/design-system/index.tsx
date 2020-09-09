@@ -55,7 +55,7 @@ const DesignSystemPage = (props) => (
           direction="column"
           spacing="16"
           w={{ default: "full", lg: "2/3" }}
-          sx="lg:max-w-2xl"
+          maxw={{ lg: "2xl" }}
         >
           <Heading level={1} size="4xl" withAnchor>
             Design System

@@ -6,7 +6,11 @@ type ColorKeys = keyof typeof config.expandedColors;
 type MarginKeys = keyof typeof config.theme.margin;
 type PaddingKeys = keyof typeof config.theme.padding;
 type WidthKeys = keyof typeof config.theme.width;
+type MinWidthKeys = keyof typeof config.theme.minWidth;
+type MaxWidthKeys = keyof typeof config.theme.maxWidth;
 type HeightKeys = keyof typeof config.theme.height;
+type MinHeightKeys = keyof typeof config.theme.minHeight;
+type MaxHeightKeys = keyof typeof config.theme.maxHeight;
 type ScreenKeys = keyof typeof config.theme.screens;
 
 export type BoxProps = {
@@ -28,7 +32,11 @@ export type BoxProps = {
   color?: ColorKeys | { [k in ScreenKeys | "default"]?: ColorKeys };
   bg?: ColorKeys | { [k in ScreenKeys | "default"]?: ColorKeys };
   w?: WidthKeys | { [k in ScreenKeys | "default"]?: WidthKeys };
+  minw?: MinWidthKeys | { [k in ScreenKeys | "default"]?: MinWidthKeys };
+  maxw?: MaxWidthKeys | { [k in ScreenKeys | "default"]?: MaxWidthKeys };
   h?: HeightKeys | { [k in ScreenKeys | "default"]?: HeightKeys };
+  minh?: MinHeightKeys | { [k in ScreenKeys | "default"]?: MinHeightKeys };
+  maxh?: MaxHeightKeys | { [k in ScreenKeys | "default"]?: MaxHeightKeys };
   // Exposed attributes
   onclick?: string;
   role?: string;

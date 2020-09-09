@@ -52,7 +52,8 @@ const CodeEditor = ({
         as="pre"
         mr="16"
         pr="16"
-        sx="overflow-hidden w-full"
+        w="full"
+        sx="overflow-hidden"
         x={`highlight('html', ${parent}.${value} || '')`}
       >
         {highlight("html", fallback)}

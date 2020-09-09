@@ -29,7 +29,13 @@ const BlogIndexLayout = ({
       ></meta>,
     ]}
     body={
-      <Box as="article" mx="auto" mb="8" sx="w-full lg:w-2/3 lg:max-w-2xl">
+      <Box
+        as="article"
+        mx="auto"
+        mb="8"
+        w={{ default: "full", lg: "2/3" }}
+        maxw={{ lg: "2xl" }}
+      >
         <Heading level={1} size="4xl">
           Blog pages
         </Heading>

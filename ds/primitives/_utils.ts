@@ -16,7 +16,11 @@ const rules = {
   pl: convertToClasses("pl"),
   pr: convertToClasses("pr"),
   w: convertToClasses("w"),
+  minw: convertToClasses("min-w"),
+  maxw: convertToClasses("max-w"),
   h: convertToClasses("h"),
+  minh: convertToClasses("min-h"),
+  maxh: convertToClasses("max-h"),
 };
 
 function supportNegative(mediaQuery, prefix, v) {
