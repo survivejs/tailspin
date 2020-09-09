@@ -74,6 +74,13 @@ function parseProps({
     const moduleTarget = identifierNode?.parent?.parent?.parent?.parent?.moduleSpecifier
       ?.getText()
       .replace(/"/g, "");
+
+    // TODO: Figure out why this can occur for Stack
+    if (!moduleTarget) {
+      // console.warn(`parseProps - Missing module target`, identifierNode);
+      return "";
+    }
+
     const componentPath = _path.join(componentDirectory, `${moduleTarget}.tsx`);
 
     return parseProps({

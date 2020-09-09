@@ -65,4 +65,4 @@ function defaultValue(prefix, value) {
 
 const isObject = (a) => typeof a === "object";
 
-export { constructTailwindClasses, tailwindKeys };
+export { constructTailwindClasses, convertToClasses, tailwindKeys };
