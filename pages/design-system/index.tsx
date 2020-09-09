@@ -23,6 +23,7 @@ import {
 import Toc from "../../ds/patterns/toc";
 import Flex from "../../ds/primitives/flex";
 import Box from "../../ds/primitives/box";
+import Stack from "../../ds/primitives/stack";
 import Heading from "../../ds/primitives/heading";
 import config from "../../tailwind.json";
 import evaluateCode from "./evaluate-code";
@@ -49,10 +50,12 @@ const DesignSystemPage = (props) => (
         <Box as="aside" w={{ lg: "1/3" }} sx="hidden lg:inline">
           <Toc />
         </Box>
-        <Box
+        <Stack
           as="article"
+          direction="column"
+          spacing="16"
           w={{ default: "full", lg: "2/3" }}
-          sx="lg:max-w-2xl space-y-16"
+          sx="lg:max-w-2xl"
         >
           <Heading level={1} size="4xl" withAnchor>
             Design System
@@ -77,29 +80,29 @@ const DesignSystemPage = (props) => (
             <Heading level={2} size="2xl" withAnchor>
               Primitives
             </Heading>
-            <Box sx="space-y-4">
+            <Stack direction="column" spacing="4">
               <Collection items={getComponents("primitives")} />
-            </Box>
+            </Stack>
           </Box>
 
           <Box as="section">
             <Heading level={2} size="2xl" withAnchor>
               Patterns
             </Heading>
-            <Box sx="space-y-4">
+            <Stack direction="column" spacing="4">
               <Collection items={getComponents("patterns")} />
-            </Box>
+            </Stack>
           </Box>
 
           <Box as="section">
             <Heading level={2} size="2xl" withAnchor>
               Layouts
             </Heading>
-            <Box sx="space-y-4">
+            <Stack direction="column" spacing="4">
               <Collection items={getComponents("layouts")} />
-            </Box>
+            </Stack>
           </Box>
-        </Box>
+        </Stack>
       </Flex>
     }
   />
@@ -143,7 +146,7 @@ const Collection = ({ items }) => {
   return items
     .map(
       ({ displayName, description, exampleSource, componentSource, props }) => (
-        <Box sx="space-y-4">
+        <Stack direction="column" spacing="4">
           <CodeContainer sources={{ componentSource, exampleSource }}>
             <Heading level={3} size="xl" withAnchor>
               {displayName}
@@ -201,7 +204,7 @@ const Collection = ({ items }) => {
               {evaluateCode(componentSources, exampleSource, displayName)}
             </Box>
           </CodeContainer>
-        </Box>
+        </Stack>
       )
     )
     .join("");

@@ -3,6 +3,7 @@ import PageLayout from "./page";
 import Tag from "../patterns/tag";
 import Box from "../primitives/box";
 import Flex from "../primitives/flex";
+import Stack from "../primitives/stack";
 import Heading from "../primitives/heading";
 import Link from "../primitives/link";
 import { name } from "../../package.json";
@@ -40,9 +41,9 @@ const BlogIndexLayout = ({
                   <Link href={slug}>{title}</Link>
                 </Heading>
                 <Box>{description}</Box>
-                <Flex direction="row" sx="space-x-2">
+                <Stack direction="row" spacing="2">
                   {categories.map((category) => <Tag>{category}</Tag>).join("")}
-                </Flex>
+                </Stack>
               </Flex>
             ))
             .join("")}

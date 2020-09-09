@@ -5,6 +5,7 @@ import PageLayout from "../ds/layouts/page";
 import Alert from "../ds/patterns/alert";
 import Heading from "../ds/primitives/heading";
 import Box from "../ds/primitives/box";
+import Stack from "../ds/primitives/stack";
 import Button from "../ds/primitives/button";
 import { processMarkdown } from "../utils/process-markdown";
 import { name } from "../package.json";
@@ -29,7 +30,7 @@ const IndexPage = (props) => (
         <Heading level={2} size="2xl">
           Demo
         </Heading>
-        <Box x-state="false" sx="space-y-4">
+        <Stack x-state="false" direction="column" spacing="4">
           <Box as="span" mr="1">
             Value: <Box as="span" x="state" />
           </Box>
@@ -37,7 +38,7 @@ const IndexPage = (props) => (
           <Button variant="primary" onclick="setState(v => !v)">
             Demo button
           </Button>
-        </Box>
+        </Stack>
       </Box>
     }
   />

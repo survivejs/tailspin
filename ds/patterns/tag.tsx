@@ -1,6 +1,6 @@
 import * as elements from "typed-html";
 import Box from "../primitives/box";
-import Flex from "../primitives/flex";
+import Stack from "../primitives/stack";
 import Link from "../primitives/link";
 
 // https://tailwindcss.com/components/alerts
@@ -12,13 +12,13 @@ const Tag = ({}, children: string[]) => (
 
 export const displayName = "Tag";
 export const Example = () => (
-  <Flex direction="row" sx="space-x-2">
+  <Stack direction="row" spacing="2">
     <Tag>Angular.js</Tag>
     <Tag>
       <Link.withExternal href="https://reactjs.org/">React</Link.withExternal>
     </Tag>
     <Tag>Vue</Tag>
-  </Flex>
+  </Stack>
 );
 export const showCodeEditor = true;
 

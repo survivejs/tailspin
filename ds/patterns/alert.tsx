@@ -1,6 +1,7 @@
 import * as elements from "typed-html";
 import Box from "../primitives/box";
 import Flex from "../primitives/flex";
+import Stack from "../primitives/stack";
 import config from "../../tailwind.json";
 
 type ColorKeys = keyof typeof config.expandedColors;
@@ -123,12 +124,12 @@ function getStyle(
 
 export const displayName = "Alert";
 export const Example = () => (
-  <Box sx="space-y-4">
+  <Stack direction="column" spacing="4">
     <Alert variant="info">This is an info alert</Alert>;
     <Alert variant="success">This is a success alert</Alert>;
     <Alert variant="warning">This is a warning alert</Alert>;
     <Alert variant="error">This is an error alert</Alert>;
-  </Box>
+  </Stack>
 );
 
 export default Alert;

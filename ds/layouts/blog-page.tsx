@@ -3,6 +3,7 @@ import PageLayout from "./page";
 import Tag from "../patterns/tag";
 import Box from "../primitives/box";
 import Flex from "../primitives/flex";
+import Stack from "../primitives/stack";
 import Heading from "../primitives/heading";
 import { name } from "../../package.json";
 
@@ -30,12 +31,12 @@ const BlogPageLayout = ({
         <Heading level={1} size="4xl">
           {attributes.title}
         </Heading>
-        <Box sx="space-y-8">
-          <Flex direction="row" sx="space-x-2">
+        <Stack direction="column" spacing="8">
+          <Stack direction="row" spacing="2">
             {attributes.categories
               .map((category) => <Tag>{category}</Tag>)
               .join("")}
-          </Flex>
+          </Stack>
           <Box>{attributes.body}</Box>
           <Flex direction="row" sx="justify-between text-sm">
             <Box>{attributes.author}</Box>
@@ -47,7 +48,7 @@ const BlogPageLayout = ({
               }).format(new Date(attributes.date))}
             </Box>
           </Flex>
-        </Box>
+        </Stack>
       </Box>
     }
   />

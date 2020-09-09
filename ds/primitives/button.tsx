@@ -1,6 +1,6 @@
 import * as elements from "typed-html";
 import Box from "./box";
-import Flex from "./flex";
+import Stack from "./stack";
 
 type ButtonProps = { onclick?: string; sx?: string };
 type Variant = "primary" | "secondary";
@@ -36,7 +36,7 @@ function getVariantClasses(variant?: Variant) {
 
 export const displayName = "Button";
 export const Example = () => (
-  <Flex x-state="'foobar'" direction="column" sx="space-y-4">
+  <Stack x-state="'foobar'" direction="column" spacing="4">
     <Box as="span" x="'Value: ' + state" />
     <Button
       onclick="setState('foobar')"
@@ -50,7 +50,7 @@ export const Example = () => (
     <Button variant="secondary" onclick="setState('secondary')">
       Set to secondary
     </Button>
-  </Flex>
+  </Stack>
 );
 
 export default Button;
