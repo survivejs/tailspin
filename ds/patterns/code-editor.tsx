@@ -1,5 +1,6 @@
 import * as elements from "typed-html";
 import Box from "../primitives/box";
+import Text from "../primitives/text";
 import * as hljs from "highlight.js";
 const html = require("highlight.js/lib/languages/xml");
 
@@ -43,8 +44,8 @@ const CodeEditor = ({
     color="white"
     sx="rounded-t-lg overflow-x-auto overflow-y-hidden"
   >
-    <Box color="gray-600" sx="float-right select-none text-xs">
-      Editor
+    <Box color="gray-600" sx="float-right select-none">
+      <Text size="xs">Editor</Text>
     </Box>
     <Box sx="inline-block font-mono relative">
       <Box

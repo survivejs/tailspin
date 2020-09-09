@@ -5,6 +5,7 @@ import Box from "../primitives/box";
 import Flex from "../primitives/flex";
 import Stack from "../primitives/stack";
 import Heading from "../primitives/heading";
+import Text from "../primitives/text";
 import { name } from "../../package.json";
 
 // TODO: Add types
@@ -38,15 +39,15 @@ const BlogPageLayout = ({
               .join("")}
           </Stack>
           <Box>{attributes.body}</Box>
-          <Flex direction="row" sx="justify-between text-sm">
-            <Box>{attributes.author}</Box>
-            <Box>
+          <Flex direction="row" sx="justify-between">
+            <Text size="sm">{attributes.author}</Text>
+            <Text size="sm">
               {new Intl.DateTimeFormat("en", {
                 year: "numeric",
                 month: "short",
                 day: "2-digit",
               }).format(new Date(attributes.date))}
-            </Box>
+            </Text>
           </Flex>
         </Stack>
       </Box>

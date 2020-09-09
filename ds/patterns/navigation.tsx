@@ -64,7 +64,7 @@ const Example = () => (
     <Navigation
       logo={<NavigationItem href="/">tailwind-webpack-starter</NavigationItem>}
     >
-      <Box sx="text-sm lg:flex-grow">
+      <Box sx="lg:flex-grow">
         <NavigationItem href="/blog/">Blog</NavigationItem>
         <NavigationItem href="/design-system/" isSelected={true}>
           Design system
