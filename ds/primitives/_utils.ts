@@ -19,8 +19,10 @@ const rules = {
   h: convertToClasses("h"),
 };
 
-function supportNegative(prefix, v) {
-  return v > 0 ? `${prefix}-${v}` : `-${prefix}-${Math.abs(v)}`;
+function supportNegative(mediaQuery, prefix, v) {
+  return v > 0
+    ? `${mediaQuery ? mediaQuery + ":" : ""}${prefix}-${v}`
+    : `-${prefix}-${Math.abs(v)}`;
 }
 
 const tailwindKeys = Object.keys(rules);
@@ -46,21 +48,22 @@ function constructTailwindClasses(
 
 function convertToClasses(prefix, customizeValue = defaultValue) {
   return (value) => {
+    if (!value) {
+      return "";
+    }
+
     if (isObject(value)) {
       return Object.entries(value)
-        .map(
-          ([k, v]) =>
-            `${k === "default" ? "" : k + ":"}${customizeValue(prefix, v)}`
-        )
+        .map(([k, v]) => customizeValue(k === "default" ? "" : k, prefix, v))
         .join(" ");
     }
 
-    return customizeValue(prefix, value);
+    return customizeValue("", prefix, value);
   };
 }
 
-function defaultValue(prefix, value) {
-  return `${prefix}-${value}`;
+function defaultValue(mediaQuery: string, prefix: string, value: unknown) {
+  return `${mediaQuery ? mediaQuery + ":" : ""}${prefix}-${value}`;
 }
 
 const isObject = (a) => typeof a === "object";
