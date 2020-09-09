@@ -1,5 +1,5 @@
 node_modules/
 public/
 stats.json
-tailwind.json
+tailwind.ts
 

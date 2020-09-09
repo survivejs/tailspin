@@ -1,6 +1,6 @@
 import * as elements from "typed-html";
 import { constructTailwindClasses, tailwindKeys } from "./_utils";
-import config from "../../tailwind.json";
+import config from "../../tailwind";
 
 type ColorKeys = keyof typeof config.expandedColors;
 type MarginKeys = keyof typeof config.theme.margin;

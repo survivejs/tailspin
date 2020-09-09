@@ -18,8 +18,8 @@ try {
   };
 
   fs.writeFileSync(
-    process.cwd() + "/tailwind.json",
-    JSON.stringify(expandedConfig, null, 2),
+    process.cwd() + "/tailwind.ts",
+    `export default ${JSON.stringify(expandedConfig, null, 2)};`,
     {
       encoding: "utf-8",
     }
