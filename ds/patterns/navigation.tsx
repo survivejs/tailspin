@@ -2,10 +2,9 @@ import * as elements from "typed-html";
 import Flex from "../primitives/flex";
 import Box from "../primitives/box";
 import Link, { ExternalLinkProps } from "../primitives/link";
-import { name } from "../../package.json";
 
 // https://tailwindcss.com/components/navigation
-const Navigation = ({}, children: string[]) => (
+const Navigation = ({ logo }: { logo?: string }, children: string[]) => (
   <Flex
     as="nav"
     direction="row"
@@ -14,9 +13,7 @@ const Navigation = ({}, children: string[]) => (
     x-state="false"
   >
     <Flex mr="6" direction="row" sx="items-center flex-shrink-0">
-      <Box as="span" sx="font-semibold text-xl tracking-tight">
-        {name}
-      </Box>
+      {logo}
     </Flex>
     <Box sx="block lg:hidden">
       <Flex
@@ -55,7 +52,7 @@ const NavigationItem = (
     href={href}
     sx={`${
       isSelected ? "font-bold" : ""
-    } block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4`}
+    } block lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4`}
   >
     {label}
   </Link.withExternal>
@@ -64,9 +61,11 @@ const NavigationItem = (
 const displayName = "Navigation";
 const Example = () => (
   <Box bg="primary" color="white">
-    <Navigation>
+    <Navigation
+      logo={<NavigationItem href="/">tailwind-webpack-starter</NavigationItem>}
+    >
       <Box sx="text-sm lg:flex-grow">
-        <NavigationItem href="/">Documentation</NavigationItem>
+        <NavigationItem href="/blog/">Blog</NavigationItem>
         <NavigationItem href="/design-system/" isSelected={true}>
           Design system
         </NavigationItem>

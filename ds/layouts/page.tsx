@@ -3,6 +3,7 @@ import { Navigation, NavigationItem } from "../patterns/navigation";
 import Box from "../primitives/box";
 import Flex from "../primitives/flex";
 import Link from "../primitives/link";
+import { name } from "../../package.json";
 
 // TODO: Add types
 const PageLayout = ({ head, body, cssTags, jsTags, htmlAttributes, url }) => (
@@ -14,11 +15,14 @@ const PageLayout = ({ head, body, cssTags, jsTags, htmlAttributes, url }) => (
     </head>
     <body>
       <Box as="header" bg="primary" color="white">
-        <Navigation>
-          <Box sx="text-sm lg:flex-grow">
+        <Navigation
+          logo={
             <NavigationItem href="/" isSelected={url === "/"}>
-              Documentation
+              {name}
             </NavigationItem>
+          }
+        >
+          <Box sx="text-sm lg:flex-grow">
             <NavigationItem href="/blog/" isSelected={url === "/blog/"}>
               Blog
             </NavigationItem>
