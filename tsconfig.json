@@ -1,22 +1,7 @@
 {
   "include": ["ds", "pages", "typings/*.d.ts"],
   "compilerOptions": {
-    "typeRoots": ["./node_modules/@types", "./typings"],
-    "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "lib": ["es2019", "dom"],
     "jsx": "react",
-    "jsxFactory": "elements.createElement",
-    "strict": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "noImplicitAny": false,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true
-  },
-  "ts-node": {
-    "logError": true,
-    "transpileOnly": true
+    "jsxFactory": "elements.createElement"
   }
 }

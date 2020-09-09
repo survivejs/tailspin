@@ -4,7 +4,7 @@ async function serve(port: number) {
   const app = new Application();
 
   // @ts-ignore
-  const { hello } = await import("./demo.ts");
+  const { hello } = await import("./demo.tsx");
 
   // TODO: Generalize and return jsx processed through typed-html
   app.use(async (context) => {
