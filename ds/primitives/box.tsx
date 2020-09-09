@@ -1,6 +1,6 @@
-import * as elements from "typed-html";
-import { constructTailwindClasses, tailwindKeys } from "./_utils";
-import config from "../../tailwind";
+import * as elements from "../../src/elements.ts";
+import { constructTailwindClasses, tailwindKeys } from "./_utils.ts";
+import config from "../../tailwind.ts";
 
 type ColorKeys = keyof typeof config.expandedColors;
 type MarginKeys = keyof typeof config.theme.margin;
@@ -70,7 +70,7 @@ export const Example = () => (
 
 export default Box;
 
-function attachAttributes(props): elements.Attributes {
+function attachAttributes(props?: {}): elements.Attributes {
   if (!props) {
     return {};
   }

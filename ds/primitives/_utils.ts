@@ -23,23 +23,28 @@ const rules = {
   maxh: convertToClasses("max-h"),
 };
 
-function supportNegative(mediaQuery, prefix, v) {
+function supportNegative(
+  mediaQuery: string,
+  prefix: string,
+  v: string | number,
+) {
   return v > 0
     ? `${mediaQuery ? mediaQuery + ":" : ""}${prefix}-${v}`
-    : `-${prefix}-${Math.abs(v)}`;
+    : `-${prefix}-${Math.abs(v as number)}`;
 }
 
 const tailwindKeys = Object.keys(rules);
 
 function constructTailwindClasses(
   props?: { sx?: string },
-  classes?: string[]
+  classes?: string[],
 ): string[] {
   if (!props) {
     return [];
   }
 
   const ret = Object.entries(props)
+    // @ts-ignore TODO: Figure out how to type this.
     .map(([k, v]) => rules[k]?.(v))
     .filter(Boolean);
 
@@ -50,8 +55,8 @@ function constructTailwindClasses(
   return ret.concat(classes);
 }
 
-function convertToClasses(prefix, customizeValue = defaultValue) {
-  return (value) => {
+function convertToClasses(prefix: string, customizeValue = defaultValue) {
+  return (value: string) => {
     if (!value) {
       return "";
     }
@@ -66,10 +71,14 @@ function convertToClasses(prefix, customizeValue = defaultValue) {
   };
 }
 
-function defaultValue(mediaQuery: string, prefix: string, value: unknown) {
+function defaultValue(
+  mediaQuery: string,
+  prefix: string,
+  value: string | number,
+) {
   return `${mediaQuery ? mediaQuery + ":" : ""}${prefix}-${value}`;
 }
 
-const isObject = (a) => typeof a === "object";
+const isObject = (a: any) => typeof a === "object";
 
 export { constructTailwindClasses, convertToClasses, tailwindKeys };
