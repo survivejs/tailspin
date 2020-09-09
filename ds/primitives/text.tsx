@@ -1,6 +1,6 @@
 import * as elements from "typed-html";
 import omit from "object.omit";
-import Box from "./box";
+import Box, { BoxProps } from "./box";
 import config from "../../tailwind.json";
 import { convertToClasses } from "./_utils";
 
@@ -8,7 +8,8 @@ type FontSize = keyof typeof config.theme.fontSize;
 type FontWeight = keyof typeof config.theme.fontWeight;
 type ScreenKeys = keyof typeof config.theme.screens;
 
-type TextProps = {
+export type TextProps = {
+  as?: BoxProps["as"];
   size?: FontSize | { [k in ScreenKeys | "default"]?: FontSize };
   weight?: FontWeight;
 };

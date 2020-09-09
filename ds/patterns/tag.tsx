@@ -2,11 +2,12 @@ import * as elements from "typed-html";
 import Box from "../primitives/box";
 import Stack from "../primitives/stack";
 import Link from "../primitives/link";
+import Text from "../primitives/text";
 
 // https://tailwindcss.com/components/alerts
 const Tag = ({}, children: string[]) => (
-  <Box px="1" color="white" bg="primary" sx="rounded-full text-sm">
-    {children.join("")}
+  <Box px="1" color="white" bg="primary" sx="rounded-full">
+    <Text size="sm">{children.join("")}</Text>
   </Box>
 );
 

@@ -2,12 +2,10 @@ import * as elements from "typed-html";
 import Box from "./box";
 import Flex from "./flex";
 import Link from "./link";
-import config from "../../tailwind.json";
+import Text, { TextProps } from "./text";
 
 type HeadingLevel = 1 | 2 | 3 | 4;
-type HeadingSize = keyof typeof config.theme.fontSize;
 
-// TODO: Support responsive syntax
 // https://theme-ui.com/components/heading
 // This one is more strict than the reference one and it enforced "as".
 const Heading = (
@@ -15,28 +13,23 @@ const Heading = (
     level,
     size,
     withAnchor,
-  }: { level: HeadingLevel; size: HeadingSize; withAnchor?: boolean },
+  }: { level: HeadingLevel; size: TextProps["size"]; withAnchor?: boolean },
   children: string[]
 ) =>
   withAnchor ? (
-    <HeadingWithAnchor level={level} sx={getSizeClass(size)}>
+    <HeadingWithAnchor level={level} size={size}>
       {children}
     </HeadingWithAnchor>
   ) : (
-    // @ts-ignore
-    <Box as={`h${level}`} sx={getSizeClass(size)}>
+    <Text as={`h${level}` as keyof JSX.IntrinsicElements} size={size}>
       {children}
-    </Box>
+    </Text>
   );
-
-function getSizeClass(size: HeadingSize) {
-  return `text-${size}`;
-}
 
 const ids: { [key: string]: number } = {};
 
 const HeadingWithAnchor = (
-  { level, sx }: { level: HeadingLevel; sx: string },
+  { level, size }: { level: HeadingLevel; size: TextProps["size"] },
   children: string[]
 ) => {
   let id = slugify(children.join(""));
@@ -50,17 +43,22 @@ const HeadingWithAnchor = (
   }
 
   return (
-    // @ts-ignore
-    <Flex as={`h${level}`} direction="row" id={id} sx={sx}>
-      <Link.withExternal
-        href={`#${id}`}
-        sx={`-ml-${
-          { 1: 6, 2: 5, 3: 4, 4: 4 }[level]
-        } text-primary absolute hover:secondary cursor-pointer no-underline after-hash`}
-      ></Link.withExternal>
-      {/* @ts-ignore */}
-      <Box as="span">{children}</Box>
-    </Flex>
+    <Text size={size}>
+      <Flex
+        as={`h${level}` as keyof JSX.IntrinsicElements}
+        direction="row"
+        id={id}
+      >
+        <Link.withExternal
+          href={`#${id}`}
+          sx={`-ml-${
+            { 1: 6, 2: 5, 3: 4, 4: 4 }[level]
+          } text-primary absolute hover:secondary cursor-pointer no-underline after-hash`}
+        ></Link.withExternal>
+        {/* @ts-ignore */}
+        <Box as="span">{children}</Box>
+      </Flex>
+    </Text>
   );
 };
 
@@ -87,6 +85,9 @@ export const Example = () => (
     </Heading>
     <Heading level={4} size="base" withAnchor>
       h4 heading with anchor
+    </Heading>
+    <Heading level={4} size={{ default: "base", md: "2xl" }}>
+      Responsive heading
     </Heading>
   </Box>
 );
