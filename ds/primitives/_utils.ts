@@ -1,3 +1,9 @@
+// import * as otion from "otion/dev";
+import ow from "https://unpkg.com/oceanwind@0.2.1";
+
+// console.log("otion", otion);
+console.log("ow", ow(["m-2"]));
+
 const rules = {
   bg: convertToClasses("bg"),
   color: convertToClasses("text"),
@@ -26,7 +32,7 @@ const rules = {
 function supportNegative(
   mediaQuery: string,
   prefix: string,
-  v: string | number,
+  v: string | number
 ) {
   return v > 0
     ? `${mediaQuery ? mediaQuery + ":" : ""}${prefix}-${v}`
@@ -37,7 +43,7 @@ const tailwindKeys = Object.keys(rules);
 
 function constructTailwindClasses(
   props?: { sx?: string },
-  classes?: string[],
+  classes?: string[]
 ): string[] {
   if (!props) {
     return [];
@@ -74,7 +80,7 @@ function convertToClasses(prefix: string, customizeValue = defaultValue) {
 function defaultValue(
   mediaQuery: string,
   prefix: string,
-  value: string | number,
+  value: string | number
 ) {
   return `${mediaQuery ? mediaQuery + ":" : ""}${prefix}-${value}`;
 }
