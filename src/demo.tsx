@@ -20,7 +20,7 @@ const button = c({
 console.log("css", c);
 */
 
-export const hello = () => (
+export const page = () => (
   <Box m="2" p="2" color="white" bg="primary">
     hello world
   </Box>
