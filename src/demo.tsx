@@ -21,7 +21,23 @@ console.log("css", c);
 */
 
 export const page = () => (
-  <Box m="2" p="2" color="white" bg="primary">
-    hello world
-  </Box>
+  <html>
+    <head>
+      <script>
+        {`
+const socket = new WebSocket('ws://localhost:8080');
+
+socket.addEventListener('message', function (event) {
+  if (event.data === 'refresh') {
+    location.reload();
+  }
+});`}
+      </script>
+    </head>
+    <body>
+      <Box m="2" p="2" color="white" bg="primary">
+        hello world
+      </Box>
+    </body>
+  </html>
 );
