@@ -3,6 +3,12 @@ import {
   WebSocket,
   WebSocketServer,
 } from "https://deno.land/x/websocket@v0.0.3/mod.ts";
+import ow, {
+  setup,
+  filterOutUnusedRules,
+  getStyleTag,
+  VirtualInjector,
+} from "https://unpkg.com/@bebraw/oceanwind@0.2.4";
 
 async function serve(port: number) {
   const app = new Application();
@@ -26,8 +32,31 @@ async function serve(port: number) {
   app.use(async (context) => {
     console.log("page", pages);
 
+    const injector = VirtualInjector();
+    setup({ injector });
+
+    const pageHtml = pages.hello.page();
+    const styleTag = getStyleTag(filterOutUnusedRules(injector, pageHtml));
+
+    console.log("style tag", styleTag);
+
+    // TODO: Set mimetype to html correctly
     // ctx.request.url.pathname
-    context.response.body = new TextEncoder().encode(pages.hello.page());
+    context.response.body = new TextEncoder().encode(`<html>
+  <head>
+    <script>
+    const socket = new WebSocket('ws://localhost:8080');
+
+    socket.addEventListener('message', function (event) {
+      if (event.data === 'refresh') {
+        location.reload();
+      }
+    });
+    </script>
+  ${styleTag}
+  </head>
+  <body>${pageHtml}</body>
+</html>`);
   });
 
   app.listen({ port });

@@ -1,8 +1,5 @@
 // import * as otion from "otion/dev";
-import ow from "https://unpkg.com/@bebraw/oceanwind@0.2.3";
-
-// console.log("otion", otion);
-console.log("ow", ow(["m-2"]));
+import ow from "https://unpkg.com/@bebraw/oceanwind@0.2.4";
 
 const rules = {
   bg: convertToClasses("bg"),
@@ -68,12 +65,14 @@ function convertToClasses(prefix: string, customizeValue = defaultValue) {
     }
 
     if (isObject(value)) {
-      return Object.entries(value)
-        .map(([k, v]) => customizeValue(k === "default" ? "" : k, prefix, v))
-        .join(" ");
+      return ow(
+        Object.entries(value).map(([k, v]) =>
+          customizeValue(k === "default" ? "" : k, prefix, v)
+        )
+      );
     }
 
-    return customizeValue("", prefix, value);
+    return ow([customizeValue("", prefix, value)]);
   };
 }
 
