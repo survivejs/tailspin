@@ -1,5 +1,5 @@
 // import * as otion from "otion/dev";
-import ow from "https://unpkg.com/oceanwind@0.2.1";
+import ow from "https://unpkg.com/@bebraw/oceanwind@0.2.3";
 
 // console.log("otion", otion);
 console.log("ow", ow(["m-2"]));
