@@ -44,6 +44,9 @@ async function serve(port: number) {
     // ctx.request.url.pathname
     context.response.body = new TextEncoder().encode(`<html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deno demo</title>
+    <meta name="description" content="description goes here"></meta>
     <script>
     const socket = new WebSocket('ws://localhost:8080');
 

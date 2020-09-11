@@ -1,4 +1,3 @@
-import { readJsonSync } from "https://deno.land/std/fs/mod.ts";
 import * as elements from "../../src/elements.ts";
 import PageLayout from "./page.tsx";
 import Tag from "../patterns/tag.tsx";
@@ -8,29 +7,25 @@ import Stack from "../primitives/stack.tsx";
 import Heading from "../primitives/heading.tsx";
 import Link from "../primitives/link.tsx";
 
-// @ts-ignore: How to use the JSON schema here?
-const { name } = readJsonSync("../package.json");
-
-// TODO: Add types
 const BlogIndexLayout = ({
-  cssTags,
-  jsTags,
-  htmlAttributes,
   url,
   attributes,
+}: {
+  url: string;
+  attributes: {
+    pages: {
+      title: string;
+      categories: string[];
+      description: string;
+      body: string;
+      author: string;
+      date: string;
+      slug: string;
+    }[];
+  };
 }) => (
   <PageLayout
-    cssTags={cssTags}
-    jsTags={jsTags}
-    htmlAttributes={htmlAttributes}
     url={url}
-    head={[
-      <title>{name} - Blog</title>,
-      <meta
-        name="description"
-        content="tailwind-webpack-starter combines webpack with Tailwind and provides a starting point for site projects"
-      ></meta>,
-    ]}
     body={
       <Box
         as="article"
@@ -65,9 +60,6 @@ const BlogIndexLayout = ({
 export const displayName = "BlogIndexLayout";
 export const Example = () => (
   <BlogIndexLayout
-    cssTags=""
-    jsTags=""
-    htmlAttributes=""
     url="/"
     attributes={{
       pages: [
