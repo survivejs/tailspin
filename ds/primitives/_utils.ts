@@ -62,7 +62,7 @@ function constructTailwindClasses(
 }
 
 function convertToClasses(prefix: string, customizeValue = defaultValue) {
-  return (value?: string) => {
+  return (value?: any) => {
     if (!value) {
       return "";
     }
@@ -70,7 +70,7 @@ function convertToClasses(prefix: string, customizeValue = defaultValue) {
     if (isObject(value)) {
       return ow(
         Object.entries(value).map(([k, v]) =>
-          customizeValue(k === "default" ? "" : k, prefix, v)
+          customizeValue(k === "default" ? "" : k, prefix, v as string)
         )
       );
     }

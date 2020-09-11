@@ -1,8 +1,4 @@
 import * as elements from "./elements.ts";
-import Box from "../ds/primitives/box.tsx";
+import PageLayout from "../ds/layouts/page.tsx";
 
-export const page = () => (
-  <Box m="2" p="2" color="white" bg="black">
-    hello world
-  </Box>
-);
+export const page = () => <PageLayout body="Hello from body" url="/" />;

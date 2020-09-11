@@ -1,13 +1,9 @@
-import { readJsonSync } from "https://deno.land/std/fs/mod.ts";
 import * as elements from "../../src/elements.ts";
 import { Navigation, NavigationItem } from "../patterns/navigation.tsx";
 import Box from "../primitives/box.tsx";
 import Flex from "../primitives/flex.tsx";
 import Link from "../primitives/link.tsx";
 import Text from "../primitives/text.tsx";
-
-// @ts-ignore: How to use the JSON schema here?
-const { name } = readJsonSync("../package.json");
 
 // TODO: Support fragments (<>)
 const PageLayout = ({ body, url }: { body: string; url: string }) => (
@@ -16,7 +12,7 @@ const PageLayout = ({ body, url }: { body: string; url: string }) => (
       <Navigation
         logo={
           <NavigationItem href="/" isSelected={url === "/"}>
-            {name}
+            tailwind-webpack-starter
           </NavigationItem>
         }
       >

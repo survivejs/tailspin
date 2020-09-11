@@ -46,7 +46,7 @@ const Navigation = ({ logo }: { logo?: string }, children: string[]) => (
 
 const NavigationItem = (
   { href, isSelected }: ExternalLinkProps & { isSelected?: boolean },
-  label
+  label: string[]
 ) => (
   <Link.withExternal
     href={href}

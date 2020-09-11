@@ -1,4 +1,3 @@
-import { readJsonSync } from "https://deno.land/std/fs/mod.ts";
 import * as elements from "../src/elements.ts";
 import PageLayout from "../ds/layouts/page.tsx";
 import Alert from "../ds/patterns/alert.tsx";
@@ -8,9 +7,6 @@ import Stack from "../ds/primitives/stack.tsx";
 import Button from "../ds/primitives/button.tsx";
 import { processMarkdown } from "../utils/process-markdown.ts";
 
-// @ts-ignore: How to use the JSON schema here?
-const { name } = readJsonSync("../package.json");
-
 const readme = Deno.readTextFileSync("../README.md");
 const readmeAsHtml = processMarkdown(readme);
 
@@ -18,7 +14,7 @@ const IndexPage = (props: any) => (
   <PageLayout
     {...props}
     head={[
-      <title>{name}</title>,
+      <title>tailwind-webpack-starter</title>,
       <meta
         name="description"
         content="tailwind-webpack-starter combines webpack with Tailwind and provides a starting point for site projects"

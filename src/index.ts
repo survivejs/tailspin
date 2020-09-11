@@ -3,7 +3,7 @@ import {
   WebSocket,
   WebSocketServer,
 } from "https://deno.land/x/websocket@v0.0.3/mod.ts";
-import ow, {
+import {
   setup,
   filterOutUnusedRules,
   getStyleTag,
@@ -40,8 +40,8 @@ async function serve(port: number) {
 
     console.log("style tag", styleTag);
 
-    // TODO: Set mimetype to html correctly
-    // ctx.request.url.pathname
+    // TODO: Either make sidewind self-register or register it explicitly in a module.
+    context.response.headers.set("Content-Type", "text/html; charset=UTF-8");
     context.response.body = new TextEncoder().encode(`<html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -56,14 +56,21 @@ async function serve(port: number) {
       }
     });
     </script>
-  ${styleTag}
+    <script type="text/javascript" src="https://unpkg.com/sidewind@3.1.2/dist/sidewind.umd.production.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@1.8.3/dist/base.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/@tailwindcss/typography@0.2.0/dist/typography.min.css" />
+    ${styleTag}
   </head>
-  <body>${pageHtml}</body>
+  <body>
+    ${pageHtml}
+  </body>
 </html>`);
   });
 
+  console.log(`Serving at http://127.0.0.1:${port}`);
   app.listen({ port });
 
+  // TODO: Extract to a separate function
   const watcher = Deno.watchFs(["./"]);
   for await (const event of watcher) {
     if (event.kind === "modify") {
@@ -77,8 +84,6 @@ async function serve(port: number) {
       websocket?.send("refresh");
     }
   }
-
-  console.log(`Serving at http://127.0.0.1:${port}`);
 }
 
 // TODO: Make port configurable

@@ -27,9 +27,6 @@ import evaluateCode from "./evaluate-code.ts";
 import parseCode from "./parse-code.ts";
 import parseProps from "./parse-props.ts";
 
-// @ts-ignore: How to use the JSON schema here?
-const { name } = readJsonSync("../package.json");
-
 const colors = config.colors;
 const spacingScale = Object.keys(config.spacing);
 
@@ -37,7 +34,7 @@ const DesignSystemPage = (props: any) => (
   <PageLayout
     {...props}
     head={[
-      <title>{name} - Design System</title>,
+      <title>tailwind-webpack-starter - Design System</title>,
       <meta
         name="description"
         content="tailwind-webpack-starter combines webpack with Tailwind and provides a starting point for site projects"
