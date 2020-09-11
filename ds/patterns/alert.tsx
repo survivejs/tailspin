@@ -1,10 +1,10 @@
-import * as elements from "typed-html";
-import Box from "../primitives/box";
-import Flex from "../primitives/flex";
-import Stack from "../primitives/stack";
-import config from "../../tailwind.json";
+import * as elements from "../../src/elements.ts";
+import Box from "../primitives/box.tsx";
+import Flex from "../primitives/flex.tsx";
+import Stack from "../primitives/stack.tsx";
+import config from "../../tailwind.ts";
 
-type ColorKeys = keyof typeof config.expandedColors;
+type ColorKeys = keyof typeof config.colors;
 type Variant = "info" | "warning" | "error" | "success";
 
 // TODO: Generate examples using available variants

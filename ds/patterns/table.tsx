@@ -1,5 +1,5 @@
-import * as elements from "typed-html";
-import Box from "../primitives/box";
+import * as elements from "../../src/elements.ts";
+import Box from "../primitives/box.tsx";
 
 // https://tailwindcss.com/docs/display/#table
 const Table = ({}, children: string[]) => (
@@ -24,7 +24,9 @@ const TableHeaderCell = ({}, children: string[]) => (
   </Box>
 );
 
-const TableBody = ({}, children) => <Box as="tbody">{children.join("")}</Box>;
+const TableBody = ({}, children: string[]) => (
+  <Box as="tbody">{children.join("")}</Box>
+);
 
 const TableBodyCell = ({}, children: string[]) => (
   <Box as="td" sx="table-cell">

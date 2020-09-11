@@ -1,12 +1,15 @@
-import * as elements from "typed-html";
-import PageLayout from "./page";
-import Tag from "../patterns/tag";
-import Box from "../primitives/box";
-import Flex from "../primitives/flex";
-import Stack from "../primitives/stack";
-import Heading from "../primitives/heading";
-import Link from "../primitives/link";
-import { name } from "../../package.json";
+import { readJsonSync } from "https://deno.land/std/fs/mod.ts";
+import * as elements from "../../src/elements.ts";
+import PageLayout from "./page.tsx";
+import Tag from "../patterns/tag.tsx";
+import Box from "../primitives/box.tsx";
+import Flex from "../primitives/flex.tsx";
+import Stack from "../primitives/stack.tsx";
+import Heading from "../primitives/heading.tsx";
+import Link from "../primitives/link.tsx";
+
+// @ts-ignore: How to use the JSON schema here?
+const { name } = readJsonSync("../package.json");
 
 // TODO: Add types
 const BlogIndexLayout = ({

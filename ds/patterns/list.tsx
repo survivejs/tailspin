@@ -1,5 +1,5 @@
-import * as elements from "typed-html";
-import Box from "../primitives/box";
+import * as elements from "../../src/elements.ts";
+import Box from "../primitives/box.tsx";
 
 type Variant = "none" | "disc" | "decimal";
 

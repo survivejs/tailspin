@@ -1,5 +1,5 @@
-import * as elements from "../src/elements.ts";
 import { readJsonSync } from "https://deno.land/std/fs/mod.ts";
+import * as elements from "../src/elements.ts";
 import PageLayout from "../ds/layouts/page.tsx";
 import Alert from "../ds/patterns/alert.tsx";
 import Heading from "../ds/primitives/heading.tsx";

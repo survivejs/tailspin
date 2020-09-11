@@ -1,8 +1,8 @@
-import * as elements from "typed-html";
-import Box from "../primitives/box";
-import Stack from "../primitives/stack";
-import Link from "../primitives/link";
-import Text from "../primitives/text";
+import * as elements from "../../src/elements.ts";
+import Box from "../primitives/box.tsx";
+import Stack from "../primitives/stack.tsx";
+import Link from "../primitives/link.tsx";
+import Text from "../primitives/text.tsx";
 
 // https://tailwindcss.com/components/alerts
 const Tag = ({}, children: string[]) => (

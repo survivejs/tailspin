@@ -1,6 +1,6 @@
-import * as elements from "typed-html";
-import Box from "../primitives/box";
-import { List, ListItem } from "./list";
+import * as elements from "../../src/elements.ts";
+import Box from "../primitives/box.tsx";
+import { List, ListItem } from "./list.tsx";
 
 const Toc = () => (
   <Box

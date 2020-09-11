@@ -1,7 +1,7 @@
-import * as elements from "typed-html";
-import Flex from "../primitives/flex";
-import Box from "../primitives/box";
-import Link, { ExternalLinkProps } from "../primitives/link";
+import * as elements from "../../src/elements.ts";
+import Flex from "../primitives/flex.tsx";
+import Box from "../primitives/box.tsx";
+import Link, { ExternalLinkProps } from "../primitives/link.tsx";
 
 // https://tailwindcss.com/components/navigation
 const Navigation = ({ logo }: { logo?: string }, children: string[]) => (

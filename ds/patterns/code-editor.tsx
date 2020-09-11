@@ -1,6 +1,7 @@
-import * as elements from "typed-html";
-import Box from "../primitives/box";
-import Text from "../primitives/text";
+import * as elements from "../../src/elements.ts";
+import Box from "../primitives/box.tsx";
+import Text from "../primitives/text.tsx";
+
 import * as hljs from "highlight.js";
 const html = require("highlight.js/lib/languages/xml");
 

@@ -1,6 +1,6 @@
-import * as elements from "typed-html";
-import Box from "../primitives/box";
-import Flex from "../primitives/flex";
+import * as elements from "../../src/elements.ts";
+import Box from "../primitives/box.tsx";
+import Flex from "../primitives/flex.tsx";
 
 const Accordion = ({ title }: { title: string }, children: string[]) => (
   <Box mb="2" x-state="false">

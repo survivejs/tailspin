@@ -1,6 +1,6 @@
-import * as elements from "typed-html";
-import Box from "../primitives/box";
-import Flex from "../primitives/flex";
+import * as elements from "../../src/elements.ts";
+import Box from "../primitives/box.tsx";
+import Flex from "../primitives/flex.tsx";
 
 // https://tailwindcss.com/components/navigation/#tabs
 const Tabs = ({ selectedTab }: { selectedTab: string }, children: string[]) => (
