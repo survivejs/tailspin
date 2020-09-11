@@ -2,16 +2,16 @@ import * as elements from "../../src/elements.ts";
 import { constructTailwindClasses, tailwindKeys } from "./_utils.ts";
 import config from "../../tailwind.ts";
 
-type ColorKeys = keyof typeof config.expandedColors;
-type MarginKeys = keyof typeof config.theme.margin;
-type PaddingKeys = keyof typeof config.theme.padding;
-type WidthKeys = keyof typeof config.theme.width;
-type MinWidthKeys = keyof typeof config.theme.minWidth;
-type MaxWidthKeys = keyof typeof config.theme.maxWidth;
-type HeightKeys = keyof typeof config.theme.height;
-type MinHeightKeys = keyof typeof config.theme.minHeight;
-type MaxHeightKeys = keyof typeof config.theme.maxHeight;
-type ScreenKeys = keyof typeof config.theme.screens;
+type ColorKeys = keyof typeof config.colors;
+type MarginKeys = keyof typeof config.unit;
+type PaddingKeys = keyof typeof config.unit;
+type WidthKeys = keyof typeof config.width;
+type MinWidthKeys = keyof typeof config.width;
+type MaxWidthKeys = keyof typeof config.width;
+type HeightKeys = keyof typeof config.width;
+type MinHeightKeys = keyof typeof config.width;
+type MaxHeightKeys = keyof typeof config.width;
+type ScreenKeys = keyof typeof config.screen;
 
 export type BoxProps = {
   as?: keyof JSX.IntrinsicElements;

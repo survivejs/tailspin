@@ -1,35 +1,28 @@
-#!/usr/bin/env node
-// https://github.com/impulse/tailwind.json/blob/main/index.js
+import defaultTheme from "../default-theme.ts";
+import userTheme from "../user-theme.ts";
 
-const fs = require("fs");
-const path = require("path");
-const glob = require("glob");
-const resolveConfig = require("tailwindcss/resolveConfig");
-const tailwindConfig = require(process.cwd() + "/tailwind.config.js");
-
-const isObject = (a) => typeof a === "object";
+const isObject = (a: any) => typeof a === "object";
 
 try {
-  const fullConfig = resolveConfig(tailwindConfig);
+  // TODO: Do a proper merge here
   const expandedConfig = {
-    ...fullConfig,
-    expandedColors: expandColors(fullConfig.theme.colors),
-    internalLinks: getInternalLinks(),
+    ...defaultTheme,
+    ...userTheme,
+    colors: expandColors({ ...defaultTheme.colors, ...userTheme.colors }),
+    // internalLinks: getInternalLinks(),
   };
 
-  fs.writeFileSync(
-    process.cwd() + "/tailwind.ts",
-    `export default ${JSON.stringify(expandedConfig, null, 2)};`,
-    {
-      encoding: "utf-8",
-    }
+  Deno.writeTextFileSync(
+    Deno.cwd() + "/tailwind.ts",
+    `export default ${JSON.stringify(expandedConfig, null, 2)};`
   );
 } catch (error) {
   console.error(error);
 }
 
+// TODO: Restore
+/*
 function getInternalLinks() {
-  // TODO: Share path and glob with webpack config?
   const pagesRoot = path.join(__dirname, "..", "pages");
   const pagesGlob = path.join(pagesRoot, "**", "index.tsx");
   const internalLinks = glob
@@ -45,9 +38,12 @@ function getInternalLinks() {
 
   return ret;
 }
+*/
 
-function expandColors(colors) {
-  const ret = {};
+type Colors = { [key: string]: string | { [key: string]: string } };
+
+function expandColors(colors: Colors) {
+  const ret: Colors = {};
 
   // This assumes one level of nesting so no recursion is needed
   Object.entries(colors).forEach(([key, value]) => {
