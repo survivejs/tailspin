@@ -1,20 +1,20 @@
-import fs from "fs";
-import path from "path";
-import * as elements from "typed-html";
-import PageLayout from "../ds/layouts/page";
-import Alert from "../ds/patterns/alert";
-import Heading from "../ds/primitives/heading";
-import Box from "../ds/primitives/box";
-import Stack from "../ds/primitives/stack";
-import Button from "../ds/primitives/button";
-import { processMarkdown } from "../utils/process-markdown";
-import { name } from "../package.json";
+import * as elements from "../src/elements.ts";
+import { readJsonSync } from "https://deno.land/std/fs/mod.ts";
+import PageLayout from "../ds/layouts/page.tsx";
+import Alert from "../ds/patterns/alert.tsx";
+import Heading from "../ds/primitives/heading.tsx";
+import Box from "../ds/primitives/box.tsx";
+import Stack from "../ds/primitives/stack.tsx";
+import Button from "../ds/primitives/button.tsx";
+import { processMarkdown } from "../utils/process-markdown.ts";
 
-const readmePath = path.join(__dirname, "..", "README.md");
-const readme = fs.readFileSync(readmePath, { encoding: "utf-8" });
+// @ts-ignore: How to use the JSON schema here?
+const { name } = readJsonSync("../package.json");
+
+const readme = Deno.readTextFileSync("../README.md");
 const readmeAsHtml = processMarkdown(readme);
 
-const IndexPage = (props) => (
+const IndexPage = (props: any) => (
   <PageLayout
     {...props}
     head={[

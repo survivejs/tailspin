@@ -1,10 +1,7 @@
-import _fs from "fs";
-import _path from "path";
-import * as elements from "typed-html";
+import * as elements from "../../src/elements.ts";
 import readableColor from "polished/lib/color/readableColor";
-import glob from "glob";
-import PageLayout from "../../ds/layouts/page";
-import { CodeContainer, CodeEditor } from "../../ds/patterns/code-editor";
+import PageLayout from "../../ds/layouts/page.tsx";
+import { CodeContainer, CodeEditor } from "../../ds/patterns/code-editor.tsx";
 import {
   Table,
   TableHeader,
@@ -12,30 +9,31 @@ import {
   TableBody,
   TableBodyCell,
   TableRow,
-} from "../../ds/patterns/table";
+} from "../../ds/patterns/table.tsx";
 import {
   Tabs,
   TabHeader,
   TabHeaderItem,
   TabBody,
   TabBodyItem,
-} from "../../ds/patterns/tabs";
-import Toc from "../../ds/patterns/toc";
-import Flex from "../../ds/primitives/flex";
-import Box from "../../ds/primitives/box";
-import Stack from "../../ds/primitives/stack";
-import Heading from "../../ds/primitives/heading";
-import config from "../../tailwind.json";
-import evaluateCode from "./evaluate-code";
-import parseCode from "./parse-code";
-import parseProps from "./parse-props";
-import { name } from "../../package.json";
+} from "../../ds/patterns/tabs.tsx";
+import Toc from "../../ds/patterns/toc.tsx";
+import Flex from "../../ds/primitives/flex.tsx";
+import Box from "../../ds/primitives/box.tsx";
+import Stack from "../../ds/primitives/stack.tsx";
+import Heading from "../../ds/primitives/heading.tsx";
+import config from "../../tailwind.ts";
+import evaluateCode from "./evaluate-code.ts";
+import parseCode from "./parse-code.ts";
+import parseProps from "./parse-props.ts";
 
-const theme = config.theme;
-const colors = theme.colors;
-const spacingScale = Object.keys(theme.spacing);
+// @ts-ignore: How to use the JSON schema here?
+const { name } = readJsonSync("../package.json");
 
-const DesignSystemPage = (props) => (
+const colors = config.colors;
+const spacingScale = Object.keys(config.spacing);
+
+const DesignSystemPage = (props: any) => (
   <PageLayout
     {...props}
     head={[
