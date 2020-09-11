@@ -64,6 +64,9 @@
   "lint-staged": {
     "*.{js,css,md}": "prettier --write"
   },
+  "prettier": {
+    "trailingComma": "es5"
+  },
   "dependencies": {
     "highlight.js": "^10.2.0",
     "polished": "^3.6.6",
