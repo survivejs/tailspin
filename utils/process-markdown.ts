@@ -1,9 +1,7 @@
-import marked from "marked";
-import hljs from "highlight.js";
-import sanitizeHtml from "sanitize-html";
-import frontmatter from "front-matter";
-import removeMarkdown from "remove-markdown";
+import { Marked } from "https://deno.land/x/markdown@v2.0.0/mod.ts";
+// import hljs from "highlight.js";
 
+/*
 marked.setOptions({
   renderer: new marked.Renderer(),
   highlight: function (code, language) {
@@ -19,6 +17,7 @@ marked.setOptions({
   xhtml: false,
 });
 
+/*
 function processMarkdownWithFrontmatter(source) {
   const result: { [key: string]: any } = frontmatter(source);
 
@@ -40,11 +39,11 @@ function generateDescription(file, body) {
 
   return `${removeMarkdown(ret).slice(0, 100)}…`;
 }
+*/
 
-function processMarkdown(source) {
-  return sanitizeHtml(marked(source), {
-    allowedTags: sanitizeHtml.defaults.allowedTags.concat(["h1", "h2"]),
-  });
+// TODO: Apply syntax highlighting - https://github.com/ubersl0th/markdown
+function processMarkdown(source: string) {
+  return Marked.parse(source);
 }
 
-export { processMarkdownWithFrontmatter, processMarkdown };
+export { processMarkdown };
