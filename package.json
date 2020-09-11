@@ -40,7 +40,6 @@
     "hyperlink": "^4.5.2",
     "jest": "^26.4.2",
     "lint-staged": "^10.3.0",
-    "marked": "^1.1.1",
     "object.omit": "^3.0.0",
     "prettier": "^2.1.1",
     "remove-markdown": "^0.3.0",

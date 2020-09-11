@@ -1,8 +1,8 @@
-import * as elements from "typed-html";
-import { constructTailwindClasses } from "./_utils";
-import config from "../../tailwind.json";
-import Box from "./box";
-import Flex from "./flex";
+import * as elements from "../../src/elements.ts";
+import { constructTailwindClasses } from "./_utils.ts";
+import config from "../../tailwind.ts";
+import Box from "./box.tsx";
+import Flex from "./flex.tsx";
 
 type InternalLinks = keyof typeof config.internalLinks;
 

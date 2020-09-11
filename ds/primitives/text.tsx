@@ -1,12 +1,11 @@
-import * as elements from "typed-html";
-import omit from "object.omit";
-import Box, { BoxProps } from "./box";
-import config from "../../tailwind.json";
-import { convertToClasses } from "./_utils";
+import * as elements from "../../src/elements.ts";
+import Box, { BoxProps } from "./box.tsx";
+import config from "../../tailwind.ts";
+import { convertToClasses, omit } from "./_utils.ts";
 
-type FontSize = keyof typeof config.theme.fontSize;
-type FontWeight = keyof typeof config.theme.fontWeight;
-type ScreenKeys = keyof typeof config.theme.screens;
+type FontSize = keyof typeof config.fontSize;
+type FontWeight = keyof typeof config.fontWeight;
+type ScreenKeys = keyof typeof config.screen;
 
 export type TextProps = {
   as?: BoxProps["as"];

@@ -1,11 +1,10 @@
-import * as elements from "typed-html";
-import omit from "object.omit";
-import Box, { BoxProps } from "./box";
-import config from "../../tailwind.json";
-import { convertToClasses } from "./_utils";
+import * as elements from "../../src/elements.ts";
+import Box, { BoxProps } from "./box.tsx";
+import config from "../../tailwind.ts";
+import { convertToClasses, omit } from "./_utils.ts";
 
 type Direction = "column" | "row";
-type ScreenKeys = keyof typeof config.theme.screens;
+type ScreenKeys = keyof typeof config.screen;
 
 type FlexProps = BoxProps & {
   direction?: Direction | { [k in ScreenKeys | "default"]?: Direction };

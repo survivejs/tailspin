@@ -1,12 +1,11 @@
-import * as elements from "typed-html";
-import omit from "object.omit";
-import Box, { BoxProps } from "./box";
-import config from "../../tailwind.json";
-import { convertToClasses } from "./_utils";
+import * as elements from "../../src/elements.ts";
+import Box, { BoxProps } from "./box.tsx";
+import config from "../../tailwind.ts";
+import { convertToClasses, omit } from "./_utils.ts";
 
 type Direction = "column" | "row";
-type SpacingKeys = keyof typeof config.theme.spacing;
-type ScreenKeys = keyof typeof config.theme.screens;
+type SpacingKeys = keyof typeof config.spacing;
+type ScreenKeys = keyof typeof config.screen;
 
 type StackProps = BoxProps & {
   direction?: Direction | { [k in ScreenKeys | "default"]?: Direction };

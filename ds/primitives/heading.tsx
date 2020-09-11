@@ -1,8 +1,8 @@
-import * as elements from "typed-html";
-import Box from "./box";
-import Flex from "./flex";
-import Link from "./link";
-import Text, { TextProps } from "./text";
+import * as elements from "../../src/elements.ts";
+import Box from "./box.tsx";
+import Flex from "./flex.tsx";
+import Link from "./link.tsx";
+import Text, { TextProps } from "./text.tsx";
 
 type HeadingLevel = 1 | 2 | 3 | 4;
 

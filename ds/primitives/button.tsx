@@ -1,6 +1,6 @@
-import * as elements from "typed-html";
-import Box from "./box";
-import Stack from "./stack";
+import * as elements from "../../src/elements.ts";
+import Box from "./box.tsx";
+import Stack from "./stack.tsx";
 
 type ButtonProps = { onclick?: string; sx?: string };
 type Variant = "primary" | "secondary";

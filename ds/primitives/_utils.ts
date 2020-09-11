@@ -62,7 +62,7 @@ function constructTailwindClasses(
 }
 
 function convertToClasses(prefix: string, customizeValue = defaultValue) {
-  return (value: string) => {
+  return (value?: string) => {
     if (!value) {
       return "";
     }
@@ -89,4 +89,19 @@ function defaultValue(
 
 const isObject = (a: any) => typeof a === "object";
 
-export { constructTailwindClasses, convertToClasses, tailwindKeys };
+// https://deno.land/x/30_seconds_of_typescript@v1.0.1/docs/omit.md
+const omit = (obj: { [key: string]: any }, ...arr: string[]) =>
+  Object.keys(obj)
+    .filter((k) => !arr.includes(k))
+    .reduce(
+      (acc, key) => ((acc[key] = obj[key]), acc),
+      {} as { [key: string]: any }
+    );
+
+export {
+  constructTailwindClasses,
+  convertToClasses,
+  tailwindKeys,
+  isObject,
+  omit,
+};
