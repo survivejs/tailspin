@@ -6,11 +6,11 @@ type ColorKeys = keyof typeof config.colors;
 type MarginKeys = keyof typeof config.unit;
 type PaddingKeys = keyof typeof config.unit;
 type WidthKeys = keyof typeof config.width;
-type MinWidthKeys = keyof typeof config.width;
-type MaxWidthKeys = keyof typeof config.width;
-type HeightKeys = keyof typeof config.width;
-type MinHeightKeys = keyof typeof config.width;
-type MaxHeightKeys = keyof typeof config.width;
+type MinWidthKeys = keyof typeof config.minWidth;
+type MaxWidthKeys = keyof typeof config.maxWidth;
+type HeightKeys = keyof typeof config.height;
+type MinHeightKeys = keyof typeof config.minHeight;
+type MaxHeightKeys = keyof typeof config.maxHeight;
 type ScreenKeys = keyof typeof config.screen;
 
 export type BoxProps = {
