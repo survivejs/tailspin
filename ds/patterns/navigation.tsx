@@ -2,6 +2,7 @@ import * as elements from "../../src/elements.ts";
 import Flex from "../primitives/flex.tsx";
 import Box from "../primitives/box.tsx";
 import Link, { ExternalLinkProps } from "../primitives/link.tsx";
+import ow from "../ow.ts";
 
 // https://tailwindcss.com/components/navigation
 const Navigation = ({ logo }: { logo?: string }, children: string[]) => (
@@ -36,7 +37,7 @@ const Navigation = ({ logo }: { logo?: string }, children: string[]) => (
       </Flex>
     </Box>
     <Box
-      x-class="!state && 'hidden'"
+      x-class={`!state && '${ow`hidden`}'`}
       w="full"
       sx="block flex-grow lg:flex lg:items-center lg:w-auto"
     >

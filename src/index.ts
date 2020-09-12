@@ -5,7 +5,6 @@ import {
 } from "https://deno.land/x/websocket@v0.0.3/mod.ts";
 import {
   setup,
-  filterOutUnusedRules,
   getStyleTag,
   VirtualInjector,
 } from "https://unpkg.com/@bebraw/oceanwind@0.2.5";
@@ -34,13 +33,11 @@ async function serve(port: number) {
 
     const injector = VirtualInjector();
     setup({ injector });
-
     const pageHtml = pages.hello.page();
-    const styleTag = getStyleTag(filterOutUnusedRules(injector, pageHtml));
+    const styleTag = getStyleTag(injector);
 
     console.log("style tag", styleTag);
 
-    // TODO: Either make sidewind self-register or register it explicitly in a module.
     context.response.headers.set("Content-Type", "text/html; charset=UTF-8");
     context.response.body = new TextEncoder().encode(`<html>
   <head>
