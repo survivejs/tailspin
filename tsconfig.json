@@ -1,5 +1,5 @@
 {
-  "include": ["ds", "pages", "typings/*.d.ts"],
+  "include": ["ds", "pages"],
   "compilerOptions": {
     "jsx": "react",
     "jsxFactory": "elements.createElement"
