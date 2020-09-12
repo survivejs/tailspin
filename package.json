@@ -67,7 +67,6 @@
   },
   "dependencies": {
     "highlight.js": "^10.2.0",
-    "polished": "^3.6.6",
-    "sidewind": "^3.1.2"
+    "polished": "^3.6.6"
   }
 }

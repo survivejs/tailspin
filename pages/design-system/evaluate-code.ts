@@ -1,15 +1,15 @@
-import evaluateJSX from "./evaluate-jsx";
+import evaluateJSX, { Components } from "./evaluate-jsx";
 
 const evaluateCode = (
-  componentSources,
-  exampleSource,
-  componentName?,
-  componentSource?
-) => {
+  componentSources: Components,
+  exampleSource: string,
+  componentName: string,
+  componentSource?: string
+): string => {
   if (componentSource) {
     return evaluateJSX(exampleSource, {
       ...componentSources,
-      [componentName]: (props, children) =>
+      [componentName]: (props: { [key: string]: any }, children: string[]) =>
         evaluateJSX(componentSource, componentSources, {
           ...props,
           children,

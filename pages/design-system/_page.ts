@@ -1,12 +1,20 @@
-import evaluateCode from "./evaluate-code";
+import evaluateComponentCode from "./evaluate-code";
 
 const components = loadComponents(
   require.context("../../ds", true, /^\.\/.*\.tsx$/)
 );
 
-// @ts-ignore: TODO: Add this to global
-window.evaluateCode = (exampleSource, componentName?, componentSource?) =>
-  evaluateCode(components, exampleSource, componentName, componentSource);
+const evaluateCode = (
+  exampleSource: string,
+  componentName: string,
+  componentSource?: string
+): string =>
+  evaluateComponentCode(
+    components,
+    exampleSource,
+    componentName,
+    componentSource
+  );
 
 function loadComponents(context) {
   const ret = {};
@@ -35,3 +43,11 @@ function loadComponents(context) {
 
   return ret;
 }
+
+declare global {
+  interface Window {
+    evaluateCode: typeof evaluateCode;
+  }
+}
+
+window.evaluateCode = evaluateCode;

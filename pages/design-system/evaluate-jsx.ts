@@ -5,7 +5,7 @@ import { generate } from "escodegen";
 const JsxParser = Parser.extend(jsx());
 
 type JSXNode = acorn.Node & { children: JSXNode[] };
-type Components = { [key: string]: (any, children: string[]) => string };
+export type Components = { [key: string]: (any, children: string[]) => string };
 type Replacements = { [key: string]: string[] };
 
 function evaluateJSX(
@@ -61,6 +61,8 @@ function evaluateJSXElement(
       )}</${firstJSXElementName.name}>`;
     }
   }
+
+  return "";
 }
 
 function attributesToString(attributes: { [key: string]: string }) {
@@ -142,7 +144,9 @@ function attributesToObject(
   return ret;
 }
 
-function objectExpressionToObject(node: acorn.Node) {
+function objectExpressionToObject(
+  node: acorn.Node
+): { [key: string]: { [key: string]: string } } {
   const ret = {};
 
   // @ts-ignore
@@ -177,41 +181,43 @@ function childrenToString(
   children: JSXNode[],
   components: Components,
   replacements: Replacements
-) {
-  return children.map((child) => {
-    if (child.type === "JSXElement") {
-      return evaluateJSXElement(child, components, replacements);
-    }
+): string {
+  return children
+    .map((child) => {
+      if (child.type === "JSXElement") {
+        return evaluateJSXElement(child, components, replacements);
+      }
 
-    if (child.type === "JSXExpressionContainer") {
-      // @ts-ignore
-      const expression = child?.expression;
+      if (child.type === "JSXExpressionContainer") {
+        // @ts-ignore
+        const expression = child?.expression;
 
-      if (expression.type === "CallExpression") {
-        return evaluate(generate(expression), replacements);
+        if (expression.type === "CallExpression") {
+          return evaluate(generate(expression), replacements);
+        }
+
+        // @ts-ignore
+        const expressionName = expression?.name;
+        const replacement = replacements[expressionName];
+
+        if (!replacement) {
+          // @ts-ignore
+          return eval(generate(child.expression));
+        }
+
+        return replacement;
       }
 
       // @ts-ignore
-      const expressionName = expression?.name;
-      const replacement = replacements[expressionName];
-
-      if (!replacement) {
+      if (child.expression) {
         // @ts-ignore
         return eval(generate(child.expression));
       }
 
-      return replacement;
-    }
-
-    // @ts-ignore
-    if (child.expression) {
       // @ts-ignore
-      return eval(generate(child.expression));
-    }
-
-    // @ts-ignore
-    return child.value;
-  });
+      return child.value;
+    })
+    .join("");
 }
 
 // TODO: Consume from sidewind?
