@@ -55,7 +55,7 @@ function constructTailwindClasses(
     .filter(Boolean);
 
   if (props.sx) {
-    return ret.concat(props.sx).concat(classes);
+    return ret.concat(ow(props.sx.split(" "))).concat(classes);
   }
 
   return ret.concat(classes);
