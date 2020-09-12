@@ -1,5 +1,5 @@
 import * as elements from "../src/elements.ts";
-import PageLayout, { PageLayoutProps } from "../ds/layouts/page.tsx";
+import PageLayout from "../ds/layouts/page.tsx";
 import Alert from "../ds/patterns/alert.tsx";
 import Heading from "../ds/primitives/heading.tsx";
 import Box from "../ds/primitives/box.tsx";
@@ -7,15 +7,16 @@ import Stack from "../ds/primitives/stack.tsx";
 import Button from "../ds/primitives/button.tsx";
 import { processMarkdown } from "../utils/process-markdown.ts";
 
-const readme = Deno.readTextFileSync("../README.md");
-const readmeAsHtml = processMarkdown(readme);
+const readme = processMarkdown(
+  Deno.readTextFileSync(Deno.cwd() + "/README.md")
+);
 
-const IndexPage = (props: PageLayoutProps) => (
+const IndexPage = (props: { url: string }) => (
   <PageLayout
     {...props}
     body={
-      <Box as="article" m="8" mx="auto" w="full" sx="prose lg:prose-xl">
-        {readmeAsHtml}
+      <Box as="article" m="8" mx="auto" w="full" class="prose lg:prose-xl">
+        {readme.content}
         <Heading level={2} size="2xl">
           Demo
         </Heading>

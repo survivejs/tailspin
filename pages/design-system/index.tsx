@@ -30,7 +30,7 @@ import parseProps from "./parse-props.ts";
 const colors = config.colors;
 const spacingScale = Object.keys(config.spacing);
 
-const DesignSystemPage = (props: PageLayoutProps) => (
+const DesignSystemPage = (props: { url: string }) => (
   <PageLayout
     {...props}
     body={

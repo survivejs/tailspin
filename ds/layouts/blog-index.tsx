@@ -37,7 +37,7 @@ const BlogIndexLayout = ({
         <Heading level={1} size="4xl">
           Blog pages
         </Heading>
-        <Flex direction="column" sx="prose lg:prose-xl">
+        <Flex direction="column" class="prose lg:prose-xl">
           {attributes.pages
             .map(({ title, description, slug, categories }) => (
               <Flex as="section" direction="column">

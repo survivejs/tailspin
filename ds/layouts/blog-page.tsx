@@ -24,7 +24,7 @@ const BlogPageLayout = ({
   <PageLayout
     url={url}
     body={
-      <Box as="article" m="8" mx="auto" w="full" sx="prose lg:prose-xl">
+      <Box as="article" m="8" mx="auto" w="full" class="prose lg:prose-xl">
         <Heading level={1} size="4xl">
           {attributes.title}
         </Heading>

@@ -38,7 +38,7 @@ function supportNegative(
 const tailwindKeys = Object.keys(rules);
 
 function constructTailwindClasses(
-  props?: { sx?: string },
+  props?: { class?: string; sx?: string },
   classes?: string[]
 ): string {
   if (!props) {
@@ -53,7 +53,9 @@ function constructTailwindClasses(
     .filter(Boolean);
 
   // Likely Oceanwind should be fine with an empty array
-  return combinedClasses.length ? ow([combinedClasses.join(" ")]) : "";
+  return (combinedClasses.length ? ow([combinedClasses.join(" ")]) : "").concat(
+    props.class ? " " + props.class.split(" ").join(" ") : ""
+  );
 }
 
 function convertToClasses(prefix: string, customizeValue = defaultValue) {

@@ -45,10 +45,14 @@ export type BoxProps = {
   id?: string;
   // TODO: These are for svg -> push to a Svg component?
   d?: string;
+  fill?: string;
+  stroke?: string;
   viewBox?: string;
   xmlns?: string;
   // TODO: sx can be only tailwind classes so constraint to those
   sx?: string;
+  // Shortcut for pure classes
+  class?: string;
 };
 
 // https://theme-ui.com/components/box

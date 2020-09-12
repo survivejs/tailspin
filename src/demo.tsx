@@ -1,4 +1,4 @@
 import * as elements from "./elements.ts";
-import PageLayout from "../ds/layouts/page.tsx";
+import IndexPage from "../pages/index.tsx";
 
-export const page = () => <PageLayout body="Hello from body" url="/" />;
+export const page = () => <IndexPage url="/" />;
