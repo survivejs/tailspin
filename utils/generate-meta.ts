@@ -1,3 +1,5 @@
+import { expandGlobSync } from "https://deno.land/std/fs/mod.ts";
+import * as path from "https://deno.land/std/path/mod.ts";
 import defaultTheme from "../default-theme.ts";
 import userTheme from "../user-theme.ts";
 
@@ -9,7 +11,7 @@ try {
     ...defaultTheme,
     ...userTheme,
     colors: expandColors({ ...defaultTheme.colors, ...userTheme.colors }),
-    // internalLinks: getInternalLinks(),
+    internalLinks: getInternalLinks(),
   };
 
   Deno.writeTextFileSync(
@@ -20,25 +22,24 @@ try {
   console.error(error);
 }
 
-// TODO: Restore
-/*
 function getInternalLinks() {
-  const pagesRoot = path.join(__dirname, "..", "pages");
-  const pagesGlob = path.join(pagesRoot, "**", "index.tsx");
-  const internalLinks = glob
-    .sync(pagesGlob)
-    .map((p) => path.relative(pagesRoot, p))
-    .map((p) => p.replace("/index.tsx", "").replace("index.tsx", "/"))
-    .map((p) => (p === "/" ? p : `/${p}/`));
-  const ret = {};
+  const rootPath = path.posix.join(Deno.cwd(), "pages");
+  const ret: { [key: string]: string } = {};
 
-  internalLinks.forEach((link) => {
-    ret[link] = link;
-  });
+  for (const file of expandGlobSync(
+    path.posix.join(rootPath, "**/index.tsx")
+  )) {
+    const relativePath = path.posix.relative(rootPath, file.path);
+    const link = relativePath
+      .replace("/index.tsx", "")
+      .replace("index.tsx", "/");
+    const resolvedLink = link === "/" ? link : `/${link}/`;
+
+    ret[resolvedLink] = resolvedLink;
+  }
 
   return ret;
 }
-*/
 
 type Colors = { [key: string]: string | { [key: string]: string } };
 

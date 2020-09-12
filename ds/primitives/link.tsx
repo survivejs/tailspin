@@ -1,12 +1,10 @@
 import * as elements from "../../src/elements.ts";
 import { constructTailwindClasses } from "./_utils.ts";
-// import config from "../../tailwind.ts";
+import config from "../../tailwind.ts";
 import Box from "./box.tsx";
 import Flex from "./flex.tsx";
 
-// TODO: Restore
-// type InternalLinks = keyof typeof config.internalLinks;
-type InternalLinks = "/" | "/design-system/" | "/blog"; // keyof typeof config.internalLinks;
+type InternalLinks = keyof typeof config.internalLinks;
 
 export type LinkProps = { href: InternalLinks; sx?: string };
 
