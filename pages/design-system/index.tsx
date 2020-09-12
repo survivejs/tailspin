@@ -1,6 +1,6 @@
 import * as elements from "../../src/elements.ts";
 import readableColor from "polished/lib/color/readableColor";
-import PageLayout, { PageLayoutProps } from "../../ds/layouts/page.tsx";
+import PageLayout from "../../ds/layouts/page.tsx";
 import { CodeContainer, CodeEditor } from "../../ds/patterns/code-editor.tsx";
 import {
   Table,
