@@ -24,14 +24,15 @@ const Navigation = ({ logo }: { logo?: string }, children: string[]) => (
         sx="items-center border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white"
         onclick="setState(v => !v)"
       >
-        <svg
-          class="fill-current w-3 h-3"
+        <Box
+          as="svg"
+          sx="fill-current w-3 h-3"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <title>Menu</title>
-          <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-        </svg>
+          <Box as="title">Menu</Box>
+          <Box as="path" d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+        </Box>
       </Flex>
     </Box>
     <Box

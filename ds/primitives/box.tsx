@@ -43,6 +43,10 @@ export type BoxProps = {
   x?: string;
   style?: string;
   id?: string;
+  // TODO: These are for svg -> push to a Svg component?
+  d?: string;
+  viewBox?: string;
+  xmlns?: string;
   // TODO: sx can be only tailwind classes so constraint to those
   sx?: string;
 };

@@ -55,10 +55,12 @@ function constructTailwindClasses(
     .filter(Boolean);
 
   if (props.sx) {
-    return ret.concat(ow(props.sx.split(" "))).concat(classes);
+    return ret
+      .concat(ow(props.sx.split(" ")))
+      .concat(classes ? ow(classes) : []);
   }
 
-  return ret.concat(classes);
+  return classes?.length ? ret.concat(ow(classes)) : ret;
 }
 
 function convertToClasses(prefix: string, customizeValue = defaultValue) {
