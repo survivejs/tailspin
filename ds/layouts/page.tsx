@@ -33,7 +33,7 @@ const PageLayout = ({ body, url }: { body: string; url: string }) => (
               px="4"
               py="2"
               color="white"
-              sx="inline-block leading-none border rounded border-white hover:border-transparent hover:text-teal-500 hover:bg-white"
+              sx="inline-block leading-none border-solid rounded border-white hover:border-transparent hover:text-teal-500 hover:bg-white"
             >
               <Text size="sm">Star at GitHub</Text>
             </Box>

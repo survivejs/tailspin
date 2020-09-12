@@ -19,7 +19,7 @@ const Alert = ({ variant }: { variant: Variant }, children: string[]) => {
       py="3"
       color={color}
       bg={bg}
-      sx={`border border-${color}-400 rounded relative`}
+      sx={`border-solid border-${color}-400 rounded relative`}
       role="alert"
     >
       <Flex direction="column" mr="2" sx="justify-center">

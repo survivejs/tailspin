@@ -21,7 +21,7 @@ const Navigation = ({ logo }: { logo?: string }, children: string[]) => (
         direction="column"
         px="3"
         py="2"
-        sx="items-center border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white"
+        sx="items-center border-solid rounded text-teal-200 border-teal-400 hover:text-white hover:border-white"
         onclick="setState(v => !v)"
       >
         <Box
