@@ -8,7 +8,7 @@ import {
   filterOutUnusedRules,
   getStyleTag,
   VirtualInjector,
-} from "https://unpkg.com/@bebraw/oceanwind@0.2.4";
+} from "https://unpkg.com/@bebraw/oceanwind@0.2.5";
 
 async function serve(port: number) {
   const app = new Application();
