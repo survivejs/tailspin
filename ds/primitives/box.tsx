@@ -91,7 +91,7 @@ function attachAttributes(props?: {}): elements.Attributes {
     }
   });
 
-  const klass = constructTailwindClasses(props).join(" ");
+  const klass = constructTailwindClasses(props);
 
   if (klass) {
     ret["class"] = klass;

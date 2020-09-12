@@ -17,10 +17,7 @@ const Link = (props: LinkProps, label: string[]) => (
 export type ExternalLinkProps = { href: string; sx?: string };
 
 const LinkExternal = (props: ExternalLinkProps, label: string[]) => (
-  <a
-    href={props.href}
-    class={constructTailwindClasses(props, ["underline"]).join(" ")}
-  >
+  <a href={props.href} class={constructTailwindClasses(props, ["underline"])}>
     {label}
   </a>
 );

@@ -40,21 +40,20 @@ const tailwindKeys = Object.keys(rules);
 function constructTailwindClasses(
   props?: { sx?: string },
   classes?: string[]
-): string[] {
+): string {
   if (!props) {
-    return [];
+    return "";
   }
 
-  const ret = Object.entries(props)
+  const combinedClasses = Object.entries(props)
     // @ts-ignore TODO: Figure out how to type this.
     .map(([k, v]) => rules[k]?.(v))
+    .concat(props.sx ? props.sx.split(" ") : [])
+    .concat(classes)
     .filter(Boolean);
 
-  if (props.sx) {
-    return ret.concat(ow([props.sx])).concat(classes ? ow(classes) : []);
-  }
-
-  return classes?.length ? ret.concat(ow(classes)) : ret;
+  // Likely Oceanwind should be fine with an empty array
+  return combinedClasses.length ? ow([combinedClasses.join(" ")]) : "";
 }
 
 function convertToClasses(prefix: string, customizeValue = defaultValue) {
@@ -64,14 +63,12 @@ function convertToClasses(prefix: string, customizeValue = defaultValue) {
     }
 
     if (isObject(value)) {
-      return ow(
-        Object.entries(value).map(([k, v]) =>
-          customizeValue(k === "default" ? "" : k, prefix, v as string)
-        )
+      return Object.entries(value).map(([k, v]) =>
+        customizeValue(k === "default" ? "" : k, prefix, v as string)
       );
     }
 
-    return ow([customizeValue("", prefix, value)]);
+    return customizeValue("", prefix, value);
   };
 }
 
