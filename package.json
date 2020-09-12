@@ -17,8 +17,7 @@
     "stats": "npm run build -- --json > stats.json",
     "analyze-stats": "webpack-bundle-analyzer stats.json",
     "generate-meta": "deno run --unstable --allow-read --allow-write ./utils/generate-meta.ts",
-    "test": "jest",
-    "lint-styles": "stylelint --fix pages/index.pcss"
+    "test": "jest"
   },
   "keywords": [
     "tailwind",
@@ -44,8 +43,6 @@
     "remove-markdown": "^0.3.0",
     "rimraf": "^3.0.2",
     "sitemap-static": "^0.4.4",
-    "stylelint": "^13.7.0",
-    "stylelint-config-standard": "^20.0.0",
     "ts-jest": "^26.3.0",
     "typed-html": "^2.0.0",
     "typescript": "^4.0.2"
@@ -55,8 +52,7 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "npm run lint-styles"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
