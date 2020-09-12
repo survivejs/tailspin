@@ -1,5 +1,5 @@
 import * as elements from "../src/elements.ts";
-import PageLayout from "../ds/layouts/page.tsx";
+import PageLayout, { PageLayoutProps } from "../ds/layouts/page.tsx";
 import Alert from "../ds/patterns/alert.tsx";
 import Heading from "../ds/primitives/heading.tsx";
 import Box from "../ds/primitives/box.tsx";
@@ -10,16 +10,9 @@ import { processMarkdown } from "../utils/process-markdown.ts";
 const readme = Deno.readTextFileSync("../README.md");
 const readmeAsHtml = processMarkdown(readme);
 
-const IndexPage = (props: any) => (
+const IndexPage = (props: PageLayoutProps) => (
   <PageLayout
     {...props}
-    head={[
-      <title>tailwind-webpack-starter</title>,
-      <meta
-        name="description"
-        content="tailwind-webpack-starter combines webpack with Tailwind and provides a starting point for site projects"
-      ></meta>,
-    ]}
     body={
       <Box as="article" m="8" mx="auto" w="full" sx="prose lg:prose-xl">
         {readmeAsHtml}
@@ -39,5 +32,11 @@ const IndexPage = (props: any) => (
     }
   />
 );
+
+IndexPage.title = "";
+IndexPage.meta = {
+  description:
+    "tailwind-webpack-starter combines webpack with Tailwind and provides a starting point for site projects",
+};
 
 export default IndexPage;

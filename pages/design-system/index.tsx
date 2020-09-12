@@ -1,6 +1,6 @@
 import * as elements from "../../src/elements.ts";
 import readableColor from "polished/lib/color/readableColor";
-import PageLayout from "../../ds/layouts/page.tsx";
+import PageLayout, { PageLayoutProps } from "../../ds/layouts/page.tsx";
 import { CodeContainer, CodeEditor } from "../../ds/patterns/code-editor.tsx";
 import {
   Table,
@@ -30,16 +30,9 @@ import parseProps from "./parse-props.ts";
 const colors = config.colors;
 const spacingScale = Object.keys(config.spacing);
 
-const DesignSystemPage = (props: any) => (
+const DesignSystemPage = (props: PageLayoutProps) => (
   <PageLayout
     {...props}
-    head={[
-      <title>tailwind-webpack-starter - Design System</title>,
-      <meta
-        name="description"
-        content="tailwind-webpack-starter combines webpack with Tailwind and provides a starting point for site projects"
-      ></meta>,
-    ]}
     body={
       <Flex direction="row" m={{ lg: "8" }}>
         <Box as="aside" w={{ lg: "1/3" }} sx="hidden lg:inline">
@@ -103,7 +96,13 @@ const DesignSystemPage = (props: any) => (
   />
 );
 
-function getComponents(type) {
+DesignSystemPage.title = "Design system";
+DesignSystemPage.meta = {
+  description:
+    "tailwind-webpack-starter combines webpack with Tailwind and provides a starting point for site projects",
+};
+
+function getComponents(type: string) {
   const componentDirectory = _path.join(__dirname, "..", "..", "ds", type);
 
   return glob
@@ -135,7 +134,17 @@ function getComponent(componentDirectory: string) {
   };
 }
 
-const Collection = ({ items }) => {
+type Component = {
+  displayName: string;
+  description: string;
+  default: () => string;
+  exampleSource: string;
+  componentSource: string;
+  // TODO: Prop type
+  props: any[];
+};
+
+const Collection = ({ items }: { items: Component[] }) => {
   const componentSources = getComponentSources(items);
 
   return items
@@ -205,8 +214,8 @@ const Collection = ({ items }) => {
     .join("");
 };
 
-function getComponentSources(items) {
-  const ret = {};
+function getComponentSources(items: Component[]) {
+  const ret: { [key: string]: string } = {};
 
   items.forEach(({ displayName, default: def }) => {
     ret[displayName] = def;
@@ -215,7 +224,7 @@ function getComponentSources(items) {
   return ret;
 }
 
-const SpacingScale = ({ items }) =>
+const SpacingScale = ({ items }: { items: string[] }) =>
   items
     .map((key) => (
       <Box bg="gray-400" sx={`w-${key}`}>
@@ -293,12 +302,12 @@ const Types = ({
     ""
   );
 
-const isObject = (a) => typeof a === "object";
+const isObject = (a: unknown) => typeof a === "object";
 
 const getComplementary = (color: string) =>
   tryTo(() => readableColor(color), "#000");
 
-function tryTo(fn, defaultValue) {
+function tryTo(fn: () => unknown, defaultValue: string) {
   try {
     return fn();
   } catch (err) {

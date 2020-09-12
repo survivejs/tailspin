@@ -5,8 +5,10 @@ import Flex from "../primitives/flex.tsx";
 import Link from "../primitives/link.tsx";
 import Text from "../primitives/text.tsx";
 
+export type PageLayoutProps = { body: string; url: string };
+
 // TODO: Support fragments (<>)
-const PageLayout = ({ body, url }: { body: string; url: string }) => (
+const PageLayout = ({ body, url }: PageLayoutProps) => (
   <Box>
     <Box as="header" bg="primary" color="white">
       <Navigation
