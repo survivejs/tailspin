@@ -1,6 +1,5 @@
-import { prettier } from "https://deno.land/x/std/prettier/prettier.ts";
-import * as ts from "typescript";
-import { tsquery } from "@phenomnomnominal/tsquery";
+import * as ts from "typescript"; // TODO: Consume through Deno somehow
+import { tsquery } from "https://unpkg.com/@phenomnomnominal/tsquery@4.1.1/dist/src/index.js";
 
 function parseCode({ name, path, source }) {
   const exampleIdentifierNode = queryNode({
@@ -84,6 +83,7 @@ function toSource({ path, source, node }) {
   );
   const printer = ts.createPrinter();
 
+  // TODO: Replace this with Deno's internal formatter
   return prettier
     .format(printer.printNode(ts.EmitHint.Unspecified, node, sourceFile), {
       parser: "typescript",

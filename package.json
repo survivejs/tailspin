@@ -27,7 +27,6 @@
   "author": "Juho Vepsäläinen",
   "license": "MIT",
   "devDependencies": {
-    "@phenomnomnominal/tsquery": "^4.1.1",
     "@types/jest": "^26.0.13",
     "@types/rimraf": "^3.0.0",
     "acorn": "^8.0.1",
