@@ -41,7 +41,8 @@ async function serve(port: number) {
   const app = new Application();
   const pages: Pages = {};
 
-  pages.index = await import("../pages/index.tsx");
+  pages["/"] = await import("../pages/index.tsx");
+  pages["/blog/"] = await import("../pages/blog/index.tsx");
 
   const wss = new WebSocketServer(8080);
   wss.on("connection", (ws: WebSocket) => {
@@ -58,13 +59,21 @@ async function serve(port: number) {
 
   // TODO: generalize
   app.use(async (context) => {
-    console.log("page", pages);
+    const url = context.request.url.pathname;
+    const page = pages[url];
 
-    const injector = VirtualInjector();
-    setup({ injector });
+    if (!page) {
+      // favicon and others fall here
+      context.response.status = 404;
+
+      return;
+    }
 
     try {
-      const pageHtml = pages.index.default({ url: "/" });
+      const injector = VirtualInjector();
+      setup({ injector });
+
+      const pageHtml = page.default({ url });
 
       const styleTag = getStyleTag(injector);
 
@@ -115,9 +124,11 @@ async function watchDirectories(
 
     if (event.kind === "modify") {
       // TODO: generalize
-      // @ts-ignore
-      pages.index = await import(
+      pages["/"] = await import(
         `../pages/index.tsx?version=${Math.random()}.tsx`
+      );
+      pages["/blog/"] = await import(
+        `../pages/blog/index.tsx?version=${Math.random()}.tsx`
       );
 
       wss.clients.forEach((socket) => {

@@ -9,20 +9,18 @@ import Link from "../primitives/link.tsx";
 
 const BlogIndexLayout = ({
   url,
-  attributes,
+  pages,
 }: {
   url: string;
-  attributes: {
-    pages: {
-      title: string;
-      categories: string[];
-      description: string;
-      body: string;
-      author: string;
-      date: string;
-      slug: string;
-    }[];
-  };
+  pages: {
+    title: string;
+    categories: string[];
+    description: string;
+    body: string;
+    author: string;
+    date: string;
+    slug: string;
+  }[];
 }) => (
   <PageLayout
     url={url}
@@ -38,10 +36,11 @@ const BlogIndexLayout = ({
           Blog pages
         </Heading>
         <Flex direction="column" class="prose lg:prose-xl">
-          {attributes.pages
+          {pages
             .map(({ title, description, slug, categories }) => (
               <Flex as="section" direction="column">
                 <Heading level={2} size="2xl">
+                  {/* @ts-ignore */}
                   <Link href={slug}>{title}</Link>
                 </Heading>
                 <Box>{description}</Box>
@@ -61,19 +60,17 @@ export const displayName = "BlogIndexLayout";
 export const Example = () => (
   <BlogIndexLayout
     url="/"
-    attributes={{
-      pages: [
-        {
-          title: "Demo post",
-          categories: ["demo", "testing"],
-          description: "This is a demo post",
-          body: "Demo post content goes here",
-          author: "John Doe",
-          date: "2020-08-12T13:19:52.922Z",
-          slug: "demo-post",
-        },
-      ],
-    }}
+    pages={[
+      {
+        title: "Demo post",
+        categories: ["demo", "testing"],
+        description: "This is a demo post",
+        body: "Demo post content goes here",
+        author: "John Doe",
+        date: "2020-08-12T13:19:52.922Z",
+        slug: "demo-post",
+      },
+    ]}
   />
 );
 
