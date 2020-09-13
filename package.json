@@ -28,38 +28,19 @@
   "license": "MIT",
   "devDependencies": {
     "@phenomnomnominal/tsquery": "^4.1.1",
-    "@types/highlight.js": "^9.12.4",
     "@types/jest": "^26.0.13",
-    "@types/remove-markdown": "^0.1.1",
     "@types/rimraf": "^3.0.0",
     "acorn": "^8.0.1",
     "acorn-jsx": "^5.3.1",
     "escodegen": "^2.0.0",
-    "husky": "^4.3.0",
     "hyperlink": "^4.5.2",
     "jest": "^26.4.2",
-    "lint-staged": "^10.3.0",
     "object.omit": "^3.0.0",
     "remove-markdown": "^0.3.0",
     "rimraf": "^3.0.2",
     "sitemap-static": "^0.4.4",
     "ts-jest": "^26.3.0",
-    "typed-html": "^2.0.0",
     "typescript": "^4.0.2"
   },
-  "browserslist": [
-    "defaults"
-  ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,css,md}": "prettier --write"
-  },
-  "dependencies": {
-    "highlight.js": "^10.2.0",
-    "polished": "^3.6.6"
-  }
+  "dependencies": {}
 }
