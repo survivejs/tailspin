@@ -1,4 +1,4 @@
-import acorn, { Parser } from "https://unpkg.com/acorn@8.0.1/dist/acorn.js";
+import acorn, { Parser } from "https://unpkg.com/acorn@8.0.1/dist/acorn.mjs";
 import jsx from "https://unpkg.com/acorn-jsx@5.3.1/index.js";
 import { generate } from "https://unpkg.com/escodegen@2.0.0/escodegen.js";
 

@@ -10,7 +10,9 @@ import {
   TabBody,
   TabBodyItem,
 } from "../../ds/patterns/tabs.tsx";
-import evaluateCode from "./evaluate-code.ts";
+
+// TODO: Restore
+// import evaluateCode from "./evaluate-code.ts";
 import Types from "./types.tsx";
 
 // TODO: Consume from a common type at the project root
@@ -91,7 +93,7 @@ const Collection = ({ items }: { items: Component[] }) => {
               sx="rounded-b-lg"
               x={`evaluateCode(codeEditor.exampleSource, '${displayName}', codeEditor.componentSource)`}
             >
-              {evaluateCode(componentSources, exampleSource, displayName)}
+              {/*evaluateCode(componentSources, exampleSource, displayName)*/}
             </Box>
           </CodeContainer>
         </Stack>

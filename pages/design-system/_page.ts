@@ -1,4 +1,4 @@
-import evaluateComponentCode from "./evaluate-code";
+import evaluateComponentCode from "./evaluate-code.ts";
 
 const components = loadComponents(
   require.context("../../ds", true, /^\.\/.*\.tsx$/),
