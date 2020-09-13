@@ -8,20 +8,21 @@ import {
   getStyleTag,
   VirtualInjector,
 } from "https://unpkg.com/@bebraw/oceanwind@0.2.5";
-import getUrls from "../utils/get-urls.ts";
+import getUrls, { Urls } from "../utils/get-urls.ts";
 
 type Pages = {
-  [key: string]: {
-    default: ({
-      url,
-      title,
-      meta,
-    }: {
-      url: string;
-      title?: string;
-      meta?: { [key: string]: string };
-    }) => void;
-  };
+  [key: string]: Page;
+};
+type Page = {
+  default: ({
+    url,
+    title,
+    meta,
+  }: {
+    url: string;
+    title?: string;
+    meta?: { [key: string]: string };
+  }) => void;
 };
 
 const websocketClient = `const socket = new WebSocket('ws://localhost:8080');
@@ -40,7 +41,21 @@ socket.addEventListener('message', (event) => {
 
 async function serve(port: number) {
   const app = new Application();
-  const pages = await getPages();
+  const urls = getUrls();
+  const pageContext: {
+    _pages: Pages;
+    init: () => void;
+    getPage: (url: string) => Page;
+  } = {
+    _pages: {},
+    init: async function () {
+      this._pages = await getPages(urls);
+    },
+    getPage: function (url: string) {
+      return this._pages[url];
+    },
+  };
+  await pageContext.init();
 
   const wss = new WebSocketServer(8080);
   wss.on("connection", (ws: WebSocket) => {
@@ -58,7 +73,7 @@ async function serve(port: number) {
   // TODO: generalize
   app.use(async (context) => {
     const url = context.request.url.pathname;
-    const page = pages[url];
+    const page = pageContext.getPage(url);
 
     if (!page) {
       // favicon and others fall here
@@ -105,18 +120,18 @@ async function serve(port: number) {
     // Directories have to be relative to cwd
     // https://github.com/denoland/deno/issues/5742
     ["./ds", "./pages"],
-    pages,
     wss,
+    async () => await pageContext.init(),
   );
 }
 
-async function getPages() {
+async function getPages(urls: Urls) {
   const pages: Pages = {};
-  const urls = getUrls();
 
   await Promise.all(
     Object.entries(urls).map(async ([url, pagePath]) => {
-      pages[url] = await import(pagePath);
+      // TODO: Maintain a counter per page instead of using a random number
+      pages[url] = await import(`${pagePath}?version=${Math.random()}.tsx`);
 
       return Promise.resolve();
     }),
@@ -127,22 +142,16 @@ async function getPages() {
 
 async function watchDirectories(
   directories: string[],
-  pages: Pages,
   wss: WebSocketServer,
+  onModify: () => void,
 ) {
   const watcher = Deno.watchFs(directories, { recursive: true });
 
   for await (const event of watcher) {
-    console.log("watchDirectories - Detected a change", event, wss.clients);
+    console.log("watchDirectories - Detected a change", event);
 
     if (event.kind === "modify") {
-      // TODO: generalize
-      pages["/"] = await import(
-        `../pages/index.tsx?version=${Math.random()}.tsx`
-      );
-      pages["/blog/"] = await import(
-        `../pages/blog/index.tsx?version=${Math.random()}.tsx`
-      );
+      await onModify();
 
       wss.clients.forEach((socket) => {
         // 1 for open, https://developer.mozilla.org/en-US/docs/Web/API/WebSocket
