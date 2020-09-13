@@ -1,6 +1,6 @@
-import { Parser } from "acorn";
-import jsx from "acorn-jsx";
-import { generate } from "escodegen";
+import acorn, { Parser } from "https://unpkg.com/acorn@8.0.1/dist/acorn.js";
+import jsx from "https://unpkg.com/acorn-jsx@5.3.1/index.js";
+import { generate } from "https://unpkg.com/escodegen@2.0.0/escodegen.js";
 
 const JsxParser = Parser.extend(jsx());
 
