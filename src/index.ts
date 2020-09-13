@@ -1,9 +1,5 @@
 import { Application } from "https://deno.land/x/oak@v6.1.0/mod.ts";
 import {
-  WebSocket,
-  WebSocketServer,
-} from "https://deno.land/x/websocket@v0.0.3/mod.ts";
-import {
   setup,
   getStyleTag,
   VirtualInjector,
@@ -12,20 +8,7 @@ import getUrls from "../utils/get-urls.ts";
 import watchDirectories from "./watch-directories.ts";
 import getPages from "./get-pages.ts";
 import { Pages, Page } from "../types.ts";
-
-const websocketClient = `const socket = new WebSocket('ws://localhost:8080');
-  
-socket.addEventListener('message', (event) => {
-  if (event.data === 'connected') {
-    console.log('WebSocket - connected');
-  }
-
-  if (event.data === 'refresh') {
-    location.reload();
-  }
-});`
-  .split("\n")
-  .join("");
+import { getWebsocketServer, websocketClient } from "./web-sockets.ts";
 
 async function serve(port: number) {
   const app = new Application();
@@ -45,18 +28,7 @@ async function serve(port: number) {
   };
   await pageContext.init();
 
-  const wss = new WebSocketServer(8080);
-  wss.on("connection", (ws: WebSocket) => {
-    console.log("wss - Connected");
-
-    ws.send("connected");
-
-    // Catch possible messages here
-    /*ws.on("message", (message: string) => {
-      console.log(message);
-      ws.send(message);
-    });*/
-  });
+  const wss = getWebsocketServer();
 
   // TODO: generalize
   app.use(async (context) => {
