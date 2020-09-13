@@ -12,7 +12,7 @@ describe("JSX evaluator", () => {
     expect(
       evaluateJSX("<ShowChildren>test</ShowChildren>", {
         ShowChildren,
-      })
+      }),
     ).toBe("<div>test</div>");
   });
 
@@ -24,7 +24,7 @@ describe("JSX evaluator", () => {
     expect(
       evaluateJSX("<ShowChildren withAnchor>test</ShowChildren>", {
         ShowChildren,
-      })
+      }),
     ).toBe("<div>anchor</div>");
   });
 
@@ -36,7 +36,7 @@ describe("JSX evaluator", () => {
     expect(
       evaluateJSX("<Show.Children>test</Show.Children>", {
         Show,
-      })
+      }),
     ).toBe("<div>test</div>");
   });
 
@@ -48,8 +48,8 @@ describe("JSX evaluator", () => {
         "<ShowChildren><ShowChildren>test</ShowChildren></ShowChildren>",
         {
           ShowChildren,
-        }
-      )
+        },
+      ),
     ).toBe("<div><div>test</div></div>");
   });
 
@@ -61,7 +61,7 @@ describe("JSX evaluator", () => {
     expect(
       evaluateJSX(`<PassProps test="test" />`, {
         PassProps,
-      })
+      }),
     ).toBe("<div>test</div>");
   });
 
@@ -73,14 +73,14 @@ describe("JSX evaluator", () => {
     expect(
       evaluateJSX(`<PassProps pages={['foo', 'bar', 'baz']} />`, {
         PassProps,
-      })
+      }),
     ).toBe("<div>foobarbaz</div>");
   });
 
   test("should evaluate arrays within objects as component props", () => {
     const PassProps = (
       { attributes }: { attributes: { pages: string[] } },
-      children: string[]
+      children: string[],
     ) => <div>{attributes.pages.join("")}</div>;
 
     expect(
@@ -88,60 +88,60 @@ describe("JSX evaluator", () => {
         `<PassProps attributes={{ pages: ['foo', 'bar', 'baz'] }} />`,
         {
           PassProps,
-        }
-      )
+        },
+      ),
     ).toBe("<div>foobarbaz</div>");
   });
 
   test("should evaluate arrays of objects within objects as component props", () => {
     const PassProps = (
       { attributes }: { attributes: { pages: { title: string }[] } },
-      children: string[]
+      children: string[],
     ) => <div>{attributes.pages[0].title}</div>;
 
     expect(
       evaluateJSX(`<PassProps attributes={{ pages: [{ title: "Demo" }] }} />`, {
         PassProps,
-      })
+      }),
     ).toBe("<div>Demo</div>");
   });
 
   test("should evaluate numbers within objects as component props", () => {
     const PassProps = (
       { attributes }: { attributes: { number: number } },
-      children: string[]
+      children: string[],
     ) => <div>{attributes.number}</div>;
 
     expect(
       evaluateJSX(`<PassProps attributes={{ number: 21 }} />`, {
         PassProps,
-      })
+      }),
     ).toBe("<div>21</div>");
   });
 
   test("should evaluate strings within objects as component props", () => {
     const PassProps = (
       { attributes }: { attributes: { str: string } },
-      children: string[]
+      children: string[],
     ) => <div>{attributes.str}</div>;
 
     expect(
       evaluateJSX(`<PassProps attributes={{ str: "foo" }} />`, {
         PassProps,
-      })
+      }),
     ).toBe("<div>foo</div>");
   });
 
   test("should evaluate objects within objects as component props", () => {
     const PassProps = (
       { attributes }: { attributes: { page: { title: string } } },
-      children: string[]
+      children: string[],
     ) => <div>{attributes.page.title}</div>;
 
     expect(
       evaluateJSX(`<PassProps attributes={{ page: { title: "Demo" } }} />`, {
         PassProps,
-      })
+      }),
     ).toBe("<div>Demo</div>");
   });
 
@@ -151,7 +151,7 @@ describe("JSX evaluator", () => {
     expect(
       evaluateJSX(`<ShowChildren>{1 + 1}</ShowChildren>`, {
         ShowChildren,
-      })
+      }),
     ).toBe("<div>2</div>");
   });
 
@@ -163,7 +163,7 @@ describe("JSX evaluator", () => {
     expect(
       evaluateJSX(`<PassProps test={1+1} />`, {
         PassProps,
-      })
+      }),
     ).toBe("<div>2</div>");
   });
 
@@ -177,14 +177,14 @@ describe("JSX evaluator", () => {
       evaluateJSX(`<PassProps test={<Hello />} />`, {
         Hello,
         PassProps,
-      })
+      }),
     ).toBe("<div><div>hello</div></div>");
   });
 
   test("should evaluate component children and props", () => {
     const PassChildrenAndProps = (
       { test }: { test: string },
-      children: string[]
+      children: string[],
     ) => (
       <div>
         {test}
@@ -197,8 +197,8 @@ describe("JSX evaluator", () => {
         `<PassChildrenAndProps test="prop">children</PassChildrenAndProps>`,
         {
           PassChildrenAndProps,
-        }
-      )
+        },
+      ),
     ).toBe("<div>prop\nchildren</div>");
   });
 
@@ -219,9 +219,9 @@ describe("JSX evaluator", () => {
     expect(
       evaluateJSX("<ShowSvg />", {
         ShowSvg,
-      })
+      }),
     ).toBe(
-      `<div><svg class="fill-current" role="button" xmlns="http://www.w3.org/2000/svg" view-box="0 0 20 20"><title>Close</title></svg></div>`
+      `<div><svg class="fill-current" role="button" xmlns="http://www.w3.org/2000/svg" view-box="0 0 20 20"><title>Close</title></svg></div>`,
     );
   });
 
@@ -248,9 +248,9 @@ describe("JSX evaluator", () => {
       evaluateJSX("<ShowSvg />", {
         ShowSvg,
         PassChildren,
-      })
+      }),
     ).toBe(
-      `<div><div><svg class="fill-current" role="button" xmlns="http://www.w3.org/2000/svg" view-box="0 0 20 20"><title>Close</title></svg></div></div>`
+      `<div><div><svg class="fill-current" role="button" xmlns="http://www.w3.org/2000/svg" view-box="0 0 20 20"><title>Close</title></svg></div></div>`,
     );
   });
 
@@ -265,8 +265,8 @@ describe("JSX evaluator", () => {
         },
         {
           children: ["replaced"],
-        }
-      )
+        },
+      ),
     ).toBe("<div>replaced</div>");
   });
 
@@ -281,8 +281,8 @@ describe("JSX evaluator", () => {
         },
         {
           children: ["replaced"],
-        }
-      )
+        },
+      ),
     ).toBe("<div>replaced</div>");
   });
 
@@ -294,7 +294,7 @@ describe("JSX evaluator", () => {
     expect(
       evaluateJSX("<ShowChildren><div>Demo</div></ShowChildren>", {
         ShowChildren,
-      })
+      }),
     ).toBe("<div><div>Demo</div></div>");
   });
 
@@ -306,7 +306,7 @@ describe("JSX evaluator", () => {
     expect(
       evaluateJSX(`<ShowChildren><div title="test">Demo</div></ShowChildren>`, {
         ShowChildren,
-      })
+      }),
     ).toBe(`<div><div title="test">Demo</div></div>`);
   });
 
@@ -320,8 +320,8 @@ describe("JSX evaluator", () => {
         "<ShowChildren><div>Demo</div><div>Another demo</div></ShowChildren>",
         {
           ShowChildren,
-        }
-      )
+        },
+      ),
     ).toBe("<div><div>Demo</div><div>Another demo</div></div>");
   });
 
@@ -335,8 +335,8 @@ describe("JSX evaluator", () => {
         "<ShowChildren><div><span>Foo</span><span>Bar</span></div></ShowChildren>",
         {
           ShowChildren,
-        }
-      )
+        },
+      ),
     ).toBe("<div><div><span>Foo</span><span>Bar</span></div></div>");
   });
 });

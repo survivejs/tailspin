@@ -11,17 +11,17 @@ type Replacements = { [key: string]: string[] };
 function evaluateJSX(
   code: string,
   components: Components,
-  replacements: Replacements = {}
+  replacements: Replacements = {},
 ) {
   return (
     evaluateJSXElement(
       findFirst(
         "JSXElement",
         // @ts-ignore: body property is missing from the root
-        JsxParser.parse(code, { ecmaVersion: 2015 })?.body
+        JsxParser.parse(code, { ecmaVersion: 2015 })?.body,
       ),
       components,
-      replacements
+      replacements,
     ) || code
   );
 }
@@ -29,7 +29,7 @@ function evaluateJSX(
 function evaluateJSXElement(
   JSXElement: JSXNode,
   components: Components,
-  replacements: Replacements
+  replacements: Replacements,
 ) {
   // @ts-ignore
   const firstJSXOpeningElement = JSXElement?.openingElement;
@@ -46,19 +46,25 @@ function evaluateJSXElement(
         ? // @ts-ignore
           foundComponent[firstJSXElementName.property]
         : foundComponent)(
-        attributesToObject(firstJSXElementAttributes, components, replacements),
-        childrenToString(JSXElement.children, components, replacements)
-      );
+          attributesToObject(
+            firstJSXElementAttributes,
+            components,
+            replacements,
+          ),
+          childrenToString(JSXElement.children, components, replacements),
+        );
     } else {
       const attributesString = attributesToString(
-        attributesToObject(firstJSXElementAttributes, components, replacements)
+        attributesToObject(firstJSXElementAttributes, components, replacements),
       );
 
       return `<${firstJSXElementName.name}${
         attributesString ? " " + attributesString : ""
-      }>${childrenToString(JSXElement.children, components, replacements).join(
-        ""
-      )}</${firstJSXElementName.name}>`;
+      }>${
+        childrenToString(JSXElement.children, components, replacements).join(
+          "",
+        )
+      }</${firstJSXElementName.name}>`;
     }
   }
 
@@ -79,12 +85,10 @@ function resolveJSXElementName(JSXElement: acorn.Node) {
     return;
   }
 
-  return name.name
-    ? { name: name.name }
-    : {
-        name: name.object.name,
-        property: name.property.name,
-      };
+  return name.name ? { name: name.name } : {
+    name: name.object.name,
+    property: name.property.name,
+  };
 }
 
 function findFirst(type: string, nodes: acorn.Node[]) {
@@ -106,7 +110,7 @@ function findFirst(type: string, nodes: acorn.Node[]) {
 function attributesToObject(
   attributes: acorn.Node[],
   components: Components,
-  replacements: Replacements
+  replacements: Replacements,
 ) {
   const ret = {};
 
@@ -145,7 +149,7 @@ function attributesToObject(
 }
 
 function objectExpressionToObject(
-  node: acorn.Node
+  node: acorn.Node,
 ): { [key: string]: { [key: string]: string } } {
   const ret = {};
 
@@ -173,14 +177,14 @@ function valueToObject(node: acorn.Node) {
   }
 
   throw new Error(
-    `valueToObject - Node type ${node.type} has not been implemented yet`
+    `valueToObject - Node type ${node.type} has not been implemented yet`,
   );
 }
 
 function childrenToString(
   children: JSXNode[],
   components: Components,
-  replacements: Replacements
+  replacements: Replacements,
 ): string {
   return children
     .map((child) => {
@@ -225,7 +229,7 @@ function evaluate(expression: string, replacements: Replacements) {
   try {
     return Function.apply(
       null,
-      Object.keys(replacements).concat(`return ${expression}`)
+      Object.keys(replacements).concat(`return ${expression}`),
     )(...Object.values(replacements));
   } catch (err) {
     console.error("Failed to evaluate", expression, replacements, err);

@@ -15,7 +15,7 @@ try {
 
   Deno.writeTextFileSync(
     Deno.cwd() + "/tailwind.ts",
-    `export default ${JSON.stringify(expandedConfig, null, 2)};`
+    `export default ${JSON.stringify(expandedConfig, null, 2)};`,
   );
 } catch (error) {
   console.error(error);

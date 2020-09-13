@@ -14,23 +14,25 @@ const Heading = (
     size,
     withAnchor,
   }: { level: HeadingLevel; size: TextProps["size"]; withAnchor?: boolean },
-  children: string[]
+  children: string[],
 ) =>
-  withAnchor ? (
-    <HeadingWithAnchor level={level} size={size}>
-      {children}
-    </HeadingWithAnchor>
-  ) : (
-    <Text as={`h${level}` as keyof JSX.IntrinsicElements} size={size}>
-      {children}
-    </Text>
-  );
+  withAnchor
+    ? (
+      <HeadingWithAnchor level={level} size={size}>
+        {children}
+      </HeadingWithAnchor>
+    )
+    : (
+      <Text as={`h${level}` as keyof JSX.IntrinsicElements} size={size}>
+        {children}
+      </Text>
+    );
 
 const ids: { [key: string]: number } = {};
 
 const HeadingWithAnchor = (
   { level, size }: { level: HeadingLevel; size: TextProps["size"] },
-  children: string[]
+  children: string[],
 ) => {
   let id = slugify(children.join(""));
 
@@ -54,7 +56,8 @@ const HeadingWithAnchor = (
           sx={`-ml-${
             { 1: 6, 2: 5, 3: 4, 4: 4 }[level]
           } text-primary absolute hover:secondary cursor-pointer no-underline after-hash`}
-        ></Link.withExternal>
+        >
+        </Link.withExternal>
         {/* @ts-ignore */}
         <Box as="span">{children}</Box>
       </Flex>

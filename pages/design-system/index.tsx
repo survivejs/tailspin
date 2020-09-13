@@ -38,66 +38,64 @@ const spacingScale = Object.keys(config.spacing);
 const DesignSystemPage = async (props: { url: string }) => (
   <PageLayout
     {...props}
-    body={
-      <Flex direction="row" m={{ lg: "8" }}>
-        <Box as="aside" w={{ lg: "1/3" }} sx="hidden lg:inline">
-          <Toc />
-        </Box>
-        <Stack
-          as="article"
-          direction="column"
-          spacing="16"
-          w={{ default: "full", lg: "2/3" }}
-          maxw={{ lg: "2xl" }}
-        >
-          <Heading level={1} size="4xl" withAnchor>
-            Design System
+    body={<Flex direction="row" m={{ lg: "8" }}>
+      <Box as="aside" w={{ lg: "1/3" }} sx="hidden lg:inline">
+        <Toc />
+      </Box>
+      <Stack
+        as="article"
+        direction="column"
+        spacing="16"
+        w={{ default: "full", lg: "2/3" }}
+        maxw={{ lg: "2xl" }}
+      >
+        <Heading level={1} size="4xl" withAnchor>
+          Design System
+        </Heading>
+
+        <Flex as="section" direction={{ default: "column", md: "row" }}>
+          <Box sx="flex-auto">
+            <Heading level={2} size="2xl" withAnchor>
+              Spacing scale
+            </Heading>
+            <SpacingScale items={spacingScale} />
+          </Box>
+          <Box>
+            <Heading level={2} size="2xl" withAnchor>
+              Colors
+            </Heading>
+            <Colors items={colors} />
+          </Box>
+        </Flex>
+
+        <Box as="section">
+          <Heading level={2} size="2xl" withAnchor>
+            Primitives
           </Heading>
+          <Stack direction="column" spacing="4">
+            <Collection items={await getComponents("primitives")} />
+          </Stack>
+        </Box>
 
-          <Flex as="section" direction={{ default: "column", md: "row" }}>
-            <Box sx="flex-auto">
-              <Heading level={2} size="2xl" withAnchor>
-                Spacing scale
-              </Heading>
-              <SpacingScale items={spacingScale} />
-            </Box>
-            <Box>
-              <Heading level={2} size="2xl" withAnchor>
-                Colors
-              </Heading>
-              <Colors items={colors} />
-            </Box>
-          </Flex>
+        <Box as="section">
+          <Heading level={2} size="2xl" withAnchor>
+            Patterns
+          </Heading>
+          <Stack direction="column" spacing="4">
+            <Collection items={await getComponents("patterns")} />
+          </Stack>
+        </Box>
 
-          <Box as="section">
-            <Heading level={2} size="2xl" withAnchor>
-              Primitives
-            </Heading>
-            <Stack direction="column" spacing="4">
-              <Collection items={await getComponents("primitives")} />
-            </Stack>
-          </Box>
-
-          <Box as="section">
-            <Heading level={2} size="2xl" withAnchor>
-              Patterns
-            </Heading>
-            <Stack direction="column" spacing="4">
-              <Collection items={await getComponents("patterns")} />
-            </Stack>
-          </Box>
-
-          <Box as="section">
-            <Heading level={2} size="2xl" withAnchor>
-              Layouts
-            </Heading>
-            <Stack direction="column" spacing="4">
-              <Collection items={await getComponents("layouts")} />
-            </Stack>
-          </Box>
-        </Stack>
-      </Flex>
-    }
+        <Box as="section">
+          <Heading level={2} size="2xl" withAnchor>
+            Layouts
+          </Heading>
+          <Stack direction="column" spacing="4">
+            <Collection items={await getComponents("layouts")} />
+          </Stack>
+        </Box>
+      </Stack>
+    </Flex>}
   />
 );
 
@@ -112,9 +110,11 @@ async function getComponents(type: string) {
 
   const ret = [];
 
-  for (const file of expandGlobSync(
-    _path.posix.join(componentDirectory, "*.tsx")
-  )) {
+  for (
+    const file of expandGlobSync(
+      _path.posix.join(componentDirectory, "*.tsx"),
+    )
+  ) {
     ret.push(await getComponent(componentDirectory, file.path));
   }
 
@@ -170,18 +170,22 @@ const Collection = ({ items }: { items: Component[] }) => {
                 <TabHeaderItem tabId="exampleSource">
                   Example source
                 </TabHeaderItem>
-                {componentSource ? (
-                  <TabHeaderItem tabId="componentSource">
-                    Component source
-                  </TabHeaderItem>
-                ) : (
-                  ""
-                )}
-                {props?.length > 0 ? (
-                  <TabHeaderItem tabId="props">Props</TabHeaderItem>
-                ) : (
-                  ""
-                )}
+                {componentSource
+                  ? (
+                    <TabHeaderItem tabId="componentSource">
+                      Component source
+                    </TabHeaderItem>
+                  )
+                  : (
+                    ""
+                  )}
+                {props?.length > 0
+                  ? (
+                    <TabHeaderItem tabId="props">Props</TabHeaderItem>
+                  )
+                  : (
+                    ""
+                  )}
               </TabHeader>
               <TabBody>
                 <TabBodyItem tabId="exampleSource">
@@ -198,13 +202,15 @@ const Collection = ({ items }: { items: Component[] }) => {
                     fallback={componentSource}
                   />
                 </TabBodyItem>
-                {props?.length > 0 ? (
-                  <TabBodyItem tabId="props">
-                    <Types props={props} />
-                  </TabBodyItem>
-                ) : (
-                  ""
-                )}
+                {props?.length > 0
+                  ? (
+                    <TabBodyItem tabId="props">
+                      <Types props={props} />
+                    </TabBodyItem>
+                  )
+                  : (
+                    ""
+                  )}
               </TabBody>
             </Tabs>
             {/* TODO: Add a fallback (evaluate code) here to work progressively */}
@@ -218,7 +224,7 @@ const Collection = ({ items }: { items: Component[] }) => {
             </Box>
           </CodeContainer>
         </Stack>
-      )
+      ),
     )
     .join("");
 };
@@ -253,24 +259,26 @@ const Colors = ({
 }) =>
   Object.entries(items)
     .map(([key, color]) =>
-      isObject(color) ? (
-        <Flex direction="row">
-          <Box ml="1" w="16">
+      isObject(color)
+        ? (
+          <Flex direction="row">
+            <Box ml="1" w="16">
+              {key}
+            </Box>
+            {/* @ts-ignore */}
+            <Colors parent={key} items={color} />
+          </Flex>
+        )
+        : (
+          <Box
+            p={/* @ts-ignore: TODO: Fix */ "1"}
+            bg={/* @ts-ignore: TODO: Fix */ parent ? `${parent}-${key}` : key}
+            color={parent ? `${parent}-${key}` : key}
+            style={`color: ${getComplementary(color as string)}`}
+          >
             {key}
           </Box>
-          {/* @ts-ignore */}
-          <Colors parent={key} items={color} />
-        </Flex>
-      ) : (
-        <Box
-          p={/* @ts-ignore: TODO: Fix */ "1"}
-          bg={/* @ts-ignore: TODO: Fix */ parent ? `${parent}-${key}` : key}
-          color={parent ? `${parent}-${key}` : key}
-          style={`color: ${getComplementary(color as string)}`}
-        >
-          {key}
-        </Box>
-      )
+        )
     )
     .join("");
 
@@ -283,32 +291,34 @@ const Types = ({
     type: "string";
   }[];
 }) =>
-  props.length > 0 ? (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHeaderCell>Name</TableHeaderCell>
-          <TableHeaderCell>Type</TableHeaderCell>
-          <TableHeaderCell>Is optional</TableHeaderCell>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {props
-          .map(({ name, isOptional, type }) => (
-            <TableRow>
-              <TableBodyCell>
-                <Box as="code">{name}</Box>
-              </TableBodyCell>
-              <TableBodyCell>{type}</TableBodyCell>
-              <TableBodyCell>{isOptional ? "✓" : ""}</TableBodyCell>
-            </TableRow>
-          ))
-          .join("")}
-      </TableBody>
-    </Table>
-  ) : (
-    ""
-  );
+  props.length > 0
+    ? (
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHeaderCell>Name</TableHeaderCell>
+            <TableHeaderCell>Type</TableHeaderCell>
+            <TableHeaderCell>Is optional</TableHeaderCell>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {props
+            .map(({ name, isOptional, type }) => (
+              <TableRow>
+                <TableBodyCell>
+                  <Box as="code">{name}</Box>
+                </TableBodyCell>
+                <TableBodyCell>{type}</TableBodyCell>
+                <TableBodyCell>{isOptional ? "✓" : ""}</TableBodyCell>
+              </TableRow>
+            ))
+            .join("")}
+        </TableBody>
+      </Table>
+    )
+    : (
+      ""
+    );
 
 const isObject = (a: unknown) => typeof a === "object";
 

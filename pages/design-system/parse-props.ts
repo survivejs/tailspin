@@ -55,7 +55,8 @@ async function parseProps({
     const referenceType = typeReferenceNode.getText();
     const propertySignatureNodes = queryNodes({
       source: source,
-      query: `Identifier[name="${referenceType}"] ~ TypeLiteral > PropertySignature`,
+      query:
+        `Identifier[name="${referenceType}"] ~ TypeLiteral > PropertySignature`,
       path,
     });
 
@@ -75,7 +76,8 @@ async function parseProps({
 
     // TODO: Tidy up
     // @ts-ignore
-    const moduleTarget = identifierNode?.parent?.parent?.parent?.parent?.moduleSpecifier
+    const moduleTarget = identifierNode?.parent?.parent?.parent?.parent
+      ?.moduleSpecifier
       ?.getText()
       .replace(/"/g, "");
 
@@ -87,7 +89,7 @@ async function parseProps({
 
     const componentPath = _path.posix.join(
       componentDirectory,
-      `${moduleTarget}.tsx`
+      `${moduleTarget}.tsx`,
     );
 
     return parseProps({

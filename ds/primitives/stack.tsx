@@ -16,20 +16,24 @@ const Stack = (
   props: StackProps = {
     direction: "column",
   },
-  children: string[]
+  children: string[],
 ) => (
   <Box
     {...omit(props, "direction", "spacing")}
-    sx={`flex ${convertToClasses(
-      "flex",
-      (mediaQuery, prefix, v) =>
-        `${mediaQuery ? mediaQuery + ":" : ""}${prefix}-${
-          v === "column" ? "col" : "row"
-        }`
-    )(props?.direction)} ${parseSpacingClass(
-      props?.direction,
-      props?.spacing
-    )} ${(props?.sx && props.sx) || ""}`.trim()}
+    sx={`flex ${
+      convertToClasses(
+        "flex",
+        (mediaQuery, prefix, v) =>
+          `${mediaQuery ? mediaQuery + ":" : ""}${prefix}-${
+            v === "column" ? "col" : "row"
+          }`,
+      )(props?.direction)
+    } ${
+      parseSpacingClass(
+        props?.direction,
+        props?.spacing,
+      )
+    } ${(props?.sx && props.sx) || ""}`.trim()}
   >
     {children.join("")}
   </Box>
@@ -37,7 +41,7 @@ const Stack = (
 
 function parseSpacingClass(
   direction: StackProps["direction"],
-  spacing: StackProps["spacing"]
+  spacing: StackProps["spacing"],
 ) {
   if (!spacing) {
     return "";

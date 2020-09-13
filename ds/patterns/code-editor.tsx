@@ -9,12 +9,14 @@ function highlight(language: string, str: string) {
 
 const CodeContainer = (
   { sources }: { sources: { [key: string]: string } },
-  children: string[]
+  children: string[],
 ) => {
   const encoder = new TextEncoder();
-  const state = `{ ${Object.entries(sources)
-    .map(([name, source]) => `${name}: atob('${encoder.encode(source)}')`)
-    .join(", ")} }`;
+  const state = `{ ${
+    Object.entries(sources)
+      .map(([name, source]) => `${name}: atob('${encoder.encode(source)}')`)
+      .join(", ")
+  } }`;
 
   return (
     <Box as="section" x-label="codeEditor" x-state={state}>
@@ -64,7 +66,8 @@ const CodeEditor = ({
         autocorrect="off"
         spellcheck="false"
         x-rows={`${parent}.${value}?.split('\\n').length`}
-      ></textarea>
+      >
+      </textarea>
     </Box>
   </Box>
 );

@@ -12,11 +12,9 @@ const PageLayout = ({ body, url }: PageLayoutProps) => (
   <Box>
     <Box as="header" bg="primary" color="white">
       <Navigation
-        logo={
-          <NavigationItem href="/" isSelected={url === "/"}>
-            tailwind-webpack-starter
-          </NavigationItem>
-        }
+        logo={<NavigationItem href="/" isSelected={url === "/"}>
+          tailwind-webpack-starter
+        </NavigationItem>}
       >
         <Box sx="lg:flex-grow">
           <NavigationItem href="/blog/" isSelected={url === "/blog/"}>
@@ -30,7 +28,9 @@ const PageLayout = ({ body, url }: PageLayoutProps) => (
           </NavigationItem>
         </Box>
         <Box>
-          <NavigationItem href="https://github.com/survivejs/tailwind-webpack-starter">
+          <NavigationItem
+            href="https://github.com/survivejs/tailwind-webpack-starter"
+          >
             <Box
               px="4"
               py="2"

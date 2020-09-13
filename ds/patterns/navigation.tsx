@@ -48,7 +48,7 @@ const Navigation = ({ logo }: { logo?: string }, children: string[]) => (
 
 const NavigationItem = (
   { href, isSelected }: ExternalLinkProps & { isSelected?: boolean },
-  label: string[]
+  label: string[],
 ) => (
   <Link.withExternal
     href={href}
@@ -73,7 +73,9 @@ const Example = () => (
         </NavigationItem>
       </Box>
       <Box>
-        <NavigationItem href="https://github.com/survivejs/tailwind-webpack-starter">
+        <NavigationItem
+          href="https://github.com/survivejs/tailwind-webpack-starter"
+        >
           Star at GitHub
         </NavigationItem>
       </Box>

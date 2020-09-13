@@ -32,7 +32,7 @@ const Alert = ({ variant }: { variant: Variant }, children: string[]) => {
 
 // Icons from https://heroicons.com/
 function getStyle(
-  variant: Variant
+  variant: Variant,
 ): { border: ColorKeys; color: ColorKeys; bg: ColorKeys; icon: string } {
   switch (variant) {
     case "info":

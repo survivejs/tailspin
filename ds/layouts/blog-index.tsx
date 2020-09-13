@@ -24,35 +24,33 @@ const BlogIndexLayout = ({
 }) => (
   <PageLayout
     url={url}
-    body={
-      <Box
-        as="article"
-        mx="auto"
-        mb="8"
-        w={{ default: "full", lg: "2/3" }}
-        maxw={{ lg: "2xl" }}
-      >
-        <Heading level={1} size="4xl">
-          Blog pages
-        </Heading>
-        <Flex direction="column" class="prose lg:prose-xl">
-          {pages
-            .map(({ title, description, slug, categories }) => (
-              <Flex as="section" direction="column">
-                <Heading level={2} size="2xl">
-                  {/* @ts-ignore */}
-                  <Link href={slug}>{title}</Link>
-                </Heading>
-                <Box>{description}</Box>
-                <Stack direction="row" spacing="2">
-                  {categories.map((category) => <Tag>{category}</Tag>).join("")}
-                </Stack>
-              </Flex>
-            ))
-            .join("")}
-        </Flex>
-      </Box>
-    }
+    body={<Box
+      as="article"
+      mx="auto"
+      mb="8"
+      w={{ default: "full", lg: "2/3" }}
+      maxw={{ lg: "2xl" }}
+    >
+      <Heading level={1} size="4xl">
+        Blog pages
+      </Heading>
+      <Flex direction="column" class="prose lg:prose-xl">
+        {pages
+          .map(({ title, description, slug, categories }) => (
+            <Flex as="section" direction="column">
+              <Heading level={2} size="2xl">
+                {/* @ts-ignore */}
+                <Link href={slug}>{title}</Link>
+              </Heading>
+              <Box>{description}</Box>
+              <Stack direction="row" spacing="2">
+                {categories.map((category) => <Tag>{category}</Tag>).join("")}
+              </Stack>
+            </Flex>
+          ))
+          .join("")}
+      </Flex>
+    </Box>}
   />
 );
 

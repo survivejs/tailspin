@@ -31,7 +31,7 @@ const TabBody = ({}, children: string[]) => (
 );
 const TabBodyItem = (
   { tabId }: { tabId: string; showAsFallback?: boolean },
-  children: string[]
+  children: string[],
 ) => (
   <Box x-class={`state === '${tabId}' ? '' : 'hidden'`}>
     {children.join("")}

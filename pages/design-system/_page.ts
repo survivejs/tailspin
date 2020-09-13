@@ -1,19 +1,19 @@
 import evaluateComponentCode from "./evaluate-code";
 
 const components = loadComponents(
-  require.context("../../ds", true, /^\.\/.*\.tsx$/)
+  require.context("../../ds", true, /^\.\/.*\.tsx$/),
 );
 
 const evaluateCode = (
   exampleSource: string,
   componentName: string,
-  componentSource?: string
+  componentSource?: string,
 ): string =>
   evaluateComponentCode(
     components,
     exampleSource,
     componentName,
-    componentSource
+    componentSource,
   );
 
 function loadComponents(context) {

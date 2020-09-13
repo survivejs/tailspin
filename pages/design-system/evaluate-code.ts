@@ -4,7 +4,7 @@ const evaluateCode = (
   componentSources: Components,
   exampleSource: string,
   componentName: string,
-  componentSource?: string
+  componentSource?: string,
 ): string => {
   if (componentSource) {
     return evaluateJSX(exampleSource, {

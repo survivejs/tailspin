@@ -21,7 +21,8 @@ const LinkExternal = (props: ExternalLinkProps, label: string[]) => (
 );
 Link.withExternal = LinkExternal;
 
-export const description = `Regular Links are meant to be used internally and they are type-checked. The external variant omits type-checking and you should check those links using another tool.`;
+export const description =
+  `Regular Links are meant to be used internally and they are type-checked. The external variant omits type-checking and you should check those links using another tool.`;
 export const displayName = "Link";
 export const Example = () => (
   <Flex direction="column">
@@ -29,7 +30,9 @@ export const Example = () => (
       <Link href="/design-system/">Design system</Link>
     </Box>
     <Box>
-      <Link.withExternal href="https://github.com/survivejs/tailwind-webpack-starter">
+      <Link.withExternal
+        href="https://github.com/survivejs/tailwind-webpack-starter"
+      >
         Star at GitHub
       </Link.withExternal>
     </Box>

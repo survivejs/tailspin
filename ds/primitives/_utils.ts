@@ -28,7 +28,7 @@ const rules = {
 function supportNegative(
   mediaQuery: string,
   prefix: string,
-  v: string | number
+  v: string | number,
 ) {
   return v > 0
     ? `${mediaQuery ? mediaQuery + ":" : ""}${prefix}-${v}`
@@ -39,7 +39,7 @@ const tailwindKeys = Object.keys(rules);
 
 function constructTailwindClasses(
   props?: { class?: string; sx?: string },
-  classes?: string[]
+  classes?: string[],
 ): string {
   if (!props) {
     return "";
@@ -54,7 +54,7 @@ function constructTailwindClasses(
 
   // Likely Oceanwind should be fine with an empty array
   return (combinedClasses.length ? ow([combinedClasses.join(" ")]) : "").concat(
-    props.class ? " " + props.class.split(" ").join(" ") : ""
+    props.class ? " " + props.class.split(" ").join(" ") : "",
   );
 }
 
@@ -77,7 +77,7 @@ function convertToClasses(prefix: string, customizeValue = defaultValue) {
 function defaultValue(
   mediaQuery: string,
   prefix: string,
-  value: string | number
+  value: string | number,
 ) {
   return `${mediaQuery ? mediaQuery + ":" : ""}${prefix}-${value}`;
 }
@@ -90,7 +90,7 @@ const omit = (obj: { [key: string]: any }, ...arr: string[]) =>
     .filter((k) => !arr.includes(k))
     .reduce(
       (acc, key) => ((acc[key] = obj[key]), acc),
-      {} as { [key: string]: any }
+      {} as { [key: string]: any },
     );
 
 export {

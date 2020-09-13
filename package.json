@@ -5,6 +5,7 @@
   "description": "Opinionated starter for Tailwind projects",
   "main": "src/index.ts",
   "scripts": {
+    "format": "deno fmt --ignore=./node_modules/ --unstable",
     "prebuild": "npm run generate-meta",
     "build": "npm run clean && TODO",
     "postbuild": "npm run purge-css",
@@ -39,7 +40,6 @@
     "jest": "^26.4.2",
     "lint-staged": "^10.3.0",
     "object.omit": "^3.0.0",
-    "prettier": "^2.1.1",
     "remove-markdown": "^0.3.0",
     "rimraf": "^3.0.2",
     "sitemap-static": "^0.4.4",
@@ -57,9 +57,6 @@
   },
   "lint-staged": {
     "*.{js,css,md}": "prettier --write"
-  },
-  "prettier": {
-    "trailingComma": "es5"
   },
   "dependencies": {
     "highlight.js": "^10.2.0",

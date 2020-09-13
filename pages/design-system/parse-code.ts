@@ -1,5 +1,5 @@
+import { prettier } from "https://deno.land/x/std/prettier/prettier.ts";
 import * as ts from "typescript";
-import * as prettier from "prettier";
 import { tsquery } from "@phenomnomnominal/tsquery";
 
 function parseCode({ name, path, source }) {
@@ -54,7 +54,7 @@ function parseProperties(nodes: ts.Node[]) {
       const type = typeNode.getText();
 
       return { name, isOptional, type };
-    }
+    },
   );
 }
 
@@ -80,7 +80,7 @@ function toSource({ path, source, node }) {
     source,
     ts.ScriptTarget.ES2015,
     false,
-    ts.ScriptKind.TSX
+    ts.ScriptKind.TSX,
   );
   const printer = ts.createPrinter();
 

@@ -106,7 +106,7 @@ async function serve(port: number) {
     // https://github.com/denoland/deno/issues/5742
     ["./ds", "./pages"],
     pages,
-    wss
+    wss,
   );
 }
 
@@ -119,7 +119,7 @@ async function getPages() {
       pages[url] = await import(pagePath);
 
       return Promise.resolve();
-    })
+    }),
   );
 
   return pages;
@@ -128,7 +128,7 @@ async function getPages() {
 async function watchDirectories(
   directories: string[],
   pages: Pages,
-  wss: WebSocketServer
+  wss: WebSocketServer,
 ) {
   const watcher = Deno.watchFs(directories, { recursive: true });
 

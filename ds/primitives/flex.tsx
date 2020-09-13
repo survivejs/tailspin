@@ -15,17 +15,19 @@ const Flex = (
   props: FlexProps = {
     direction: "column",
   },
-  children: string[]
+  children: string[],
 ) => (
   <Box
     {...omit(props, "direction")}
-    sx={`flex ${convertToClasses(
-      "flex",
-      (mediaQuery, prefix, v) =>
-        `${mediaQuery ? mediaQuery + ":" : ""}${prefix}-${
-          v === "column" ? "col" : "row"
-        }`
-    )(props?.direction)} ${(props?.sx && props.sx) || ""}`.trim()}
+    sx={`flex ${
+      convertToClasses(
+        "flex",
+        (mediaQuery, prefix, v) =>
+          `${mediaQuery ? mediaQuery + ":" : ""}${prefix}-${
+            v === "column" ? "col" : "row"
+          }`,
+      )(props?.direction)
+    } ${(props?.sx && props.sx) || ""}`.trim()}
   >
     {children.join("")}
   </Box>

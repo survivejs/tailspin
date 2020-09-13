@@ -8,7 +8,7 @@ type Variant = "primary" | "secondary";
 // https://tailwindcss.com/components/buttons
 const Button = (
   { onclick, sx, variant }: ButtonProps & { variant?: Variant },
-  children: string[]
+  children: string[],
 ) => (
   <Box
     as="button"

@@ -5,9 +5,11 @@ function getUrls() {
   const rootPath = path.posix.join(Deno.cwd(), "pages");
   const ret: { [key: string]: string } = {};
 
-  for (const file of expandGlobSync(
-    path.posix.join(rootPath, "**/index.tsx")
-  )) {
+  for (
+    const file of expandGlobSync(
+      path.posix.join(rootPath, "**/index.tsx"),
+    )
+  ) {
     const relativePath = path.posix.relative(rootPath, file.path);
     const link = relativePath
       .replace("/index.tsx", "")

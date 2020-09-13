@@ -23,31 +23,29 @@ const BlogPageLayout = ({
 }) => (
   <PageLayout
     url={url}
-    body={
-      <Box as="article" m="8" mx="auto" w="full" class="prose lg:prose-xl">
-        <Heading level={1} size="4xl">
-          {attributes.title}
-        </Heading>
-        <Stack direction="column" spacing="8">
-          <Stack direction="row" spacing="2">
-            {attributes.categories
-              .map((category) => <Tag>{category}</Tag>)
-              .join("")}
-          </Stack>
-          <Box>{attributes.body}</Box>
-          <Flex direction="row" sx="justify-between">
-            <Text size="sm">{attributes.author}</Text>
-            <Text size="sm">
-              {new Intl.DateTimeFormat("en", {
-                year: "numeric",
-                month: "short",
-                day: "2-digit",
-              }).format(new Date(attributes.date))}
-            </Text>
-          </Flex>
+    body={<Box as="article" m="8" mx="auto" w="full" class="prose lg:prose-xl">
+      <Heading level={1} size="4xl">
+        {attributes.title}
+      </Heading>
+      <Stack direction="column" spacing="8">
+        <Stack direction="row" spacing="2">
+          {attributes.categories
+            .map((category) => <Tag>{category}</Tag>)
+            .join("")}
         </Stack>
-      </Box>
-    }
+        <Box>{attributes.body}</Box>
+        <Flex direction="row" sx="justify-between">
+          <Text size="sm">{attributes.author}</Text>
+          <Text size="sm">
+            {new Intl.DateTimeFormat("en", {
+              year: "numeric",
+              month: "short",
+              day: "2-digit",
+            }).format(new Date(attributes.date))}
+          </Text>
+        </Flex>
+      </Stack>
+    </Box>}
   />
 );
 

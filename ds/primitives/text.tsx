@@ -18,9 +18,11 @@ export type TextProps = {
 const Text = (props: TextProps, children: string[]) => (
   <Box
     {...omit(props, "size", "weight")}
-    sx={`${convertToClasses("text")(props?.size)} ${convertToClasses("font")(
-      props?.weight
-    )}`.trim()}
+    sx={`${convertToClasses("text")(props?.size)} ${
+      convertToClasses("font")(
+        props?.weight,
+      )
+    }`.trim()}
   >
     {children.join("")}
   </Box>
