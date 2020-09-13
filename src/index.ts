@@ -5,8 +5,8 @@ import {
   VirtualInjector,
 } from "https://unpkg.com/@bebraw/oceanwind@0.2.5";
 import getUrls from "../utils/get-urls.ts";
+import getPages from "../utils/get-pages.ts";
 import watchDirectories from "./watch-directories.ts";
-import getPages from "./get-pages.ts";
 import { Pages, Page } from "../types.ts";
 import { getWebsocketServer, websocketClient } from "./web-sockets.ts";
 

@@ -17,7 +17,7 @@
     "check-types": "tsc --noEmit",
     "stats": "npm run build -- --json > stats.json",
     "analyze-stats": "webpack-bundle-analyzer stats.json",
-    "generate-meta": "deno run --unstable --allow-read --allow-write ./utils/generate-meta.ts",
+    "generate-meta": "deno run --config ./tsconfig.json --unstable --allow-net --allow-read --allow-write ./utils/generate-meta.ts",
     "test": "jest"
   },
   "keywords": [
