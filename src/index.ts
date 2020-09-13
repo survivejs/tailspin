@@ -12,7 +12,6 @@ import { getWebsocketServer, websocketClient } from "./web-sockets.ts";
 
 async function serve(port: number) {
   const app = new Application();
-  const urls = getUrls();
   const pageContext: {
     _pages: Pages;
     init: () => void;
@@ -20,7 +19,7 @@ async function serve(port: number) {
   } = {
     _pages: {},
     init: async function () {
-      this._pages = await getPages(urls);
+      this._pages = await getPages(getUrls());
     },
     getPage: function (url: string) {
       return this._pages[url];
