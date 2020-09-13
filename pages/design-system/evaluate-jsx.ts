@@ -5,7 +5,9 @@ import { generate } from "https://unpkg.com/escodegen@2.0.0/escodegen.js";
 const JsxParser = Parser.extend(jsx());
 
 type JSXNode = acorn.Node & { children: JSXNode[] };
-export type Components = { [key: string]: (any, children: string[]) => string };
+export type Components = {
+  [key: string]: (props: any, children: string[]) => string;
+};
 type Replacements = { [key: string]: string[] };
 
 function evaluateJSX(
@@ -61,9 +63,7 @@ function evaluateJSXElement(
       return `<${firstJSXElementName.name}${
         attributesString ? " " + attributesString : ""
       }>${
-        childrenToString(JSXElement.children, components, replacements).join(
-          "",
-        )
+        childrenToString(JSXElement.children, components, replacements)
       }</${firstJSXElementName.name}>`;
     }
   }
@@ -150,8 +150,8 @@ function attributesToObject(
 
 function objectExpressionToObject(
   node: acorn.Node,
-): { [key: string]: { [key: string]: string } } {
-  const ret = {};
+) {
+  const ret: { [key: string]: { [key: string]: string } } = {};
 
   // @ts-ignore
   node.properties?.forEach((property) => {
