@@ -1,5 +1,7 @@
+import * as _path from "https://deno.land/std/path/mod.ts";
+import { expandGlobSync } from "https://deno.land/std/fs/mod.ts";
+import { readableColor } from "https://unpkg.com/polished@3.6.6/dist/polished.cjs.js";
 import * as elements from "../../src/elements.ts";
-import readableColor from "polished/lib/color/readableColor";
 import PageLayout from "../../ds/layouts/page.tsx";
 import { CodeContainer, CodeEditor } from "../../ds/patterns/code-editor.tsx";
 import {
@@ -103,17 +105,23 @@ DesignSystemPage.meta = {
 };
 
 function getComponents(type: string) {
-  const componentDirectory = _path.join(__dirname, "..", "..", "ds", type);
+  const componentDirectory = _path.posix.join(Deno.cwd(), "ds", type);
 
-  return glob
-    .sync(_path.join(componentDirectory, "*.tsx"))
-    .map(getComponent(componentDirectory));
+  const ret = [];
+
+  for (const file of expandGlobSync(
+    _path.posix.join(componentDirectory, "*.tsx")
+  )) {
+    ret.push(getComponent(file.path));
+  }
+
+  return ret;
 }
 
 function getComponent(componentDirectory: string) {
-  return (path: string) => {
-    const source = _fs.readFileSync(path, { encoding: "utf-8" });
-    const component = require(path);
+  return async (path: string) => {
+    const source = Deno.readTextFileSync(path);
+    const component = await import(path);
     const { displayName } = component;
 
     return {
@@ -215,7 +223,7 @@ const Collection = ({ items }: { items: Component[] }) => {
 };
 
 function getComponentSources(items: Component[]) {
-  const ret: { [key: string]: string } = {};
+  const ret: { [key: string]: () => string } = {};
 
   items.forEach(({ displayName, default: def }) => {
     ret[displayName] = def;
@@ -253,10 +261,9 @@ const Colors = ({
           <Colors parent={key} items={color} />
         </Flex>
       ) : (
-        // @ts-ignore
         <Box
-          p="1"
-          bg={parent ? `${parent}-${key}` : key}
+          p={/* @ts-ignore: TODO: Fix */ "1"}
+          bg={/* @ts-ignore: TODO: Fix */ parent ? `${parent}-${key}` : key}
           color={parent ? `${parent}-${key}` : key}
           style={`color: ${getComplementary(color as string)}`}
         >

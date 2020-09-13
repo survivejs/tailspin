@@ -1,7 +1,7 @@
 import { expandGlobSync } from "https://deno.land/std/fs/mod.ts";
 import * as path from "https://deno.land/std/path/mod.ts";
 
-function resolveUrls() {
+function getUrls() {
   const rootPath = path.posix.join(Deno.cwd(), "pages");
   const ret: { [key: string]: string } = {};
 
@@ -20,4 +20,4 @@ function resolveUrls() {
   return ret;
 }
 
-export default resolveUrls;
+export default getUrls;

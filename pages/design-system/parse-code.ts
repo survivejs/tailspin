@@ -1,5 +1,3 @@
-import _fs from "fs";
-import _path from "path";
 import * as ts from "typescript";
 import * as prettier from "prettier";
 import { tsquery } from "@phenomnomnominal/tsquery";

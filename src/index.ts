@@ -8,6 +8,7 @@ import {
   getStyleTag,
   VirtualInjector,
 } from "https://unpkg.com/@bebraw/oceanwind@0.2.5";
+import getUrls from "../utils/get-urls.ts";
 
 type Pages = {
   [key: string]: {
@@ -39,10 +40,7 @@ socket.addEventListener('message', (event) => {
 
 async function serve(port: number) {
   const app = new Application();
-  const pages: Pages = {};
-
-  pages["/"] = await import("../pages/index.tsx");
-  pages["/blog/"] = await import("../pages/blog/index.tsx");
+  const pages = await getPages();
 
   const wss = new WebSocketServer(8080);
   wss.on("connection", (ws: WebSocket) => {
@@ -110,6 +108,21 @@ async function serve(port: number) {
     pages,
     wss
   );
+}
+
+async function getPages() {
+  const pages: Pages = {};
+  const urls = getUrls();
+
+  await Promise.all(
+    Object.entries(urls).map(async ([url, pagePath]) => {
+      pages[url] = await import(pagePath);
+
+      return Promise.resolve();
+    })
+  );
+
+  return pages;
 }
 
 async function watchDirectories(

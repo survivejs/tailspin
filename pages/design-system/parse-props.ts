@@ -1,8 +1,12 @@
-import _fs from "fs";
-import _path from "path";
-import { parseProperties, toSource, queryNode, queryNodes } from "./parse-code";
+import * as _path from "https://deno.land/std/path/mod.ts";
+import {
+  parseProperties,
+  toSource,
+  queryNode,
+  queryNodes,
+} from "./parse-code.ts";
 
-function parseProps({
+async function parseProps({
   componentDirectory,
   displayName,
   path,
@@ -81,13 +85,17 @@ function parseProps({
       return "";
     }
 
-    const componentPath = _path.join(componentDirectory, `${moduleTarget}.tsx`);
+    const componentPath = _path.posix.join(
+      componentDirectory,
+      `${moduleTarget}.tsx`
+    );
 
     return parseProps({
       componentDirectory,
-      displayName: require(componentPath).displayName,
+      // @ts-ignore TODO: Type this properly
+      displayName: await import(componentPath).displayName,
       path: componentPath,
-      source: _fs.readFileSync(componentPath, { encoding: "utf-8" }),
+      source: Deno.readTextFileSync(componentPath),
     });
   }
 }

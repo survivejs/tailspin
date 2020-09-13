@@ -1,13 +1,9 @@
+import * as hljs from "https://unpkg.com/highlight.js@10.2.0/lib/index.js";
 import * as elements from "../../src/elements.ts";
 import Box from "../primitives/box.tsx";
 import Text from "../primitives/text.tsx";
 
-import * as hljs from "highlight.js";
-const html = require("highlight.js/lib/languages/xml");
-
-hljs.registerLanguage("html", html);
-
-function highlight(language, str) {
+function highlight(language: string, str: string) {
   return hljs.highlight(language, str).value;
 }
 
@@ -15,11 +11,9 @@ const CodeContainer = (
   { sources }: { sources: { [key: string]: string } },
   children: string[]
 ) => {
+  const encoder = new TextEncoder();
   const state = `{ ${Object.entries(sources)
-    .map(
-      ([name, source]) =>
-        `${name}: atob('${Buffer.from(source as string).toString("base64")}')`
-    )
+    .map(([name, source]) => `${name}: atob('${encoder.encode(source)}')`)
     .join(", ")} }`;
 
   return (

@@ -1,6 +1,6 @@
 import defaultTheme from "../default-theme.ts";
 import userTheme from "../user-theme.ts";
-import resolveUrls from "./resolve-urls.ts";
+import getUrls from "./get-urls.ts";
 
 const isObject = (a: any) => typeof a === "object";
 
@@ -10,7 +10,7 @@ try {
     ...defaultTheme,
     ...userTheme,
     colors: expandColors({ ...defaultTheme.colors, ...userTheme.colors }),
-    internalLinks: resolveUrls(),
+    internalLinks: getUrls(),
   };
 
   Deno.writeTextFileSync(

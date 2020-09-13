@@ -1,6 +1,3 @@
 {
-  "imports": {
-    "otion/dev": "https://unpkg.com/otion/dist-deno/bundle.dev.mjs",
-    "otion": "https://unpkg.com/otion/dist-deno/bundle.prod.min.mjs"
-  }
+  "imports": {}
 }
