@@ -6,7 +6,7 @@ import Flex from "../../ds/primitives/flex.tsx";
 // import { readableColor } from "https://unpkg.com/polished@3.6.6/dist/polished.cjs.js";
 
 // TODO: Figure out how to handle polymorphism in TS
-// Likely this one is easier to solve against expandedColors
+// Likely this one is easier to solve against extendedColors
 const Colors = ({
   items,
   parent,

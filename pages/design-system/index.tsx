@@ -13,9 +13,6 @@ import Colors from "./colors.tsx";
 import SpacingScale from "./spacing-scale.tsx";
 import Collection from "./collection.tsx";
 
-const colors = config.colors;
-const spacingScale = Object.keys(config.spacing);
-
 const DesignSystemPage = async (props: { url: string }) => (
   <PageLayout
     {...props}
@@ -39,13 +36,13 @@ const DesignSystemPage = async (props: { url: string }) => (
             <Heading level={2} size="2xl" withAnchor>
               Spacing scale
             </Heading>
-            <SpacingScale items={spacingScale} />
+            <SpacingScale items={Object.keys(config.spacing)} />
           </Box>
           <Box>
             <Heading level={2} size="2xl" withAnchor>
               Colors
             </Heading>
-            <Colors items={colors} />
+            <Colors items={config.extendedColors} />
           </Box>
         </Flex>
 

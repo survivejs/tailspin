@@ -9,6 +9,7 @@ try {
   const expandedConfig = {
     ...defaultTheme,
     ...userTheme,
+    extendedColors: { ...defaultTheme.colors, ...userTheme.colors },
     colors: expandColors({ ...defaultTheme.colors, ...userTheme.colors }),
     internalLinks: getUrls(),
   };
