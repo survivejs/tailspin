@@ -9,6 +9,7 @@ import {
   VirtualInjector,
 } from "https://unpkg.com/@bebraw/oceanwind@0.2.5";
 import getUrls, { Urls } from "../utils/get-urls.ts";
+import watchDirectories from "./watch-directories.ts";
 
 type Pages = {
   [key: string]: Page;
@@ -120,8 +121,18 @@ async function serve(port: number) {
     // Directories have to be relative to cwd
     // https://github.com/denoland/deno/issues/5742
     ["./ds", "./pages"],
-    wss,
-    async () => await pageContext.init(),
+    async () => {
+      await pageContext.init();
+
+      wss.clients.forEach((socket) => {
+        // 1 for open, https://developer.mozilla.org/en-US/docs/Web/API/WebSocket
+        if (socket.state === 1) {
+          console.log("watchDirectories - Refresh ws");
+
+          socket.send("refresh");
+        }
+      });
+    },
   );
 }
 
@@ -138,31 +149,6 @@ async function getPages(urls: Urls) {
   );
 
   return pages;
-}
-
-async function watchDirectories(
-  directories: string[],
-  wss: WebSocketServer,
-  onModify: () => void,
-) {
-  const watcher = Deno.watchFs(directories, { recursive: true });
-
-  for await (const event of watcher) {
-    console.log("watchDirectories - Detected a change", event);
-
-    if (event.kind === "modify") {
-      await onModify();
-
-      wss.clients.forEach((socket) => {
-        // 1 for open, https://developer.mozilla.org/en-US/docs/Web/API/WebSocket
-        if (socket.state === 1) {
-          console.log("watchDirectories - Refresh ws");
-
-          socket.send("refresh");
-        }
-      });
-    }
-  }
 }
 
 // TODO: Make port configurable
