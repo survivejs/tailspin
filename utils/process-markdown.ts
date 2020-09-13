@@ -1,58 +1,16 @@
-import { Marked } from "https://deno.land/x/markdown@v2.0.0/mod.ts";
-// import hljs from "highlight.js";
+// Reference: https://deno.land/x/pagic@v0.9.1/src/plugins/md.tsx
+import fm from "https://dev.jspm.io/front-matter@4.0.2";
+import MarkdownIt from "https://dev.jspm.io/markdown-it@11.0.0";
 
-/*
-marked.setOptions({
-  renderer: new marked.Renderer(),
-  highlight: function (code, language) {
-    const validLanguage = hljs.getLanguage(language) ? language : "plaintext";
-
-    return hljs.highlight(validLanguage, code).value;
-  },
-  pedantic: false,
-  gfm: true,
-  breaks: false,
-  smartLists: true,
-  smartypants: false,
-  xhtml: false,
+// TODO: Customize and add highlighting (highlight.js?)
+const mdRenderer = new MarkdownIt({
+  html: true,
 });
 
-/*
-function processMarkdownWithFrontmatter(source) {
-  const result: { [key: string]: any } = frontmatter(source);
-
-  result.attributes = result.attributes || {};
-  result.attributes.description =
-    result.attributes.description ||
-    generateDescription(result, result.attributes.body);
-  result.attributes.body = processMarkdown(result.body);
-
-  return { ...result.attributes, body: result.body };
-}
-
-function generateDescription(file, body) {
-  let ret = body;
-
-  if (file.attributes && file.attributes.preview) {
-    ret = file.attributes.preview;
-  }
-
-  return `${removeMarkdown(ret).slice(0, 100)}…`;
-}
-*/
-
-// TODO: Apply syntax highlighting - https://github.com/ubersl0th/markdown
 function processMarkdown(source: string) {
-  try {
-    return Marked.parse(source);
-  } catch (err) {
-    console.error("processMarkdown - Failed to parse", source);
+  const { body, attributes: meta } = fm(source);
 
-    return {
-      content: "",
-      meta: {},
-    };
-  }
+  return { content: mdRenderer.render(body).trim(), meta };
 }
 
 export { processMarkdown };
