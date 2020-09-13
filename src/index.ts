@@ -46,7 +46,11 @@ async function serve(port: number) {
       const injector = VirtualInjector();
       setup({ injector });
 
-      const pageHtml = await Promise.resolve(page.default({ url }));
+      const { default: component } = page;
+      const pageHtml = await Promise.resolve(component({ url }));
+
+      // @ts-ignore: TODO: Drop default in favor of simpler composition?
+      const { title, meta } = component;
 
       const styleTag = getStyleTag(injector);
 
@@ -54,8 +58,8 @@ async function serve(port: number) {
       context.response.body = new TextEncoder().encode(`<html>
     <head>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Deno demo</title>
-      <meta name="description" content="description goes here"></meta>
+      <title>${title}</title>
+      ${generateMeta(meta)}
       <script>${websocketClient}</script>
       <script type="text/javascript" src="https://unpkg.com/sidewind@3.1.2/dist/sidewind.umd.production.min.js"></script>
       <link rel="stylesheet" href="https://unpkg.com/tailwindcss@1.8.3/dist/base.min.css" />
@@ -93,6 +97,12 @@ async function serve(port: number) {
       });
     },
   );
+}
+
+function generateMeta(meta: { [key: string]: string }) {
+  return Object.entries(meta).map(([key, value]) =>
+    `<meta name="${key}" content="${value}"></meta>`
+  ).join("\n");
 }
 
 // TODO: Make port configurable

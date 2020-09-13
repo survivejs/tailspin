@@ -32,7 +32,7 @@ const IndexPage = (props: { url: string }) => (
   />
 );
 
-IndexPage.title = "";
+IndexPage.title = "tailwind-webpack-starter";
 IndexPage.meta = {
   description:
     "tailwind-webpack-starter combines webpack with Tailwind and provides a starting point for site projects",
