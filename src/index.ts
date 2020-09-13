@@ -46,7 +46,7 @@ async function serve(port: number) {
       const injector = VirtualInjector();
       setup({ injector });
 
-      const pageHtml = page.default({ url });
+      const pageHtml = await Promise.resolve(page.default({ url }));
 
       const styleTag = getStyleTag(injector);
 
