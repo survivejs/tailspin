@@ -22,12 +22,7 @@ function getPages() {
       path.posix.join(Deno.cwd(), "data/blog/**/*.md"),
     )
   ) {
-    const markdown = Deno.readTextFileSync(file.path);
-
-    console.log("markdown", markdown, "path", file.path);
-
-    // @ts-ignore: Figure out how to pass BlogPage type through
-    ret.push(processMarkdown(markdown));
+    ret.push(processMarkdown(Deno.readTextFileSync(file.path)));
   }
 
   return ret;
