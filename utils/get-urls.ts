@@ -1,7 +1,6 @@
 import { expandGlobSync } from "https://deno.land/std/fs/mod.ts";
 import * as path from "https://deno.land/std/path/mod.ts";
-
-export type Urls = { [key: string]: string };
+import { Urls } from "../types.ts";
 
 function getUrls() {
   const rootPath = path.posix.join(Deno.cwd(), "pages");

@@ -8,23 +8,10 @@ import {
   getStyleTag,
   VirtualInjector,
 } from "https://unpkg.com/@bebraw/oceanwind@0.2.5";
-import getUrls, { Urls } from "../utils/get-urls.ts";
+import getUrls from "../utils/get-urls.ts";
 import watchDirectories from "./watch-directories.ts";
-
-type Pages = {
-  [key: string]: Page;
-};
-type Page = {
-  default: ({
-    url,
-    title,
-    meta,
-  }: {
-    url: string;
-    title?: string;
-    meta?: { [key: string]: string };
-  }) => void;
-};
+import getPages from "./get-pages.ts";
+import { Pages, Page } from "../types.ts";
 
 const websocketClient = `const socket = new WebSocket('ws://localhost:8080');
   
@@ -134,21 +121,6 @@ async function serve(port: number) {
       });
     },
   );
-}
-
-async function getPages(urls: Urls) {
-  const pages: Pages = {};
-
-  await Promise.all(
-    Object.entries(urls).map(async ([url, pagePath]) => {
-      // TODO: Maintain a counter per page instead of using a random number
-      pages[url] = await import(`${pagePath}?version=${Math.random()}.tsx`);
-
-      return Promise.resolve();
-    }),
-  );
-
-  return pages;
 }
 
 // TODO: Make port configurable
