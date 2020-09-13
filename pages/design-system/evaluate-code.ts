@@ -1,4 +1,4 @@
-import evaluateJSX, { Components } from "./evaluate-jsx";
+import evaluateJSX, { Components } from "./evaluate-jsx.ts";
 
 const evaluateCode = (
   componentSources: Components,
