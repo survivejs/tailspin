@@ -1,6 +1,9 @@
 import * as _path from "https://deno.land/std/path/mod.ts";
 import { expandGlobSync } from "https://deno.land/std/fs/mod.ts";
-import { readableColor } from "https://unpkg.com/polished@3.6.6/dist/polished.cjs.js";
+
+// TODO: Replace with a standalone implementation
+// import { readableColor } from "https://unpkg.com/polished@3.6.6/dist/polished.cjs.js";
+
 import * as elements from "../../src/elements.ts";
 import PageLayout from "../../ds/layouts/page.tsx";
 import { CodeContainer, CodeEditor } from "../../ds/patterns/code-editor.tsx";
@@ -32,7 +35,7 @@ import parseProps from "./parse-props.ts";
 const colors = config.colors;
 const spacingScale = Object.keys(config.spacing);
 
-const DesignSystemPage = (props: { url: string }) => (
+const DesignSystemPage = async (props: { url: string }) => (
   <PageLayout
     {...props}
     body={
@@ -71,7 +74,7 @@ const DesignSystemPage = (props: { url: string }) => (
               Primitives
             </Heading>
             <Stack direction="column" spacing="4">
-              <Collection items={getComponents("primitives")} />
+              <Collection items={await getComponents("primitives")} />
             </Stack>
           </Box>
 
@@ -80,7 +83,7 @@ const DesignSystemPage = (props: { url: string }) => (
               Patterns
             </Heading>
             <Stack direction="column" spacing="4">
-              <Collection items={getComponents("patterns")} />
+              <Collection items={await getComponents("patterns")} />
             </Stack>
           </Box>
 
@@ -89,7 +92,7 @@ const DesignSystemPage = (props: { url: string }) => (
               Layouts
             </Heading>
             <Stack direction="column" spacing="4">
-              <Collection items={getComponents("layouts")} />
+              <Collection items={await getComponents("layouts")} />
             </Stack>
           </Box>
         </Stack>
@@ -104,7 +107,7 @@ DesignSystemPage.meta = {
     "tailwind-webpack-starter combines webpack with Tailwind and provides a starting point for site projects",
 };
 
-function getComponents(type: string) {
+async function getComponents(type: string) {
   const componentDirectory = _path.posix.join(Deno.cwd(), "ds", type);
 
   const ret = [];
@@ -112,33 +115,31 @@ function getComponents(type: string) {
   for (const file of expandGlobSync(
     _path.posix.join(componentDirectory, "*.tsx")
   )) {
-    ret.push(getComponent(file.path));
+    ret.push(await getComponent(componentDirectory, file.path));
   }
 
   return ret;
 }
 
-function getComponent(componentDirectory: string) {
-  return async (path: string) => {
-    const source = Deno.readTextFileSync(path);
-    const component = await import(path);
-    const { displayName } = component;
+async function getComponent(componentDirectory: string, componentPath: string) {
+  const source = Deno.readTextFileSync(componentPath);
+  const component = await import(componentPath);
+  const { displayName } = component;
 
-    return {
-      ...component,
-      path,
+  return {
+    ...component,
+    path: componentPath,
+    source,
+    componentSource: component.showCodeEditor
+      ? parseCode({ name: displayName, path: componentPath, source })
+      : "",
+    exampleSource: parseCode({ name: "Example", path: componentPath, source }),
+    props: parseProps({
+      componentDirectory,
+      displayName,
+      path: componentPath,
       source,
-      componentSource: component.showCodeEditor
-        ? parseCode({ name: displayName, path, source })
-        : "",
-      exampleSource: parseCode({ name: "Example", path, source }),
-      props: parseProps({
-        componentDirectory,
-        displayName,
-        path,
-        source,
-      }),
-    };
+    }),
   };
 }
 
@@ -313,6 +314,8 @@ const isObject = (a: unknown) => typeof a === "object";
 
 const getComplementary = (color: string) =>
   tryTo(() => readableColor(color), "#000");
+
+const readableColor = (color: string) => color;
 
 function tryTo(fn: () => unknown, defaultValue: string) {
   try {
