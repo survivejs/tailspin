@@ -43,7 +43,16 @@ function generateDescription(file, body) {
 
 // TODO: Apply syntax highlighting - https://github.com/ubersl0th/markdown
 function processMarkdown(source: string) {
-  return Marked.parse(source);
+  try {
+    return Marked.parse(source);
+  } catch (err) {
+    console.error("processMarkdown - Failed to parse", source);
+
+    return {
+      content: "",
+      meta: {},
+    };
+  }
 }
 
 export { processMarkdown };

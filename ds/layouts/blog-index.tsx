@@ -6,22 +6,17 @@ import Flex from "../primitives/flex.tsx";
 import Stack from "../primitives/stack.tsx";
 import Heading from "../primitives/heading.tsx";
 import Link from "../primitives/link.tsx";
+import { BlogPage } from "./blog-page.tsx";
+
+export type BlogIndexLayoutProps = {
+  url: string;
+  pages: BlogPage[];
+};
 
 const BlogIndexLayout = ({
   url,
   pages,
-}: {
-  url: string;
-  pages: {
-    title: string;
-    categories: string[];
-    description: string;
-    body: string;
-    author: string;
-    date: string;
-    slug: string;
-  }[];
-}) => (
+}: BlogIndexLayoutProps) => (
   <PageLayout
     url={url}
     body={<Box
@@ -36,7 +31,7 @@ const BlogIndexLayout = ({
       </Heading>
       <Flex direction="column" class="prose lg:prose-xl">
         {pages
-          .map(({ title, description, slug, categories }) => (
+          .map(({ meta: { title, description, slug, categories } }) => (
             <Flex as="section" direction="column">
               <Heading level={2} size="2xl">
                 {/* @ts-ignore */}
@@ -60,13 +55,15 @@ export const Example = () => (
     url="/"
     pages={[
       {
-        title: "Demo post",
-        categories: ["demo", "testing"],
-        description: "This is a demo post",
-        body: "Demo post content goes here",
-        author: "John Doe",
-        date: "2020-08-12T13:19:52.922Z",
-        slug: "demo-post",
+        content: "Demo post content goes here",
+        meta: {
+          title: "Demo post",
+          categories: ["demo", "testing"],
+          description: "This is a demo post",
+          author: "John Doe",
+          date: "2020-08-12T13:19:52.922Z",
+          slug: "demo-post",
+        },
       },
     ]}
   />
