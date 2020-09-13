@@ -30,7 +30,6 @@ async function serve(port: number) {
 
   const wss = getWebsocketServer();
 
-  // TODO: generalize
   app.use(async (context) => {
     const url = context.request.url.pathname;
     const page = pageContext.getPage(url);
