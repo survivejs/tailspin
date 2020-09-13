@@ -30,6 +30,14 @@ const Heading = (
 
 const ids: { [key: string]: number } = {};
 
+/*
+TODO: Restore after-hash for links
+
+.after-hash::after {
+  content: "#";
+}
+*/
+
 const HeadingWithAnchor = (
   { level, size }: { level: HeadingLevel; size: TextProps["size"] },
   children: string[],
@@ -55,7 +63,7 @@ const HeadingWithAnchor = (
           href={`#${id}`}
           sx={`-ml-${
             { 1: 6, 2: 5, 3: 4, 4: 4 }[level]
-          } text-primary absolute hover:secondary cursor-pointer no-underline after-hash`}
+          } text-primary absolute hover:text-secondary cursor-pointer no-underline`}
         >
         </Link.withExternal>
         {/* @ts-ignore */}
