@@ -5,20 +5,16 @@
   "description": "Opinionated starter for Tailwind projects",
   "main": "src/index.ts",
   "scripts": {
-    "format": "deno fmt --ignore=./node_modules/ --unstable",
+    "format": "deno fmt --unstable",
     "prebuild": "npm run generate-meta",
     "build": "npm run clean && TODO",
-    "postbuild": "npm run purge-css",
     "prestart": "npm run generate-meta",
     "start": "deno run --config ./tsconfig.json --importmap=import_map.json --unstable --allow-read --allow-write --allow-net src/index.ts --serve --watch",
-    "clean": "rimraf public",
+    "clean": "rm -rf public",
     "generate-sitemap": "TODO",
     "check-links": "TODO",
-    "check-types": "tsc --noEmit",
-    "stats": "npm run build -- --json > stats.json",
-    "analyze-stats": "webpack-bundle-analyzer stats.json",
     "generate-meta": "deno run --config ./tsconfig.json --unstable --allow-net --allow-read --allow-write ./utils/generate-meta.ts",
-    "test": "jest"
+    "test": "deno test --config ./tsconfig.json --unstable --allow-env --allow-read --allow-write --allow-net --allow-plugin"
   },
   "keywords": [
     "tailwind",
@@ -26,12 +22,6 @@
   ],
   "author": "Juho Vepsäläinen",
   "license": "MIT",
-  "devDependencies": {
-    "@types/rimraf": "^3.0.0",
-    "hyperlink": "^4.5.2",
-    "remove-markdown": "^0.3.0",
-    "rimraf": "^3.0.2",
-    "sitemap-static": "^0.4.4"
-  },
+  "devDependencies": {},
   "dependencies": {}
 }

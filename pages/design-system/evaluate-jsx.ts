@@ -1,6 +1,13 @@
-import acorn, { Parser } from "https://unpkg.com/acorn@8.0.1/dist/acorn.mjs";
-import jsx from "https://unpkg.com/acorn-jsx@5.3.1/index.js";
-import { generate } from "https://unpkg.com/escodegen@2.0.0/escodegen.js";
+// TODO: Use swc for parsing as well
+import acorn, { Parser } from "https://cdn.skypack.dev/acorn@8.0.1?dts";
+import jsx from "https://cdn.skypack.dev/acorn-jsx@5.3.1?dts";
+import {
+  print,
+} from "https://x.nest.land/swc@0.0.5/mod.ts";
+
+function generate(program: string) {
+  return print({ program }).code;
+}
 
 const JsxParser = Parser.extend(jsx());
 

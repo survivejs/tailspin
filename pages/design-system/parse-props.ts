@@ -1,10 +1,10 @@
 import * as _path from "https://deno.land/std/path/mod.ts";
 import {
   parseProperties,
-  toSource,
   queryNode,
   queryNodes,
 } from "./parse-code.ts";
+import toSource from "./to-source.ts";
 
 async function parseProps({
   componentDirectory,
@@ -16,7 +16,7 @@ async function parseProps({
   displayName: string;
   path: string;
   source: string;
-}) {
+}): Promise<{ name: string; isOptional: boolean; type: string } | undefined> {
   // This isn't fool proof. It would be better to find specifically a function
   // to avoid matching something else.
   const componentNode = queryNode({
@@ -29,11 +29,7 @@ async function parseProps({
     return;
   }
 
-  const componentSource = toSource({
-    source,
-    node: componentNode.parent,
-    path,
-  });
+  const componentSource = toSource({ source, node: componentNode.parent });
   const propNodes = queryNodes({
     source: componentSource,
     query: "TypeLiteral PropertySignature",
@@ -41,6 +37,7 @@ async function parseProps({
   });
 
   if (propNodes.length) {
+    // @ts-ignore TODO: Fix the type
     return parseProperties(propNodes);
   }
 
@@ -61,6 +58,7 @@ async function parseProps({
     });
 
     if (propertySignatureNodes.length) {
+      // @ts-ignore TODO: Fix the type
       return parseProperties(propertySignatureNodes);
     }
 
@@ -84,7 +82,7 @@ async function parseProps({
     // TODO: Figure out why this can occur for Stack
     if (!moduleTarget) {
       // console.warn(`parseProps - Missing module target`, identifierNode);
-      return "";
+      return;
     }
 
     const componentPath = _path.posix.join(

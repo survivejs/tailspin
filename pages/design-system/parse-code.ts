@@ -1,7 +1,16 @@
-import * as ts from "typescript"; // TODO: Consume through Deno somehow
-import { tsquery } from "https://unpkg.com/@phenomnomnominal/tsquery@4.1.1/dist/src/index.js";
+import {
+  parseTypescript,
+  print,
+} from "https://x.nest.land/swc@0.3.0-rc.1/mod.ts";
 
-function parseCode({ name, path, source }) {
+/*
+import * as ts from "../../node_modules/typescript/lib/typescript.d.ts"; // "https://cdn.skypack.dev/typescript@4.0.2?dts";
+import { tsquery } from "https://unpkg.com/@phenomnomnominal/tsquery@4.1.1/dist/src/index.js";
+*/
+
+function parseCode(
+  { name, path, source }: { name: any; path: any; source: any },
+) {
   const exampleIdentifierNode = queryNode({
     source,
     query: `Identifier[name="${name}"]`,
@@ -57,7 +66,9 @@ function parseProperties(nodes: ts.Node[]) {
   );
 }
 
-function queryNode({ source, query, path }) {
+function queryNode(
+  { path, source, query }: { path: any; source: any; query: any },
+) {
   const nodes = queryNodes({ source, query, path });
 
   if (nodes.length) {
@@ -67,29 +78,12 @@ function queryNode({ source, query, path }) {
   return;
 }
 
-function queryNodes({ source, query, path }) {
+function queryNodes(
+  { path, source, query }: { path: any; source: any; query: any },
+) {
   const ast = tsquery.ast(source, path, ts.ScriptKind.TSX);
 
   return tsquery(ast, query, { visitAllChildren: true });
-}
-
-function toSource({ path, source, node }) {
-  const sourceFile = ts.createSourceFile(
-    path,
-    source,
-    ts.ScriptTarget.ES2015,
-    false,
-    ts.ScriptKind.TSX,
-  );
-  const printer = ts.createPrinter();
-
-  // TODO: Replace this with Deno's internal formatter
-  return prettier
-    .format(printer.printNode(ts.EmitHint.Unspecified, node, sourceFile), {
-      parser: "typescript",
-    })
-    .replace(/;/g, "")
-    .trim();
 }
 
 export {
@@ -97,5 +91,4 @@ export {
   parseProperties,
   queryNode,
   queryNodes,
-  toSource,
 };

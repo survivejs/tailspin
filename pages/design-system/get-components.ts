@@ -1,5 +1,3 @@
-// TODO: Restore
-/*
 import * as _path from "https://deno.land/std/path/mod.ts";
 import { expandGlobSync } from "https://deno.land/std/fs/mod.ts";
 
@@ -35,18 +33,13 @@ async function getComponent(componentDirectory: string, componentPath: string) {
       ? parseCode({ name: displayName, path: componentPath, source })
       : "",
     exampleSource: parseCode({ name: "Example", path: componentPath, source }),
-    props: parseProps({
+    props: await parseProps({
       componentDirectory,
       displayName,
       path: componentPath,
       source,
     }),
   };
-}
-*/
-
-async function getComponents(type: string) {
-  return Promise.resolve([]);
 }
 
 export default getComponents;
