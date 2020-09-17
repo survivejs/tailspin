@@ -17,7 +17,7 @@ function g() {
 
 console.log(g());`;
 
-Deno.test("finds const", () => {
+Deno.test("finds a const", () => {
   const type = "VariableDeclaration";
   const kind = "const";
   const matches = queryNodes(
@@ -38,20 +38,13 @@ Deno.test("finds functions", () => {
   assertEquals(matches.length, 2);
 });
 
-Deno.test("finds function", () => {
-  // TODO: Figure out how to make jsx parsing work with swc
+Deno.test("finds component source", () => {
   const source = "const Demo = () => <div>demo</div>;";
-  // const source = "const Demo = () => {};";
-  // const type = "VariableDeclaration";
+  const type = "ArrowFunctionExpression";
 
-  // console.log(printNodes({ source: componentSource }));
-  printNodes({ source });
-
-  /*
   const matches = queryNodes(
     { source, query: { type } },
   );
 
   assertEquals(matches.length, 1);
-  */
 });

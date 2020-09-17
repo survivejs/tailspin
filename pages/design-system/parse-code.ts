@@ -16,11 +16,10 @@ function parseCode(
     return;
   }
 
-  const identifierSource = toSource({
-    source,
+  const identifierSource = toSource(
     // @ts-ignore TODO: Attach parent info
-    node: exampleIdentifierNode.parent,
-  });
+    exampleIdentifierNode.parent,
+  );
   let exampleJsxNodes = queryNodes({
     source: identifierSource,
     // query: "JsxElement",
@@ -45,7 +44,7 @@ function parseCode(
     }
   }
 
-  return toSource({ source: identifierSource, node: exampleJsxNode });
+  return toSource(exampleJsxNode);
 }
 
 export default parseCode;

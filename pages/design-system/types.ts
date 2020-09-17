@@ -9,4 +9,5 @@ export type AstNode = {
   declare: boolean;
   declarations: AstNode[];
   body?: AstNode[] | AstNode;
+  init?: AstNode;
 };

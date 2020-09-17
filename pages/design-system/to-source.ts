@@ -1,16 +1,12 @@
 import {
-  parse,
   print,
 } from "https://x.nest.land/swc@0.0.5/mod.ts";
+import { AstNode } from "./types.ts";
 
-function toSource(
-  { source, node }: { source: string; node: any },
-) {
-  // TODO: Get source for the node using queryNodes
+function toSource(node: AstNode) {
   return print(
     {
-      // @ts-ignore
-      program: parse(source).value,
+      program: node,
       options: {
         minify: false,
         isModule: true,
