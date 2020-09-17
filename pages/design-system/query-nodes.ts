@@ -1,19 +1,9 @@
 import {
   parse,
 } from "https://x.nest.land/swc@0.0.5/mod.ts";
+import walkAst from "./walk-ast.ts";
+import { AstNode } from "./types.ts";
 
-type AstNode = {
-  type: string;
-  kind: string;
-  span: {
-    start: number;
-    end: number;
-    ctxt: number;
-  };
-  declare: boolean;
-  declarations: AstNode[];
-  body?: AstNode[] | AstNode;
-};
 type Query = { [key in keyof AstNode]?: string };
 
 function queryNodes(
@@ -36,20 +26,6 @@ function queryNodes(
   });
 
   return matches;
-}
-
-function walkAst(
-  { node, onNode }: { node: AstNode; onNode: (node: AstNode) => void },
-) {
-  onNode(node);
-
-  if (node.body) {
-    if (Array.isArray(node.body)) {
-      node.body.forEach((node) => walkAst({ node, onNode }));
-    } else {
-      onNode(node.body);
-    }
-  }
 }
 
 export default queryNodes;
