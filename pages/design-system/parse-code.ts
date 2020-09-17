@@ -2,12 +2,13 @@ import toSource from "./to-source.ts";
 import queryNodes from "./query-nodes.ts";
 
 function parseCode(
-  { name, path, source }: { name: any; path: any; source: any },
+  { name, source }: { name: any; source: any },
 ) {
   const exampleIdentifierNodes = queryNodes({
     source,
-    query: `Identifier[name="${name}"]`,
-    path,
+    // query: `Identifier[name="${name}"]`,
+    // TODO
+    query: { type: name },
   });
   const exampleIdentifierNode = exampleIdentifierNodes[0];
 
@@ -17,25 +18,28 @@ function parseCode(
 
   const identifierSource = toSource({
     source,
+    // @ts-ignore TODO: Attach parent info
     node: exampleIdentifierNode.parent,
   });
   let exampleJsxNodes = queryNodes({
     source: identifierSource,
-    query: "JsxElement",
-    path,
+    // query: "JsxElement",
+    // TODO
+    query: {},
   });
   let exampleJsxNode = exampleJsxNodes[0];
 
   if (!exampleJsxNode) {
     exampleJsxNodes = queryNodes({
       source: identifierSource,
-      query: "JsxSelfClosingElement",
-      path,
+      // query: "JsxSelfClosingElement",
+      // TODO
+      query: {},
     });
     exampleJsxNode = exampleJsxNodes[0];
 
     if (!exampleJsxNode) {
-      console.error("queryNode - No nodes found", { source, path });
+      console.error("queryNode - No nodes found", { source });
 
       return;
     }

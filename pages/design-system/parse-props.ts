@@ -5,20 +5,19 @@ import toSource from "./to-source.ts";
 async function parseProps({
   componentDirectory,
   displayName,
-  path,
   source,
 }: {
   componentDirectory: string;
   displayName: string;
-  path: string;
   source: string;
 }): Promise<{ name: string; isOptional: boolean; type: string } | undefined> {
   // This isn't fool proof. It would be better to find specifically a function
   // to avoid matching something else.
   const componentNodes = queryNodes({
     source,
-    query: `Identifier[name="${displayName}"]`,
-    path,
+    // TODO
+    // query: `Identifier[name="${displayName}"]`,
+    query: { type: displayName },
   });
   const componentNode = componentNodes[0];
 
@@ -26,11 +25,13 @@ async function parseProps({
     return;
   }
 
+  // @ts-ignore: TODO
   const componentSource = toSource({ source, node: componentNode.parent });
   const propNodes = queryNodes({
     source: componentSource,
-    query: "TypeLiteral PropertySignature",
-    path,
+    // query: "TypeLiteral PropertySignature",
+    // TODO
+    query: {},
   });
 
   if (propNodes.length) {
@@ -41,8 +42,9 @@ async function parseProps({
   // TODO: Likely it would be better to select the first parameter instead
   const typeReferenceNodes = queryNodes({
     source: componentSource,
-    query: `Identifier[name="props"] ~ TypeReference`,
-    path,
+    // query: `Identifier[name="props"] ~ TypeReference`,
+    // TODO
+    query: {},
   });
   const typeReferenceNode = typeReferenceNodes[0];
 
@@ -50,9 +52,10 @@ async function parseProps({
     const referenceType = typeReferenceNode.getText();
     const propertySignatureNodes = queryNodes({
       source: source,
-      query:
-        `Identifier[name="${referenceType}"] ~ TypeLiteral > PropertySignature`,
-      path,
+      /*query:
+        `Identifier[name="${referenceType}"] ~ TypeLiteral > PropertySignature`,*/
+      // TODO
+      query: {},
     });
 
     if (propertySignatureNodes.length) {
@@ -62,8 +65,9 @@ async function parseProps({
 
     const identifierNodes = queryNodes({
       source,
-      query: `Identifier[name="${referenceType}"]`,
-      path,
+      // query: `Identifier[name="${referenceType}"]`,
+      // TODO
+      query: {},
     });
     const identifierNode = identifierNodes[0];
 
@@ -93,7 +97,6 @@ async function parseProps({
       componentDirectory,
       // @ts-ignore TODO: Type this properly
       displayName: await import(componentPath).displayName,
-      path: componentPath,
       source: Deno.readTextFileSync(componentPath),
     });
   }
