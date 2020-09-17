@@ -16,12 +16,23 @@ function g() {
 
 console.log(g());`;
 
-// TODO: Add proper tests for query nodes ops
 Deno.test("finds const", () => {
-  const result = queryNodes(
-    // 'VariableDeclaration[name="props"] ~ TypeReference'
-    { source, query: { type: "VariableDeclaration", kind: "const" } },
+  const type = "VariableDeclaration";
+  const kind = "const";
+  const matches = queryNodes(
+    { source, query: { type, kind } },
   );
 
-  assertEquals(3, 3);
+  assertEquals(matches.length, 1);
+  assertEquals(matches[0].type, type);
+  assertEquals(matches[0].kind, kind);
+});
+
+Deno.test("finds functions", () => {
+  const type = "FunctionDeclaration";
+  const matches = queryNodes(
+    { source, query: { type } },
+  );
+
+  assertEquals(matches.length, 2);
 });

@@ -1,27 +1,41 @@
 import {
   parse,
-  print,
 } from "https://x.nest.land/swc@0.0.5/mod.ts";
 
-type AstNode = object;
-type Query = object;
+type AstNode = {
+  type: string;
+  kind: string;
+  span: {
+    start: number;
+    end: number;
+    ctxt: number;
+  };
+  declare: boolean;
+  declarations: AstNode[];
+  body?: AstNode[] | AstNode;
+};
+type Query = { [key in keyof AstNode]?: string };
 
-function queryNodes({ source, query }: { source: string; query: Query }) {
+function queryNodes(
+  { source, query }: { source: string; query: Query },
+) {
   // @ts-ignore
   const node = parse(source).value;
+  const matches: AstNode[] = [];
 
-  // TODO: Check the ast against query match
-
-  // TODO: Capture based on query match
-  walkAst({ node, onNode: (node) => console.log(node) });
-
-  return print({
-    program: node,
-    options: {
-      minify: false,
-      isModule: true,
+  walkAst({
+    node,
+    onNode: (node: AstNode) => {
+      if (
+        // @ts-ignore: Figure out how to type this
+        Object.entries(query).every(([k, v]) => node[k] === v)
+      ) {
+        matches.push(node);
+      }
     },
   });
+
+  return matches;
 }
 
 function walkAst(
@@ -29,14 +43,10 @@ function walkAst(
 ) {
   onNode(node);
 
-  // @ts-ignore
   if (node.body) {
-    // @ts-ignore
     if (Array.isArray(node.body)) {
-      // @ts-ignore
       node.body.forEach((node) => walkAst({ node, onNode }));
     } else {
-      // @ts-ignore
       onNode(node.body);
     }
   }
