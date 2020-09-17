@@ -6,10 +6,11 @@ import {
 function toSource(
   { source, node }: { source: string; node: any },
 ) {
-  // TODO: Get source for the node
+  // TODO: Get source for the node using queryNodes
   return print(
     {
-      program: parse(source),
+      // @ts-ignore
+      program: parse(source).value,
       options: {
         minify: false,
         isModule: true,

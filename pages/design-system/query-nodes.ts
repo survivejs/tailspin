@@ -1,12 +1,45 @@
-import { tsquery } from "https://unpkg.com/@phenomnomnominal/tsquery@4.1.1/dist/src/index.js";
+import {
+  parse,
+  print,
+} from "https://x.nest.land/swc@0.0.5/mod.ts";
 
-function queryNodes(
-  { path, source, query }: { path: any; source: any; query: any },
-) {
+type AstNode = object;
+type Query = object;
+
+function queryNodes({ source, query }: { source: string; query: Query }) {
   // @ts-ignore
-  const ast = tsquery.ast(source, path, ts.ScriptKind.TSX);
+  const node = parse(source).value;
 
-  return tsquery(ast, query, { visitAllChildren: true });
+  // TODO: Check the ast against query match
+
+  // TODO: Capture based on query match
+  walkAst({ node, onNode: (node) => console.log(node) });
+
+  return print({
+    program: node,
+    options: {
+      minify: false,
+      isModule: true,
+    },
+  });
+}
+
+function walkAst(
+  { node, onNode }: { node: AstNode; onNode: (node: AstNode) => void },
+) {
+  onNode(node);
+
+  // @ts-ignore
+  if (node.body) {
+    // @ts-ignore
+    if (Array.isArray(node.body)) {
+      // @ts-ignore
+      node.body.forEach((node) => walkAst({ node, onNode }));
+    } else {
+      // @ts-ignore
+      onNode(node.body);
+    }
+  }
 }
 
 export default queryNodes;
