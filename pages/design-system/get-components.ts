@@ -1,8 +1,6 @@
 import * as _path from "https://deno.land/std/path/mod.ts";
 import { expandGlobSync } from "https://deno.land/std/fs/mod.ts";
-
-import parseCode from "./parse-code.ts";
-import parseProps from "./parse-props.ts";
+import getComponent from "./get-component.ts";
 
 async function getComponents(type: string) {
   const componentDirectory = _path.posix.join(Deno.cwd(), "ds", type);
@@ -18,28 +16,6 @@ async function getComponents(type: string) {
   }
 
   return ret;
-}
-
-async function getComponent(componentDirectory: string, componentPath: string) {
-  const source = Deno.readTextFileSync(componentPath);
-  const component = await import(componentPath);
-  const { displayName } = component;
-
-  return {
-    ...component,
-    path: componentPath,
-    source,
-    componentSource: component.showCodeEditor
-      ? parseCode({ name: displayName, path: componentPath, source })
-      : "",
-    exampleSource: parseCode({ name: "Example", path: componentPath, source }),
-    props: await parseProps({
-      componentDirectory,
-      displayName,
-      path: componentPath,
-      source,
-    }),
-  };
 }
 
 export default getComponents;
