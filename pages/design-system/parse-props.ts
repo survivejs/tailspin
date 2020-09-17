@@ -1,9 +1,5 @@
 import * as _path from "https://deno.land/std/path/mod.ts";
-import {
-  parseProperties,
-  queryNode,
-  queryNodes,
-} from "./parse-code.ts";
+import queryNodes from "./query-nodes.ts";
 import toSource from "./to-source.ts";
 
 async function parseProps({
@@ -19,11 +15,12 @@ async function parseProps({
 }): Promise<{ name: string; isOptional: boolean; type: string } | undefined> {
   // This isn't fool proof. It would be better to find specifically a function
   // to avoid matching something else.
-  const componentNode = queryNode({
+  const componentNodes = queryNodes({
     source,
     query: `Identifier[name="${displayName}"]`,
     path,
   });
+  const componentNode = componentNodes[0];
 
   if (!componentNode) {
     return;
@@ -42,11 +39,12 @@ async function parseProps({
   }
 
   // TODO: Likely it would be better to select the first parameter instead
-  const typeReferenceNode = queryNode({
+  const typeReferenceNodes = queryNodes({
     source: componentSource,
     query: `Identifier[name="props"] ~ TypeReference`,
     path,
   });
+  const typeReferenceNode = typeReferenceNodes[0];
 
   if (typeReferenceNode) {
     const referenceType = typeReferenceNode.getText();
@@ -62,11 +60,12 @@ async function parseProps({
       return parseProperties(propertySignatureNodes);
     }
 
-    const identifierNode = queryNode({
+    const identifierNodes = queryNodes({
       source,
       query: `Identifier[name="${referenceType}"]`,
       path,
     });
+    const identifierNode = identifierNodes[0];
 
     if (!identifierNode) {
       return;
@@ -98,6 +97,24 @@ async function parseProps({
       source: Deno.readTextFileSync(componentPath),
     });
   }
+}
+
+// @ts-ignore
+function parseProperties(nodes) {
+  if (!nodes.length) {
+    return;
+  }
+
+  return nodes.map(
+    // @ts-ignore: Figure out the exact type
+    ({ name: nameNode, questionToken, type: typeNode }) => {
+      const name = nameNode.getText();
+      const isOptional = !!questionToken;
+      const type = typeNode.getText();
+
+      return { name, isOptional, type };
+    },
+  );
 }
 
 export default parseProps;
