@@ -7,8 +7,12 @@ import { AstNode } from "./types.ts";
 function printNodes(
   { source }: { source: string },
 ) {
+  // TODO: Extract parser to a module of its own to encapsulate this
   // @ts-ignore
-  const { value: node, type } = parse(source);
+  const { value: node, type } = parse(
+    source,
+    { syntax: "typescript", tsx: true },
+  );
   const matches: AstNode[] = [];
 
   // TODO: Extract to a helper

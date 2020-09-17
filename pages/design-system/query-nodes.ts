@@ -10,7 +10,7 @@ function queryNodes(
   { source, query }: { source: string; query: Query },
 ) {
   // @ts-ignore
-  const node = parse(source).value;
+  const node = parse(source, { syntax: "typescript", tsx: true }).value;
   const matches: AstNode[] = [];
 
   walkAst({
