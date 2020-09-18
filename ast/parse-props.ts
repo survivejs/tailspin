@@ -1,6 +1,6 @@
-import * as _path from "https://deno.land/std/path/mod.ts";
-import queryNodes from "./query-nodes.ts";
+import { joinPath } from "../deps.ts";
 import toSource from "./to-source.ts";
+import queryNodes from "./query-nodes.ts";
 
 async function parseProps({
   componentDirectory,
@@ -49,6 +49,7 @@ async function parseProps({
   const typeReferenceNode = typeReferenceNodes[0];
 
   if (typeReferenceNode) {
+    // @ts-ignore
     const referenceType = typeReferenceNode.getText();
     const propertySignatureNodes = queryNodes({
       source: source,
@@ -88,7 +89,7 @@ async function parseProps({
       return;
     }
 
-    const componentPath = _path.posix.join(
+    const componentPath = joinPath(
       componentDirectory,
       `${moduleTarget}.tsx`,
     );

@@ -1,6 +1,4 @@
-import {
-  assertEquals,
-} from "https://deno.land/std@0.69.0/testing/asserts.ts";
+import { assertEquals } from "../deps.ts";
 import queryNodes from "./query-nodes.ts";
 import toSource from "./to-source.ts";
 

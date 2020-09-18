@@ -1,16 +1,13 @@
-import {
-  parse,
-} from "https://x.nest.land/swc@0.0.5/mod.ts";
+import { parseSource } from "../deps.ts";
+import { AstNode } from "../types.ts";
 import walkAst from "./walk-ast.ts";
-import { AstNode } from "./types.ts";
 
 type Query = { [key in keyof AstNode]?: string };
 
 function queryNodes(
   { source, query }: { source: string; query: Query },
 ) {
-  // @ts-ignore
-  const node = parse(source, { syntax: "typescript", tsx: true }).value;
+  const node = parseSource(source);
   const matches: AstNode[] = [];
 
   walkAst({

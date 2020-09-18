@@ -1,4 +1,4 @@
-import * as elements from "../../src/elements.ts";
+import { elements } from "../../deps.ts";
 import Box from "../../ds/primitives/box.tsx";
 
 const SpacingScale = ({ items }: { items: string[] }) =>

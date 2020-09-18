@@ -1,4 +1,4 @@
-import * as elements from "../../src/elements.ts";
+import { elements } from "../../deps.ts";
 import { CodeContainer, CodeEditor } from "../../ds/patterns/code-editor.tsx";
 import Box from "../../ds/primitives/box.tsx";
 import Stack from "../../ds/primitives/stack.tsx";

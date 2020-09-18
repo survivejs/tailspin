@@ -1,15 +1,10 @@
 // TODO: Use swc for parsing as well
-import acorn, { Parser } from "https://cdn.skypack.dev/acorn@8.0.1?dts";
-import jsx from "https://cdn.skypack.dev/acorn-jsx@5.3.1?dts";
-import {
-  print,
-} from "https://x.nest.land/swc@0.0.5/mod.ts";
+import acorn from "https://cdn.skypack.dev/acorn@8.0.1?dts";
+import { printAst } from "../../deps.ts";
 
 function generate(program: string) {
-  return print({ program }).code;
+  return printAst({ program }).code;
 }
-
-const JsxParser = Parser.extend(jsx());
 
 type JSXNode = acorn.Node & { children: JSXNode[] };
 export type Components = {

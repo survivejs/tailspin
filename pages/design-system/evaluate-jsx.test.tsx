@@ -1,10 +1,8 @@
-import {
-  assertEquals,
-} from "https://deno.land/std@0.69.0/testing/asserts.ts";
-
-import * as elements from "../../src/elements.ts";
+import { assertEquals, elements } from "../../deps.ts";
 import evaluateJSX from "./evaluate-jsx.ts";
 
+// TODO: Redo evaluation based on swc
+/*
 Deno.test("should return empty string for empty string", () => {
   assertEquals(evaluateJSX("", {}), "");
 });
@@ -75,6 +73,7 @@ Deno.test("should evaluate component props", () => {
     "<div>test</div>",
   );
 });
+*/
 
 // TODO
 /*
@@ -92,6 +91,7 @@ Deno.test("should evaluate arrays as component props", () => {
 });
 */
 
+/*
 Deno.test("should evaluate arrays within objects as component props", () => {
   const PassProps = (
     { attributes }: { attributes: { pages: string[] } },
@@ -164,6 +164,7 @@ Deno.test("should evaluate objects within objects as component props", () => {
     "<div>Demo</div>",
   );
 });
+*/
 
 // TODO
 /*
@@ -195,6 +196,7 @@ Deno.test("should evaluate expression props", () => {
 });
 */
 
+/*
 Deno.test("should evaluate components as props", () => {
   const Hello = () => <div>hello</div>;
   const PassProps = ({ test }: { test: string }, children: string[]) => (
@@ -299,8 +301,6 @@ Deno.test("should replace children", () => {
   );
 });
 
-// TODO
-/*
 Deno.test("should replace calling children", () => {
   const ShowChildren = ({}, children: string[]) => <div>{children}</div>;
 

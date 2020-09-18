@@ -1,5 +1,4 @@
-import parseCode from "./parse-code.ts";
-import parseProps from "./parse-props.ts";
+import { parseCode, parseProps } from "../deps.ts";
 
 async function getComponent(componentDirectory: string, componentPath: string) {
   const source = Deno.readTextFileSync(componentPath);

@@ -1,11 +1,8 @@
-import {
-  parse,
-  print,
-} from "https://x.nest.land/swc@0.0.5/mod.ts";
-import { AstNode } from "./types.ts";
+import { printAst } from "../deps.ts";
+import { AstNode } from "../types.ts";
 
 function toSource(node: AstNode) {
-  return print(
+  return printAst(
     {
       program: {
         type: "Module",

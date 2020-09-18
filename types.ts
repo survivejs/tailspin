@@ -1,3 +1,16 @@
+type AstNode = {
+  type: string;
+  kind?: string;
+  span: {
+    start: number;
+    end: number;
+    ctxt: number;
+  };
+  declare?: boolean;
+  declarations?: AstNode[];
+  body?: AstNode[] | AstNode;
+  init?: AstNode;
+};
 type Pages = {
   [key: string]: Page;
 };
@@ -14,4 +27,4 @@ type Page = {
 };
 type Urls = { [key: string]: string };
 
-export { Pages, Page, Urls };
+export { AstNode, Pages, Page, Urls };

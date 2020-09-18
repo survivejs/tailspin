@@ -1,14 +1,11 @@
-import * as _path from "https://deno.land/std/path/mod.ts";
-import * as elements from "../../src/elements.ts";
+import { getComponents, elements } from "../../deps.ts";
 import PageLayout from "../../ds/layouts/page.tsx";
-
 import Toc from "../../ds/patterns/toc.tsx";
 import Flex from "../../ds/primitives/flex.tsx";
 import Box from "../../ds/primitives/box.tsx";
 import Stack from "../../ds/primitives/stack.tsx";
 import Heading from "../../ds/primitives/heading.tsx";
 import config from "../../tailwind.ts";
-import getComponents from "./get-components.ts";
 import Colors from "./colors.tsx";
 import SpacingScale from "./spacing-scale.tsx";
 import Collection from "./collection.tsx";
