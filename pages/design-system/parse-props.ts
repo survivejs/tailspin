@@ -26,7 +26,7 @@ async function parseProps({
   }
 
   // @ts-ignore: TODO
-  const componentSource = toSource({ source, node: componentNode.parent });
+  const componentSource = toSource(componentNode.parent);
   const propNodes = queryNodes({
     source: componentSource,
     // query: "TypeLiteral PropertySignature",

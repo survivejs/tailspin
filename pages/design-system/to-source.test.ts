@@ -8,14 +8,8 @@ Deno.test("prints component source", () => {
   const source = "const Demo = () => <div>demo</div>;";
   const type = "VariableDeclaration";
 
-  const printedSource = toSource(
-    queryNodes(
-      { source, query: { type } },
-    )[0],
-  );
+  const printedSource = toSource(queryNodes({ source, query: { type } })[0]);
 
-  // TODO: Figure this out
-  // https://github.com/nestdotland/deno_swc/blob/master/examples/print.ts
   console.log(printedSource);
 
   // assertEquals(matches.length, 1);
