@@ -1,4 +1,5 @@
 import { elements } from "../../deps.ts";
+import { Component } from "../../types.ts";
 import { CodeContainer, CodeEditor } from "../../ds/patterns/code-editor.tsx";
 import Box from "../../ds/primitives/box.tsx";
 import Stack from "../../ds/primitives/stack.tsx";
@@ -14,17 +15,6 @@ import {
 // TODO: Restore
 // import evaluateCode from "./evaluate-code.ts";
 import Types from "./types.tsx";
-
-// TODO: Consume from a common type at the project root
-type Component = {
-  displayName: string;
-  description: string;
-  default: () => string;
-  exampleSource: string;
-  componentSource: string;
-  // TODO: Prop type
-  props: any[];
-};
 
 const Collection = ({ items }: { items: Component[] }) => {
   const componentSources = getComponentSources(items);

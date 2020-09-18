@@ -1,7 +1,6 @@
 import defaultTheme from "../default-theme.ts";
 import userTheme from "../user-theme.ts";
 import getUrls from "./get-urls.ts";
-// import getPages from "./get-pages.ts";
 
 const isObject = (a: any) => typeof a === "object";
 

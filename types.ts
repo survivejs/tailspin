@@ -11,6 +11,15 @@ type AstNode = {
   body?: AstNode[] | AstNode;
   init?: AstNode;
 };
+type Component = {
+  displayName: string;
+  description: string;
+  default: () => string;
+  exampleSource: string;
+  componentSource: string;
+  // TODO: Prop type
+  props: any[];
+};
 type Pages = {
   [key: string]: Page;
 };
@@ -27,4 +36,4 @@ type Page = {
 };
 type Urls = { [key: string]: string };
 
-export { AstNode, Pages, Page, Urls };
+export { AstNode, Component, Pages, Page, Urls };

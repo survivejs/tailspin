@@ -1,6 +1,10 @@
 import { parseCode, parseProps } from "../deps.ts";
+import { Component } from "../types.ts";
 
-async function getComponent(componentDirectory: string, componentPath: string) {
+async function getComponent(
+  componentDirectory: string,
+  componentPath: string,
+): Promise<Component> {
   const source = Deno.readTextFileSync(componentPath);
   const component = await import(componentPath);
   const { displayName } = component;

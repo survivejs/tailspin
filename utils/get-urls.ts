@@ -1,5 +1,4 @@
-import { expandGlobSync } from "https://deno.land/std/fs/mod.ts";
-import { joinPath, getRelativePath } from "../deps.ts";
+import { joinPath, getRelativePath, expandGlobSync } from "../deps.ts";
 import { Urls } from "../types.ts";
 
 function getUrls() {
@@ -7,9 +6,7 @@ function getUrls() {
   const ret: Urls = {};
 
   for (
-    const file of expandGlobSync(
-      joinPath(rootPath, "**/index.tsx"),
-    )
+    const file of expandGlobSync(joinPath(rootPath, "**/index.tsx"))
   ) {
     const relativePath = getRelativePath(rootPath, file.path);
     const link = relativePath
