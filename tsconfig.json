@@ -2,8 +2,6 @@
   "include": ["ds", "pages"],
   "compilerOptions": {
     "jsx": "react",
-    "jsxFactory": "elements.createElement",
-    // TODO: Remove (true by default)
-    "noImplicitAny": false,
+    "jsxFactory": "elements.createElement"
   }
 }
