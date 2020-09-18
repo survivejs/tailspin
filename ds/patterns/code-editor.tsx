@@ -1,10 +1,11 @@
-import * as hljs from "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.0/build/highlight.min.js";
-import * as elements from "../../src/elements.ts";
+import { elements } from "../../deps.ts";
 import Box from "../primitives/box.tsx";
 import Text from "../primitives/text.tsx";
 
+// TODO: Restore
 function highlight(language: string, str: string) {
-  return hljs.highlight(language, str).value;
+  return str;
+  // return hljs.highlight(language, str).value;
 }
 
 const CodeContainer = (
