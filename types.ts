@@ -23,17 +23,26 @@ type Component = {
 type Pages = {
   [key: string]: Page;
 };
+// TODO: Figure out a good way to type dynamic pages
+type DynamicPages = [];
 type Page = {
-  default: ({
-    url,
-    title,
-    meta,
-  }: {
-    url: string;
-    title?: string;
-    meta?: { [key: string]: string };
-  }) => void;
+  module: {
+    default: ({
+      url,
+      title,
+      meta,
+      pages,
+    }: {
+      url: string;
+      title?: string;
+      meta?: { [key: string]: string };
+      pages: DynamicPages;
+    }) => void;
+  };
+  pages: [];
 };
-type Urls = { [key: string]: string | undefined };
+type Urls = {
+  [key: string]: { path: string | undefined; pages: DynamicPages };
+};
 
 export { AstNode, Component, Pages, Page, Urls };

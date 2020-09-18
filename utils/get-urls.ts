@@ -21,20 +21,22 @@ async function getUrls() {
       .replace("index.tsx", "/");
     const resolvedUrl = link === "/" ? link : `/${link}/`;
 
-    // TODO: if extra pages exist, attach them to a page object here
-    ret[resolvedUrl] = file.path;
-
     const extraPagesPath = joinPath(fileDir, "_pages.ts");
 
+    let pages = [];
     if (existsSync(extraPagesPath)) {
-      (await import(extraPagesPath)).default().forEach((
+      pages = (await import(extraPagesPath)).default();
+
+      pages.forEach((
         { url }: { url: string },
       ) => {
         // TODO: Figure out what data to pass here. There should be enough
         // to load the content through a layout
-        ret[`${resolvedUrl}${url}/`] = undefined;
+        ret[`${resolvedUrl}${url}/`] = { path: undefined, pages: [] };
       });
     }
+
+    ret[resolvedUrl] = { path: file.path, pages };
   }
 
   return ret;

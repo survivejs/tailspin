@@ -38,8 +38,8 @@ async function serve(port: number) {
     try {
       const injector = getStyleInjector();
 
-      const { default: component } = page;
-      const pageHtml = await Promise.resolve(component({ url }));
+      const { module: { default: component }, pages } = page;
+      const pageHtml = await Promise.resolve(component({ url, pages }));
 
       // @ts-ignore: TODO: Drop default in favor of simpler composition?
       const { title, meta } = component;
