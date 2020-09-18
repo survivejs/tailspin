@@ -1,6 +1,9 @@
 import { printAst } from "../deps.ts";
 import { AstNode } from "../types.ts";
 
+// TODO: Note that the printer is limited to only very specific nodes for now
+// since it's using an outdated swc. https://github.com/nestdotland/deno_swc
+// would need to be updated to support more node types.
 function toSource(node: AstNode) {
   return printAst(
     {
@@ -11,7 +14,7 @@ function toSource(node: AstNode) {
       },
       options: {
         minify: false,
-        isModule: true,
+        isModule: false,
       },
     },
   ).code;
