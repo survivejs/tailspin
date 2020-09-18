@@ -4,10 +4,6 @@ import getUrls from "./get-urls.ts";
 
 const isObject = (a: any) => typeof a === "object";
 
-// TODO: This has to work in two passes - first to generate the file
-// and then to get source so that dependencies can be resolved during
-// runtime. Another option would be to declare dependencies outside
-// within a configuration files.
 async function generateMeta() {
   try {
     // TODO: Do a proper merge here
@@ -16,7 +12,7 @@ async function generateMeta() {
       ...userTheme,
       extendedColors: { ...defaultTheme.colors, ...userTheme.colors },
       colors: expandColors({ ...defaultTheme.colors, ...userTheme.colors }),
-      internalLinks: getUrls(),
+      internalLinks: await getUrls(),
     };
 
     Deno.writeTextFileSync(

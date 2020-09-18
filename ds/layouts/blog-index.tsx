@@ -55,6 +55,7 @@ export const Example = () => (
     url="/"
     pages={[
       {
+        url: "demo-post",
         content: "Demo post content goes here",
         meta: {
           title: "Demo post",

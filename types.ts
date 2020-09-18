@@ -34,6 +34,6 @@ type Page = {
     meta?: { [key: string]: string };
   }) => void;
 };
-type Urls = { [key: string]: string };
+type Urls = { [key: string]: string | undefined };
 
 export { AstNode, Component, Pages, Page, Urls };

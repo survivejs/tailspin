@@ -1,9 +1,9 @@
 import { assertEquals } from "../deps.ts";
 import getUrls from "./get-urls.ts";
 
-Deno.test("gets urls", () => {
+Deno.test("gets urls", async () => {
   // TODO: Use a fake fs for testing
-  const urls = getUrls();
+  const urls = await getUrls();
 
-  assertEquals(Object.keys(urls).length, 3);
+  assertEquals(Object.keys(urls).length, 5);
 });

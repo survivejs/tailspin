@@ -14,7 +14,7 @@ async function serve(port: number) {
   } = {
     _pages: {},
     init: async function () {
-      this._pages = await getPages(getUrls());
+      this._pages = await getPages(await getUrls());
     },
     getPage: function (url: string) {
       return this._pages[url];

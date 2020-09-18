@@ -3,7 +3,7 @@ import {
   print as printAst,
 } from "https://x.nest.land/swc@0.0.5/mod.ts";
 import * as path from "https://deno.land/std/path/mod.ts";
-import { expandGlobSync } from "https://deno.land/std/fs/mod.ts";
+import { expandGlobSync, existsSync } from "https://deno.land/std/fs/mod.ts";
 import { assertEquals } from "https://deno.land/std@0.69.0/testing/asserts.ts";
 import {
   setup as setupOceanwind,
@@ -22,6 +22,7 @@ import processMarkdown from "./utils/process-markdown.ts";
 import { AstNode } from "./types.ts";
 
 const joinPath = path.posix.join;
+const getDirectory = path.posix.dirname;
 const getRelativePath = path.posix.relative;
 
 // TODO: Check for error object and throw
@@ -53,7 +54,9 @@ export {
   expandGlobSync,
   elements,
   joinPath,
+  existsSync,
   getComponents,
+  getDirectory,
   getRelativePath,
   parseCode,
   parseProps,

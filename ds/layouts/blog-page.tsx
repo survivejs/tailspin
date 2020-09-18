@@ -8,6 +8,7 @@ import Heading from "../primitives/heading.tsx";
 import Text from "../primitives/text.tsx";
 
 export type BlogPage = {
+  url: string;
   content: string;
   meta: {
     title: string;
@@ -59,6 +60,7 @@ export const Example = () => (
   <BlogPageLayout
     url="/"
     attributes={{
+      url: "demo-post",
       content: "Demo post content goes here",
       meta: {
         title: "Demo post",
