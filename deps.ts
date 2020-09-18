@@ -10,7 +10,6 @@ import {
 import * as elements from "./src/elements.ts";
 import parseCode from "./ast/parse-code.ts";
 import parseProps from "./ast/parse-props.ts";
-import printNodes from "./ast/print-nodes.ts";
 import queryNodes from "./ast/query-nodes.ts";
 import toSource from "./ast/to-source.ts";
 import getComponents from "./utils/get-components.ts";
@@ -30,7 +29,7 @@ const parseSource = (source: string): AstNode => {
 
   // TODO: Extract to a helper
   if (type !== "ok") {
-    throw new Error("printNodes - Failed to parse source");
+    throw new Error("parseSource - Failed to parse source");
   }
 
   return value;
@@ -47,7 +46,6 @@ export {
   parseProps,
   parseSource,
   printAst,
-  printNodes,
   processMarkdown,
   queryNodes,
   toSource,
