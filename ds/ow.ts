@@ -1,4 +1,4 @@
-import { themed } from "https://unpkg.com/@bebraw/oceanwind@0.2.5";
+import { themed } from "../deps.ts";
 import userTheme from "../user-theme.ts";
 
 export default themed(userTheme);

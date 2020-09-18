@@ -1,9 +1,4 @@
-import { Application } from "https://deno.land/x/oak@v6.1.0/mod.ts";
-import {
-  setup,
-  getStyleTag,
-  VirtualInjector,
-} from "https://unpkg.com/@bebraw/oceanwind@0.2.5";
+import { getStyleInjector, getStyleTag, Application } from "../deps.ts";
 import getUrls from "../utils/get-urls.ts";
 import getPages from "../utils/get-pages.ts";
 import watchDirectories from "./watch-directories.ts";
@@ -41,8 +36,7 @@ async function serve(port: number) {
     }
 
     try {
-      const injector = VirtualInjector();
-      setup({ injector });
+      const injector = getStyleInjector();
 
       const { default: component } = page;
       const pageHtml = await Promise.resolve(component({ url }));

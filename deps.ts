@@ -4,9 +4,14 @@ import {
 } from "https://x.nest.land/swc@0.0.5/mod.ts";
 import * as path from "https://deno.land/std/path/mod.ts";
 import { expandGlobSync } from "https://deno.land/std/fs/mod.ts";
+import { assertEquals } from "https://deno.land/std@0.69.0/testing/asserts.ts";
 import {
-  assertEquals,
-} from "https://deno.land/std@0.69.0/testing/asserts.ts";
+  setup as setupOceanwind,
+  getStyleTag,
+  VirtualInjector,
+  themed,
+} from "https://unpkg.com/@bebraw/oceanwind@0.2.5";
+import { Application } from "https://deno.land/x/oak@v6.1.0/mod.ts";
 import * as elements from "./src/elements.ts";
 import parseCode from "./ast/parse-code.ts";
 import parseProps from "./ast/parse-props.ts";
@@ -35,6 +40,14 @@ const parseSource = (source: string): AstNode => {
   return value;
 };
 
+const getStyleInjector = () => {
+  const injector = VirtualInjector();
+
+  setupOceanwind({ injector });
+
+  return injector;
+};
+
 export {
   assertEquals,
   expandGlobSync,
@@ -49,4 +62,8 @@ export {
   processMarkdown,
   queryNodes,
   toSource,
+  themed,
+  getStyleInjector,
+  getStyleTag,
+  Application,
 };
