@@ -43,11 +43,11 @@ const BlogPageLayout = ({
         <Flex direction="row" sx="justify-between">
           <Text size="sm">{attributes.meta.author}</Text>
           <Text size="sm">
-            {new Intl.DateTimeFormat("en", {
+            {/*new Intl.DateTimeFormat("en", {
               year: "numeric",
               month: "short",
               day: "2-digit",
-            }).format(new Date(attributes.meta.date))}
+            }).format(new Date(attributes.meta.date))*/}
           </Text>
         </Flex>
       </Stack>

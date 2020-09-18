@@ -38,8 +38,11 @@ async function serve(port: number) {
     try {
       const injector = getStyleInjector();
 
-      const { module: { default: component }, pages } = page;
-      const pageHtml = await Promise.resolve(component({ url, pages }));
+      const { module: { default: component }, pages, attributes } = page;
+
+      const pageHtml = await Promise.resolve(
+        component({ url, pages, attributes }),
+      );
 
       // @ts-ignore: TODO: Drop default in favor of simpler composition?
       const { title, meta } = component;
@@ -91,7 +94,11 @@ async function serve(port: number) {
   );
 }
 
-function generateMeta(meta: { [key: string]: string }) {
+function generateMeta(meta?: { [key: string]: string }) {
+  if (!meta) {
+    return "";
+  }
+
   return Object.entries(meta).map(([key, value]) =>
     `<meta name="${key}" content="${value}"></meta>`
   ).join("\n");

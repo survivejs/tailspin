@@ -1,4 +1,4 @@
-import * as elements from "../../src/elements.ts";
+import { elements, joinPath } from "../../deps.ts";
 import PageLayout from "./page.tsx";
 import Tag from "../patterns/tag.tsx";
 import Box from "../primitives/box.tsx";
@@ -35,7 +35,7 @@ const BlogIndexLayout = ({
             <Flex as="section" direction="column">
               <Heading level={2} size="2xl">
                 {/* @ts-ignore */}
-                <Link href={slug}>{title}</Link>
+                <Link href={joinPath(url, slug)}>{title}</Link>
               </Heading>
               <Box>{description}</Box>
               <Stack direction="row" spacing="2">

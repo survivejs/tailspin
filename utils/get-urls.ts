@@ -25,18 +25,24 @@ async function getUrls() {
 
     let pages = [];
     if (existsSync(extraPagesPath)) {
-      pages = (await import(extraPagesPath)).default();
+      const extraPages = await import(extraPagesPath);
+      const layout = extraPages.layout;
 
-      pages.forEach((
-        { url }: { url: string },
+      pages = extraPages.getPages().map((
+        { url, ...attributes }: { url: string },
       ) => {
-        // TODO: Figure out what data to pass here. There should be enough
-        // to load the content through a layout
-        ret[`${resolvedUrl}${url}/`] = { path: undefined, pages: [] };
+        ret[joinPath(resolvedUrl, url)] = {
+          layout,
+          path: undefined,
+          pages: [],
+          attributes,
+        };
+
+        return { ...attributes };
       });
     }
 
-    ret[resolvedUrl] = { path: file.path, pages };
+    ret[resolvedUrl] = { path: file.path, pages, attributes: {} };
   }
 
   return ret;

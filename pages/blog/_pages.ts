@@ -3,7 +3,7 @@ import {
   joinPath,
   processMarkdown,
 } from "../../deps.ts";
-import { BlogPage } from "../../ds/layouts/blog-page.tsx";
+import BlogPageLayout, { BlogPage } from "../../ds/layouts/blog-page.tsx";
 
 function getPages() {
   const ret: BlogPage[] = [];
@@ -21,4 +21,7 @@ function getPages() {
   return ret;
 }
 
-export default getPages;
+export {
+  getPages,
+  BlogPageLayout as layout,
+};

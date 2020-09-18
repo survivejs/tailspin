@@ -6,7 +6,7 @@ description: >-
 date: "2019-02-04T10:18:30.273Z"
 categories: []
 keywords: []
-slug: demo-post-2
+slug: /demo-post-2/
 author: "Juho Vepsäläinen"
 ---
 
