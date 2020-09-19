@@ -1,0 +1,16 @@
+{
+  "name": "swc-server",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "keywords": [],
+  "author": "Juho Vepsäläinen",
+  "license": "MIT",
+  "dependencies": {
+    "@swc/wasm": "^1.2.29",
+    "koa": "^2.13.0"
+  }
+}
