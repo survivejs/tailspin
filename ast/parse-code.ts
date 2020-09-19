@@ -1,10 +1,10 @@
-import toSource from "./to-source.ts";
+import { printAst } from "../deps.ts";
 import queryNodes from "./query-nodes.ts";
 
-function parseCode(
+async function parseCode(
   { name, source }: { name: any; source: any },
 ) {
-  const exampleIdentifierNodes = queryNodes({
+  const exampleIdentifierNodes = await queryNodes({
     source,
     // query: `Identifier[name="${name}"]`,
     // TODO
@@ -16,11 +16,11 @@ function parseCode(
     return;
   }
 
-  const identifierSource = toSource(
+  const identifierSource = await printAst(
     // @ts-ignore TODO: Attach parent info
     exampleIdentifierNode.parent,
   );
-  let exampleJsxNodes = queryNodes({
+  let exampleJsxNodes = await queryNodes({
     source: identifierSource,
     // query: "JsxElement",
     // TODO
@@ -29,7 +29,7 @@ function parseCode(
   let exampleJsxNode = exampleJsxNodes[0];
 
   if (!exampleJsxNode) {
-    exampleJsxNodes = queryNodes({
+    exampleJsxNodes = await queryNodes({
       source: identifierSource,
       // query: "JsxSelfClosingElement",
       // TODO
@@ -44,7 +44,7 @@ function parseCode(
     }
   }
 
-  return toSource(exampleJsxNode);
+  return printAst(exampleJsxNode);
 }
 
 export default parseCode;

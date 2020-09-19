@@ -14,10 +14,10 @@ function g() {
 
 console.log(g());`;
 
-Deno.test("finds a const", () => {
+Deno.test("finds a const", async () => {
   const type = "VariableDeclaration";
   const kind = "const";
-  const matches = queryNodes(
+  const matches = await queryNodes(
     { source, query: { type, kind } },
   );
 
@@ -26,20 +26,20 @@ Deno.test("finds a const", () => {
   assertEquals(matches[0].kind, kind);
 });
 
-Deno.test("finds functions", () => {
+Deno.test("finds functions", async () => {
   const type = "FunctionDeclaration";
-  const matches = queryNodes(
+  const matches = await queryNodes(
     { source, query: { type } },
   );
 
   assertEquals(matches.length, 2);
 });
 
-Deno.test("finds component source", () => {
+Deno.test("finds component source", async () => {
   const source = "const Demo = () => <div>demo</div>;";
   const type = "ArrowFunctionExpression";
 
-  const matches = queryNodes(
+  const matches = await queryNodes(
     { source, query: { type } },
   );
 

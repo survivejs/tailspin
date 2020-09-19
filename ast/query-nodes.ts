@@ -4,10 +4,10 @@ import walkAst from "./walk-ast.ts";
 
 type Query = { [key in keyof AstNode]?: string };
 
-function queryNodes(
+async function queryNodes(
   { source, query }: { source: string; query: Query },
 ) {
-  const node = parseSource(source);
+  const node = await parseSource(source);
   const matches: AstNode[] = [];
 
   walkAst({

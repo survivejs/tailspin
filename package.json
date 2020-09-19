@@ -14,7 +14,7 @@
     "generate-sitemap": "TODO",
     "check-links": "TODO",
     "generate-meta": "deno run --config ./tsconfig.json --unstable --allow-env --allow-plugin --allow-net --allow-read --allow-write ./utils/generate-meta.ts",
-    "test": "deno test --config ./tsconfig.json --unstable --allow-env --allow-read --allow-write --allow-net --allow-plugin"
+    "test": "deno test ./ast --config ./tsconfig.json --unstable --allow-env --allow-read --allow-write --allow-net --allow-plugin"
   },
   "keywords": [
     "tailwind",

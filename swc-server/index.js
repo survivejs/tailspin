@@ -17,7 +17,9 @@ function serve(port) {
         context.status = 404;
       }
       else {
-        context.body = parse(source);
+        const parsedSource = JSON.parse(Buffer.from(source, 'base64').toString());
+
+        context.body = parse(parsedSource);
       }
     }
     // http://localhost:4000/parse?ast=%22<AST goes here>%22
@@ -41,7 +43,7 @@ function serve(port) {
 }
 
 function parse(str) {
-  return swc.parseSync("const a = 5;", { syntax: "typescript", tsx: true });
+  return swc.parseSync(str, { syntax: "typescript", tsx: true });
 }
 
 function print(ast) {

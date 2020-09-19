@@ -2,10 +2,6 @@
 import acorn from "https://cdn.skypack.dev/acorn@8.0.1?dts";
 import { printAst } from "../../deps.ts";
 
-function generate(program: string) {
-  return printAst({ program }).code;
-}
-
 type JSXNode = acorn.Node & { children: JSXNode[] };
 export type Components = {
   [key: string]: (props: any, children: string[]) => string;
@@ -30,7 +26,7 @@ function evaluateJSX(
   );
 }
 
-function evaluateJSXElement(
+async function evaluateJSXElement(
   JSXElement: JSXNode,
   components: Components,
   replacements: Replacements,
@@ -50,23 +46,29 @@ function evaluateJSXElement(
         ? // @ts-ignore
           foundComponent[firstJSXElementName.property]
         : foundComponent)(
-          attributesToObject(
+          await attributesToObject(
             firstJSXElementAttributes,
             components,
             replacements,
           ),
-          childrenToString(JSXElement.children, components, replacements),
+          await childrenToString(JSXElement.children, components, replacements),
         );
     } else {
       const attributesString = attributesToString(
-        attributesToObject(firstJSXElementAttributes, components, replacements),
+        await attributesToObject(
+          firstJSXElementAttributes,
+          components,
+          replacements,
+        ),
       );
 
       return `<${firstJSXElementName.name}${
         attributesString ? " " + attributesString : ""
-      }>${
-        childrenToString(JSXElement.children, components, replacements)
-      }</${firstJSXElementName.name}>`;
+      }>${await childrenToString(
+        JSXElement.children,
+        components,
+        replacements,
+      )}</${firstJSXElementName.name}>`;
     }
   }
 
@@ -109,14 +111,14 @@ function findFirst(type: string, nodes: acorn.Node[]) {
   }
 }
 
-function attributesToObject(
+async function attributesToObject(
   attributes: acorn.Node[],
   components: Components,
   replacements: Replacements,
 ) {
   const ret = {};
 
-  attributes.forEach((attribute) => {
+  attributes.forEach(async (attribute) => {
     // @ts-ignore
     if (attribute?.value?.expression) {
       // @ts-ignore
@@ -137,7 +139,10 @@ function attributesToObject(
       }
 
       // @ts-ignore
-      ret[attribute?.name?.name] = evaluate(generate(expression), replacements);
+      ret[attribute?.name?.name] = evaluate(
+        await printAst(expression),
+        replacements,
+      );
       // @ts.ignore
     } else {
       // @ts-ignore
@@ -183,13 +188,13 @@ function valueToObject(node: acorn.Node) {
   );
 }
 
-function childrenToString(
+async function childrenToString(
   children: JSXNode[],
   components: Components,
   replacements: Replacements,
-): string {
+): Promise<string> {
   return children
-    .map((child) => {
+    .map(async (child) => {
       if (child.type === "JSXElement") {
         return evaluateJSXElement(child, components, replacements);
       }
@@ -199,7 +204,7 @@ function childrenToString(
         const expression = child?.expression;
 
         if (expression.type === "CallExpression") {
-          return evaluate(generate(expression), replacements);
+          return evaluate(await printAst(expression), replacements);
         }
 
         // @ts-ignore

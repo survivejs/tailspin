@@ -1,5 +1,4 @@
-import { joinPath } from "../deps.ts";
-import toSource from "./to-source.ts";
+import { joinPath, printAst } from "../deps.ts";
 import queryNodes from "./query-nodes.ts";
 
 async function parseProps({
@@ -13,7 +12,7 @@ async function parseProps({
 }): Promise<{ name: string; isOptional: boolean; type: string } | undefined> {
   // This isn't fool proof. It would be better to find specifically a function
   // to avoid matching something else.
-  const componentNodes = queryNodes({
+  const componentNodes = await queryNodes({
     source,
     // TODO
     // query: `Identifier[name="${displayName}"]`,
@@ -25,9 +24,9 @@ async function parseProps({
     return;
   }
 
-  // @ts-ignore: TODO
-  const componentSource = toSource(componentNode.parent);
-  const propNodes = queryNodes({
+  // @ts-ignore: TODO: Add parents to AST nodes
+  const componentSource = await printAst(componentNode.parent);
+  const propNodes = await queryNodes({
     source: componentSource,
     // query: "TypeLiteral PropertySignature",
     // TODO
@@ -40,7 +39,7 @@ async function parseProps({
   }
 
   // TODO: Likely it would be better to select the first parameter instead
-  const typeReferenceNodes = queryNodes({
+  const typeReferenceNodes = await queryNodes({
     source: componentSource,
     // query: `Identifier[name="props"] ~ TypeReference`,
     // TODO
@@ -51,7 +50,7 @@ async function parseProps({
   if (typeReferenceNode) {
     // @ts-ignore
     const referenceType = typeReferenceNode.getText();
-    const propertySignatureNodes = queryNodes({
+    const propertySignatureNodes = await queryNodes({
       source: source,
       /*query:
         `Identifier[name="${referenceType}"] ~ TypeLiteral > PropertySignature`,*/
@@ -64,7 +63,7 @@ async function parseProps({
       return parseProperties(propertySignatureNodes);
     }
 
-    const identifierNodes = queryNodes({
+    const identifierNodes = await queryNodes({
       source,
       // query: `Identifier[name="${referenceType}"]`,
       // TODO
