@@ -5,6 +5,34 @@ import getUrls from "./get-urls.ts";
 const isObject = (a: any) => typeof a === "object";
 
 async function generateMeta() {
+  await generateInitialMeta();
+  await generateAllMeta();
+}
+
+async function generateInitialMeta() {
+  try {
+    // TODO: Do a proper merge here
+    const expandedConfig = {
+      ...defaultTheme,
+      ...userTheme,
+      extendedColors: { ...defaultTheme.colors, ...userTheme.colors },
+      colors: expandColors({ ...defaultTheme.colors, ...userTheme.colors }),
+      // TODO: Find a way to generate the definition without executing code since the
+      // code depends on it. Maybe it's better to push the check to the system instead of ts
+      // as that can handle external links as well.
+      internalLinks: { "/": {}, "/blog/": {}, "/design-system/": {} },
+    };
+
+    Deno.writeTextFileSync(
+      Deno.cwd() + "/tailwind.ts",
+      `export default ${JSON.stringify(expandedConfig, null, 2)};`,
+    );
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function generateAllMeta() {
   try {
     // TODO: Do a proper merge here
     const expandedConfig = {
