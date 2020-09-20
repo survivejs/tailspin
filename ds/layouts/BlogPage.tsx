@@ -1,11 +1,11 @@
-import * as elements from "../../src/elements.ts";
-import PageLayout from "./page.tsx";
-import Tag from "../patterns/tag.tsx";
-import Box from "../primitives/box.tsx";
-import Flex from "../primitives/flex.tsx";
-import Stack from "../primitives/stack.tsx";
-import Heading from "../primitives/heading.tsx";
-import Text from "../primitives/text.tsx";
+import { elements } from "../../deps.ts";
+import PageLayout from "./Page.tsx";
+import Tag from "../patterns/Tag.tsx";
+import Box from "../primitives/Box.tsx";
+import Flex from "../primitives/Flex.tsx";
+import Stack from "../primitives/Stack.tsx";
+import Heading from "../primitives/Heading.tsx";
+import Text from "../primitives/Text.tsx";
 
 export type BlogPage = {
   url: string;

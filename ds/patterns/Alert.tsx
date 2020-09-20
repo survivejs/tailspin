@@ -1,7 +1,7 @@
-import * as elements from "../../src/elements.ts";
-import Box from "../primitives/box.tsx";
-import Flex from "../primitives/flex.tsx";
-import Stack from "../primitives/stack.tsx";
+import { elements } from "../../deps.ts";
+import Box from "../primitives/Box.tsx";
+import Flex from "../primitives/Flex.tsx";
+import Stack from "../primitives/Stack.tsx";
 import type config from "../../tailwind.ts";
 
 type ColorKeys = keyof typeof config.colors;

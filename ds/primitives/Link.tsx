@@ -1,8 +1,8 @@
-import * as elements from "../../src/elements.ts";
+import { elements } from "../../deps.ts";
 import { constructTailwindClasses } from "./_utils.ts";
 import type config from "../../tailwind.ts";
-import Box from "./box.tsx";
-import Flex from "./flex.tsx";
+import Box from "./Box.tsx";
+import Flex from "./Flex.tsx";
 
 type InternalLinks = keyof typeof config.internalLinks;
 

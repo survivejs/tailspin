@@ -1,7 +1,7 @@
-import * as elements from "../../src/elements.ts";
-import Flex from "../primitives/flex.tsx";
-import Box from "../primitives/box.tsx";
-import Link, { ExternalLinkProps } from "../primitives/link.tsx";
+import { elements } from "../../deps.ts";
+import Flex from "../primitives/Flex.tsx";
+import Box from "../primitives/Box.tsx";
+import Link, { ExternalLinkProps } from "../primitives/Link.tsx";
 import ow from "../ow.ts";
 
 // https://tailwindcss.com/components/navigation

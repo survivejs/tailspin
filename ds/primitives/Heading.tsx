@@ -1,8 +1,8 @@
-import * as elements from "../../src/elements.ts";
-import Box from "./box.tsx";
-import Flex from "./flex.tsx";
-import Link from "./link.tsx";
-import Text, { TextProps } from "./text.tsx";
+import { elements } from "../../deps.ts";
+import Box from "./Box.tsx";
+import Flex from "./Flex.tsx";
+import Link from "./Link.tsx";
+import Text, { TextProps } from "./Text.tsx";
 
 type HeadingLevel = 1 | 2 | 3 | 4;
 

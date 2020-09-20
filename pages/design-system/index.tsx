@@ -1,14 +1,14 @@
 import { getComponents, elements } from "../../deps.ts";
-import PageLayout from "../../ds/layouts/page.tsx";
-import Toc from "../../ds/patterns/toc.tsx";
-import Flex from "../../ds/primitives/flex.tsx";
-import Box from "../../ds/primitives/box.tsx";
-import Stack from "../../ds/primitives/stack.tsx";
-import Heading from "../../ds/primitives/heading.tsx";
+import PageLayout from "../../ds/layouts/Page.tsx";
+import Toc from "../../ds/patterns/Toc.tsx";
+import Flex from "../../ds/primitives/Flex.tsx";
+import Box from "../../ds/primitives/Box.tsx";
+import Stack from "../../ds/primitives/Stack.tsx";
+import Heading from "../../ds/primitives/Heading.tsx";
 import config from "../../tailwind.ts";
-import Colors from "./colors.tsx";
-import SpacingScale from "./spacing-scale.tsx";
-import Collection from "./collection.tsx";
+import Colors from "./Colors.tsx";
+import SpacingScale from "./SpacingScale.tsx";
+import Collection from "./Collection.tsx";
 
 const DesignSystemPage = async (props: { url: string }) => (
   <PageLayout

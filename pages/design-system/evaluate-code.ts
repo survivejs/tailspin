@@ -1,11 +1,12 @@
 import evaluateJSX, { Components } from "./evaluate-jsx.ts";
 
-const evaluateCode = (
+// TODO: Redo
+const evaluateCode = async (
   componentSources: Components,
   exampleSource: string,
   componentName: string,
   componentSource?: string,
-): string => {
+): Promise<string> => {
   if (componentSource) {
     return evaluateJSX(exampleSource, {
       ...componentSources,

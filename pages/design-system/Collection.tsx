@@ -1,16 +1,16 @@
 import { elements } from "../../deps.ts";
 import type { Component } from "../../types.ts";
-import { CodeContainer, CodeEditor } from "../../ds/patterns/code-editor.tsx";
-import Box from "../../ds/primitives/box.tsx";
-import Stack from "../../ds/primitives/stack.tsx";
-import Heading from "../../ds/primitives/heading.tsx";
+import { CodeContainer, CodeEditor } from "../../ds/patterns/CodeEditor.tsx";
+import Box from "../../ds/primitives/Box.tsx";
+import Stack from "../../ds/primitives/Stack.tsx";
+import Heading from "../../ds/primitives/Heading.tsx";
 import {
   Tabs,
   TabHeader,
   TabHeaderItem,
   TabBody,
   TabBodyItem,
-} from "../../ds/patterns/tabs.tsx";
+} from "../../ds/patterns/Tabs.tsx";
 
 // TODO: Restore
 // import evaluateCode from "./evaluate-code.ts";

@@ -6,8 +6,8 @@ import {
   TableBody,
   TableBodyCell,
   TableRow,
-} from "../../ds/patterns/table.tsx";
-import Box from "../../ds/primitives/box.tsx";
+} from "../../ds/patterns/Table.tsx";
+import Box from "../../ds/primitives/Box.tsx";
 
 const Types = ({
   props = [],

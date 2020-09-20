@@ -1,9 +1,9 @@
-import * as elements from "../../src/elements.ts";
-import { Navigation, NavigationItem } from "../patterns/navigation.tsx";
-import Box from "../primitives/box.tsx";
-import Flex from "../primitives/flex.tsx";
-import Link from "../primitives/link.tsx";
-import Text from "../primitives/text.tsx";
+import { elements } from "../../deps.ts";
+import { Navigation, NavigationItem } from "../patterns/Navigation.tsx";
+import Box from "../primitives/Box.tsx";
+import Flex from "../primitives/Flex.tsx";
+import Link from "../primitives/Link.tsx";
+import Text from "../primitives/Text.tsx";
 
 type PageLayoutProps = { body: string; url: string };
 

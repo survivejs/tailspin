@@ -1,4 +1,4 @@
-import * as elements from "../../src/elements.ts";
+import { elements } from "../../deps.ts";
 import { constructTailwindClasses, tailwindKeys } from "./_utils.ts";
 import type config from "../../tailwind.ts";
 

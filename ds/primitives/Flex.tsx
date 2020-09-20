@@ -1,5 +1,5 @@
-import * as elements from "../../src/elements.ts";
-import Box, { BoxProps } from "./box.tsx";
+import { elements } from "../../deps.ts";
+import Box, { BoxProps } from "./Box.tsx";
 import type config from "../../tailwind.ts";
 import { convertToClasses, omit } from "./_utils.ts";
 

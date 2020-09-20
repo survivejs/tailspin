@@ -1,12 +1,12 @@
 import { elements, joinPath } from "../../deps.ts";
-import PageLayout from "./page.tsx";
-import Tag from "../patterns/tag.tsx";
-import Box from "../primitives/box.tsx";
-import Flex from "../primitives/flex.tsx";
-import Stack from "../primitives/stack.tsx";
-import Heading from "../primitives/heading.tsx";
-import Link from "../primitives/link.tsx";
-import type { BlogPage } from "./blog-page.tsx";
+import PageLayout from "./Page.tsx";
+import Tag from "../patterns/Tag.tsx";
+import Box from "../primitives/Box.tsx";
+import Flex from "../primitives/Flex.tsx";
+import Stack from "../primitives/Stack.tsx";
+import Heading from "../primitives/Heading.tsx";
+import Link from "../primitives/Link.tsx";
+import type { BlogPage } from "./BlogPage.tsx";
 
 export type BlogIndexLayoutProps = {
   url: string;

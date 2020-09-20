@@ -1,6 +1,6 @@
 import { elements } from "../../deps.ts";
-import Box from "../primitives/box.tsx";
-import Text from "../primitives/text.tsx";
+import Box from "../primitives/Box.tsx";
+import Text from "../primitives/Text.tsx";
 
 // TODO: Restore
 function highlight(language: string, str: string) {

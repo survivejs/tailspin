@@ -1,5 +1,5 @@
-import * as elements from "../../src/elements.ts";
-import Box from "../primitives/box.tsx";
+import { elements } from "../../deps.ts";
+import Box from "../primitives/Box.tsx";
 
 // https://tailwindcss.com/docs/display/#table
 const Table = ({}, children: string[]) => (

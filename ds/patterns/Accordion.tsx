@@ -1,6 +1,6 @@
-import * as elements from "../../src/elements.ts";
-import Box from "../primitives/box.tsx";
-import Flex from "../primitives/flex.tsx";
+import { elements } from "../../deps.ts";
+import Box from "../primitives/Box.tsx";
+import Flex from "../primitives/Flex.tsx";
 
 const Accordion = ({ title }: { title: string }, children: string[]) => (
   <Box mb="2" x-state="false">

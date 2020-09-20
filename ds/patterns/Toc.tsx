@@ -1,6 +1,6 @@
-import * as elements from "../../src/elements.ts";
-import Box from "../primitives/box.tsx";
-import { List, ListItem } from "./list.tsx";
+import { elements } from "../../deps.ts";
+import Box from "../primitives/Box.tsx";
+import { List, ListItem } from "./List.tsx";
 
 const Toc = () => (
   <Box

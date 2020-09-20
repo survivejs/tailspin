@@ -1,6 +1,6 @@
 import { elements } from "../../deps.ts";
-import Box from "../../ds/primitives/box.tsx";
-import Flex from "../../ds/primitives/flex.tsx";
+import Box from "../../ds/primitives/Box.tsx";
+import Flex from "../../ds/primitives/Flex.tsx";
 
 // TODO: Replace with a standalone implementation
 // import { readableColor } from "https://unpkg.com/polished@3.6.6/dist/polished.cjs.js";

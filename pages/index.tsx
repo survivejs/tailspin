@@ -1,10 +1,10 @@
 import { elements, processMarkdown } from "../deps.ts";
-import PageLayout from "../ds/layouts/page.tsx";
-import Alert from "../ds/patterns/alert.tsx";
-import Heading from "../ds/primitives/heading.tsx";
-import Box from "../ds/primitives/box.tsx";
-import Stack from "../ds/primitives/stack.tsx";
-import Button from "../ds/primitives/button.tsx";
+import PageLayout from "../ds/layouts/Page.tsx";
+import Alert from "../ds/patterns/Alert.tsx";
+import Heading from "../ds/primitives/Heading.tsx";
+import Box from "../ds/primitives/Box.tsx";
+import Stack from "../ds/primitives/Stack.tsx";
+import Button from "../ds/primitives/Button.tsx";
 
 const readme = processMarkdown(
   Deno.readTextFileSync(Deno.cwd() + "/README.md"),
