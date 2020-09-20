@@ -4,6 +4,22 @@ import queryNodes from "./query-nodes.ts";
 async function parseCode(
   { name, source }: { name: string; source: string },
 ) {
+  // console.log(JSON.stringify(ast, null, 2));
+
+  const identifierNodes = await queryNodes({
+    source,
+    query: {
+      "type": "Identifier",
+      value: name,
+    },
+  });
+
+  if (identifierNodes.length) {
+    const identifierNode = identifierNodes[0];
+
+    console.log("found identifier node");
+  }
+
   // TODO
   return Promise.resolve();
   /*

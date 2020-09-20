@@ -1,5 +1,7 @@
+// TODO: Disjointed union would work better here
 type AstNode = {
   type: string;
+  value?: string;
   kind?: string;
   span: {
     start: number;

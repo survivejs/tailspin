@@ -17,7 +17,9 @@ function serve(port) {
         context.status = 404;
       }
       else {
-        const parsedSource = JSON.parse(Buffer.from(source, 'base64').toString());
+        const parsedSource = Buffer.from(source, 'base64').toString();
+
+        console.log('parsed source', parsedSource)
 
         context.body = parse(parsedSource);
       }

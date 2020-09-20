@@ -26,7 +26,7 @@ const printAst = async (ast: AstNode): Promise<string> =>
   ) => res.text());
 
 const parseSource = async (source: string): Promise<AstNode> =>
-  fetch(`http://localhost:4000/parse?source="${btoa(JSON.stringify(source))}"`)
+  fetch(`http://localhost:4000/parse?source="${btoa(source)}"`)
     .then((
       res,
     ) => res.json());
