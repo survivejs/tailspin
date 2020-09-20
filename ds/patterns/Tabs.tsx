@@ -1,4 +1,4 @@
-import { elements } from "../../deps.ts";
+import { elements, ow } from "../../deps.ts";
 import Box from "../primitives/Box.tsx";
 import Flex from "../primitives/Flex.tsx";
 
@@ -18,7 +18,8 @@ const TabHeaderItem = ({ tabId }: { tabId: string }, children: string[]) => (
     py="2"
     w="full"
     sx="cursor-pointer text-center"
-    x-class={`state === '${tabId}' ? 'border-l border-t border-r rounded-t' : 'border-b'`}
+    x-class={`state === '${tabId}' ? '${ow
+      `border-l border-t border-r rounded-t`}' : '${ow`border-b`}'`}
     onclick={`setState('${tabId}')`}
   >
     {children.join("")}
@@ -33,7 +34,7 @@ const TabBodyItem = (
   { tabId }: { tabId: string; showAsFallback?: boolean },
   children: string[],
 ) => (
-  <Box x-class={`state === '${tabId}' ? '' : 'hidden'`}>
+  <Box x-class={`state === '${tabId}' ? '' : '${ow`hidden`}'`}>
     {children.join("")}
   </Box>
 );
