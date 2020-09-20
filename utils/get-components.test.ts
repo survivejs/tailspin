@@ -2,7 +2,7 @@ import { assertEquals } from "../deps.ts";
 import getComponents from "./get-components.ts";
 
 Deno.test("gets primitives", async () => {
-  const primitives = await getComponents("primitives");
+  // const primitives = await getComponents("primitives");
 
   // console.log(primitives);
 
@@ -17,7 +17,7 @@ Deno.test("gets primitives", async () => {
 });
 
 Deno.test("gets patterns", async () => {
-  const patterns = await getComponents("patterns");
+  // const patterns = await getComponents("patterns");
 
   // console.log(patterns);
 
@@ -32,7 +32,7 @@ Deno.test("gets patterns", async () => {
 });
 
 Deno.test("gets layouts", async () => {
-  const layouts = await getComponents("layouts");
+  // const layouts = await getComponents("layouts");
 
   // console.log(layouts);
 
