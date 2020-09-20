@@ -1,5 +1,6 @@
 // TODO: Disjointed union would work better here
 type AstNode = {
+  parent?: AstNode;
   type: string;
   value?: string;
   kind?: string;

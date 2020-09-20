@@ -7,20 +7,34 @@ function walkAst(
 
   if (node.body) {
     if (Array.isArray(node.body)) {
-      node.body.forEach((node) => walkAst({ node, onNode }));
+      node.body.forEach((child) => {
+        child.parent = node;
+
+        walkAst({ node: child, onNode });
+      });
     } else if (node.body) {
+      node.body.parent = node;
+
       onNode(node.body);
     }
   }
   if (node.declarations) {
     if (Array.isArray(node.declarations)) {
-      node.declarations.forEach((node) => walkAst({ node, onNode }));
+      node.declarations.forEach((child) => {
+        child.parent = node;
+
+        walkAst({ node: child, onNode });
+      });
     }
   }
   if (node.id) {
+    node.id.parent = node;
+
     walkAst({ node: node.id, onNode });
   }
   if (node.init) {
+    node.init.parent = node;
+
     walkAst({ node: node.init, onNode });
   }
 }

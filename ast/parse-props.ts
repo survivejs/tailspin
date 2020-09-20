@@ -13,6 +13,7 @@ async function parseProps({
   // TODO
   return Promise.resolve([{ name: "demo", isOptional: false, type: "demo" }]);
 
+  /*
   // This isn't fool proof. It would be better to find specifically a function
   // to avoid matching something else.
   const componentNodes = await queryNodes({
@@ -56,7 +57,7 @@ async function parseProps({
     const propertySignatureNodes = await queryNodes({
       source: source,
       /*query:
-        `Identifier[name="${referenceType}"] ~ TypeLiteral > PropertySignature`,*/
+        `Identifier[name="${referenceType}"] ~ TypeLiteral > PropertySignature`,
       // TODO
       query: {},
     });
@@ -94,15 +95,14 @@ async function parseProps({
     // TODO
     return Promise.resolve(undefined);
 
-    /*
     return parseProps({
       componentDirectory,
       // @ts-ignore TODO: Type this properly
       displayName: await import(componentPath).displayName,
       source: Deno.readTextFileSync(componentPath),
     });
-    */
   }
+  */
 }
 
 // @ts-ignore
