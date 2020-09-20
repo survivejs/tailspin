@@ -1,0 +1,15 @@
+{
+  "allow": ["env", "plugin", "read", "write", "net"],
+  "scripts": {
+    "format": "deno fmt --unstable",
+    "prebuild": "npm run generate-meta",
+    "build": "npm run clean && TODO",
+    "prestart": "npm run generate-meta",
+    "start": "deno run --config ./tsconfig.json --unstable src/index.ts --serve --watch",
+    "clean": "rm -rf public",
+    "generate-sitemap": "TODO",
+    "check-links": "TODO",
+    "generate-meta": "deno run --config ./tsconfig.json --unstable ./utils/generate-meta.ts",
+    "test": "deno test --config ./tsconfig.json --unstable ./ast"
+  }
+}
