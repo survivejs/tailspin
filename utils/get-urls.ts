@@ -32,6 +32,11 @@ async function getUrls() {
       pages = extras.map((
         { url, ...attributes }: { url: string },
       ) => {
+        if (!url) {
+          // TODO: Give a warning?
+          return;
+        }
+
         ret[joinPath(resolvedUrl, url)] = {
           layout,
           path: undefined,
@@ -40,7 +45,7 @@ async function getUrls() {
         };
 
         return { ...attributes };
-      });
+      }).filter(Boolean);
     }
 
     ret[resolvedUrl] = { path: file.path, pages, attributes: {} };

@@ -44,6 +44,8 @@ async function serve(port: number) {
         component({ url, pages, attributes }),
       );
 
+      console.log("page html", pageHtml);
+
       // @ts-ignore: TODO: Drop default in favor of simpler composition?
       const { title, meta } = component;
 

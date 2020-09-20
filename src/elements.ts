@@ -77,11 +77,17 @@ const attributeToString = (attributes: Attributes) =>
 
 const attributesToString = (attributes: Attributes | undefined): string => {
   if (attributes) {
-    return " " + Object.keys(attributes)
+    const renderedAttributes = Object.keys(attributes)
       .filter((attribute) => attribute !== "children") // filter out children attributes
       .map(attributeToString(attributes))
       .filter((attribute) => attribute.length) // filter out negative boolean attributes
       .join(" ");
+
+    if (renderedAttributes.length) {
+      return ` ${renderedAttributes}`;
+    }
+
+    return "";
   } else {
     return "";
   }
@@ -120,6 +126,7 @@ const isVoidElement = (tagName: string) => {
   ].indexOf(tagName) > -1;
 };
 
+// TODO: Support only React-style children here!
 export function createElement(
   name: string | CustomElementHandler,
   attributes: Attributes & Children | undefined = {},
