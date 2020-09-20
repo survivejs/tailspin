@@ -1,6 +1,11 @@
-// TODO: Use swc for parsing as well
-import acorn from "https://cdn.skypack.dev/acorn@8.0.1?dts";
-import { printAst } from "../../deps.ts";
+// This module has been designed to work in the browser!
+import acorn, { Parser } from "https://cdn.skypack.dev/acorn@8.0.1?dts";
+import jsx from "https://cdn.skypack.dev/acorn-jsx@5.3.1?dts";
+import escodegen from "https://cdn.skypack.dev/escodegen@2.0.0?dts";
+
+const generate = escodegen.generate;
+
+const JsxParser = Parser.extend(jsx());
 
 type JSXNode = acorn.Node & { children: JSXNode[] };
 export type Components = {
@@ -26,7 +31,7 @@ function evaluateJSX(
   );
 }
 
-async function evaluateJSXElement(
+function evaluateJSXElement(
   JSXElement: JSXNode,
   components: Components,
   replacements: Replacements,
@@ -46,16 +51,16 @@ async function evaluateJSXElement(
         ? // @ts-ignore
           foundComponent[firstJSXElementName.property]
         : foundComponent)(
-          await attributesToObject(
+          attributesToObject(
             firstJSXElementAttributes,
             components,
             replacements,
           ),
-          await childrenToString(JSXElement.children, components, replacements),
+          childrenToString(JSXElement.children, components, replacements),
         );
     } else {
       const attributesString = attributesToString(
-        await attributesToObject(
+        attributesToObject(
           firstJSXElementAttributes,
           components,
           replacements,
@@ -64,11 +69,13 @@ async function evaluateJSXElement(
 
       return `<${firstJSXElementName.name}${
         attributesString ? " " + attributesString : ""
-      }>${await childrenToString(
-        JSXElement.children,
-        components,
-        replacements,
-      )}</${firstJSXElementName.name}>`;
+      }>${
+        childrenToString(
+          JSXElement.children,
+          components,
+          replacements,
+        )
+      }</${firstJSXElementName.name}>`;
     }
   }
 
@@ -111,14 +118,14 @@ function findFirst(type: string, nodes: acorn.Node[]) {
   }
 }
 
-async function attributesToObject(
+function attributesToObject(
   attributes: acorn.Node[],
   components: Components,
   replacements: Replacements,
 ) {
   const ret = {};
 
-  attributes.forEach(async (attribute) => {
+  attributes.forEach((attribute) => {
     // @ts-ignore
     if (attribute?.value?.expression) {
       // @ts-ignore
@@ -140,7 +147,7 @@ async function attributesToObject(
 
       // @ts-ignore
       ret[attribute?.name?.name] = evaluate(
-        await printAst(expression),
+        generate(expression),
         replacements,
       );
       // @ts.ignore
@@ -188,13 +195,13 @@ function valueToObject(node: acorn.Node) {
   );
 }
 
-async function childrenToString(
+function childrenToString(
   children: JSXNode[],
   components: Components,
   replacements: Replacements,
-): Promise<string> {
+): string {
   return children
-    .map(async (child) => {
+    .map((child) => {
       if (child.type === "JSXElement") {
         return evaluateJSXElement(child, components, replacements);
       }
@@ -204,7 +211,7 @@ async function childrenToString(
         const expression = child?.expression;
 
         if (expression.type === "CallExpression") {
-          return evaluate(await printAst(expression), replacements);
+          return evaluate(generate(expression), replacements);
         }
 
         // @ts-ignore

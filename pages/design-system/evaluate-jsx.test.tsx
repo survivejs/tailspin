@@ -1,8 +1,6 @@
 import { assertEquals, elements } from "../../deps.ts";
 import evaluateJSX from "./evaluate-jsx.ts";
 
-// TODO: Redo evaluation based on swc
-/*
 Deno.test("should return empty string for empty string", () => {
   assertEquals(evaluateJSX("", {}), "");
 });
@@ -73,10 +71,7 @@ Deno.test("should evaluate component props", () => {
     "<div>test</div>",
   );
 });
-*/
 
-// TODO
-/*
 Deno.test("should evaluate arrays as component props", () => {
   const PassProps = ({ pages }: { pages: string[] }, children: string[]) => (
     <div>{pages.join("")}</div>
@@ -89,9 +84,7 @@ Deno.test("should evaluate arrays as component props", () => {
     "<div>foobarbaz</div>",
   );
 });
-*/
 
-/*
 Deno.test("should evaluate arrays within objects as component props", () => {
   const PassProps = (
     { attributes }: { attributes: { pages: string[] } },
@@ -164,10 +157,7 @@ Deno.test("should evaluate objects within objects as component props", () => {
     "<div>Demo</div>",
   );
 });
-*/
 
-// TODO
-/*
 Deno.test("should evaluate children", () => {
   const ShowChildren = ({}, children: string[]) => <div>{children}</div>;
 
@@ -178,10 +168,7 @@ Deno.test("should evaluate children", () => {
     "<div>2</div>",
   );
 });
-*/
 
-// TODO
-/*
 Deno.test("should evaluate expression props", () => {
   const PassProps = ({ test }: { test: string }, children: string[]) => (
     <div>{test}</div>
@@ -194,9 +181,7 @@ Deno.test("should evaluate expression props", () => {
     "<div>2</div>",
   );
 });
-*/
 
-/*
 Deno.test("should evaluate components as props", () => {
   const Hello = () => <div>hello</div>;
   const PassProps = ({ test }: { test: string }, children: string[]) => (
@@ -320,7 +305,7 @@ Deno.test("should replace calling children", () => {
 
 Deno.test("should replace children with elements", () => {
   const ShowChildren = ({}, children: string[]) => (
-    <div>{children.join("")}</div>
+    <div>{children}</div>
   );
 
   assertEquals(
@@ -333,7 +318,7 @@ Deno.test("should replace children with elements", () => {
 
 Deno.test("should replace children with elements and attributes", () => {
   const ShowChildren = ({}, children: string[]) => (
-    <div>{children.join("")}</div>
+    <div>{children}</div>
   );
 
   assertEquals(
@@ -346,7 +331,7 @@ Deno.test("should replace children with elements and attributes", () => {
 
 Deno.test("should replace children with multiple elements", () => {
   const ShowChildren = ({}, children: string[]) => (
-    <div>{children.join("")}</div>
+    <div>{children}</div>
   );
 
   assertEquals(
@@ -362,7 +347,7 @@ Deno.test("should replace children with multiple elements", () => {
 
 Deno.test("should replace children with multiple children", () => {
   const ShowChildren = ({}, children: string[]) => (
-    <div>{children.join("")}</div>
+    <div>{children}</div>
   );
 
   assertEquals(
@@ -375,4 +360,3 @@ Deno.test("should replace children with multiple children", () => {
     "<div><div><span>Foo</span><span>Bar</span></div></div>",
   );
 });
-*/
