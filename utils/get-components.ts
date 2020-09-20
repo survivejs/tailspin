@@ -3,6 +3,7 @@ import type { Component } from "../types.ts";
 import getComponent from "./get-component.ts";
 
 async function getComponents(type: string) {
+  // TODO: Expose as a parameter
   const componentDirectory = joinPath(Deno.cwd(), "ds", type);
 
   const ret: Component[] = [];
@@ -12,7 +13,7 @@ async function getComponents(type: string) {
       joinPath(componentDirectory, "*.tsx"),
     )
   ) {
-    ret.push(await getComponent(componentDirectory, file.path));
+    ret.push(await getComponent(file.path));
   }
 
   return ret;

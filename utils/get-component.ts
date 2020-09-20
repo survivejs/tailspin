@@ -2,7 +2,6 @@ import { parseCode, parseProps } from "../deps.ts";
 import type { Component } from "../types.ts";
 
 async function getComponent(
-  componentDirectory: string,
   componentPath: string,
 ): Promise<Component> {
   const source = Deno.readTextFileSync(componentPath);
@@ -17,7 +16,7 @@ async function getComponent(
       : "",
     exampleSource: parseCode({ name: "Example", source }),
     props: await parseProps({
-      componentDirectory,
+      componentPath,
       displayName,
       source,
     }),

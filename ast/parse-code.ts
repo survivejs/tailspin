@@ -2,8 +2,11 @@ import { printAst } from "../deps.ts";
 import queryNodes from "./query-nodes.ts";
 
 async function parseCode(
-  { name, source }: { name: any; source: any },
+  { name, source }: { name: string; source: string },
 ) {
+  // TODO
+  return Promise.resolve();
+  /*
   const exampleIdentifierNodes = await queryNodes({
     source,
     // query: `Identifier[name="${name}"]`,
@@ -44,7 +47,7 @@ async function parseCode(
     }
   }
 
-  return printAst(exampleJsxNode);
+  return printAst(exampleJsxNode);*/
 }
 
 export default parseCode;

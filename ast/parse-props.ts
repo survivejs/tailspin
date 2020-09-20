@@ -1,15 +1,18 @@
-import { joinPath, printAst } from "../deps.ts";
+import { printAst } from "../deps.ts";
 import queryNodes from "./query-nodes.ts";
 
 async function parseProps({
-  componentDirectory,
+  componentPath,
   displayName,
   source,
 }: {
-  componentDirectory: string;
+  componentPath: string;
   displayName: string;
   source: string;
-}): Promise<{ name: string; isOptional: boolean; type: string } | undefined> {
+}): Promise<{ name: string; isOptional: boolean; type: string }[] | undefined> {
+  // TODO
+  return Promise.resolve([{ name: "demo", isOptional: false, type: "demo" }]);
+
   // This isn't fool proof. It would be better to find specifically a function
   // to avoid matching something else.
   const componentNodes = await queryNodes({
@@ -88,17 +91,17 @@ async function parseProps({
       return;
     }
 
-    const componentPath = joinPath(
-      componentDirectory,
-      `${moduleTarget}.tsx`,
-    );
+    // TODO
+    return Promise.resolve(undefined);
 
+    /*
     return parseProps({
       componentDirectory,
       // @ts-ignore TODO: Type this properly
       displayName: await import(componentPath).displayName,
       source: Deno.readTextFileSync(componentPath),
     });
+    */
   }
 }
 
