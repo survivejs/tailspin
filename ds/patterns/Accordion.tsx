@@ -1,4 +1,4 @@
-import { elements } from "../../deps.ts";
+import { elements, ow } from "../../deps.ts";
 import Box from "../primitives/Box.tsx";
 import Flex from "../primitives/Flex.tsx";
 
@@ -12,7 +12,7 @@ const Accordion = ({ title }: { title: string }, children: string[]) => (
       <Box as="span">{title}</Box>
       <Box as="span" x="state ? '+' : '-'" />
     </Flex>
-    <div class="py-2 text-gray-600" x-class="!state && 'hidden'">
+    <div class="py-2 text-gray-600" x-class={`!state && '${ow`hidden`}'`}>
       {children.join("")}
     </div>
   </Box>

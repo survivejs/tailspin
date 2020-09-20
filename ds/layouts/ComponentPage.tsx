@@ -22,7 +22,7 @@ const ComponentPageLayout = ({
       <Heading level={1} size="4xl">
         {attributes.displayName}
       </Heading>
-      <Stack direction="row" spacing="2">
+      <Stack direction="column" spacing="4">
         <Box>{attributes.description}</Box>
         <Box>{attributes.Example()}</Box>
       </Stack>
