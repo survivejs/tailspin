@@ -16,6 +16,7 @@ import getComponents from "./utils/get-components.ts";
 import processMarkdown from "./utils/process-markdown.ts";
 import type { AstNode } from "./types.ts";
 import { createRemote } from "./lib/gentleRpc/rpcClient.ts";
+import userTheme from "./user-theme.ts";
 
 const remote = createRemote("http://0.0.0.0:4000");
 
@@ -39,7 +40,10 @@ const getStyleInjector = () => {
   return injector;
 };
 
+const ow = themed(userTheme);
+
 export {
+  ow,
   assertEquals,
   expandGlobSync,
   elements,

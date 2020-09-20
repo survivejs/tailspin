@@ -1,4 +1,4 @@
-import ow from "../ow.ts";
+import { ow } from "../../deps.ts";
 
 const rules = {
   bg: convertToClasses("bg"),

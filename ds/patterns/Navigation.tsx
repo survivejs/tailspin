@@ -1,8 +1,7 @@
-import { elements } from "../../deps.ts";
+import { elements, ow } from "../../deps.ts";
 import Flex from "../primitives/Flex.tsx";
 import Box from "../primitives/Box.tsx";
 import Link, { ExternalLinkProps } from "../primitives/Link.tsx";
-import ow from "../ow.ts";
 
 // https://tailwindcss.com/components/navigation
 const Navigation = ({ logo }: { logo?: string }, children: string[]) => (
