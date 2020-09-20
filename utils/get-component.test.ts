@@ -6,7 +6,6 @@ Deno.test("gets text", async () => {
     joinPath(Deno.cwd(), "ds", "primitives", "Text.tsx"),
   );
 
-  console.log(text);
-
   assertEquals(text.displayName, "Text");
+  assertEquals(text.exampleSource.length, 111);
 });
