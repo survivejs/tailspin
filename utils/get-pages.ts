@@ -7,6 +7,8 @@ async function getPages(urls: Urls) {
     Object.entries(urls).map(
       async ([url, { path, pages, attributes, layout }]) => {
         if (path) {
+          // TODO: It's better to do
+          // await import(`${path}.tsx#${Math.random()}`)
           // TODO: Maintain a counter per page instead of using a random number
           const module = await import(`${path}?version=${Math.random()}.tsx`);
 
