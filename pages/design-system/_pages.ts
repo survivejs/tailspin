@@ -3,7 +3,7 @@ import type { DesignSystemComponent } from "../../types.ts";
 import ComponentPageLayout from "../../ds/layouts/ComponentPage.tsx";
 
 async function getPages() {
-  const ret: DesignSystemComponent[] = [];
+  const ret: { component: DesignSystemComponent; url: string }[] = [];
 
   for (
     const file of expandGlobSync(
@@ -12,7 +12,7 @@ async function getPages() {
   ) {
     const component = await import(file.path);
 
-    ret.push({ ...component, url: component.displayName });
+    ret.push({ component, url: component.displayName });
   }
 
   return ret;

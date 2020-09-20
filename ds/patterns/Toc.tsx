@@ -1,4 +1,4 @@
-import { elements } from "../../deps.ts";
+import { elements, ow } from "../../deps.ts";
 import Box from "../primitives/Box.tsx";
 import { List, ListItem } from "./List.tsx";
 
@@ -16,10 +16,11 @@ const Toc = () => (
             as="a"
             x-href="'#' + state.id"
             x="state.textContent"
-            x-class="[
-              state.textContent === parent.closest.textContent && 'font-bold',
+            x-class={`[
+              state.textContent === parent.closest.textContent && '${ow
+              `font-bold`}',
               state.tagName === 'H3' && 'ml-2'
-            ]"
+            ]`}
           >
           </Box>
         </ListItem>

@@ -11,20 +11,24 @@ import Heading from "../primitives/Heading.tsx";
 
 const ComponentPageLayout = ({
   url,
-  attributes,
+  attributes: {
+    component,
+  },
 }: {
   url: string;
-  attributes: DesignSystemComponent;
+  attributes: {
+    component: DesignSystemComponent;
+  };
 }) => (
   <PageLayout
     url={url}
     body={<Box as="article" m="8" mx="auto" w="full" class="prose lg:prose-xl">
       <Heading level={1} size="4xl">
-        {attributes.displayName}
+        {component.displayName}
       </Heading>
       <Stack direction="column" spacing="4">
-        <Box>{attributes.description}</Box>
-        <Box>{attributes.Example()}</Box>
+        <Box>{component.description}</Box>
+        <Box>{component.Example()}</Box>
       </Stack>
     </Box>}
   />
@@ -35,10 +39,12 @@ export const Example = () => (
   <ComponentPageLayout
     url="/"
     attributes={{
-      displayName: "Tag",
-      description: tagDescription,
-      default: Tag,
-      Example: TagExample,
+      component: {
+        displayName: "Tag",
+        description: tagDescription,
+        default: Tag,
+        Example: TagExample,
+      },
     }}
   />
 );
