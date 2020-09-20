@@ -25,6 +25,7 @@ const CodeContainer = (
   );
 };
 
+// TODO: Re-enable fallback
 // TODO: Textarea
 const CodeEditor = ({
   parent = "this",
@@ -53,7 +54,7 @@ const CodeEditor = ({
         sx="overflow-hidden"
         x={`highlight('html', ${parent}.${value} || '')`}
       >
-        {highlight("html", fallback)}
+        {/*highlight("html", fallback)*/}
       </Box>
       <textarea
         class="overflow-hidden absolute min-w-full top-0 left-0 outline-none opacity-50 bg-none whitespace-pre resize-none"
