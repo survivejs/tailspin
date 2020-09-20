@@ -22,8 +22,8 @@ Deno.test("finds a const", async () => {
   );
 
   assertEquals(matches.length, 1);
-  assertEquals(matches[0].type, type);
-  assertEquals(matches[0].kind, kind);
+  assertEquals(matches[0].node.type, type);
+  assertEquals(matches[0].node.kind, kind);
 });
 
 Deno.test("finds functions", async () => {

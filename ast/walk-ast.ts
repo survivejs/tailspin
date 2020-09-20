@@ -1,41 +1,35 @@
 import type { AstNode } from "../types.ts";
 
 function walkAst(
-  { node, onNode }: { node: AstNode; onNode: (node: AstNode) => void },
+  { node, onNode, parent }: {
+    node: AstNode;
+    onNode: (node: AstNode, parent?: AstNode) => void;
+    parent?: AstNode;
+  },
 ) {
-  onNode(node);
+  onNode(node, parent);
 
   if (node.body) {
     if (Array.isArray(node.body)) {
       node.body.forEach((child) => {
-        child.parent = node;
-
-        walkAst({ node: child, onNode });
+        walkAst({ node: child, onNode, parent: node });
       });
     } else if (node.body) {
-      node.body.parent = node;
-
-      onNode(node.body);
+      onNode(node.body, node);
     }
   }
   if (node.declarations) {
     if (Array.isArray(node.declarations)) {
       node.declarations.forEach((child) => {
-        child.parent = node;
-
-        walkAst({ node: child, onNode });
+        walkAst({ node: child, onNode, parent: node });
       });
     }
   }
   if (node.id) {
-    node.id.parent = node;
-
-    walkAst({ node: node.id, onNode });
+    walkAst({ node: node.id, onNode, parent: node });
   }
   if (node.init) {
-    node.init.parent = node;
-
-    walkAst({ node: node.init, onNode });
+    walkAst({ node: node.init, onNode, parent: node });
   }
 }
 

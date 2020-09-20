@@ -5,19 +5,23 @@ import walkAst from "./walk-ast.ts";
 type Query = { [key in keyof AstNode]?: string };
 
 async function queryNodes(
-  { source, query }: { source: string; query: Query },
+  { node, source, query }: { node?: AstNode; source?: string; query: Query },
 ) {
-  const node = await parseSource(source);
-  const matches: AstNode[] = [];
+  const matches: { node: AstNode; parent?: AstNode }[] = [];
+
+  if (!node && !source) {
+    return [];
+  }
 
   walkAst({
-    node,
-    onNode: (node: AstNode) => {
+    // @ts-ignore: Find a better way to pass either node or source
+    node: node || await parseSource(source),
+    onNode: (node: AstNode, parent?: AstNode) => {
       if (
         // @ts-ignore: Figure out how to type this
         Object.entries(query).every(([k, v]) => node[k] === v)
       ) {
-        matches.push(node);
+        matches.push({ node, parent });
       }
     },
   });

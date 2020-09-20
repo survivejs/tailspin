@@ -7,16 +7,24 @@ async function parseCode(
   const identifierNodes = await queryNodes({
     source,
     query: {
-      "type": "Identifier",
+      type: "Identifier",
       value: name,
     },
   });
 
   if (identifierNodes.length) {
-    const identifierNode = identifierNodes[0];
+    const identifierParent = identifierNodes[0].parent;
 
-    // TODO: Get identifier parent and find the first jsx within it
-    console.log("found identifier node", identifierNode);
+    const jsxNodes = await queryNodes({
+      node: identifierParent,
+      query: {
+        type: "JSXElement",
+      },
+    });
+
+    if (jsxNodes.length) {
+      return printAst(jsxNodes[0].node);
+    }
   }
 
   // TODO

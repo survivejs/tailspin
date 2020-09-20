@@ -3,9 +3,25 @@ const jayson = require('jayson');
 
 function serve(port) {
   const server = jayson.server({
-    parse: (args, cb) => cb(null, parse(args[0])),
+    parse: (args, cb) => {
+      try {
+        cb(null, parse(args[0]));
+      } catch(err) {
+        console.error(err);
+
+        cb(err);
+      }
+    },
     ping: (_, cb) => cb(null, 'pong'),
-    print: (args, cb) => cb(null, print(args[0])),
+    print: (args, cb) => {
+      try {
+        cb(null, print(args[0]));
+      } catch(err) {
+        console.error(err);
+
+        cb(err);
+      }
+    },
   });
  
   console.log(`swc-server - running at port ${port}`)
@@ -19,9 +35,9 @@ function parse(source) {
 }
 
 function print(ast) {
-  consoel.log('PRINTING', ast)
+  console.log('PRINTING', ast);
 
-  return swc.printSync(ast, {});
+  return swc.printSync(ast, { syntax: "typescript", tsx: true });
 }
 
 serve(process.env.PORT || 4000);
