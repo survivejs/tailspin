@@ -16,14 +16,22 @@ type AstNode = {
   init?: AstNode;
   id?: AstNode;
 };
+
+// TODO: Join these two and extract the generator specific type
 type Component = {
   displayName: string;
   description: string;
-  default: () => string;
+  default: (...args: any) => string;
   exampleSource: string;
   componentSource: string;
   // TODO: Prop type
   props: any[];
+};
+type DesignSystemComponent = {
+  displayName: string;
+  description: string;
+  default: (...args: any) => string;
+  Example: (...args: any) => string;
 };
 type Pages = {
   [key: string]: Page;
@@ -59,4 +67,4 @@ type Urls = {
   };
 };
 
-export type { AstNode, Component, Pages, Page, Urls };
+export type { AstNode, Component, DesignSystemComponent, Pages, Page, Urls };
