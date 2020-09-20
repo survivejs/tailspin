@@ -12,10 +12,9 @@ const CodeContainer = (
   { sources }: { sources: { [key: string]: string } },
   children: string[],
 ) => {
-  const encoder = new TextEncoder();
   const state = `{ ${
     Object.entries(sources)
-      .map(([name, source]) => `${name}: atob('${encoder.encode(source)}')`)
+      .map(([name, source]) => `${name}: atob('${btoa(source)}')`)
       .join(", ")
   } }`;
 
