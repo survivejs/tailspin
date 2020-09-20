@@ -53,7 +53,7 @@ async function serve(port: number) {
       context.response.body = new TextEncoder().encode(`<html>
     <head>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>${title}</title>
+      <title>${title || ""}</title>
       ${generateMeta(meta)}
       <script>${websocketClient}</script>
       <script type="text/javascript" src="https://unpkg.com/sidewind@3.1.2/dist/sidewind.umd.production.min.js"></script>
