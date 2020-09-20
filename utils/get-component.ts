@@ -12,9 +12,9 @@ async function getComponent(
     ...component,
     source,
     componentSource: component.showCodeEditor
-      ? parseCode({ name: displayName, source })
+      ? await parseCode({ name: displayName, source })
       : "",
-    exampleSource: parseCode({ name: "Example", source }),
+    exampleSource: await parseCode({ name: "Example", source }),
     props: await parseProps({
       componentPath,
       displayName,
