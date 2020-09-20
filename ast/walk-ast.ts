@@ -25,6 +25,9 @@ function walkAst(
       });
     }
   }
+  if (node.expression) {
+    walkAst({ node: node.expression, onNode, parent: node });
+  }
   if (node.id) {
     walkAst({ node: node.id, onNode, parent: node });
   }

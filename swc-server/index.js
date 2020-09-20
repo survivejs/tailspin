@@ -29,15 +29,14 @@ function serve(port) {
 }
 
 function parse(source) {
-  console.log('PARSING', source, swc.parseSync(source, { syntax: "typescript", tsx: true }))
-
   return swc.parseSync(source, { syntax: "typescript", tsx: true });
 }
 
 function print(ast) {
-  console.log('PRINTING', ast);
+  const ret = swc.printSync({ type: "Module", body: [{ type: "ExpressionStatement", expression: ast, span: { start: 0, end: 0, ctxt: 0 } }], span: { start: 0, end: 0, ctxt: 0 } }, {}).code.trim();
 
-  return swc.printSync(ast, { syntax: "typescript", tsx: true });
+  // TODO: Trim last ;
+  return ret.slice(0, ret.length - 1);
 }
 
 serve(process.env.PORT || 4000);

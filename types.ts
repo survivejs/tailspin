@@ -11,6 +11,7 @@ type AstNode = {
   declare?: boolean;
   declarations?: AstNode[];
   body?: AstNode[] | AstNode;
+  expression?: AstNode;
   init?: AstNode;
   id?: AstNode;
 };
