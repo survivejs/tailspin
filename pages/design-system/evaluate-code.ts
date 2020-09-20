@@ -1,12 +1,12 @@
 import evaluateJSX from "./evaluate-jsx.ts";
 import type { Components } from "./evaluate-jsx.ts";
 
-const evaluateCode = async (
+const evaluateCode = (
   componentSources: Components,
   exampleSource: string,
   componentName: string,
   componentSource?: string,
-): Promise<string> => {
+): string => {
   if (componentSource) {
     return evaluateJSX(exampleSource, {
       ...componentSources,

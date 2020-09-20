@@ -1,8 +1,5 @@
 import evaluateComponentCode from "./evaluate-code.ts";
-
-const components = loadComponents(
-  require.context("../../ds", true, /^\.\/.*\.tsx$/),
-);
+import type { Components } from "./evaluate-jsx.ts";
 
 const evaluateCode = (
   exampleSource: string,
@@ -10,12 +7,14 @@ const evaluateCode = (
   componentSource?: string,
 ): string =>
   evaluateComponentCode(
-    components,
+    window.components,
     exampleSource,
     componentName,
     componentSource,
   );
 
+// TODO: Inject to a global at the host
+/*
 function loadComponents(context) {
   const ret = {};
 
@@ -43,9 +42,12 @@ function loadComponents(context) {
 
   return ret;
 }
+*/
 
 declare global {
   interface Window {
+    // Components should be injected to a global by the host
+    components: Components;
     evaluateCode: typeof evaluateCode;
   }
 }
