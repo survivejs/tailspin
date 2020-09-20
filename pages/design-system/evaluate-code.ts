@@ -1,6 +1,6 @@
-import evaluateJSX, { Components } from "./evaluate-jsx.ts";
+import evaluateJSX from "./evaluate-jsx.ts";
+import type { Components } from "./evaluate-jsx.ts";
 
-// TODO: Redo
 const evaluateCode = async (
   componentSources: Components,
   exampleSource: string,
