@@ -15,7 +15,7 @@ function walkAst(
         walkAst({ node: child, onNode, parent: node });
       });
     } else if (node.body) {
-      onNode(node.body, node);
+      walkAst({ node: node.body, onNode, parent: node });
     }
   }
   if (node.declarations) {
@@ -24,6 +24,9 @@ function walkAst(
         walkAst({ node: child, onNode, parent: node });
       });
     }
+  }
+  if (node.declaration) {
+    walkAst({ node: node.declaration, onNode, parent: node });
   }
   if (node.expression) {
     walkAst({ node: node.expression, onNode, parent: node });

@@ -9,6 +9,7 @@ type AstNode = {
     ctxt: number;
   };
   declare?: boolean;
+  declaration?: AstNode;
   declarations?: AstNode[];
   body?: AstNode[] | AstNode;
   expression?: AstNode;
