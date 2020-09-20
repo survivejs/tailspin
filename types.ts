@@ -12,6 +12,7 @@ type AstNode = {
   declarations?: AstNode[];
   body?: AstNode[] | AstNode;
   init?: AstNode;
+  id?: AstNode;
 };
 type Component = {
   displayName: string;

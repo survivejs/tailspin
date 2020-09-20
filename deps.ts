@@ -15,21 +15,21 @@ import queryNodes from "./ast/query-nodes.ts";
 import getComponents from "./utils/get-components.ts";
 import processMarkdown from "./utils/process-markdown.ts";
 import type { AstNode } from "./types.ts";
+import { createRemote } from "./lib/gentleRpc/rpcClient.ts";
+
+const remote = createRemote("http://0.0.0.0:4000");
 
 const joinPath = path.posix.join;
 const getDirectory = path.posix.dirname;
 const getRelativePath = path.posix.relative;
 
 const printAst = async (ast: AstNode): Promise<string> =>
-  fetch(`http://localhost:4000/print?ast="${JSON.stringify(ast)}"`).then((
-    res,
-  ) => res.text());
+  // @ts-ignore
+  remote.print(ast);
 
 const parseSource = async (source: string): Promise<AstNode> =>
-  fetch(`http://localhost:4000/parse?source="${btoa(source)}"`)
-    .then((
-      res,
-    ) => res.json());
+  // @ts-ignore
+  remote.parse(source);
 
 const getStyleInjector = () => {
   const injector = VirtualInjector();

@@ -11,6 +11,6 @@
   "license": "MIT",
   "dependencies": {
     "@swc/wasm": "^1.2.29",
-    "koa": "^2.13.0"
+    "jayson": "^3.3.4"
   }
 }

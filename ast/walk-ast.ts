@@ -17,6 +17,9 @@ function walkAst(
       node.declarations.forEach((node) => walkAst({ node, onNode }));
     }
   }
+  if (node.id) {
+    walkAst({ node: node.id, onNode });
+  }
   if (node.init) {
     walkAst({ node: node.init, onNode });
   }

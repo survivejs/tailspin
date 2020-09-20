@@ -4,8 +4,6 @@ import queryNodes from "./query-nodes.ts";
 async function parseCode(
   { name, source }: { name: string; source: string },
 ) {
-  // console.log(JSON.stringify(ast, null, 2));
-
   const identifierNodes = await queryNodes({
     source,
     query: {
@@ -17,7 +15,8 @@ async function parseCode(
   if (identifierNodes.length) {
     const identifierNode = identifierNodes[0];
 
-    console.log("found identifier node");
+    // TODO: Get identifier parent and find the first jsx within it
+    console.log("found identifier node", identifierNode);
   }
 
   // TODO

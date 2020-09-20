@@ -1,54 +1,26 @@
 const swc = require('@swc/wasm');
-const Koa = require('koa');
+const jayson = require('jayson');
 
 function serve(port) {
-  const app = new Koa();
- 
-  // response
-  app.use(context => {
-    const { url, query } = context;
-    const urlRoot = url.split('?')[0]
-
-    // http://localhost:4000/parse?source=%22const%20a%20=%20%3Cdiv%3Efoo%3C/div%3E%22
-    if (urlRoot === '/parse') {
-      const { source } = query;
-
-      if (!source) {
-        context.status = 404;
-      }
-      else {
-        const parsedSource = Buffer.from(source, 'base64').toString();
-
-        console.log('parsed source', parsedSource)
-
-        context.body = parse(parsedSource);
-      }
-    }
-    // http://localhost:4000/parse?ast=%22<AST goes here>%22
-    else if (urlRoot === '/print') {
-      const { ast } = query;
-
-      if (!source) {
-        context.status = 404;
-      }
-      else {
-        context.body = print(ast);
-      }
-    }
-    else {
-      context.status = 404
-    }
+  const server = jayson.server({
+    parse: (args, cb) => cb(null, parse(args[0])),
+    ping: (_, cb) => cb(null, 'pong'),
+    print: (args, cb) => cb(null, print(args[0])),
   });
-  
-  console.log('swc-server - running at port 4000')
-  app.listen(port);
+ 
+  console.log(`swc-server - running at port ${port}`)
+  server.http().listen(port);
 }
 
-function parse(str) {
-  return swc.parseSync(str, { syntax: "typescript", tsx: true });
+function parse(source) {
+  console.log('PARSING', source, swc.parseSync(source, { syntax: "typescript", tsx: true }))
+
+  return swc.parseSync(source, { syntax: "typescript", tsx: true });
 }
 
 function print(ast) {
+  consoel.log('PRINTING', ast)
+
   return swc.printSync(ast, {});
 }
 

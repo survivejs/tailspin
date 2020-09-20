@@ -10,6 +10,6 @@
     "generate-sitemap": "TODO",
     "check-links": "TODO",
     "generate-meta": "deno run --config ./tsconfig.json --unstable ./utils/generate-meta.ts",
-    "test": "deno test --config ./tsconfig.json --unstable ./ast ./utils"
+    "test": "deno test --config ./tsconfig.json --failfast --unstable ./ast ./utils"
   }
 }
