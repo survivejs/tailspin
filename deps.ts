@@ -58,7 +58,6 @@ export {
   printAst,
   processMarkdown,
   queryNodes,
-  themed,
   getStyleInjector,
   getStyleTag,
   Application,
