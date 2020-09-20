@@ -31,7 +31,7 @@ export const Example = () => (
     </Box>
     <Box>
       <Link.withExternal
-        href="https://github.com/survivejs/tailwind-webpack-starter"
+        href="https://github.com/survivejs/tailspin"
       >
         Star at GitHub
       </Link.withExternal>

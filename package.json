@@ -1,9 +1,8 @@
 {
-  "name": "tailwind-webpack-starter",
+  "name": "tailspin",
   "version": "0.0.0",
   "private": true,
-  "description": "Opinionated starter for Tailwind projects",
-  "main": "src/index.ts",
+  "description": "Site generator and design system in one",
   "scripts": {
     "format": "deno fmt --unstable",
     "prebuild": "npm run generate-meta",

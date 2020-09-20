@@ -13,7 +13,7 @@ const PageLayout = ({ body, url }: PageLayoutProps) => (
     <Box as="header" bg="primary" color="white">
       <Navigation
         logo={<NavigationItem href="/" isSelected={url === "/"}>
-          tailwind-webpack-starter
+          tailspin
         </NavigationItem>}
       >
         <Box sx="lg:flex-grow">
@@ -29,7 +29,7 @@ const PageLayout = ({ body, url }: PageLayoutProps) => (
         </Box>
         <Box>
           <NavigationItem
-            href="https://github.com/survivejs/tailwind-webpack-starter"
+            href="https://github.com/survivejs/tailspin"
           >
             <Box
               px="4"

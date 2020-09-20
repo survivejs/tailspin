@@ -64,7 +64,7 @@ const displayName = "Navigation";
 const Example = () => (
   <Box bg="primary" color="white">
     <Navigation
-      logo={<NavigationItem href="/">tailwind-webpack-starter</NavigationItem>}
+      logo={<NavigationItem href="/">tailspin</NavigationItem>}
     >
       <Box sx="lg:flex-grow">
         <NavigationItem href="/blog/">Blog</NavigationItem>
@@ -74,7 +74,7 @@ const Example = () => (
       </Box>
       <Box>
         <NavigationItem
-          href="https://github.com/survivejs/tailwind-webpack-starter"
+          href="https://github.com/survivejs/tailspin"
         >
           Star at GitHub
         </NavigationItem>

@@ -77,7 +77,7 @@ const DesignSystemPage = async (props: { url: string }) => (
 DesignSystemPage.title = "Design system";
 DesignSystemPage.meta = {
   description:
-    "tailwind-webpack-starter combines webpack with Tailwind and provides a starting point for site projects",
+    "You can find the different variants and components of the system on this page",
 };
 
 export default DesignSystemPage;
