@@ -1,6 +1,6 @@
 import * as elements from "../../src/elements.ts";
 import Box, { BoxProps } from "./box.tsx";
-import config from "../../tailwind.ts";
+import type config from "../../tailwind.ts";
 import { convertToClasses, omit } from "./_utils.ts";
 
 type Direction = "column" | "row";

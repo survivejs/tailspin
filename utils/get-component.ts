@@ -1,5 +1,5 @@
 import { parseCode, parseProps } from "../deps.ts";
-import { Component } from "../types.ts";
+import type { Component } from "../types.ts";
 
 async function getComponent(
   componentDirectory: string,

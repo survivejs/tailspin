@@ -1,4 +1,4 @@
-import { Pages, Urls } from "../types.ts";
+import type { Pages, Urls } from "../types.ts";
 
 async function getPages(urls: Urls) {
   const ret: Pages = {};

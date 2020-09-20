@@ -1,7 +1,9 @@
 import {
-  WebSocket,
   WebSocketServer,
-} from "https://deno.land/x/websocket@v0.0.3/mod.ts";
+} from "../lib/deno-websocket/mod.ts";
+import type {
+  WebSocket,
+} from "../lib/deno-websocket/mod.ts";
 
 const getWebsocketServer = () => {
   const wss = new WebSocketServer(8080);

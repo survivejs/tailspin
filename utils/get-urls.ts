@@ -5,7 +5,7 @@ import {
   expandGlobSync,
   existsSync,
 } from "../deps.ts";
-import { Urls } from "../types.ts";
+import type { Urls } from "../types.ts";
 
 async function getUrls() {
   const rootPath = joinPath(Deno.cwd(), "pages");

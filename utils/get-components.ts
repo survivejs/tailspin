@@ -1,5 +1,5 @@
 import { expandGlobSync, joinPath } from "../deps.ts";
-import { Component } from "../types.ts";
+import type { Component } from "../types.ts";
 import getComponent from "./get-component.ts";
 
 async function getComponents(type: string) {

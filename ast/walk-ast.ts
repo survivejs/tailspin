@@ -1,4 +1,4 @@
-import { AstNode } from "../types.ts";
+import type { AstNode } from "../types.ts";
 
 function walkAst(
   { node, onNode }: { node: AstNode; onNode: (node: AstNode) => void },

@@ -1,5 +1,5 @@
 import { elements } from "../../deps.ts";
-import { Component } from "../../types.ts";
+import type { Component } from "../../types.ts";
 import { CodeContainer, CodeEditor } from "../../ds/patterns/code-editor.tsx";
 import Box from "../../ds/primitives/box.tsx";
 import Stack from "../../ds/primitives/stack.tsx";

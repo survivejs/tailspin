@@ -6,7 +6,7 @@ import Flex from "../primitives/flex.tsx";
 import Stack from "../primitives/stack.tsx";
 import Heading from "../primitives/heading.tsx";
 import Link from "../primitives/link.tsx";
-import { BlogPage } from "./blog-page.tsx";
+import type { BlogPage } from "./blog-page.tsx";
 
 export type BlogIndexLayoutProps = {
   url: string;

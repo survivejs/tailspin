@@ -1,6 +1,6 @@
 import * as elements from "../../src/elements.ts";
 import { constructTailwindClasses, tailwindKeys } from "./_utils.ts";
-import config from "../../tailwind.ts";
+import type config from "../../tailwind.ts";
 
 type ColorKeys = keyof typeof config.colors;
 type MarginKeys = keyof typeof config.unit;

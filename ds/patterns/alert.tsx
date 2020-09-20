@@ -2,7 +2,7 @@ import * as elements from "../../src/elements.ts";
 import Box from "../primitives/box.tsx";
 import Flex from "../primitives/flex.tsx";
 import Stack from "../primitives/stack.tsx";
-import config from "../../tailwind.ts";
+import type config from "../../tailwind.ts";
 
 type ColorKeys = keyof typeof config.colors;
 type Variant = "info" | "warning" | "error" | "success";

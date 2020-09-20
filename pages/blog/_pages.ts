@@ -3,7 +3,8 @@ import {
   joinPath,
   processMarkdown,
 } from "../../deps.ts";
-import BlogPageLayout, { BlogPage } from "../../ds/layouts/blog-page.tsx";
+import BlogPageLayout from "../../ds/layouts/blog-page.tsx";
+import type { BlogPage } from "../../ds/layouts/blog-page.tsx";
 
 function getPages() {
   const ret: BlogPage[] = [];

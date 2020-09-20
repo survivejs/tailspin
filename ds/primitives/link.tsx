@@ -1,6 +1,6 @@
 import * as elements from "../../src/elements.ts";
 import { constructTailwindClasses } from "./_utils.ts";
-import config from "../../tailwind.ts";
+import type config from "../../tailwind.ts";
 import Box from "./box.tsx";
 import Flex from "./flex.tsx";
 

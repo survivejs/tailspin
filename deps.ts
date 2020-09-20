@@ -7,14 +7,14 @@ import {
   VirtualInjector,
   themed,
 } from "https://unpkg.com/@bebraw/oceanwind@0.2.6";
-import { Application } from "https://deno.land/x/oak@v6.1.0/mod.ts";
+import { Application } from "https://deno.land/x/oak@v6.2.0/mod.ts";
 import * as elements from "./src/elements.ts";
 import parseCode from "./ast/parse-code.ts";
 import parseProps from "./ast/parse-props.ts";
 import queryNodes from "./ast/query-nodes.ts";
 import getComponents from "./utils/get-components.ts";
 import processMarkdown from "./utils/process-markdown.ts";
-import { AstNode } from "./types.ts";
+import type { AstNode } from "./types.ts";
 
 const joinPath = path.posix.join;
 const getDirectory = path.posix.dirname;

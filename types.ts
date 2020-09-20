@@ -54,4 +54,4 @@ type Urls = {
   };
 };
 
-export { AstNode, Component, Pages, Page, Urls };
+export type { AstNode, Component, Pages, Page, Urls };

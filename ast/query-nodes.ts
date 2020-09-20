@@ -1,5 +1,5 @@
 import { parseSource } from "../deps.ts";
-import { AstNode } from "../types.ts";
+import type { AstNode } from "../types.ts";
 import walkAst from "./walk-ast.ts";
 
 type Query = { [key in keyof AstNode]?: string };
