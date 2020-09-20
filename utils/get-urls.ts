@@ -28,7 +28,8 @@ async function getUrls() {
       const extraPages = await import(extraPagesPath);
       const layout = extraPages.layout;
 
-      pages = extraPages.getPages().map((
+      const extras = await Promise.resolve(extraPages.getPages());
+      pages = extras.map((
         { url, ...attributes }: { url: string },
       ) => {
         ret[joinPath(resolvedUrl, url)] = {

@@ -6,7 +6,6 @@ import {
 import BlogPageLayout from "../../ds/layouts/BlogPage.tsx";
 import type { BlogPage } from "../../ds/layouts/BlogPage.tsx";
 
-// TODO: Let this be async
 function getPages() {
   const ret: BlogPage[] = [];
 
