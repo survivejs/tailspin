@@ -5,7 +5,7 @@
     "prebuild": "npm run generate-meta",
     "build": "npm run clean && TODO",
     "prestart": "npm run generate-meta",
-    "start": "deno run --config ./tsconfig.json --unstable src/index.ts --serve --watch",
+    "start": "deno run --config ./tsconfig.json --unstable src/index.ts --serve",
     "clean": "rm -rf public",
     "generate-sitemap": "TODO",
     "check-links": "TODO",
