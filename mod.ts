@@ -1,9 +1,9 @@
-import { getStyleInjector, getStyleTag, Application } from "../deps.ts";
-import getUrls from "../utils/get-urls.ts";
-import getPages from "../utils/get-pages.ts";
-import watchDirectories from "./watch-directories.ts";
-import type { Pages, Page } from "../types.ts";
-import { getWebsocketServer, websocketClient } from "./web-sockets.ts";
+import { getStyleInjector, getStyleTag, Application } from "./deps.ts";
+import getUrls from "./utils/get-urls.ts";
+import getPages from "./utils/get-pages.ts";
+import watchDirectories from "./src/watch-directories.ts";
+import type { Pages, Page } from "./types.ts";
+import { getWebsocketServer, websocketClient } from "./src/web-sockets.ts";
 
 async function serve(port: number) {
   const app = new Application();
@@ -75,6 +75,8 @@ async function serve(port: number) {
   console.log(`Serving at http://127.0.0.1:${port}`);
   app.listen({ port });
 
+  // TODO: Drop this as denon handles file watching - all we need to do
+  // is to make the client reconnect and the force a refresh on reconnection
   watchDirectories(
     // Directories have to be relative to cwd
     // https://github.com/denoland/deno/issues/5742
