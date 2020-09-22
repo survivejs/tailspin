@@ -1,12 +1,6 @@
-import { elements } from "../../deps.ts";
+import { elements, highlight } from "../../deps.ts";
 import Box from "../primitives/Box.tsx";
 import Text from "../primitives/Text.tsx";
-
-// TODO: Restore
-function highlight(language: string, str: string) {
-  return str;
-  // return hljs.highlight(language, str).value;
-}
 
 const CodeContainer = (
   { sources }: { sources: { [key: string]: string } },
@@ -25,7 +19,6 @@ const CodeContainer = (
   );
 };
 
-// TODO: Re-enable fallback
 // TODO: Textarea
 const CodeEditor = ({
   parent = "this",
@@ -54,7 +47,7 @@ const CodeEditor = ({
         sx="overflow-hidden"
         x={`highlight('html', ${parent}.${value} || '')`}
       >
-        {/*highlight("html", fallback)*/}
+        {highlight(fallback, "html")}
       </Box>
       <textarea
         class="overflow-hidden absolute min-w-full top-0 left-0 outline-none opacity-50 bg-none whitespace-pre resize-none"

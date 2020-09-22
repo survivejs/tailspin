@@ -17,6 +17,7 @@ import processMarkdown from "./utils/process-markdown.ts";
 import type { AstNode } from "./types.ts";
 import { createRemote } from "./lib/gentleRpc/rpcClient.ts";
 import userTheme from "./user-theme.ts";
+import Prism from "./lib/prism/mod.ts";
 
 const remote = createRemote("http://0.0.0.0:4000");
 
@@ -42,8 +43,13 @@ const getStyleInjector = () => {
 
 const ow = themed(userTheme);
 
+// TODO: Check that given language exists
+const highlight = (str: string, language: string) =>
+  Prism.highlight(str, Prism.languages[language], language);
+
 export {
   ow,
+  highlight,
   assertEquals,
   expandGlobSync,
   elements,
