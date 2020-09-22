@@ -59,11 +59,13 @@ async function serve(port: number) {
       <script type="text/javascript" src="https://unpkg.com/sidewind@3.1.2/dist/sidewind.umd.production.min.js"></script>
       <link rel="stylesheet" href="https://unpkg.com/tailwindcss@1.8.3/dist/base.min.css" />
       <link rel="stylesheet" href="https://unpkg.com/@tailwindcss/typography@0.2.0/dist/typography.min.css" />
-      <link rel="stylesheet" href="https://unpkg.com/prismjs@1.21.0/themes/prism.css" />
+      <link rel="stylesheet" href="https://unpkg.com/prismjs@1.21.0/themes/prism-twilight.css" />
       ${styleTag}
     </head>
     <body>
       ${pageHtml}
+      <script defer src="https://myCDN.com/prism@v1.x/components/prism-core.min.js"></script>
+	    <script defer src="https://myCDN.com/prism@v1.x/plugins/autoloader/prism-autoloader.min.js"></script>
     </body>
   </html>`);
     } catch (err) {

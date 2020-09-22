@@ -45,9 +45,9 @@ const CodeEditor = ({
         pr="16"
         w="full"
         sx="overflow-hidden"
-        x={`highlight('html', ${parent}.${value} || '')`}
+        x={`Prism.highlight(${parent}.${value} || '', Prism.languages.tsx, 'tsx')`}
       >
-        {highlight(fallback, "html")}
+        {highlight(fallback, "tsx")}
       </Box>
       <textarea
         class="overflow-hidden absolute min-w-full top-0 left-0 outline-none opacity-50 bg-none whitespace-pre resize-none"
