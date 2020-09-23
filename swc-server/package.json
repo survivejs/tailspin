@@ -10,7 +10,7 @@
   "author": "Juho Vepsäläinen",
   "license": "MIT",
   "dependencies": {
-    "@swc/wasm": "^1.2.29",
+    "@swc/wasm": "^1.2.30",
     "jayson": "^3.3.4"
   }
 }
