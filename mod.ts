@@ -1,9 +1,9 @@
 import { getStyleInjector, getStyleTag, Application } from "./deps.ts";
 import getUrls from "./utils/get-urls.ts";
 import getPages from "./utils/get-pages.ts";
-import watchDirectories from "./src/watch-directories.ts";
+import watchDirectories from "./utils/watch-directories.ts";
+import { getWebsocketServer, websocketClient } from "./utils/web-sockets.ts";
 import type { Pages, Page } from "./types.ts";
-import { getWebsocketServer, websocketClient } from "./src/web-sockets.ts";
 
 async function serve(port: number) {
   const app = new Application();
