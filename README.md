@@ -1,3 +1,5 @@
+> **Deprecated** See [gustwind](https://github.com/survivejs/gustwind) for the project that replaced this one.
+
 # Tailspin - Site generator and design system in one
 
 **Tailspin** is a collection of utilities that implements the following stack:
